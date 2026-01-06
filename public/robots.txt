@@ -1,0 +1,10 @@
+# Robots.txt for Gamakay Giftcards
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://gamakay.com/sitemap.xml
+
+# Disallow admin pages
+Disallow: /admin
+Disallow: /api/
