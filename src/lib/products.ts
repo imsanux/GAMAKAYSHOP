@@ -1,4 +1,5 @@
 import { Product } from './supabase';
+export type { Product };
 
 // Currency: Nepali Rupees (Rs.)
 // Prices synced from Hamrobazar - January 2026
@@ -29,7 +30,6 @@ export const sampleProducts: Product[] = [
         category: 'gaming',
         region: 'India',
         denominations: [
-            { value: '₹500', price: 950 },
             { value: '₹1000', price: 1900 },
             { value: '₹2000', price: 3800 },
             { value: '₹5000', price: 9500 }
@@ -77,8 +77,8 @@ export const sampleProducts: Product[] = [
         category: 'gaming',
         region: 'India',
         denominations: [
-            { value: '1 Month', price: 499 },
-            { value: '3 Months', price: 1399 }
+            { value: '1 Month', price: 1650 },
+            { value: '3 Months', price: 4850 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/XBOX_GAMEPASS_INR.png',
@@ -109,8 +109,7 @@ export const sampleProducts: Product[] = [
         category: 'gaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 3000 },
-            { value: '1 Year', price: 18000 }
+            { value: '1 Month', price: 3000 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/EA_PLAY_PRO.png',
@@ -139,6 +138,7 @@ export const sampleProducts: Product[] = [
         category: 'gaming',
         region: 'US',
         denominations: [
+            { value: '$5', price: 925 },
             { value: '$10', price: 1850 },
             { value: '$25', price: 4500 },
             { value: '$50', price: 9000 },
@@ -182,6 +182,24 @@ export const sampleProducts: Product[] = [
         description: '🎮 VR Gaming! Buy games for Meta Quest 2/3 headsets.'
     },
 
+    {
+        id: '99',
+        name: 'Steam Gift Cards',
+        brand: 'Steam',
+        category: 'gaming',
+        region: 'US',
+        denominations: [
+            { value: '$5', price: 925 },
+            { value: '$20', price: 3600 },
+            { value: '$50', price: 9000 },
+            { value: '$100', price: 17000 }
+        ],
+        delivery_type: 'Manual',
+        image_url: '/IMAGES/PRODUCTS/STEAM_GIFTCARDS.png',
+        logo_url: '',
+        description: '🎮 Ultimate Entertainment! Instant access to thousands of games on Steam.'
+    },
+
     // ============ STREAMING ============
     {
         id: '10',
@@ -190,8 +208,9 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month 1080p', price: 250 },
-            { value: '1 Month 4K', price: 450 }
+            { value: '1 Month 1080p Shared', price: 325 },
+            { value: '1 Month 4K', price: 500 },
+            { value: '1 Month Personal 1080p', price: 1350 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/NETFLIX.png',
@@ -205,10 +224,7 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 175 },
-            { value: '3 Months', price: 499 },
-            { value: '6 Months', price: 899 },
-            { value: '1 Year', price: 1699 }
+            { value: '1 Month', price: 550 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.png',
@@ -222,10 +238,7 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 150 },
-            { value: '3 Months', price: 399 },
-            { value: '6 Months', price: 749 },
-            { value: '1 Year', price: 1399 }
+            { value: '1 Month', price: 200 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.png',
@@ -285,7 +298,7 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 250 },
-            { value: '3 Months', price: 699 }
+            { value: '1 Year', price: 1650 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/CRUCHYROLL.png',
@@ -299,8 +312,9 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month Basic', price: 399 },
-            { value: '1 Month Full', price: 1350 }
+            { value: '1 Month Basic', price: 625 },
+            { value: '1 Month Classic', price: 775 },
+            { value: '1 Month Nitro', price: 1850 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/DISCORD_NITRO.png',
@@ -314,8 +328,7 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 450 },
-            { value: '1 Year', price: 4500 }
+            { value: '1 Month', price: 450 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/F1TV.png',
@@ -344,8 +357,7 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 350 },
-            { value: '1 Year', price: 3500 }
+            { value: '1 Month', price: 350 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/VIKI_RAKUTEN.png',
@@ -361,11 +373,10 @@ export const sampleProducts: Product[] = [
         category: 'software',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 450 },
-            { value: '3 Months', price: 1299 }
+            { value: '1 Month', price: 450 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.png',
+        image_url: '/IMAGES/PRODUCTS/CHATGPT.png',
         logo_url: '',
         description: '🧠 GPT-4 Access! Faster responses, priority access, plugins.'
     },
@@ -433,7 +444,7 @@ export const sampleProducts: Product[] = [
         category: 'software',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 1950 }
+            { value: '1 Month', price: 2000 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/SUNO_AI.png',
@@ -533,8 +544,7 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 199 },
-            { value: '1 Year', price: 1799 }
+            { value: '1 Month', price: 199 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/NORD_VPN.png',
@@ -548,8 +558,7 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 350 },
-            { value: '6 Months', price: 1799 }
+            { value: '1 Month', price: 350 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/EXPRESS_VPN.png',
@@ -563,8 +572,8 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 150 },
-            { value: '1 Year', price: 1350 }
+            { value: '1 Month', price: 250 },
+            { value: '2 Months', price: 500 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/SURFSHARK_VPN.png',
@@ -578,8 +587,7 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 175 },
-            { value: '1 Year', price: 1599 }
+            { value: '1 Month', price: 175 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/CYBERGHOST_VPN.png',
@@ -642,8 +650,7 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 200 },
-            { value: '1 Year', price: 1800 }
+            { value: '1 Week', price: 250 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/QUILLBOT.png',
@@ -671,8 +678,7 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 350 },
-            { value: '1 Year', price: 2999 }
+            { value: '1 Month', price: 350 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/SKILLSHARE.png',
@@ -686,7 +692,7 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: 'Any Course', price: 350 }
+            { value: 'Any Course', price: 1850 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/UDEMY_COURSE_WITH_CERTIFICATION.png',
@@ -763,8 +769,9 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 450 },
-            { value: '3 Months', price: 1199 }
+            { value: '1 Week', price: 500 },
+            { value: '1 Month', price: 950 },
+            { value: '6 Months', price: 3250 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/TINDER_GOLD.png',
@@ -778,8 +785,9 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 800 },
-            { value: '3 Months', price: 2199 }
+            { value: '1 Week', price: 950 },
+            { value: '1 Month', price: 2150 },
+            { value: '6 Months', price: 5850 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/TINDER_PLATINUM.png',
@@ -787,14 +795,14 @@ export const sampleProducts: Product[] = [
         description: '💎 Premium Priority! Message before matching, priority likes.'
     },
     {
-        id: '50',
+        id: '70',
         name: 'Bumble Premium',
         brand: 'Bumble',
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Week', price: 399 },
-            { value: '1 Month', price: 975 }
+            { value: '1 Week', price: 975 },
+            { value: '1 Month', price: 2150 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/BUMBLE.png',
@@ -802,14 +810,14 @@ export const sampleProducts: Product[] = [
         description: '💛 Boost Your Profile! Beeline, SuperSwipes, unlimited extends.'
     },
     {
-        id: '51',
+        id: '71',
         name: 'Hinge X+',
         brand: 'Hinge',
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Week', price: 200 },
-            { value: '1 Month', price: 699 }
+            { value: 'Hinge+ 1 Week', price: 1850 },
+            { value: 'Hinge X 1 Month', price: 4850 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/HINGE.png',
@@ -983,7 +991,7 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Domain', price: 1500 }
+            { value: '1 Domain', price: 1650 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/NAMECHEAP_DOMAINS.png',
@@ -1043,7 +1051,7 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 1500 }
+            { value: '1 Month', price: 2750 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/APEUNI_PTE_VIP.png',
@@ -1069,7 +1077,8 @@ export function getProductsByCategory(category: string): Product[] {
 }
 
 export function getFeaturedProducts(): Product[] {
-    return sampleProducts.slice(0, 8);
+    const featuredIds = ['99', '50', '1', '4', '10', '11', '21', '33']; // Steam, Apple USD, PS USD, Xbox GP, Netflix, Spotify, ChatGPT, NordVPN
+    return sampleProducts.filter(p => featuredIds.includes(p.id));
 }
 
 export function searchProducts(query: string): Product[] {

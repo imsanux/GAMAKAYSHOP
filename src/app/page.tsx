@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import FAQSection from '@/components/FAQSection';
-import { getFeaturedProducts, getProductsByCategory } from '@/lib/products';
+import { getFeaturedProducts, getProductsByCategory, searchProducts, Product } from '@/lib/products';
 
 export default function Home() {
   const featuredProducts = getFeaturedProducts();
@@ -14,6 +14,34 @@ export default function Home() {
   const streamingProducts = getProductsByCategory('streaming').slice(0, 6);
   const [currentSlide, setCurrentSlide] = useState(0);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState<Product[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  // Filter suggestions as user types
+  useEffect(() => {
+    if (searchQuery.trim().length >= 2) {
+      const results = searchProducts(searchQuery).slice(0, 6);
+      setSuggestions(results);
+      setShowSuggestions(results.length > 0);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  }, [searchQuery]);
+
+  // Close suggestions on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const heroSlides = [
     // Product Slides
@@ -327,14 +355,13 @@ export default function Home() {
         padding: '24px 16px',
         borderBottom: '1px solid #e2e8f0'
       }}>
-        <div className="container" style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div ref={searchContainerRef} className="container" style={{ maxWidth: '600px', margin: '0 auto', position: 'relative' }}>
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const query = formData.get('search') as string;
-              if (query?.trim()) {
-                window.location.href = `/search?q=${encodeURIComponent(query.trim())}`;
+              if (searchQuery.trim()) {
+                router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                setShowSuggestions(false);
               }
             }}
             style={{
@@ -345,6 +372,9 @@ export default function Home() {
             <input
               type="text"
               name="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
               placeholder="Search for gift cards, subscriptions..."
               style={{
                 width: '100%',
@@ -356,15 +386,15 @@ export default function Home() {
                 outline: 'none',
                 transition: 'all 0.2s ease'
               }}
-              onFocus={(e) => {
+              onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = '#3b82f6';
                 e.currentTarget.style.background = 'white';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(59,130,246,0.15)';
               }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = '#e2e8f0';
-                e.currentTarget.style.background = '#f8fafc';
-                e.currentTarget.style.boxShadow = 'none';
+              onMouseLeave={(e) => {
+                if (document.activeElement !== e.currentTarget) {
+                  e.currentTarget.style.borderColor = '#e2e8f0';
+                  e.currentTarget.style.background = '#f8fafc';
+                }
               }}
             />
             <button
@@ -393,6 +423,59 @@ export default function Home() {
               </svg>
             </button>
           </form>
+
+          {/* Suggestions Dropdown */}
+          {showSuggestions && suggestions.length > 0 && (
+            <div style={{
+              position: 'absolute',
+              top: 'calc(100% + 8px)',
+              left: 0,
+              right: 0,
+              background: 'white',
+              borderRadius: '16px',
+              boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+              border: '1px solid #e2e8f0',
+              zIndex: 200,
+              overflow: 'hidden'
+            }}>
+              {suggestions.map((product) => (
+                <Link
+                  key={product.id}
+                  href={`/search?q=${encodeURIComponent(product.name)}`}
+                  onClick={() => {
+                    setShowSuggestions(false);
+                    setSearchQuery('');
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '12px 16px',
+                    textDecoration: 'none',
+                    color: '#0f172a',
+                    borderBottom: '1px solid #f1f5f9',
+                    transition: 'background 0.15s ease'
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = '#f8fafc'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'white'; }}
+                >
+                  <Image
+                    src={product.image_url}
+                    alt={product.name}
+                    width={40}
+                    height={40}
+                    style={{ borderRadius: '8px', objectFit: 'cover' }}
+                  />
+                  <div>
+                    <div style={{ fontWeight: 500, fontSize: '0.95rem' }}>{product.name}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#64748b' }}>
+                      From Rs. {product.denominations[0]?.price.toLocaleString()}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section >
 

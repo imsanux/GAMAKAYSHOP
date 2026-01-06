@@ -166,33 +166,33 @@ export default function ProductCard({ product }: ProductCardProps) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '10px'
+                    gap: '6px'
                 }}>
-                    <div>
-                        <span style={{
-                            fontSize: '0.9rem',
-                            fontWeight: 700,
-                            color: '#0f172a'
-                        }}>
-                            Rs. {selectedDenom.price.toLocaleString()}
-                        </span>
-                    </div>
+                    <span style={{
+                        fontSize: 'clamp(0.75rem, 2.5vw, 0.9rem)',
+                        fontWeight: 700,
+                        color: '#0f172a',
+                        whiteSpace: 'nowrap'
+                    }}>
+                        Rs. {selectedDenom.price.toLocaleString()}
+                    </span>
 
                     <button
                         onClick={handleAddToCart}
                         disabled={isAdding}
                         style={{
-                            padding: '8px 10px',
-                            fontSize: '0.7rem',
+                            padding: '6px 8px',
+                            fontSize: '0.65rem',
                             fontWeight: 600,
                             background: isAdding ? '#22c55e' : '#3b82f6',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '8px',
+                            borderRadius: '6px',
                             cursor: isAdding ? 'default' : 'pointer',
                             transition: 'all 0.15s ease',
                             whiteSpace: 'nowrap',
-                            transform: isAdding ? 'scale(0.97)' : 'scale(1)'
+                            transform: isAdding ? 'scale(0.97)' : 'scale(1)',
+                            flexShrink: 0
                         }}
                         onMouseEnter={(e) => {
                             if (!isAdding) e.currentTarget.style.background = '#2563eb';

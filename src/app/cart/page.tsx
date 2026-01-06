@@ -185,14 +185,16 @@ export default function CartPage() {
                                         </span>
                                         <button
                                             onClick={() => updateQuantity(item.product.id, item.denomination.value, item.quantity + 1)}
+                                            disabled={item.quantity >= 5}
                                             style={{
                                                 width: '32px',
                                                 height: '32px',
                                                 border: 'none',
                                                 background: 'transparent',
-                                                cursor: 'pointer',
+                                                cursor: item.quantity >= 5 ? 'not-allowed' : 'pointer',
                                                 fontSize: '1rem',
-                                                color: '#1a1a1a'
+                                                color: item.quantity >= 5 ? '#ccc' : '#1a1a1a',
+                                                opacity: item.quantity >= 5 ? 0.5 : 1
                                             }}
                                         >
                                             +

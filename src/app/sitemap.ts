@@ -1,7 +1,16 @@
 import { MetadataRoute } from 'next'
+import { getAllProducts } from '@/lib/products'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://gamakay.com'
+    const products = getAllProducts()
+
+    const productUrls = products.map((product) => ({
+        url: `${baseUrl}/product/${product.id}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+    }))
 
     return [
         {
@@ -52,5 +61,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.5,
         },
+        ...productUrls,
     ]
 }

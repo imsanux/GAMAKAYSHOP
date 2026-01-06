@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
+import { searchProducts, Product } from '@/lib/products';
 
 export default function Header() {
     const { items } = useCart();
@@ -13,13 +14,40 @@ export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [cartBounce, setCartBounce] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [suggestions, setSuggestions] = useState<Product[]>([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const searchContainerRef = useRef<HTMLDivElement>(null);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim()) {
             router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+            setShowSuggestions(false);
         }
     };
+
+    // Filter suggestions as user types
+    useEffect(() => {
+        if (searchQuery.trim().length >= 2) {
+            const results = searchProducts(searchQuery).slice(0, 6);
+            setSuggestions(results);
+            setShowSuggestions(results.length > 0);
+        } else {
+            setSuggestions([]);
+            setShowSuggestions(false);
+        }
+    }, [searchQuery]);
+
+    // Close suggestions on outside click
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+                setShowSuggestions(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     const itemCount = items.reduce((count, item) => count + item.quantity, 0);
 
@@ -120,7 +148,7 @@ export default function Header() {
                             height={100}
                             priority
                             style={{
-                                height: '50px',
+                                height: '100px',
                                 width: 'auto',
                                 objectFit: 'contain'
                             }}
@@ -201,7 +229,7 @@ export default function Header() {
                             width: '44px',
                             height: '44px',
                             borderRadius: '10px',
-                            background: itemCount > 0 ? '#3b82f6' : '#f1f5f9',
+                            background: itemCount > 0 ? '#FF9800' : '#f1f5f9',
                             color: itemCount > 0 ? 'white' : '#475569',
                             textDecoration: 'none',
                             transition: 'all 0.2s ease',

@@ -46,6 +46,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
             );
 
             if (existingIndex >= 0) {
+                // Check if incrementing would exceed limit
+                if (prev[existingIndex].quantity >= 5) {
+                    return prev;
+                }
                 const updated = [...prev];
                 updated[existingIndex].quantity += 1;
                 return updated;
@@ -66,6 +70,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const updateQuantity = (productId: string, denominationValue: string, quantity: number) => {
         if (quantity <= 0) {
             removeItem(productId, denominationValue);
+            return;
+        }
+
+        // Enforce limit
+        if (quantity > 5) {
             return;
         }
 
