@@ -46,7 +46,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 position: 'relative',
                 width: '100%',
                 paddingTop: '70%',
-                background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+                background: '#f1f5f9',
                 overflow: 'hidden'
             }}>
                 {product.image_url && !imageError ? (
@@ -129,6 +129,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 {/* Denomination Selector */}
                 <div style={{ marginBottom: '8px', marginTop: 'auto' }}>
                     <select
+                        aria-label="Select denomination"
                         value={selectedDenom.value}
                         onChange={(e) => {
                             const denom = product.denominations.find(d => d.value === e.target.value);

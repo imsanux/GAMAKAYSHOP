@@ -18,13 +18,15 @@ export default function CartPage() {
                     height: '80px',
                     margin: '0 auto 24px',
                     borderRadius: '50%',
-                    background: '#f0ede8',
+                    background: '#3b82f6',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '2rem'
                 }}>
-                    🛒
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 002-2V6l-3-4H6zM3.8 6h16.4M16 10a4 4 0 11-8 0" />
+                    </svg>
                 </div>
                 <h1 style={{ marginBottom: '10px', fontSize: '1.5rem' }}>
                     Your cart is empty

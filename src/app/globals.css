@@ -156,12 +156,12 @@ h4 {
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
+  background-color: #3b82f6;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #2a2a2a;
+  background-color: #2563eb;
 }
 
 .btn-secondary {
@@ -409,10 +409,21 @@ h4 {
 
 /* Skeleton */
 .skeleton {
-  background: linear-gradient(90deg, #f0ede8 25%, #e8e5df 50%, #f0ede8 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+  background: #f0ede8;
+  animation: pulse 1.5s infinite;
   border-radius: var(--radius-sm);
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
 
 @keyframes shimmer {
@@ -563,5 +574,12 @@ button,
 @media print {
   .no-print {
     display: none !important;
+  }
+}
+
+/* Checkout page responsive grid */
+@media (min-width: 900px) {
+  .checkout-grid {
+    grid-template-columns: 1fr 1fr !important;
   }
 }

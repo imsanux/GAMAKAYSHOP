@@ -3,13 +3,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { searchProducts, Product } from '@/lib/products';
 
 export default function Header() {
     const { items } = useCart();
     const router = useRouter();
+    const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [cartBounce, setCartBounce] = useState(false);
@@ -17,6 +18,8 @@ export default function Header() {
     const [suggestions, setSuggestions] = useState<Product[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const searchContainerRef = useRef<HTMLDivElement>(null);
+
+    const isHomepage = pathname === '/';
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
@@ -156,40 +159,42 @@ export default function Header() {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hide-mobile" style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px'
-                    }}>
-                        {navLinks.map(link => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                style={{
-                                    fontSize: '0.9rem',
-                                    fontWeight: 500,
-                                    color: '#475569',
-                                    textDecoration: 'none',
-                                    padding: '8px 14px',
-                                    borderRadius: '8px',
-                                    transition: 'all 0.15s ease'
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.background = '#f1f5f9';
-                                    e.currentTarget.style.color = '#0f172a';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.background = 'transparent';
-                                    e.currentTarget.style.color = '#475569';
-                                }}
-                            >
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                    {link.icon}
-                                    {link.label}
-                                </span>
-                            </Link>
-                        ))}
-                    </nav>
+                    {isHomepage && (
+                        <nav className="hide-mobile" style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px'
+                        }}>
+                            {navLinks.map(link => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    style={{
+                                        fontSize: '0.9rem',
+                                        fontWeight: 500,
+                                        color: '#475569',
+                                        textDecoration: 'none',
+                                        padding: '8px 14px',
+                                        borderRadius: '8px',
+                                        transition: 'all 0.15s ease'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.background = '#f1f5f9';
+                                        e.currentTarget.style.color = '#0f172a';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.background = 'transparent';
+                                        e.currentTarget.style.color = '#475569';
+                                    }}
+                                >
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        {link.icon}
+                                        {link.label}
+                                    </span>
+                                </Link>
+                            ))}
+                        </nav>
+                    )}
 
                     {/* Right Actions */}
                     <div style={{
@@ -229,16 +234,14 @@ export default function Header() {
                             width: '44px',
                             height: '44px',
                             borderRadius: '10px',
-                            background: itemCount > 0 ? '#FF9800' : '#f1f5f9',
+                            background: itemCount > 0 ? '#3b82f6' : '#f1f5f9',
                             color: itemCount > 0 ? 'white' : '#475569',
                             textDecoration: 'none',
                             transition: 'all 0.2s ease',
                             transform: cartBounce ? 'scale(1.1)' : 'scale(1)'
                         }}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-                                <line x1="3" y1="6" x2="21" y2="6" />
-                                <path d="M16 10a4 4 0 01-8 0" />
+                                <path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 002-2V6l-3-4H6zM3.8 6h16.4M16 10a4 4 0 11-8 0" />
                             </svg>
                             {itemCount > 0 && (
                                 <span style={{

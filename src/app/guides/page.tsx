@@ -134,7 +134,7 @@ const guides: Guide[] = [
         ),
         steps: [
             'Open Settings on your iPhone/iPad and tap on your Apple ID at the top',
-            'Go to Media & Purchases → View Account → Country/Region',
+            'Go to Media & Purchases > View Account > Country/Region',
             'Tap "Change Country or Region" and select the new region (e.g., US or India)',
             'Accept the Terms & Conditions',
             'Enter a valid payment method for that region (or select None if available)',
@@ -333,9 +333,15 @@ export default function GuidesPage() {
                 <Link href="/" style={{
                     color: '#3b82f6',
                     textDecoration: 'none',
-                    fontSize: '0.9rem'
+                    fontSize: '0.9rem',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px'
                 }}>
-                    ← Back to Store
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                    Back to Store
                 </Link>
             </div>
         </div>
