@@ -6,14 +6,44 @@ import { useRouter } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import FAQSection from '@/components/FAQSection';
 import PromoBanner from '@/components/PromoBanner';
-import { getFeaturedProducts, getProductsByCategory } from '@/lib/products';
+import { getFeaturedProducts, getProductsByCategory, searchProducts } from '@/lib/products';
 
 export default function Home() {
+  const router = useRouter();
   const featuredProducts = getFeaturedProducts();
   const gamingProducts = getProductsByCategory('gaming').slice(0, 6);
   const streamingProducts = getProductsByCategory('streaming').slice(0, 6);
   const [currentSlide, setCurrentSlide] = useState(0);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
+
+  // Live search state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<ReturnType<typeof searchProducts>>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Handle live search
+  useEffect(() => {
+    if (searchQuery.trim().length > 0) {
+      const results = searchProducts(searchQuery);
+      setSearchResults(results.slice(0, 8)); // Limit to 8 results
+      setShowDropdown(true);
+    } else {
+      setSearchResults([]);
+      setShowDropdown(false);
+    }
+  }, [searchQuery]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const heroSlides = [
     // Product Slides
@@ -320,79 +350,194 @@ export default function Home() {
       </section >
 
       {/* Search Bar Section */}
-      < section style={{
+      <section style={{
         background: 'white',
         padding: '24px 16px',
         borderBottom: '1px solid #e2e8f0'
       }}>
         <div className="container" style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const query = formData.get('search') as string;
-              if (query?.trim()) {
-                window.location.href = `/search?q=${encodeURIComponent(query.trim())}`;
-              }
-            }}
-            style={{
-              position: 'relative',
-              width: '100%'
-            }}
-          >
-            <input
-              type="text"
-              name="search"
-              placeholder="Search for gift cards, subscriptions..."
+          <div ref={searchRef} style={{ position: 'relative', width: '100%' }}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (searchQuery.trim()) {
+                  setShowDropdown(false);
+                  router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                }
+              }}
               style={{
-                width: '100%',
-                padding: '14px 50px 14px 20px',
-                fontSize: '1rem',
-                border: '2px solid #e2e8f0',
-                borderRadius: '50px',
-                background: '#f8fafc',
-                outline: 'none',
-                transition: 'all 0.2s ease'
-              }}
-              onFocus={(e) => {
-                e.currentTarget.style.borderColor = '#3b82f6';
-                e.currentTarget.style.background = 'white';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(59,130,246,0.15)';
-              }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = '#e2e8f0';
-                e.currentTarget.style.background = '#f8fafc';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-            />
-            <button
-              type="submit"
-              style={{
-                position: 'absolute',
-                right: '6px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '40px',
-                height: '40px',
-                background: '#3b82f6',
-                border: 'none',
-                borderRadius: '50%',
-                cursor: 'pointer',
-                color: 'white',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.15s ease'
+                position: 'relative',
+                width: '100%'
               }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <path d="M21 21l-4.35-4.35" />
-              </svg>
-            </button>
-          </form>
+              <input
+                type="text"
+                name="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search for gift cards, subscriptions..."
+                style={{
+                  width: '100%',
+                  padding: '14px 50px 14px 20px',
+                  fontSize: '1rem',
+                  border: '2px solid #e2e8f0',
+                  borderRadius: showDropdown && searchResults.length > 0 ? '20px 20px 0 0' : '50px',
+                  background: '#f8fafc',
+                  outline: 'none',
+                  transition: 'all 0.2s ease'
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = '#3b82f6';
+                  e.currentTarget.style.background = 'white';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(59,130,246,0.15)';
+                  if (searchQuery.trim().length > 0) {
+                    setShowDropdown(true);
+                  }
+                }}
+              />
+              <button
+                type="submit"
+                style={{
+                  position: 'absolute',
+                  right: '6px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '40px',
+                  height: '40px',
+                  background: '#3b82f6',
+                  border: 'none',
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="M21 21l-4.35-4.35" />
+                </svg>
+              </button>
+            </form>
+
+            {/* Live Search Dropdown */}
+            {showDropdown && searchResults.length > 0 && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                left: 0,
+                right: 0,
+                background: 'white',
+                border: '2px solid #3b82f6',
+                borderTop: 'none',
+                borderRadius: '0 0 20px 20px',
+                boxShadow: '0 8px 24px rgba(59,130,246,0.2)',
+                zIndex: 100,
+                maxHeight: '400px',
+                overflowY: 'auto'
+              }}>
+                {searchResults.map((product) => (
+                  <Link
+                    key={product.id}
+                    href={`/product/${product.id}`}
+                    onClick={() => {
+                      setShowDropdown(false);
+                      setSearchQuery('');
+                    }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      padding: '12px 16px',
+                      textDecoration: 'none',
+                      color: '#1e293b',
+                      borderBottom: '1px solid #f1f5f9',
+                      transition: 'background 0.15s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#f8fafc';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'white';
+                    }}
+                  >
+                    <div style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '8px',
+                      overflow: 'hidden',
+                      flexShrink: 0,
+                      background: '#f1f5f9'
+                    }}>
+                      <img
+                        src={product.image_url}
+                        alt={product.name}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover'
+                        }}
+                      />
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{
+                        fontWeight: 600,
+                        fontSize: '0.9rem',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                      }}>
+                        {product.name}
+                      </div>
+                      <div style={{
+                        fontSize: '0.8rem',
+                        color: '#64748b'
+                      }}>
+                        {product.brand} • {product.category}
+                      </div>
+                    </div>
+                    <div style={{
+                      fontSize: '0.85rem',
+                      fontWeight: 600,
+                      color: '#3b82f6'
+                    }}>
+                      Rs. {product.denominations[0]?.price.toLocaleString()}
+                    </div>
+                  </Link>
+                ))}
+
+                {/* View All Results */}
+                <Link
+                  href={`/search?q=${encodeURIComponent(searchQuery.trim())}`}
+                  onClick={() => {
+                    setShowDropdown(false);
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    padding: '14px 16px',
+                    textDecoration: 'none',
+                    color: '#3b82f6',
+                    fontWeight: 600,
+                    fontSize: '0.9rem',
+                    background: '#f8fafc',
+                    borderRadius: '0 0 18px 18px'
+                  }}
+                >
+                  View all results for "{searchQuery}"
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
-      </section >
+      </section>
 
       {/* Promo Banners - Random Selection */}
       <section style={{
