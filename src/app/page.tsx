@@ -441,7 +441,7 @@ export default function Home() {
                 {searchResults.map((product) => (
                   <Link
                     key={product.id}
-                    href={`/product/${product.id}`}
+                    href={`/search?q=${encodeURIComponent(product.name)}`}
                     onClick={() => {
                       setShowDropdown(false);
                       setSearchQuery('');
