@@ -113,14 +113,12 @@ export default function Header() {
                         textDecoration: 'none',
                         flexShrink: 0
                     }}>
-                        <Image
+                        <img
                             src="/logo.png"
                             alt="Gamakay"
-                            width={100}
-                            height={100}
-                            priority
                             style={{
-                                height: '50px',
+                                height: '100px',
+                                maxHeight: '100px',
                                 width: 'auto',
                                 objectFit: 'contain'
                             }}

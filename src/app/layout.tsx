@@ -1,16 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google"; // Optimized font loading
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-// Configure Inter font
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   title: "Gamakay Giftcards - Digital Gift Cards & Subscriptions Nepal",
@@ -32,24 +24,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gamakay Giftcards - Digital Gift Cards Nepal",
     description: "Buy digital gift cards and subscriptions instantly in Nepal.",
-  },
-  icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
-    other: {
-      rel: "apple-touch-icon-precomposed",
-      url: "/logo.png",
-    },
-  },
-  manifest: "/manifest.json",
+  }
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#0f172a",
+  themeColor: "#faf9f7",
 };
 
 export default function RootLayout({
@@ -58,8 +40,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={inter.variable}>
-      <body suppressHydrationWarning className={inter.className} style={{
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="format-detection" content="telephone=no" />
+        <link rel="preconnect" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://wa.me" />
+      </head>
+      <body suppressHydrationWarning style={{
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100dvh'

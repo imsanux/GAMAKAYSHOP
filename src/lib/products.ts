@@ -206,7 +206,7 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 175 },
-            { value: '3 Months', price: 499 },
+            { value: '3 Months', price: 650 },
             { value: '6 Months', price: 899 },
             { value: '1 Year', price: 1699 }
         ],
@@ -419,7 +419,7 @@ export const sampleProducts: Product[] = [
         category: 'software',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 4000 }
+            { value: '1 Month', price: 1950 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/ELEVEN_LABS.png',
@@ -517,7 +517,7 @@ export const sampleProducts: Product[] = [
         category: 'software',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 3750 }
+            { value: '1 Month', price: 500 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/LOVEABLE_AI.png',
@@ -955,7 +955,7 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Year', price: 2999 }
+            { value: '1 Year', price: 750 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/GOPRO_PREMIUM.png',
@@ -1049,6 +1049,583 @@ export const sampleProducts: Product[] = [
         image_url: '/IMAGES/PRODUCTS/APEUNI_PTE_VIP.png',
         logo_url: '',
         description: '📚 PTE Prep! Practice tests, AI scoring, study materials.'
+    }
+,
+
+    // ============ NEW ADDITIONS ============
+    {
+        id: '68',
+        name: '1Password',
+        brand: '1Password',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 825 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/1Password.png',
+        logo_url: '',
+        description: 'Contact via Viber/WhatsApp: 9862157864 ðŸ“· Or scan the QR code  ðŸ” Stay secure with 1Password. ðŸ—ï¸ Store and mana'
+    },
+    {
+        id: '69',
+        name: 'Ape Uni VIP',
+        brand: 'Ape',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 2500 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Ape_Uni_VIP.png',
+        logo_url: '',
+        description: 'ðŸ¦ Level Up with Ape Uni VIP Monthly! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ“ Exclusive Ac'
+    },
+    {
+        id: '70',
+        name: 'Apple Arcade',
+        brand: 'Apple',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 200 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Apple_Arcade.png',
+        logo_url: '',
+        description: 'ðŸŽ® Apple Arcade   ðŸ“± Contact: Viber / WhatsApp â€“ 9862157864 or Scan the QR code.   Features included:  ðŸŽ¯ Access'
+    },
+    {
+        id: '71',
+        name: 'Apple Books',
+        brand: 'Apple',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1150 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Apple_Books.png',
+        logo_url: '',
+        description: 'ðŸ“š Apple Books  Access Appleâ€™s digital reading platform to purchase and keep books in your personal library.  ðŸ“± C'
+    },
+    {
+        id: '72',
+        name: 'Apple Creator Studio',
+        brand: 'Apple',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 825 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Apple_Creator_Studio.png',
+        logo_url: '',
+        description: 'ðŸ“±Contact via Viber/WhatsApp: 9862157864 Or scan the QR code Use the finest creative application, now at a fraction of'
+    },
+    {
+        id: '73',
+        name: 'Apple Developer',
+        brand: 'Apple',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 15000 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Apple_Developer.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ‘¨â€ðŸ’» Apple Developer Program ðŸš€ Build, test,'
+    },
+    {
+        id: '74',
+        name: 'Blackbox for Vision Pro',
+        brand: 'Blackbox',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 2850 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Blackbox_for_Vision_Pro.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Dive into a spatial puzzle adventure that plays with y'
+    },
+    {
+        id: '75',
+        name: 'ChatGPT PRO',
+        brand: 'ChatGPT',
+        category: 'software',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 500 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/ChatGPT_PRO.png',
+        logo_url: '',
+        description: 'ðŸ“ž Viber/WhatsApp: 9862157864 ðŸ“² Scan the QR to get started!  ðŸš€ Upgrade to ChatGPT Pro â€” unlock GPT-5.1, OpenAI'
+    },
+    {
+        id: '76',
+        name: 'ChatGPT Shared',
+        brand: 'ChatGPT',
+        category: 'software',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 500 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/ChatGPT_Shared.png',
+        logo_url: '',
+        description: 'ðŸ¤– Unlock Smarter Conversations with ChatGPT 5.1! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ’¡'
+    },
+    {
+        id: '77',
+        name: 'Crouton for Vision Pro',
+        brand: 'Crouton',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 2850 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Crouton_for_Vision_Pro.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!   ðŸ½ï¸ Cook smarter with recipes in a fully immersiv'
+    },
+    {
+        id: '78',
+        name: 'djay for Vision Pro',
+        brand: 'djay',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1350 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/djay_for_Vision_Pro.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Nextâ€‘level DJing in spatial music reality, mix like'
+    },
+    {
+        id: '79',
+        name: 'EA Pro',
+        brand: 'EA',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 3000 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/EA_Pro.png',
+        logo_url: '',
+        description: 'ðŸŽ® Play Without Limits with EA Play Pro! ðŸ† Latest Hits: Play FIFA 26 on day one and never miss a match! ðŸ“± Contac'
+    },
+    {
+        id: '80',
+        name: 'ESPN Plus',
+        brand: 'ESPN',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1950 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/ESPN_Plus.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ† Stream live sports with ESPN+! âš½ Watch exclusiv'
+    },
+    {
+        id: '81',
+        name: 'Exitlag Renewable',
+        brand: 'Exitlag',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1175 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Exitlag_Renewable.png',
+        logo_url: '',
+        description: 'âš¡ Game Without Limits with ExitLag! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ® 1 Month Premiu'
+    },
+    {
+        id: '82',
+        name: 'Express VPN Weekly.Monthly',
+        brand: 'Express',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 150 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Express_VPN_Weekly_Monthly.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact at Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸ®ðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° ðŸ”’ VPN Subscriptions â€“ Stay Safe & Private'
+    },
+    {
+        id: '83',
+        name: 'Feather Draw for iPad',
+        brand: 'Feather',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 2950 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Feather_Draw_for_iPad.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Bring your ideas to life in a fully immersive spatial'
+    },
+    {
+        id: '84',
+        name: 'Filmora Video Editor Pro',
+        brand: 'Filmora',
+        category: 'streaming',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 975 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Filmora_Video_Editor_Pro.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ¬ Get Filmora Video Editor Pro! âœ¨ Edit videos lik'
+    },
+    {
+        id: '85',
+        name: 'Final Cut Pro',
+        brand: 'Final',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 50000 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Final_Cut_Pro.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Professional video editing faster, smoother, smarter.'
+    },
+    {
+        id: '86',
+        name: 'FL Studio Mobile',
+        brand: 'FL',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1500 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/FL_Studio_Mobile.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Create professional music on your iPhone or iPad'
+    },
+    {
+        id: '87',
+        name: 'Flight Radar 24 Gold Monthly',
+        brand: 'Flight',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1450 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Flight_Radar_24_Gold_Monthly.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  âœˆï¸ Track flights worldwide in real-time with advan'
+    },
+    {
+        id: '88',
+        name: 'Google Play In-app Purchases',
+        brand: 'Google',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 850 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Google_Play_In_app_Purchases.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 ðŸš€ Fast Delivery: Google Play subscriptions within 10 minutes! ðŸ“± Easy P'
+    },
+    {
+        id: '89',
+        name: 'Grok 4 By xAI',
+        brand: 'Grok',
+        category: 'software',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1500 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Grok_4_By_xAI.png',
+        logo_url: '',
+        description: 'ðŸ¤– Unlock the Power of Grok AI â€“ Elon Muskâ€™s Smartest Chatbot  ðŸ“± Contact via Viber/WhatsApp: 9862157864  Lookin'
+    },
+    {
+        id: '90',
+        name: 'Hinge X +',
+        brand: 'Hinge',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 2150 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Hinge_X__.png',
+        logo_url: '',
+        description: 'Hinge+ ðŸ–¤   ðŸ“± Contact: Viber / WhatsApp â€“ 9862157864 (or scan QR code)  Features included: ðŸ’¬ Send unlimited li'
+    },
+    {
+        id: '91',
+        name: 'iCloud Storage',
+        brand: 'iCloud',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 400 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/iCloud_Storage.png',
+        logo_url: '',
+        description: 'ðŸ“± ð‚ð¨ð§ð­ðšðœð­: Viber/WhatsApp: 9862157864 or scan QR code. â˜ï¸ ð”ð©ð ð«ðšððž ð˜ð'
+    },
+    {
+        id: '92',
+        name: 'IMAX for Apple Vision Pro',
+        brand: 'IMAX',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1350 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/IMAX_for_Apple_Vision_Pro.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  IMAX Experiences for Apple Vision Pro  Watch curated i'
+    },
+    {
+        id: '93',
+        name: 'iTunes giftcard (Apple Appstore)',
+        brand: 'iTunes',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 850 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/iTunes_giftcard__Apple_Appstore_.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 ðŸš€ Quick delivery: Game codes in 10 mins! ðŸ“± Easy redemption: Hassle-fre'
+    },
+    {
+        id: '94',
+        name: 'Logic Pro',
+        brand: 'Logic',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 35000 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Logic_Pro.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Create professional music from your Mac.  ðŸŽ¹ Hu'
+    },
+    {
+        id: '95',
+        name: 'LumaFusion for iOS',
+        brand: 'LumaFusion',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1950 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/LumaFusion_for_iOS.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Professional video editing on iPhone & iPad. Fast, pow'
+    },
+    {
+        id: '96',
+        name: 'Magnet for Macbook',
+        brand: 'Magnet',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 975 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Magnet_for_Macbook.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Magnet, Window Management for Mac  ðŸ“ Snap windows i'
+    },
+    {
+        id: '97',
+        name: 'Nomad Sculpt for iOS',
+        brand: 'Nomad',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 3850 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Nomad_Sculpt_for_iOS.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Bring your ideas to life with intuitive 3D modeling on'
+    },
+    {
+        id: '98',
+        name: 'Notion AI',
+        brand: 'Notion',
+        category: 'software',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 2450 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Notion_AI.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ§  Boost your productivity with Notion AI. ðŸ’¬ Gene'
+    },
+    {
+        id: '99',
+        name: 'Pixelmator Pro',
+        brand: 'Pixelmator',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 825 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Pixelmator_Pro.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Stream millions of songs, ad-free. ðŸ“¥ Download'
+    },
+    {
+        id: '100',
+        name: 'Playstation Giftcards US & INDIA',
+        brand: 'Playstation',
+        category: 'gaming',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 850 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Playstation_Giftcards_US___INDIA.png',
+        logo_url: '',
+        description: 'ðŸ“± Order Now: Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸ®ðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° or scan the QR! ðŸ’³ Playstaion Gift Cards INR'
+    },
+    {
+        id: '101',
+        name: 'Playstation plus for Playstations',
+        brand: 'Playstation',
+        category: 'gaming',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 975 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Playstation_plus_for_Playstations.png',
+        logo_url: '',
+        description: 'ðŸŽ® PlayStation Plus (India Region) â€“ Cheapest Worldwide!  ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR'
+    },
+    {
+        id: '102',
+        name: 'Snapchat +',
+        brand: 'Snapchat',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 150 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Snapchat__.png',
+        logo_url: '',
+        description: 'ðŸ‘» Unlock Exclusive Perks with Snapchat+! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŒŸ 1 Month'
+    },
+    {
+        id: '103',
+        name: 'Steam Giftcards US & INDIA',
+        brand: 'Steam',
+        category: 'gaming',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 850 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Steam_Giftcards_US___INDIA.png',
+        logo_url: '',
+        description: 'ðŸ“± Order Now: Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸ®ðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° or scan the QR! ðŸ’³ Steam Gift Cards - Choose'
+    },
+    {
+        id: '104',
+        name: 'Supercut for Vision Pro',
+        brand: 'Supercut',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 925 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Supercut_for_Vision_Pro.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  The ultimate way to watch Netflix & Prime Video in a s'
+    },
+    {
+        id: '105',
+        name: 'Tantan Dating VIP',
+        brand: 'Tantan',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1950 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Tantan_Dating_VIP.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  â¤ï¸ TanTan VIP â€“ Unlock premium dating features.'
+    },
+    {
+        id: '106',
+        name: 'Twitch Sub',
+        brand: 'Twitch',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 385 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Twitch_Sub.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ’œ Get Twitch Subscriptions Instantly! â­ Support y'
+    },
+    {
+        id: '107',
+        name: 'Udemy Courses With Certifications',
+        brand: 'Udemy',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1500 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/Udemy_Courses_With_Certifications.png',
+        logo_url: '',
+        description: 'ðŸ“± ð‚ð¨ð§ð­ðšðœð­: Viber/WhatsApp: 9862157864 or scan QR code! ðŸŽ“ ð‹ðžðšð«ð§ ð¨ð§ ð˜ð'
+    },
+    {
+        id: '108',
+        name: 'X(Twitter) Premium',
+        brand: 'X(Twitter)',
+        category: 'subscriptions',
+        region: 'Global',
+        denominations: [
+            { value: 'Standard', price: 1150 }
+        ],
+        delivery_type: 'Instant',
+        image_url: '/IMAGES/PRODUCTS/X_Twitter__Premium.png',
+        logo_url: '',
+        description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ¦ Get Twitter/X Premium! âœ¨ Unlock exclusive featu'
     }
 ];
 

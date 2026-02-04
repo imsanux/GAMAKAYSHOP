@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { Product } from '@/lib/supabase';
 import { useCart } from '@/context/CartContext';
 
@@ -60,13 +59,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                         borderRadius: '12px',
                         overflow: 'hidden'
                     }}>
-                        <Image
+                        <img
                             src={product.image_url}
                             alt={product.name}
-                            fill
-                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                             onError={() => setImageError(true)}
+                            loading="lazy"
                             style={{
+                                width: '100%',
+                                height: '100%',
                                 objectFit: 'cover',
                                 transition: 'transform 0.3s ease'
                             }}

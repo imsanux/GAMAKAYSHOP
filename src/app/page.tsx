@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import FAQSection from '@/components/FAQSection';
+import PromoBanner from '@/components/PromoBanner';
 import { getFeaturedProducts, getProductsByCategory } from '@/lib/products';
 
 export default function Home() {
@@ -179,16 +179,14 @@ export default function Home() {
                   background: 'rgba(255,255,255,0.1)',
                   boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
                   border: '2px solid rgba(255,255,255,0.2)',
-                  flexShrink: 0,
-                  position: 'relative'
+                  flexShrink: 0
                 }}>
-                  <Image
+                  <img
                     src={slide.image}
                     alt={slide.title || 'Product'}
-                    fill
-                    sizes="(max-width: 640px) 120px, 160px"
-                    priority={index === 0}
                     style={{
+                      width: '100%',
+                      height: '100%',
                       objectFit: 'cover'
                     }}
                   />
@@ -396,78 +394,14 @@ export default function Home() {
         </div>
       </section >
 
-      {/* Promo Banners */}
+      {/* Promo Banners - Random Selection */}
       <section style={{
         background: 'white',
         padding: '24px 16px',
         borderBottom: '1px solid #e2e8f0'
       }}>
         <div className="container">
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '16px'
-          }}>
-            {/* AI Tools Banner */}
-            <a
-              href="/category/software"
-              style={{
-                display: 'block',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
-              }}
-            >
-              <img
-                src="/banner-ai.png"
-                alt="AI Tools - ChatGPT, Claude, Gemini & More"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block'
-                }}
-              />
-            </a>
-
-            {/* Entertainment Banner */}
-            <a
-              href="/category/streaming"
-              style={{
-                display: 'block',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
-              }}
-            >
-              <img
-                src="/banner-entertainment.png"
-                alt="Entertainment - Netflix, Spotify, Apple Music"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block'
-                }}
-              />
-            </a>
-          </div>
+          <PromoBanner variant="double" />
         </div>
       </section>
 
@@ -736,6 +670,13 @@ export default function Home() {
         </div>
       </section >
 
+      {/* Gaming Banner */}
+      <section style={{ padding: '24px 16px', background: '#f8fafc' }}>
+        <div className="container">
+          <PromoBanner variant="single" category="gaming" />
+        </div>
+      </section>
+
       {/* Streaming Section */}
       < section style={{ padding: '48px 16px', background: '#f8fafc' }}>
         <div className="container">
@@ -776,6 +717,13 @@ export default function Home() {
           </div>
         </div>
       </section >
+
+      {/* Streaming/Software Banner */}
+      <section style={{ padding: '24px 16px', background: 'white' }}>
+        <div className="container">
+          <PromoBanner variant="carousel" />
+        </div>
+      </section>
 
       {/* Trust Section */}
       < section style={{
