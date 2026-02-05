@@ -52,35 +52,40 @@ export default function Home() {
       title: 'PlayStation Gift Cards',
       subtitle: 'Level up your gaming experience',
       image: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.png',
-      bg: 'linear-gradient(135deg, #003087 0%, #0070d1 100%)'
+      bg: 'linear-gradient(135deg, #003087 0%, #0070d1 100%)',
+      brand: 'PLAYSTATION'
     },
     {
       type: 'standard',
       title: 'Netflix & Streaming',
       subtitle: 'Entertainment at your fingertips',
       image: '/IMAGES/PRODUCTS/NETFLIX.png',
-      bg: 'linear-gradient(135deg, #8b0000 0%, #e50914 100%)'
+      bg: 'linear-gradient(135deg, #8b0000 0%, #e50914 100%)',
+      brand: 'NETFLIX'
     },
     {
       type: 'standard',
       title: 'Xbox Game Pass',
       subtitle: 'Hundreds of games, one low price',
       image: '/IMAGES/PRODUCTS/XBOX_GAMEPASS.png',
-      bg: 'linear-gradient(135deg, #0e7a0d 0%, #107c10 100%)'
+      bg: 'linear-gradient(135deg, #0e7a0d 0%, #107c10 100%)',
+      brand: 'XBOX'
     },
     {
       type: 'standard',
       title: 'Steam Gift Cards',
       subtitle: 'Unlock your gaming library',
       image: '/IMAGES/PRODUCTS/STEAM_GIFTCARDS.png',
-      bg: 'linear-gradient(135deg, #1b2838 0%, #2a475e 100%)'
+      bg: 'linear-gradient(135deg, #1b2838 0%, #2a475e 100%)',
+      brand: 'STEAM'
     },
     {
       type: 'standard',
       title: 'Apple Gift Cards',
       subtitle: 'For all things Apple',
       image: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.png',
-      bg: 'linear-gradient(135deg, #1d1d1f 0%, #555555 100%)'
+      bg: 'linear-gradient(135deg, #1d1d1f 0%, #555555 100%)',
+      brand: 'APPLE'
     }
   ];
 
@@ -165,7 +170,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ background: '#f8fafc' }}>
+    <div style={{ background: 'var(--bg-primary)', transition: 'background-color 0.3s ease' }}>
       {/* Hero Carousel */}
       <section style={{
         position: 'relative',
@@ -174,22 +179,42 @@ export default function Home() {
       }}>
         <div style={{
           display: 'flex',
-          transition: 'transform 0.5s ease-out',
+          transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
           transform: `translateX(-${currentSlide * 100}%)`
         }}>
           {heroSlides.map((slide, index) => (
             <div
               key={index}
+              className="hero-slide"
               style={{
                 minWidth: '100%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: 'clamp(160px, 28vw, 240px)',
                 background: slide.bg,
-                padding: '0'
+                padding: '0',
+                position: 'relative',
+                overflow: 'hidden'
               }}
             >
+              {/* Large transparent brand text background */}
+              <span style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+                fontSize: 'clamp(80px, 20vw, 200px)',
+                fontWeight: 900,
+                color: 'rgba(255, 255, 255, 0.08)',
+                whiteSpace: 'nowrap',
+                letterSpacing: '0.05em',
+                pointerEvents: 'none',
+                userSelect: 'none',
+                zIndex: 0,
+                textTransform: 'uppercase'
+              }}>
+                {slide.brand}
+              </span>
               {/* Horizontal layout - Image + Text side by side */}
               <div className="container" style={{
                 display: 'flex',
@@ -198,7 +223,9 @@ export default function Home() {
                 justifyContent: 'center',
                 gap: 'clamp(16px, 4vw, 40px)',
                 height: '100%',
-                padding: '16px 24px'
+                padding: '16px 24px',
+                position: 'relative',
+                zIndex: 1
               }}>
                 {/* Product Image */}
                 <div style={{
@@ -276,84 +303,29 @@ export default function Home() {
           }
         </div >
 
-        {/* Arrow buttons */}
-        < button
-          onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
-          className="hide-mobile"
-          style={{
-            position: 'absolute',
-            left: '24px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '48px',
-            height: '48px',
-            borderRadius: '50%',
-            border: '2px solid rgba(255,255,255,0.3)',
-            background: 'rgba(255,255,255,0.15)',
-            backdropFilter: 'blur(12px)',
-            color: 'white',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'all 0.2s ease',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.3)';
-            e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-            e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
-          }}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button >
-        <button
-          onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
-          className="hide-mobile"
-          style={{
-            position: 'absolute',
-            right: '24px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '48px',
-            height: '48px',
-            borderRadius: '50%',
-            border: '2px solid rgba(255,255,255,0.3)',
-            background: 'rgba(255,255,255,0.15)',
-            backdropFilter: 'blur(12px)',
-            color: 'white',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'all 0.2s ease',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.3)';
-            e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-            e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
-          }}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </button>
+        <style jsx>{`
+          .hero-slide {
+            height: 180px;
+          }
+          @media (min-width: 768px) {
+            .hero-slide {
+              height: 220px;
+            }
+          }
+          @media (min-width: 1024px) {
+            .hero-slide {
+              height: 280px;
+            }
+          }
+        `}</style>
       </section >
 
       {/* Search Bar Section */}
       <section style={{
-        background: 'white',
+        background: 'var(--card-bg)',
         padding: '24px 16px',
-        borderBottom: '1px solid #e2e8f0'
+        borderBottom: '1px solid var(--border-color)',
+        transition: 'var(--theme-transition)'
       }}>
         <div className="container" style={{ maxWidth: '600px', margin: '0 auto' }}>
           <div ref={searchRef} style={{ position: 'relative', width: '100%' }}>
@@ -380,9 +352,10 @@ export default function Home() {
                   width: '100%',
                   padding: '14px 50px 14px 20px',
                   fontSize: '1rem',
-                  border: '2px solid #e2e8f0',
+                  border: '2px solid var(--border-color)',
+                  color: 'var(--text-primary)',
                   borderRadius: showDropdown && searchResults.length > 0 ? '20px 20px 0 0' : '50px',
-                  background: '#f8fafc',
+                  background: 'var(--input-bg)',
                   outline: 'none',
                   transition: 'all 0.2s ease'
                 }}
@@ -429,8 +402,8 @@ export default function Home() {
                 top: '100%',
                 left: 0,
                 right: 0,
-                background: 'white',
-                border: '2px solid #3b82f6',
+                background: 'var(--dropdown-bg)',
+                border: '2px solid var(--btn-primary-bg)',
                 borderTop: 'none',
                 borderRadius: '0 0 20px 20px',
                 boxShadow: '0 8px 24px rgba(59,130,246,0.2)',
@@ -452,15 +425,15 @@ export default function Home() {
                       gap: '12px',
                       padding: '12px 16px',
                       textDecoration: 'none',
-                      color: '#1e293b',
-                      borderBottom: '1px solid #f1f5f9',
+                      color: 'var(--text-primary)',
+                      borderBottom: '1px solid var(--border-color)',
                       transition: 'background 0.15s ease'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#f8fafc';
+                      e.currentTarget.style.background = 'var(--bg-secondary)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'white';
+                      e.currentTarget.style.background = 'var(--dropdown-bg)';
                     }}
                   >
                     <div style={{
@@ -469,7 +442,7 @@ export default function Home() {
                       borderRadius: '8px',
                       overflow: 'hidden',
                       flexShrink: 0,
-                      background: '#f1f5f9'
+                      background: 'var(--bg-secondary)'
                     }}>
                       <img
                         src={product.image_url}
@@ -493,7 +466,7 @@ export default function Home() {
                       </div>
                       <div style={{
                         fontSize: '0.8rem',
-                        color: '#64748b'
+                        color: 'var(--text-muted)'
                       }}>
                         {product.brand} • {product.category}
                       </div>
@@ -501,7 +474,7 @@ export default function Home() {
                     <div style={{
                       fontSize: '0.85rem',
                       fontWeight: 600,
-                      color: '#3b82f6'
+                      color: 'var(--btn-primary-bg)'
                     }}>
                       Rs. {product.denominations[0]?.price.toLocaleString()}
                     </div>
@@ -521,10 +494,10 @@ export default function Home() {
                     gap: '8px',
                     padding: '14px 16px',
                     textDecoration: 'none',
-                    color: '#3b82f6',
+                    color: 'var(--btn-primary-bg)',
                     fontWeight: 600,
                     fontSize: '0.9rem',
-                    background: '#f8fafc',
+                    background: 'var(--bg-secondary)',
                     borderRadius: '0 0 18px 18px'
                   }}
                 >
@@ -541,29 +514,36 @@ export default function Home() {
 
       {/* Promo Banners - Random Selection */}
       <section style={{
-        background: 'white',
+        background: 'var(--card-bg)',
         padding: '24px 16px',
-        borderBottom: '1px solid #e2e8f0'
+        borderBottom: '1px solid var(--border-color)',
+        transition: 'var(--theme-transition)'
       }}>
         <div className="container">
           <PromoBanner variant="double" />
         </div>
       </section>
 
-      {/* Category Icons - Grid Layout */}
+      {/* Category Icons - Horizontal scroll on mobile, grid on desktop */}
       <section style={{
-        background: 'white',
-        padding: '20px 16px',
-        borderBottom: '1px solid #e2e8f0'
+        background: 'var(--card-bg)',
+        padding: '20px 0',
+        borderBottom: '1px solid var(--border-color)',
+        transition: 'var(--theme-transition)'
       }}>
-        <div className="container">
+        <div className="container" style={{ padding: '0' }}>
           <div
+            className="category-scroll"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '10px'
+              display: 'flex',
+              gap: '12px',
+              overflowX: 'auto',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              paddingLeft: '16px',
+              paddingRight: '16px',
+              paddingBottom: '4px'
             }}
-            className="category-grid"
           >
             {categories.map((cat, index) => (
               <Link
@@ -574,31 +554,34 @@ export default function Home() {
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '6px',
-                  padding: '14px 8px',
+                  gap: '8px',
+                  padding: '16px 20px',
+                  minWidth: '100px',
                   borderRadius: '12px',
-                  border: '1px solid #e2e8f0',
-                  background: 'white',
+                  border: '1px solid var(--border-color)',
+                  background: 'var(--card-bg)',
                   textDecoration: 'none',
-                  transition: 'all 0.15s ease'
+                  transition: 'all 0.15s ease',
+                  flexShrink: 0
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#3b82f6';
+                  e.currentTarget.style.borderColor = 'var(--btn-primary-bg)';
                   e.currentTarget.style.boxShadow = '0 4px 12px rgba(59,130,246,0.15)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#e2e8f0';
+                  e.currentTarget.style.borderColor = 'var(--border-color)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                <span style={{ fontSize: '1.4rem' }}>
+                <span style={{ fontSize: '1.5rem' }}>
                   {typeof cat.icon === 'string' ? cat.icon : cat.icon}
                 </span>
                 <span style={{
                   fontSize: '0.75rem',
                   fontWeight: 500,
-                  color: '#1e293b',
-                  textAlign: 'center'
+                  color: 'var(--text-primary)',
+                  textAlign: 'center',
+                  whiteSpace: 'nowrap'
                 }}>
                   {cat.name}
                 </span>
@@ -607,18 +590,19 @@ export default function Home() {
           </div>
         </div>
         <style jsx>{`
-          @media (min-width: 480px) {
-            .category-grid {
-              grid-template-columns: repeat(3, 1fr) !important;
-            }
+          .category-scroll::-webkit-scrollbar {
+            display: none;
           }
           @media (min-width: 768px) {
-            .category-grid {
+            .category-scroll {
+              display: grid !important;
               grid-template-columns: repeat(4, 1fr) !important;
+              overflow-x: visible !important;
+              padding: 0 16px !important;
             }
           }
           @media (min-width: 1024px) {
-            .category-grid {
+            .category-scroll {
               grid-template-columns: repeat(7, 1fr) !important;
             }
           }
@@ -627,9 +611,10 @@ export default function Home() {
 
       {/* Brand Marquee - CoinGate Style */}
       < section style={{
-        background: '#f1f5f9',
+        background: 'var(--bg-marquee)',
         padding: '32px 0',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        transition: 'var(--theme-transition)'
       }}>
         {/* Row 1 - Scrolling Left */}
         < div style={{
@@ -735,7 +720,7 @@ export default function Home() {
       </section >
 
       {/* Popular Gift Cards */}
-      < section style={{ padding: '48px 16px', background: '#f8fafc' }}>
+      < section style={{ padding: '48px 16px', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
         <div className="container">
           <div style={{
             display: 'flex',
@@ -746,7 +731,7 @@ export default function Home() {
             <h2 style={{
               fontSize: '1.5rem',
               fontWeight: 700,
-              color: '#0f172a'
+              color: 'var(--text-primary)'
             }}>
               🔥 Popular Gift Cards
             </h2>
@@ -771,7 +756,7 @@ export default function Home() {
       </section >
 
       {/* Gaming Section */}
-      < section style={{ padding: '48px 16px', background: 'white' }}>
+      < section style={{ padding: '48px 16px', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
         <div className="container">
           <div style={{
             display: 'flex',
@@ -782,7 +767,7 @@ export default function Home() {
             <h2 style={{
               fontSize: '1.5rem',
               fontWeight: 700,
-              color: '#0f172a',
+              color: 'var(--text-primary)',
               display: 'flex',
               alignItems: 'center',
               gap: '10px'
@@ -800,7 +785,7 @@ export default function Home() {
               style={{
                 fontSize: '0.9rem',
                 fontWeight: 600,
-                color: '#3b82f6',
+                color: 'var(--btn-primary-bg)',
                 textDecoration: 'none'
               }}
             >
@@ -816,14 +801,14 @@ export default function Home() {
       </section >
 
       {/* Gaming Banner */}
-      <section style={{ padding: '24px 16px', background: '#f8fafc' }}>
+      <section style={{ padding: '24px 16px', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
         <div className="container">
           <PromoBanner variant="single" category="gaming" />
         </div>
       </section>
 
       {/* Streaming Section */}
-      < section style={{ padding: '48px 16px', background: '#f8fafc' }}>
+      < section style={{ padding: '48px 16px', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
         <div className="container">
           <div style={{
             display: 'flex',
@@ -834,7 +819,7 @@ export default function Home() {
             <h2 style={{
               fontSize: '1.5rem',
               fontWeight: 700,
-              color: '#0f172a'
+              color: 'var(--text-primary)'
             }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
                 <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -848,7 +833,7 @@ export default function Home() {
               style={{
                 fontSize: '0.9rem',
                 fontWeight: 600,
-                color: '#3b82f6',
+                color: 'var(--btn-primary-bg)',
                 textDecoration: 'none'
               }}
             >
@@ -864,7 +849,7 @@ export default function Home() {
       </section >
 
       {/* Streaming/Software Banner */}
-      <section style={{ padding: '24px 16px', background: 'white' }}>
+      <section style={{ padding: '24px 16px', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
         <div className="container">
           <PromoBanner variant="carousel" />
         </div>
@@ -873,8 +858,9 @@ export default function Home() {
       {/* Trust Section */}
       < section style={{
         padding: '64px 16px',
-        background: 'white',
-        borderTop: '1px solid #e2e8f0'
+        background: 'var(--card-bg)',
+        borderTop: '1px solid var(--border-color)',
+        transition: 'var(--theme-transition)'
       }}>
         <div className="container" style={{ maxWidth: '900px' }}>
           <div

@@ -5,9 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function Header() {
     const { items } = useCart();
+    const { theme, toggleTheme, isDark } = useTheme();
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -92,10 +94,10 @@ export default function Header() {
                 position: 'sticky',
                 top: 0,
                 zIndex: 100,
-                background: isScrolled ? 'rgba(255,255,255,0.98)' : 'white',
+                background: isScrolled ? 'var(--header-bg-scrolled)' : 'var(--header-bg)',
                 backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-                boxShadow: isScrolled ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
-                borderBottom: '1px solid #e2e8f0',
+                boxShadow: isScrolled ? 'var(--shadow-sm)' : 'none',
+                borderBottom: '1px solid var(--border-color)',
                 transition: 'all 0.2s ease'
             }}>
                 <div className="container" style={{
@@ -120,7 +122,8 @@ export default function Header() {
                                 height: '100px',
                                 maxHeight: '100px',
                                 width: 'auto',
-                                objectFit: 'contain'
+                                objectFit: 'contain',
+                                filter: isDark ? 'brightness(0) invert(1)' : 'none'
                             }}
                         />
                     </Link>
@@ -138,19 +141,19 @@ export default function Header() {
                                 style={{
                                     fontSize: '0.9rem',
                                     fontWeight: 500,
-                                    color: '#475569',
+                                    color: 'var(--text-secondary)',
                                     textDecoration: 'none',
                                     padding: '8px 14px',
                                     borderRadius: '8px',
                                     transition: 'all 0.15s ease'
                                 }}
                                 onMouseEnter={(e) => {
-                                    e.currentTarget.style.background = '#f1f5f9';
-                                    e.currentTarget.style.color = '#0f172a';
+                                    e.currentTarget.style.background = 'var(--btn-secondary-bg)';
+                                    e.currentTarget.style.color = 'var(--text-primary)';
                                 }}
                                 onMouseLeave={(e) => {
                                     e.currentTarget.style.background = 'transparent';
-                                    e.currentTarget.style.color = '#475569';
+                                    e.currentTarget.style.color = 'var(--text-secondary)';
                                 }}
                             >
                                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -167,6 +170,74 @@ export default function Header() {
                         alignItems: 'center',
                         gap: '8px'
                     }}>
+                        {/* Theme Toggle Switch - Hidden on mobile, shown in mobile menu */}
+                        <button
+                            className="hide-mobile"
+                            onClick={toggleTheme}
+                            style={{
+                                position: 'relative',
+                                display: 'flex',
+                                alignItems: 'center',
+                                width: '56px',
+                                height: '28px',
+                                borderRadius: '50px',
+                                background: isDark ? '#333' : '#e2e8f0',
+                                border: 'none',
+                                cursor: 'pointer',
+                                transition: 'background 0.3s ease',
+                                padding: '3px'
+                            }}
+                            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                        >
+                            {/* Sliding circle */}
+                            <span style={{
+                                position: 'absolute',
+                                left: isDark ? '30px' : '3px',
+                                width: '22px',
+                                height: '22px',
+                                borderRadius: '50%',
+                                background: '#fff',
+                                transition: 'left 0.3s ease',
+                                boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
+                            }} />
+                            {/* Sun icon (left side) */}
+                            <span style={{
+                                position: 'absolute',
+                                left: '6px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                opacity: isDark ? 0.5 : 0,
+                                transition: 'opacity 0.3s ease'
+                            }}>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="12" cy="12" r="5" />
+                                    <line x1="12" y1="1" x2="12" y2="3" />
+                                    <line x1="12" y1="21" x2="12" y2="23" />
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                                    <line x1="1" y1="12" x2="3" y2="12" />
+                                    <line x1="21" y1="12" x2="23" y2="12" />
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                                </svg>
+                            </span>
+                            {/* Moon icon (right side) */}
+                            <span style={{
+                                position: 'absolute',
+                                right: '6px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                opacity: isDark ? 0 : 0.5,
+                                transition: 'opacity 0.3s ease'
+                            }}>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="#64748b" stroke="none">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                                </svg>
+                            </span>
+                        </button>
+
                         {/* Track Order */}
                         <Link
                             href="/track"
@@ -174,14 +245,14 @@ export default function Header() {
                             style={{
                                 fontSize: '0.85rem',
                                 fontWeight: 500,
-                                color: '#475569',
+                                color: 'var(--text-secondary)',
                                 textDecoration: 'none',
                                 padding: '8px 14px',
                                 borderRadius: '8px',
                                 transition: 'all 0.15s ease'
                             }}
                             onMouseEnter={(e) => {
-                                e.currentTarget.style.background = '#f1f5f9';
+                                e.currentTarget.style.background = 'var(--btn-secondary-bg)';
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.background = 'transparent';
@@ -199,8 +270,8 @@ export default function Header() {
                             width: '44px',
                             height: '44px',
                             borderRadius: '10px',
-                            background: itemCount > 0 ? '#3b82f6' : '#f1f5f9',
-                            color: itemCount > 0 ? 'white' : '#475569',
+                            background: 'transparent',
+                            color: itemCount > 0 ? 'var(--btn-primary-bg)' : 'var(--text-secondary)',
                             textDecoration: 'none',
                             transition: 'all 0.2s ease',
                             transform: cartBounce ? 'scale(1.1)' : 'scale(1)'
@@ -242,7 +313,7 @@ export default function Header() {
                                 justifyContent: 'center',
                                 width: '44px',
                                 height: '44px',
-                                background: '#f1f5f9',
+                                background: 'transparent',
                                 border: 'none',
                                 borderRadius: '10px',
                                 cursor: 'pointer'
@@ -259,7 +330,7 @@ export default function Header() {
                                     left: 0,
                                     width: '100%',
                                     height: '2px',
-                                    background: '#0f172a',
+                                    background: 'var(--text-primary)',
                                     borderRadius: '1px',
                                     transition: 'all 0.25s ease',
                                     top: isMenuOpen ? '6px' : 0,
@@ -271,7 +342,7 @@ export default function Header() {
                                     top: '6px',
                                     width: '100%',
                                     height: '2px',
-                                    background: '#0f172a',
+                                    background: 'var(--text-primary)',
                                     borderRadius: '1px',
                                     transition: 'all 0.25s ease',
                                     opacity: isMenuOpen ? 0 : 1
@@ -281,7 +352,7 @@ export default function Header() {
                                     left: 0,
                                     width: '100%',
                                     height: '2px',
-                                    background: '#0f172a',
+                                    background: 'var(--text-primary)',
                                     borderRadius: '1px',
                                     transition: 'all 0.25s ease',
                                     top: isMenuOpen ? '6px' : '12px',
@@ -300,7 +371,7 @@ export default function Header() {
                 style={{
                     position: 'fixed',
                     inset: 0,
-                    background: 'rgba(0, 0, 0, 0.5)',
+                    background: 'var(--menu-overlay)',
                     opacity: isMenuOpen ? 1 : 0,
                     visibility: isMenuOpen ? 'visible' : 'hidden',
                     transition: 'all 0.3s ease',
@@ -317,7 +388,7 @@ export default function Header() {
                     right: 0,
                     width: '280px',
                     height: '100%',
-                    background: 'white',
+                    background: 'var(--mobile-menu-bg)',
                     zIndex: 99,
                     transform: isMenuOpen ? 'translateX(0)' : 'translateX(100%)',
                     transition: 'transform 0.3s ease',
@@ -337,16 +408,16 @@ export default function Header() {
                                 padding: '16px 0',
                                 fontSize: '1.1rem',
                                 fontWeight: 500,
-                                color: '#0f172a',
+                                color: 'var(--text-primary)',
                                 textDecoration: 'none',
-                                borderBottom: index < navLinks.length - 1 ? '1px solid #e2e8f0' : 'none'
+                                borderBottom: index < navLinks.length - 1 ? '1px solid var(--border-color)' : 'none'
                             }}
                         >
                             {link.label}
                         </Link>
                     ))}
 
-                    <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid #e2e8f0' }}>
+                    <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid var(--border-color)' }}>
                         <Link
                             href="/track"
                             onClick={() => setIsMenuOpen(false)}
@@ -355,18 +426,101 @@ export default function Header() {
                                 padding: '16px 0',
                                 fontSize: '1rem',
                                 fontWeight: 500,
-                                color: '#64748b',
+                                color: 'var(--text-muted)',
                                 textDecoration: 'none'
                             }}
                         >
                             Track Order
                         </Link>
+
+                        {/* Theme toggle in mobile menu */}
+                        <div
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                padding: '16px 0'
+                            }}
+                        >
+                            <span style={{
+                                fontSize: '1rem',
+                                fontWeight: 500,
+                                color: 'var(--text-muted)'
+                            }}>
+                                {isDark ? 'Dark Mode' : 'Light Mode'}
+                            </span>
+                            <button
+                                onClick={toggleTheme}
+                                style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    width: '56px',
+                                    height: '28px',
+                                    borderRadius: '50px',
+                                    background: isDark ? '#333' : '#e2e8f0',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'background 0.3s ease',
+                                    padding: '3px'
+                                }}
+                                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                            >
+                                {/* Sliding circle */}
+                                <span style={{
+                                    position: 'absolute',
+                                    left: isDark ? '30px' : '3px',
+                                    width: '22px',
+                                    height: '22px',
+                                    borderRadius: '50%',
+                                    background: '#fff',
+                                    transition: 'left 0.3s ease',
+                                    boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
+                                }} />
+                                {/* Sun icon (left side) */}
+                                <span style={{
+                                    position: 'absolute',
+                                    left: '6px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    opacity: isDark ? 0.5 : 0,
+                                    transition: 'opacity 0.3s ease'
+                                }}>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="12" cy="12" r="5" />
+                                        <line x1="12" y1="1" x2="12" y2="3" />
+                                        <line x1="12" y1="21" x2="12" y2="23" />
+                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                                        <line x1="1" y1="12" x2="3" y2="12" />
+                                        <line x1="21" y1="12" x2="23" y2="12" />
+                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                                    </svg>
+                                </span>
+                                {/* Moon icon (right side) */}
+                                <span style={{
+                                    position: 'absolute',
+                                    right: '6px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    opacity: isDark ? 0 : 0.5,
+                                    transition: 'opacity 0.3s ease'
+                                }}>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#64748b" stroke="none">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <div style={{
                     padding: '24px',
-                    borderTop: '1px solid #e2e8f0'
+                    borderTop: '1px solid var(--border-color)'
                 }}>
                     <Link
                         href="/cart"
@@ -378,7 +532,7 @@ export default function Header() {
                             gap: '8px',
                             width: '100%',
                             padding: '14px',
-                            background: '#3b82f6',
+                            background: 'var(--btn-primary-bg)',
                             color: 'white',
                             borderRadius: '10px',
                             fontWeight: 600,
@@ -392,3 +546,4 @@ export default function Header() {
         </>
     );
 }
+

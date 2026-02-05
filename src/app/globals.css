@@ -19,16 +19,42 @@
   --bg-secondary: #f0ede8;
   --bg-card: #ffffff;
   --bg-glass: rgba(250, 249, 247, 0.95);
+  --bg-elevated: #ffffff;
+  --bg-marquee: #f1f5f9;
+
+  /* Text colors */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-inverted: #ffffff;
 
   /* Borders */
   --border-light: rgba(0, 0, 0, 0.06);
   --border-medium: rgba(0, 0, 0, 0.1);
+  --border-color: #e2e8f0;
 
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.08);
   --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 10px 40px rgba(0, 0, 0, 0.12);
+
+  /* Component colors */
+  --header-bg: #ffffff;
+  --header-bg-scrolled: rgba(255, 255, 255, 0.98);
+  --card-bg: #ffffff;
+  --input-bg: #f8fafc;
+  --input-bg-focus: #ffffff;
+  --dropdown-bg: #ffffff;
+  --menu-overlay: rgba(0, 0, 0, 0.5);
+  --mobile-menu-bg: #ffffff;
+
+  /* Button colors */
+  --btn-primary-bg: #3b82f6;
+  --btn-primary-hover: #2563eb;
+  --btn-secondary-bg: #f1f5f9;
+  --btn-secondary-hover: #e2e8f0;
 
   /* Spacing */
   --spacing-xs: 4px;
@@ -51,6 +77,61 @@
   --transition-base: 200ms ease;
   --transition-slow: 300ms ease;
   --transition-bounce: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark Mode Theme */
+[data-theme="dark"] {
+  /* Colors - Neutral greyish black palette */
+  --color-primary: #f5f5f5;
+  --color-secondary: #a1a1a1;
+  --color-accent: #f59e0b;
+  --color-accent-hover: #fbbf24;
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+
+  /* Backgrounds - Neutral greyish blacks */
+  --bg-primary: #121212;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #1e1e1e;
+  --bg-glass: rgba(18, 18, 18, 0.95);
+  --bg-elevated: #242424;
+  --bg-marquee: #161616;
+
+  /* Text colors */
+  --text-primary: #f5f5f5;
+  --text-secondary: #a1a1a1;
+  --text-muted: #6b6b6b;
+  --text-inverted: #121212;
+
+  /* Borders */
+  --border-light: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.1);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-card-hover: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  /* Component colors - Neutral greys */
+  --header-bg: #121212;
+  --header-bg-scrolled: rgba(18, 18, 18, 0.98);
+  --card-bg: #1e1e1e;
+  --input-bg: #1a1a1a;
+  --input-bg-focus: #242424;
+  --dropdown-bg: #1e1e1e;
+  --menu-overlay: rgba(0, 0, 0, 0.7);
+  --mobile-menu-bg: #1a1a1a;
+
+  /* Button colors */
+  --btn-primary-bg: #3b82f6;
+  --btn-primary-hover: #2563eb;
+  --btn-secondary-bg: #2a2a2a;
+  --btn-secondary-hover: #333333;
 }
 
 * {
@@ -67,11 +148,12 @@ html {
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg-primary);
-  color: var(--color-primary);
+  color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: var(--theme-transition);
 }
 
 /* Typography */
