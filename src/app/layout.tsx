@@ -166,11 +166,20 @@ export default function RootLayout({
                 try {
                   document.documentElement.classList.add('no-transitions');
                   var theme = localStorage.getItem('theme');
+                  var isDarkMode = false;
+                  
                   if (theme) {
-                    document.documentElement.setAttribute('data-theme', theme);
-                  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    isDarkMode = theme === 'dark';
+                  } else {
+                    // Fallback to time-based: Dark mode between 6 PM and 6 AM
+                    var hours = new Date().getHours();
+                    isDarkMode = hours < 6 || hours >= 18;
+                  }
+                  
+                  if (isDarkMode) {
                     document.documentElement.setAttribute('data-theme', 'dark');
                   }
+                  
                   requestAnimationFrame(function() {
                     requestAnimationFrame(function() {
                       document.documentElement.classList.remove('no-transitions');
