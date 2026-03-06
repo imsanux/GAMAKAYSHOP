@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Giftcards Nepal | Buy Steam, Apple, PlayStation Gift Cards Online - Gamakay",
@@ -185,6 +187,8 @@ export default function RootLayout({
                 {children}
               </main>
               <Footer />
+              <Analytics />
+              <SpeedInsights />
             </SmoothScroll>
           </CartProvider>
         </ThemeProvider>

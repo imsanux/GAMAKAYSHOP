@@ -7,6 +7,7 @@ import ProductCard from '@/components/ProductCard';
 import FAQSection from '@/components/FAQSection';
 import PromoBanner from '@/components/PromoBanner';
 import ScrollReveal from '@/components/ScrollReveal';
+import DraggableMarquee from '@/components/DraggableMarquee';
 import { getFeaturedProducts, getProductsByCategory, searchProducts } from '@/lib/products';
 
 export default function Home() {
@@ -621,106 +622,38 @@ export default function Home() {
           transition: 'var(--theme-transition)'
         }}>
           {/* Row 1 - Scrolling Left */}
-          < div style={{
-            display: 'flex',
-            animation: 'marquee 30s linear infinite',
-            marginBottom: '16px'
-          }}>
-            {
-              [...Array(2)].map((_, setIndex) => (
-                <div key={setIndex} style={{ display: 'flex', gap: '16px', paddingRight: '16px' }}>
-                  {[
-                    '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.png',
-                    '/IMAGES/PRODUCTS/XBOX_GIFTCARDS.png',
-                    '/IMAGES/PRODUCTS/NETFLIX.png',
-                    '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.png',
-                    '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.png',
-                    '/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.png',
-                    '/IMAGES/PRODUCTS/DISCORD_NITRO.png',
-                    '/IMAGES/PRODUCTS/CRUCHYROLL.png',
-                  ].map((image, index) => (
-                    <div
-                      key={`${setIndex}-${index}`}
-                      style={{
-                        width: '160px',
-                        height: '100px',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                        flexShrink: 0
-                      }}
-                    >
-                      <img
-                        src={image}
-                        alt="Gift Card"
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover'
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ))
-            }
-          </div >
+          <DraggableMarquee
+            items={[
+              { image: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.png', link: '/search?q=playstation' },
+              { image: '/IMAGES/PRODUCTS/XBOX_GIFTCARDS.png', link: '/search?q=xbox' },
+              { image: '/IMAGES/PRODUCTS/NETFLIX.png', link: '/search?q=netflix' },
+              { image: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.png', link: '/search?q=spotify' },
+              { image: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.png', link: '/search?q=apple' },
+              { image: '/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.png', link: '/search?q=nintendo' },
+              { image: '/IMAGES/PRODUCTS/DISCORD_NITRO.png', link: '/search?q=discord' },
+              { image: '/IMAGES/PRODUCTS/CRUCHYROLL.png', link: '/search?q=crunchyroll' },
+            ]}
+            direction="forward"
+            speed={0.5}
+          />
+
+          <div style={{ height: '16px' }}></div>
 
           {/* Row 2 - Scrolling Right */}
-          < div style={{
-            display: 'flex',
-            animation: 'marquee-reverse 35s linear infinite'
-          }}>
-            {
-              [...Array(2)].map((_, setIndex) => (
-                <div key={setIndex} style={{ display: 'flex', gap: '16px', paddingRight: '16px' }}>
-                  {[
-                    '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.png',
-                    '/IMAGES/PRODUCTS/NORD_VPN.png',
-                    '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.png',
-                    '/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.png',
-                    '/IMAGES/PRODUCTS/CURSOR_AI.png',
-                    '/IMAGES/PRODUCTS/EXPRESS_VPN.png',
-                    '/IMAGES/PRODUCTS/DUOLINGO.png',
-                    '/IMAGES/PRODUCTS/TINDER_GOLD.png',
-                  ].map((image, index) => (
-                    <div
-                      key={`${setIndex}-${index}`}
-                      style={{
-                        width: '160px',
-                        height: '100px',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                        flexShrink: 0
-                      }}
-                    >
-                      <img
-                        src={image}
-                        alt="Gift Card"
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover'
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ))
-            }
-          </div >
-
-          <style jsx>{`
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          @keyframes marquee-reverse {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-          }
-        `}</style>
+          <DraggableMarquee
+            items={[
+              { image: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.png', link: '/search?q=youtube' },
+              { image: '/IMAGES/PRODUCTS/NORD_VPN.png', link: '/search?q=nordvpn' },
+              { image: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.png', link: '/search?q=gemini' },
+              { image: '/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.png', link: '/search?q=claude' },
+              { image: '/IMAGES/PRODUCTS/CURSOR_AI.png', link: '/search?q=cursor' },
+              { image: '/IMAGES/PRODUCTS/EXPRESS_VPN.png', link: '/search?q=express' },
+              { image: '/IMAGES/PRODUCTS/DUOLINGO.png', link: '/search?q=duolingo' },
+              { image: '/IMAGES/PRODUCTS/TINDER_GOLD.png', link: '/search?q=tinder' },
+            ]}
+            direction="backward"
+            speed={0.5}
+          />
         </section >
       </ScrollReveal>
 
