@@ -43,6 +43,8 @@ export default function Footer() {
                                 filter: isDark ? 'brightness(0) invert(1)' : 'brightness(0)',
                                 marginBottom: '16px'
                             }}
+                            loading="lazy"
+                            decoding="async"
                         />
                         <p style={{
                             fontSize: '0.875rem',

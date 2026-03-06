@@ -4,10 +4,18 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
-import FAQSection from '@/components/FAQSection';
 import PromoBanner from '@/components/PromoBanner';
 import ScrollReveal from '@/components/ScrollReveal';
-import DraggableMarquee from '@/components/DraggableMarquee';
+import dynamic from 'next/dynamic';
+
+const DraggableMarquee = dynamic(() => import('@/components/DraggableMarquee'), {
+  ssr: false,
+  loading: () => <div style={{ height: '116px', width: '100%', background: 'var(--bg-secondary)', opacity: 0.5, animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
+});
+const FAQSection = dynamic(() => import('@/components/FAQSection'), {
+  ssr: true,
+  loading: () => <div style={{ minHeight: '400px', width: '100%', background: 'var(--bg-primary)' }} />
+});
 import { getFeaturedProducts, getProductsByCategory, searchProducts } from '@/lib/products';
 
 export default function Home() {
@@ -656,7 +664,7 @@ export default function Home() {
       </ScrollReveal>
 
       {/* Popular Gift Cards */}
-      <ScrollReveal>
+      <ScrollReveal threshold={0} duration={0.4} distance="20px">
         < section style={{ padding: '48px 16px', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
           <div className="container">
             <div style={{
@@ -1034,6 +1042,8 @@ export default function Home() {
                     <img
                       src="/hamrobazar-ok-logo.png"
                       alt="Hamrobazar"
+                      loading="lazy"
+                      decoding="async"
                       style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
                   </div>
