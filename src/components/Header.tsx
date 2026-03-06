@@ -53,36 +53,40 @@ export default function Header() {
     const navLinks = [
         {
             href: '/category/gaming', label: 'Gaming', icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="6" width="20" height="12" rx="2" />
-                    <path d="M6 12h4M8 10v4" />
-                    <circle cx="17" cy="10" r="1" fill="#10b981" />
-                    <circle cx="15" cy="12" r="1" fill="#10b981" />
+                    <circle cx="16" cy="12" r="1" fill="#10B981" stroke="none" />
+                    <circle cx="18" cy="10" r="1" fill="#10B981" stroke="none" />
+                    <path d="M6 12h4" />
+                    <path d="M8 10v4" />
                 </svg>
             )
         },
         {
             href: '/category/streaming', label: 'Streaming', icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="2" />
-                    <path d="M8 21h8M12 17v4" />
-                    <polygon points="10,8 10,12 14,10" fill="#f43f5e" />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F43F5E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                    <path d="M10 9l5 3-5 3v-6z" fill="#F43F5E" />
+                    <path d="M8 22h8" />
+                    <path d="M12 19v3" />
                 </svg>
             )
         },
         {
             href: '/category/software', label: 'Software', icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="2" />
-                    <path d="M8 21h8M12 17v4" />
-                    <path d="M7 8l3 3-3 3M12 14h5" />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="4" width="20" height="14" rx="2" />
+                    <path d="M8 22h8" />
+                    <path d="M12 18v4" />
+                    <path d="M7 9l2 2-2 2" />
+                    <path d="M11 13h5" />
                 </svg>
             )
         },
         {
             href: '/category/subscriptions', label: 'Subscriptions', icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" />
                 </svg>
             )
         },
@@ -95,7 +99,8 @@ export default function Header() {
                 top: 0,
                 zIndex: 100,
                 background: isScrolled ? 'var(--header-bg-scrolled)' : 'var(--header-bg)',
-                backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+                backdropFilter: isScrolled ? 'blur(24px) saturate(180%)' : 'none',
+                WebkitBackdropFilter: isScrolled ? 'blur(24px) saturate(180%)' : 'none',
                 boxShadow: isScrolled ? 'var(--shadow-sm)' : 'none',
                 borderBottom: '1px solid var(--border-color)',
                 transition: 'all 0.2s ease'

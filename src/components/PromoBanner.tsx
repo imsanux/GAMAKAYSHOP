@@ -139,18 +139,26 @@ export default function PromoBanner({ variant = 'single', category, className }:
                 className={className}
                 style={{
                     display: 'block',
-                    borderRadius: '16px',
+                    borderRadius: '24px',
                     overflow: 'hidden',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-                    transition: 'all 0.3s ease',
+                    boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
+                    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                    position: 'relative',
+                    border: '1px solid rgba(255,255,255,0.05)'
                 }}
                 onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.15)';
+                    e.currentTarget.style.transform = 'scale(1.02) translateY(-4px)';
+                    e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.7), 0 0 20px rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                    const img = e.currentTarget.querySelector('img');
+                    if (img) img.style.transform = 'scale(1.05)';
                 }}
                 onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.1)';
+                    e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.5)';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+                    const img = e.currentTarget.querySelector('img');
+                    if (img) img.style.transform = 'scale(1)';
                 }}
             >
                 <img
@@ -160,6 +168,7 @@ export default function PromoBanner({ variant = 'single', category, className }:
                         width: '100%',
                         height: 'auto',
                         display: 'block',
+                        transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                 />
             </Link>
@@ -183,18 +192,26 @@ export default function PromoBanner({ variant = 'single', category, className }:
                         href={banner.link}
                         style={{
                             display: 'block',
-                            borderRadius: '16px',
+                            borderRadius: '24px',
                             overflow: 'hidden',
-                            boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-                            transition: 'all 0.3s ease',
+                            boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
+                            transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                            position: 'relative',
+                            border: '1px solid rgba(255,255,255,0.05)'
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'translateY(-4px)';
-                            e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.15)';
+                            e.currentTarget.style.transform = 'scale(1.02) translateY(-4px)';
+                            e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.7), 0 0 20px rgba(255, 255, 255, 0.1)';
+                            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                            const img = e.currentTarget.querySelector('img');
+                            if (img) img.style.transform = 'scale(1.05)';
                         }}
                         onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.1)';
+                            e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                            e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.5)';
+                            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+                            const img = e.currentTarget.querySelector('img');
+                            if (img) img.style.transform = 'scale(1)';
                         }}
                     >
                         <img
@@ -204,6 +221,7 @@ export default function PromoBanner({ variant = 'single', category, className }:
                                 width: '100%',
                                 height: 'auto',
                                 display: 'block',
+                                transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
                             }}
                         />
                     </Link>
@@ -219,9 +237,10 @@ export default function PromoBanner({ variant = 'single', category, className }:
                 className={className}
                 style={{
                     position: 'relative',
-                    borderRadius: '16px',
+                    borderRadius: '24px',
                     overflow: 'hidden',
-                    boxShadow: '0 4px 24px rgba(0,0,0,0.12)',
+                    boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
+                    border: '1px solid rgba(255,255,255,0.05)'
                 }}
             >
                 <div
@@ -238,6 +257,15 @@ export default function PromoBanner({ variant = 'single', category, className }:
                             style={{
                                 minWidth: '100%',
                                 display: 'block',
+                                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                            }}
+                            onMouseEnter={(e) => {
+                                const img = e.currentTarget.querySelector('img');
+                                if (img) img.style.transform = 'scale(1.03)';
+                            }}
+                            onMouseLeave={(e) => {
+                                const img = e.currentTarget.querySelector('img');
+                                if (img) img.style.transform = 'scale(1)';
                             }}
                         >
                             <img
@@ -247,6 +275,7 @@ export default function PromoBanner({ variant = 'single', category, className }:
                                     width: '100%',
                                     height: 'auto',
                                     display: 'block',
+                                    transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
                                 }}
                             />
                         </Link>

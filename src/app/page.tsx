@@ -91,12 +91,7 @@ export default function Home() {
     }
   ];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [heroSlides.length]);
+  // Auto-slide removed per user request
 
   const categories = [
     {
@@ -243,6 +238,9 @@ export default function Home() {
                   <img
                     src={slide.image}
                     alt={slide.title || 'Product'}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={index === 0 ? 'high' : 'auto'}
+                    decoding="async"
                     style={{
                       width: '100%',
                       height: '100%',

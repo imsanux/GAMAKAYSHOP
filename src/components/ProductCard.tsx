@@ -22,22 +22,29 @@ export default function ProductCard({ product }: ProductCardProps) {
 
     return (
         <div style={{
-            borderRadius: '16px',
+            borderRadius: '18px',
             background: 'var(--card-bg)',
             overflow: 'hidden',
-            transition: 'all 0.2s ease',
+            transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
             boxShadow: 'var(--shadow-card)',
             border: '1px solid var(--border-color)',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            position: 'relative'
         }}
             onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = 'var(--shadow-card-hover)';
-                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.5), 0 0 20px rgba(59, 130, 246, 0.15)';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+                const img = e.currentTarget.querySelector('img');
+                if (img) img.style.transform = 'scale(1.08)';
             }}
             onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = 'var(--shadow-card)';
                 e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.borderColor = 'var(--border-color)';
+                const img = e.currentTarget.querySelector('img');
+                if (img) img.style.transform = 'scale(1)';
             }}
         >
             {/* Product Image */}
@@ -68,7 +75,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                                 width: '100%',
                                 height: '100%',
                                 objectFit: 'cover',
-                                transition: 'transform 0.3s ease'
+                                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
                             }}
                         />
                     </div>
