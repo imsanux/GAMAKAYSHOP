@@ -93,15 +93,17 @@ export default function ProductCard({ product }: ProductCardProps) {
 
             {/* Card Content */}
             <div style={{
-                padding: '14px',
+                padding: '12px',
                 display: 'flex',
                 flexDirection: 'column',
                 flex: 1,
-                gap: '6px'
+                gap: '5px',
+                overflow: 'hidden',
+                boxSizing: 'border-box'
             }}>
                 {/* Brand */}
                 <div style={{
-                    fontSize: '0.65rem',
+                    fontSize: '0.6rem',
                     fontWeight: 600,
                     color: 'var(--text-muted)',
                     textTransform: 'uppercase',
@@ -112,7 +114,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                 {/* Product Name */}
                 <h3 style={{
-                    fontSize: '0.82rem',
+                    fontSize: '0.8rem',
                     fontWeight: 600,
                     color: 'var(--text-primary)',
                     lineHeight: 1.35,
@@ -137,8 +139,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                         }}
                         style={{
                             width: '100%',
-                            padding: '8px 30px 8px 12px',
-                            fontSize: '0.75rem',
+                            padding: '7px 28px 7px 10px',
+                            fontSize: '0.72rem',
                             fontWeight: 500,
                             border: '1px solid var(--border-color)',
                             borderRadius: '10px',
@@ -147,10 +149,11 @@ export default function ProductCard({ product }: ProductCardProps) {
                             appearance: 'none',
                             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2386868b' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
                             backgroundRepeat: 'no-repeat',
-                            backgroundPosition: 'right 10px center',
+                            backgroundPosition: 'right 8px center',
                             transition: 'all 0.2s ease',
                             color: 'var(--text-primary)',
-                            outline: 'none'
+                            outline: 'none',
+                            boxSizing: 'border-box'
                         }}
                         onFocus={(e) => {
                             e.currentTarget.style.borderColor = 'var(--btn-primary-bg)';
@@ -170,43 +173,30 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </div>
 
                 {/* Price & Add Button */}
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '8px',
-                    marginTop: '6px'
-                }}>
-                    <div>
+                <div className="product-card-action">
+                    <div className="price-wrapper">
                         <span style={{
-                            fontSize: '0.95rem',
+                            fontSize: '0.8rem',
                             fontWeight: 700,
                             color: 'var(--text-primary)',
-                            letterSpacing: '-0.02em'
+                            letterSpacing: '-0.02em',
+                            whiteSpace: 'nowrap'
                         }}>
                             Rs. {selectedDenom.price.toLocaleString()}
                         </span>
                     </div>
 
                     <button
+                        className="add-to-cart-btn"
                         onClick={handleAddToCart}
                         disabled={isAdding}
                         style={{
-                            padding: '8px 14px',
-                            fontSize: '0.72rem',
-                            fontWeight: 600,
                             background: isAdding ? '#30d158' : 'var(--btn-primary-bg)',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '10px',
                             cursor: isAdding ? 'default' : 'pointer',
-                            transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-                            whiteSpace: 'nowrap',
                             transform: isAdding ? 'scale(0.95)' : 'scale(1)',
                             boxShadow: isAdding
                                 ? '0 2px 8px rgba(48, 209, 88, 0.3)'
-                                : '0 2px 8px rgba(0, 113, 227, 0.2)',
-                            letterSpacing: '-0.01em'
+                                : '0 2px 6px rgba(0, 113, 227, 0.2)',
                         }}
                         onMouseEnter={(e) => {
                             if (!isAdding) {
@@ -222,8 +212,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                         }}
                     >
                         {isAdding ? (
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                     <polyline points="20 6 9 17 4 12" />
                                 </svg>
                                 Added

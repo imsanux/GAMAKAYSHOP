@@ -53,6 +53,26 @@ const nextConfig: NextConfig = {
           }
         ],
       },
+      {
+        // Cache static image assets for 30 days
+        source: '/IMAGES/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, immutable'
+          }
+        ],
+      },
+      {
+        // Cache other static assets (logos, icons) for 7 days
+        source: '/:path*.(png|jpg|jpeg|gif|svg|webp|ico)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, stale-while-revalidate=86400'
+          }
+        ],
+      },
     ];
   }
 };

@@ -179,12 +179,12 @@ export default function GuidesPage() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '6px',
-                        color: '#64748b',
+                        color: 'var(--text-secondary)',
                         textDecoration: 'none',
                         fontSize: '0.9rem',
                         fontWeight: 500,
                         padding: '8px 12px',
-                        background: '#f1f5f9',
+                        background: 'var(--bg-secondary)',
                         borderRadius: '50px',
                         transition: 'all 0.2s ease'
                     }}>
@@ -200,13 +200,15 @@ export default function GuidesPage() {
                     textAlign: 'center',
                     margin: 0,
                     padding: '0 40px',
-                    width: '100%'
+                    width: '100%',
+                    color: 'var(--text-primary)',
+                    letterSpacing: '-0.03em'
                 }}>
                     Redemption Guides
                 </h1>
             </div>
             <p style={{
-                color: '#64748b',
+                color: 'var(--text-secondary)',
                 textAlign: 'center',
                 marginBottom: '40px',
                 fontSize: '0.95rem'
@@ -219,11 +221,12 @@ export default function GuidesPage() {
                     <div
                         key={index}
                         style={{
-                            background: 'white',
+                            background: 'var(--card-bg)',
                             borderRadius: '16px',
-                            border: '1px solid #e2e8f0',
+                            border: '1px solid var(--border-light)',
                             padding: '24px',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
+                            boxShadow: 'var(--shadow-sm)',
+                            transition: 'var(--theme-transition)'
                         }}
                     >
                         <div style={{
@@ -249,15 +252,15 @@ export default function GuidesPage() {
                                 <h2 style={{
                                     fontSize: '1.1rem',
                                     fontWeight: 600,
-                                    color: '#0f172a',
+                                    color: 'var(--text-primary)',
                                     marginBottom: '2px'
                                 }}>
                                     {guide.title}
                                 </h2>
                                 <span style={{
                                     fontSize: '0.75rem',
-                                    color: '#64748b',
-                                    background: '#f1f5f9',
+                                    color: 'var(--text-muted)',
+                                    background: 'var(--bg-secondary)',
                                     padding: '2px 8px',
                                     borderRadius: '4px'
                                 }}>
@@ -278,7 +281,7 @@ export default function GuidesPage() {
                                     key={stepIndex}
                                     style={{
                                         fontSize: '0.9rem',
-                                        color: '#475569',
+                                        color: 'var(--text-secondary)',
                                         lineHeight: 1.5
                                     }}
                                 >
@@ -294,14 +297,15 @@ export default function GuidesPage() {
             <div style={{
                 marginTop: '40px',
                 padding: '24px',
-                background: '#f8fafc',
+                background: 'var(--bg-secondary)',
                 borderRadius: '16px',
-                textAlign: 'center'
+                textAlign: 'center',
+                transition: 'var(--theme-transition)'
             }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '8px' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '8px', color: 'var(--text-primary)' }}>
                     Need Help?
                 </h3>
-                <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '16px' }}>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>
                     Contact us on WhatsApp for instant support
                 </p>
                 <a
@@ -331,7 +335,7 @@ export default function GuidesPage() {
             {/* Back Link */}
             <div style={{ textAlign: 'center', marginTop: '24px' }}>
                 <Link href="/" style={{
-                    color: '#3b82f6',
+                    color: 'var(--btn-primary-bg)',
                     textDecoration: 'none',
                     fontSize: '0.9rem'
                 }}>

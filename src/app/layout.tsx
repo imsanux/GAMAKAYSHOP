@@ -73,6 +73,8 @@ export default function RootLayout({
         <meta name="format-detection" content="telephone=no" />
         <meta name="geo.region" content="NP" />
         <meta name="geo.placename" content="Kathmandu, Nepal" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://wa.me" />
 
@@ -156,19 +158,27 @@ export default function RootLayout({
           }}
         />
 
-        {/* Theme initialization */}
+        {/* Theme initialization + suppress transitions on first paint */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
+                  document.documentElement.classList.add('no-transitions');
                   var theme = localStorage.getItem('theme');
                   if (theme) {
                     document.documentElement.setAttribute('data-theme', theme);
                   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
                     document.documentElement.setAttribute('data-theme', 'dark');
                   }
-                } catch (e) {}
+                  requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                      document.documentElement.classList.remove('no-transitions');
+                    });
+                  });
+                } catch (e) {
+                  document.documentElement.classList.remove('no-transitions');
+                }
               })();
             `,
           }}
