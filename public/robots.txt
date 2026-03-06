@@ -1,10 +1,23 @@
-# Robots.txt for Gamakay Giftcards
 User-agent: *
 Allow: /
 
 # Sitemap
 Sitemap: https://gamakay.com/sitemap.xml
 
-# Disallow admin pages
-Disallow: /admin
+# Crawl-delay for all bots
+Crawl-delay: 1
+
+# Block specific paths
 Disallow: /api/
+Disallow: /_next/
+Disallow: /checkout/
+Disallow: /confirmation/
+
+# Allow important assets
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$

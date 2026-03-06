@@ -35,7 +35,7 @@ export default function Footer() {
                     {/* Brand Column */}
                     <div style={{ gridColumn: 'span 1' }}>
                         <img
-                            src="/logo.png"
+                            src="/gamakay-logo.png"
                             alt="Gamakay"
                             style={{
                                 height: '80px',

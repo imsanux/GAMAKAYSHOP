@@ -245,7 +245,7 @@ h4 {
 }
 
 .btn-primary:hover {
-  background-color: #2a2a2a;
+  background-color: var(--color-secondary);
 }
 
 .btn-secondary {
@@ -254,7 +254,7 @@ h4 {
 }
 
 .btn-secondary:hover {
-  background-color: #e5e2dc;
+  background-color: var(--btn-secondary-hover);
 }
 
 .btn-outline {
@@ -294,7 +294,8 @@ h4 {
   font-size: 1rem;
   border: 1.5px solid var(--border-medium);
   border-radius: var(--radius-md);
-  background: white;
+  background: var(--input-bg);
+  color: var(--text-primary);
   transition: all var(--transition-fast);
   -webkit-appearance: none;
 }
@@ -455,12 +456,12 @@ h4 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--border-medium);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--color-secondary);
 }
 
 /* Selection */
@@ -493,7 +494,7 @@ h4 {
 
 /* Skeleton */
 .skeleton {
-  background: linear-gradient(90deg, #f0ede8 25%, #e8e5df 50%, #f0ede8 75%);
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-elevated) 50%, var(--bg-secondary) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: var(--radius-sm);
@@ -648,4 +649,28 @@ button,
   .no-print {
     display: none !important;
   }
+}
+
+/* Smooth scrolling (Lenis) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Scroll Reveal */
+.sr-element.sr-visible {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) scale(1) !important;
 }

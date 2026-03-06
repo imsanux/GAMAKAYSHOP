@@ -74,18 +74,19 @@ export default function CategoryPage() {
     };
 
     return (
-        <div style={{ background: '#faf9f7', minHeight: '70vh' }}>
+        <div style={{ background: 'var(--bg-primary)', minHeight: '70vh', transition: 'var(--theme-transition)' }}>
             {/* Category Header */}
             <div style={{
-                background: 'white',
-                borderBottom: '1px solid rgba(0,0,0,0.06)',
-                padding: '32px 16px'
+                background: 'var(--card-bg)',
+                borderBottom: '1px solid var(--border-color)',
+                padding: '32px 16px',
+                transition: 'var(--theme-transition)'
             }}>
                 <div className="container">
                     {/* Breadcrumb */}
                     <nav style={{
                         fontSize: '0.8rem',
-                        color: '#888',
+                        color: 'var(--text-muted)',
                         marginBottom: '16px',
                         display: 'flex',
                         alignItems: 'center',
@@ -100,13 +101,15 @@ export default function CategoryPage() {
                                 padding: '8px 14px',
                                 fontSize: '0.85rem',
                                 fontWeight: 500,
-                                color: '#475569',
-                                background: '#f1f5f9',
+                                color: 'var(--text-secondary)',
+                                background: 'var(--btn-secondary-bg)',
                                 border: 'none',
                                 borderRadius: '8px',
                                 cursor: 'pointer',
                                 transition: 'all 0.15s ease'
                             }}
+                            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--btn-secondary-hover)'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--btn-secondary-bg)'; }}
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -114,21 +117,21 @@ export default function CategoryPage() {
                             Back
                         </button>
                         <div>
-                            <Link href="/" style={{ color: '#888', textDecoration: 'none' }}>
+                            <Link href="/" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>
                                 Home
                             </Link>
-                            <span style={{ margin: '0 8px' }}>/</span>
-                            <span style={{ color: '#1a1a1a' }}>{category.title}</span>
+                            <span style={{ margin: '0 8px', color: 'var(--text-muted)' }}>/</span>
+                            <span style={{ color: 'var(--text-primary)' }}>{category.title}</span>
                         </div>
                     </nav>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         <span style={{ fontSize: '2rem' }}>{category.icon}</span>
                         <div>
-                            <h1 style={{ fontSize: '1.5rem', marginBottom: '4px' }}>
+                            <h1 style={{ fontSize: '1.5rem', marginBottom: '4px', color: 'var(--text-primary)' }}>
                                 {category.title}
                             </h1>
-                            <p style={{ color: '#6b6b6b', fontSize: '0.9rem', margin: 0 }}>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>
                                 {category.description}
                             </p>
                         </div>
@@ -148,7 +151,7 @@ export default function CategoryPage() {
                             height: '64px',
                             margin: '0 auto 16px',
                             borderRadius: '50%',
-                            background: '#f0ede8',
+                            background: 'var(--bg-secondary)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -156,10 +159,10 @@ export default function CategoryPage() {
                         }}>
                             📦
                         </div>
-                        <h2 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>
+                        <h2 style={{ fontSize: '1.25rem', marginBottom: '8px', color: 'var(--text-primary)' }}>
                             No products yet
                         </h2>
-                        <p style={{ color: '#6b6b6b', marginBottom: '20px' }}>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
                             Check back soon for new products in this category.
                         </p>
                         <Link href="/" className="btn btn-primary">
@@ -171,7 +174,7 @@ export default function CategoryPage() {
                         <div style={{
                             marginBottom: '20px',
                             fontSize: '0.85rem',
-                            color: '#888'
+                            color: 'var(--text-muted)'
                         }}>
                             {products.length} product{products.length !== 1 ? 's' : ''} available
                         </div>

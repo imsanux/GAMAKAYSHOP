@@ -18,7 +18,7 @@ export default function CartPage() {
                     height: '80px',
                     margin: '0 auto 24px',
                     borderRadius: '50%',
-                    background: '#f0ede8',
+                    background: 'var(--bg-secondary)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -26,17 +26,17 @@ export default function CartPage() {
                 }}>
                     🛒
                 </div>
-                <h1 style={{ marginBottom: '10px', fontSize: '1.5rem' }}>
+                <h1 style={{ marginBottom: '10px', fontSize: '1.5rem', color: 'var(--text-primary)' }}>
                     Your cart is empty
                 </h1>
                 <p style={{
-                    color: '#6b6b6b',
+                    color: 'var(--text-secondary)',
                     marginBottom: '28px',
                     maxWidth: '320px',
                     margin: '0 auto 28px',
                     fontSize: '0.95rem'
                 }}>
-                    Add some gift cards and they'll appear here.
+                    Add some gift cards and they&apos;ll appear here.
                 </p>
                 <Link href="/" className="btn btn-primary btn-lg">
                     Start Shopping
@@ -47,12 +47,12 @@ export default function CartPage() {
 
     return (
         <div className="container fade-in" style={{ padding: '32px 16px 64px' }}>
-            <h1 style={{ marginBottom: '24px', fontSize: '1.5rem' }}>
+            <h1 style={{ marginBottom: '24px', fontSize: '1.5rem', color: 'var(--text-primary)' }}>
                 Shopping Cart
                 <span style={{
                     fontSize: '0.9rem',
                     fontWeight: 400,
-                    color: '#6b6b6b',
+                    color: 'var(--text-secondary)',
                     marginLeft: '10px'
                 }}>
                     ({items.reduce((c, i) => c + i.quantity, 0)} items)
@@ -72,12 +72,13 @@ export default function CartPage() {
                             style={{
                                 padding: '16px',
                                 marginBottom: '12px',
-                                background: 'white',
+                                background: 'var(--card-bg)',
                                 borderRadius: '12px',
-                                border: '1px solid rgba(0,0,0,0.06)',
+                                border: '1px solid var(--border-color)',
                                 display: 'flex',
                                 gap: '12px',
-                                alignItems: 'flex-start'
+                                alignItems: 'flex-start',
+                                transition: 'var(--theme-transition)'
                             }}
                         >
                             {/* Product Image */}
@@ -85,7 +86,7 @@ export default function CartPage() {
                                 width: '64px',
                                 height: '64px',
                                 borderRadius: '8px',
-                                background: '#f8f7f5',
+                                background: 'var(--bg-secondary)',
                                 overflow: 'hidden',
                                 flexShrink: 0
                             }}>
@@ -108,7 +109,7 @@ export default function CartPage() {
                                         justifyContent: 'center',
                                         fontSize: '1.25rem',
                                         fontWeight: 600,
-                                        color: '#ccc'
+                                        color: 'var(--text-muted)'
                                     }}>
                                         {item.product.brand.charAt(0)}
                                     </div>
@@ -119,7 +120,7 @@ export default function CartPage() {
                             <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{
                                     fontSize: '0.7rem',
-                                    color: '#888',
+                                    color: 'var(--text-muted)',
                                     textTransform: 'uppercase',
                                     letterSpacing: '0.03em',
                                     marginBottom: '2px'
@@ -133,13 +134,14 @@ export default function CartPage() {
                                     lineHeight: 1.3,
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap'
+                                    whiteSpace: 'nowrap',
+                                    color: 'var(--text-primary)'
                                 }}>
                                     {item.product.name}
                                 </h3>
                                 <div style={{
                                     fontSize: '0.8rem',
-                                    color: '#6b6b6b',
+                                    color: 'var(--text-secondary)',
                                     marginBottom: '10px'
                                 }}>
                                     {item.denomination.value}
@@ -157,9 +159,10 @@ export default function CartPage() {
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: '0',
-                                        background: '#f5f3f0',
+                                        background: 'var(--bg-secondary)',
                                         borderRadius: '6px',
-                                        overflow: 'hidden'
+                                        overflow: 'hidden',
+                                        border: '1px solid var(--border-color)'
                                     }}>
                                         <button
                                             onClick={() => updateQuantity(item.product.id, item.denomination.value, item.quantity - 1)}
@@ -170,7 +173,7 @@ export default function CartPage() {
                                                 background: 'transparent',
                                                 cursor: 'pointer',
                                                 fontSize: '1rem',
-                                                color: '#1a1a1a'
+                                                color: 'var(--text-primary)'
                                             }}
                                         >
                                             −
@@ -179,7 +182,8 @@ export default function CartPage() {
                                             minWidth: '28px',
                                             textAlign: 'center',
                                             fontSize: '0.9rem',
-                                            fontWeight: 600
+                                            fontWeight: 600,
+                                            color: 'var(--text-primary)'
                                         }}>
                                             {item.quantity}
                                         </span>
@@ -192,7 +196,7 @@ export default function CartPage() {
                                                 background: 'transparent',
                                                 cursor: 'pointer',
                                                 fontSize: '1rem',
-                                                color: '#1a1a1a'
+                                                color: 'var(--text-primary)'
                                             }}
                                         >
                                             +
@@ -202,7 +206,8 @@ export default function CartPage() {
                                     {/* Price */}
                                     <div style={{
                                         fontWeight: 700,
-                                        fontSize: '1rem'
+                                        fontSize: '1rem',
+                                        color: 'var(--text-primary)'
                                     }}>
                                         Rs. {(item.denomination.price * item.quantity).toLocaleString()}
                                     </div>
@@ -217,7 +222,7 @@ export default function CartPage() {
                                     border: 'none',
                                     background: 'none',
                                     cursor: 'pointer',
-                                    color: '#999',
+                                    color: 'var(--text-muted)',
                                     flexShrink: 0
                                 }}
                                 aria-label="Remove item"
@@ -235,7 +240,7 @@ export default function CartPage() {
                             padding: '10px 16px',
                             background: 'none',
                             border: 'none',
-                            color: '#888',
+                            color: 'var(--text-muted)',
                             fontSize: '0.85rem',
                             cursor: 'pointer',
                             textDecoration: 'underline'
@@ -247,15 +252,16 @@ export default function CartPage() {
 
                 {/* Order Summary */}
                 <div style={{
-                    background: 'white',
+                    background: 'var(--card-bg)',
                     borderRadius: '12px',
-                    border: '1px solid rgba(0,0,0,0.06)',
+                    border: '1px solid var(--border-color)',
                     padding: '20px',
                     position: 'sticky',
                     top: '80px',
-                    height: 'fit-content'
+                    height: 'fit-content',
+                    transition: 'var(--theme-transition)'
                 }}>
-                    <h2 style={{ fontSize: '1.1rem', marginBottom: '20px' }}>
+                    <h2 style={{ fontSize: '1.1rem', marginBottom: '20px', color: 'var(--text-primary)' }}>
                         Order Summary
                     </h2>
 
@@ -265,10 +271,10 @@ export default function CartPage() {
                         marginBottom: '10px',
                         fontSize: '0.9rem'
                     }}>
-                        <span style={{ color: '#6b6b6b' }}>
+                        <span style={{ color: 'var(--text-secondary)' }}>
                             Subtotal
                         </span>
-                        <span>Rs. {getTotal().toLocaleString()}</span>
+                        <span style={{ color: 'var(--text-primary)' }}>Rs. {getTotal().toLocaleString()}</span>
                     </div>
 
                     <div style={{
@@ -277,12 +283,12 @@ export default function CartPage() {
                         marginBottom: '20px',
                         fontSize: '0.9rem'
                     }}>
-                        <span style={{ color: '#6b6b6b' }}>Delivery</span>
-                        <span style={{ color: '#2d8a4e', fontWeight: 500 }}>Digital (Free)</span>
+                        <span style={{ color: 'var(--text-secondary)' }}>Delivery</span>
+                        <span style={{ color: 'var(--color-success)', fontWeight: 500 }}>Digital (Free)</span>
                     </div>
 
                     <div style={{
-                        borderTop: '1px solid rgba(0,0,0,0.08)',
+                        borderTop: '1px solid var(--border-color)',
                         paddingTop: '16px',
                         marginBottom: '20px'
                     }}>
@@ -292,8 +298,8 @@ export default function CartPage() {
                             fontSize: '1.2rem',
                             fontWeight: 700
                         }}>
-                            <span>Total</span>
-                            <span>Rs. {getTotal().toLocaleString()}</span>
+                            <span style={{ color: 'var(--text-primary)' }}>Total</span>
+                            <span style={{ color: 'var(--text-primary)' }}>Rs. {getTotal().toLocaleString()}</span>
                         </div>
                     </div>
 
@@ -308,11 +314,6 @@ export default function CartPage() {
             </div>
 
             <style jsx>{`
-                @media (min-width: 768px) {
-                    div:has(> div > button[aria-label="Remove item"]) {
-                        padding: 20px;
-                    }
-                }
                 @media (min-width: 900px) {
                     .container > div {
                         grid-template-columns: 1fr 340px !important;

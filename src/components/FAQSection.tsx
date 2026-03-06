@@ -44,13 +44,14 @@ export default function FAQSection() {
     return (
         <section style={{
             padding: '64px 16px',
-            background: 'white'
+            background: 'var(--bg-primary)',
+            transition: 'var(--theme-transition)'
         }}>
             <div className="container" style={{ maxWidth: '800px' }}>
                 <h2 style={{
                     fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                     fontWeight: 700,
-                    color: '#0f172a',
+                    color: 'var(--text-primary)',
                     marginBottom: '40px'
                 }}>
                     Frequently Asked Questions
@@ -61,7 +62,7 @@ export default function FAQSection() {
                         <div
                             key={index}
                             style={{
-                                borderBottom: index < faqData.length - 1 ? '1px solid #e2e8f0' : 'none'
+                                borderBottom: index < faqData.length - 1 ? '1px solid var(--border-color)' : 'none'
                             }}
                         >
                             <button
@@ -76,13 +77,14 @@ export default function FAQSection() {
                                     border: 'none',
                                     cursor: 'pointer',
                                     textAlign: 'left',
-                                    gap: '20px'
+                                    gap: '20px',
+                                    color: 'var(--text-primary)'
                                 }}
                                 onMouseEnter={(e) => {
                                     e.currentTarget.style.color = '#3b82f6';
                                 }}
                                 onMouseLeave={(e) => {
-                                    e.currentTarget.style.color = '#0f172a';
+                                    e.currentTarget.style.color = 'var(--text-primary)';
                                 }}
                             >
                                 <span style={{
@@ -101,7 +103,7 @@ export default function FAQSection() {
                                     height="20"
                                     viewBox="0 0 24 24"
                                     fill="none"
-                                    stroke="#94a3b8"
+                                    stroke="var(--text-muted)"
                                     strokeWidth="2"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -127,7 +129,7 @@ export default function FAQSection() {
                                 }}>
                                     <p style={{
                                         fontSize: '0.95rem',
-                                        color: '#64748b',
+                                        color: 'var(--text-secondary)',
                                         lineHeight: 1.7,
                                         margin: 0
                                     }}>

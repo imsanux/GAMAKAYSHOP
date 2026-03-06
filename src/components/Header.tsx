@@ -116,7 +116,7 @@ export default function Header() {
                         flexShrink: 0
                     }}>
                         <img
-                            src="/logo.png"
+                            src="/gamakay-logo.png"
                             alt="Gamakay"
                             style={{
                                 height: '100px',

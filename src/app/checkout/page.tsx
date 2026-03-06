@@ -83,10 +83,10 @@ export default function CheckoutPage() {
                 padding: '64px 16px',
                 textAlign: 'center'
             }}>
-                <h1 style={{ marginBottom: '12px', fontSize: '1.5rem' }}>
+                <h1 style={{ marginBottom: '12px', fontSize: '1.5rem', color: 'var(--text-primary)' }}>
                     Your cart is empty
                 </h1>
-                <p style={{ color: '#6b6b6b', marginBottom: '24px' }}>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
                     Add some items before checking out.
                 </p>
                 <Link href="/" style={{
@@ -105,19 +105,20 @@ export default function CheckoutPage() {
 
     return (
         <div className="container fade-in" style={{ padding: '24px 16px 64px', maxWidth: '600px' }}>
-            <h1 style={{ marginBottom: '24px', fontSize: '1.5rem', textAlign: 'center' }}>
+            <h1 style={{ marginBottom: '24px', fontSize: '1.5rem', textAlign: 'center', color: 'var(--text-primary)' }}>
                 {showPayment ? '💳 Complete Payment' : '🛒 Checkout'}
             </h1>
 
             {/* Order Summary */}
             <div style={{
-                background: 'white',
+                background: 'var(--card-bg)',
                 borderRadius: '16px',
-                border: '1px solid #e2e8f0',
+                border: '1px solid var(--border-color)',
                 padding: '20px',
-                marginBottom: '20px'
+                marginBottom: '20px',
+                transition: 'var(--theme-transition)'
             }}>
-                <h2 style={{ fontSize: '1rem', marginBottom: '16px', fontWeight: 600 }}>
+                <h2 style={{ fontSize: '1rem', marginBottom: '16px', fontWeight: 600, color: 'var(--text-primary)' }}>
                     Order Summary
                 </h2>
 
@@ -129,29 +130,30 @@ export default function CheckoutPage() {
                             justifyContent: 'space-between',
                             alignItems: 'flex-start',
                             padding: '12px 0',
-                            borderBottom: index < items.length - 1 ? '1px solid #f1f5f9' : 'none'
+                            borderBottom: index < items.length - 1 ? '1px solid var(--border-color)' : 'none'
                         }}
                     >
                         <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{
                                 fontSize: '0.9rem',
                                 fontWeight: 500,
-                                marginBottom: '2px'
+                                marginBottom: '2px',
+                                color: 'var(--text-primary)'
                             }}>
                                 {item.product.name}
                             </div>
-                            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                                 {item.denomination.value} × {item.quantity}
                             </div>
                         </div>
-                        <div style={{ fontWeight: 600, fontSize: '0.9rem', marginLeft: '12px' }}>
+                        <div style={{ fontWeight: 600, fontSize: '0.9rem', marginLeft: '12px', color: 'var(--text-primary)' }}>
                             Rs. {(item.denomination.price * item.quantity).toLocaleString()}
                         </div>
                     </div>
                 ))}
 
                 <div style={{
-                    borderTop: '2px solid #0f172a',
+                    borderTop: '2px solid var(--border-color)',
                     paddingTop: '16px',
                     marginTop: '12px'
                 }}>
@@ -161,8 +163,8 @@ export default function CheckoutPage() {
                         fontSize: '1.25rem',
                         fontWeight: 700
                     }}>
-                        <span>Total</span>
-                        <span style={{ color: '#0f172a' }}>Rs. {getTotal().toLocaleString()}</span>
+                        <span style={{ color: 'var(--text-primary)' }}>Total</span>
+                        <span style={{ color: 'var(--text-primary)' }}>Rs. {getTotal().toLocaleString()}</span>
                     </div>
                 </div>
             </div>
@@ -170,16 +172,18 @@ export default function CheckoutPage() {
             {!showPayment ? (
                 /* Phone Number Entry */
                 <div style={{
-                    background: 'white',
+                    background: 'var(--card-bg)',
                     borderRadius: '16px',
-                    border: '1px solid #e2e8f0',
-                    padding: '20px'
+                    border: '1px solid var(--border-color)',
+                    padding: '20px',
+                    transition: 'var(--theme-transition)'
                 }}>
                     <label style={{
                         display: 'block',
                         marginBottom: '8px',
                         fontWeight: 600,
-                        fontSize: '0.9rem'
+                        fontSize: '0.9rem',
+                        color: 'var(--text-primary)'
                     }}>
                         📱 Your Phone Number
                     </label>
@@ -192,13 +196,18 @@ export default function CheckoutPage() {
                             width: '100%',
                             padding: '14px 16px',
                             fontSize: '1rem',
-                            border: '2px solid #e2e8f0',
+                            border: '2px solid var(--border-color)',
                             borderRadius: '10px',
                             marginBottom: '16px',
-                            outline: 'none'
+                            outline: 'none',
+                            background: 'var(--input-bg)',
+                            color: 'var(--text-primary)',
+                            transition: 'border-color 0.15s ease'
                         }}
+                        onFocus={(e) => { e.currentTarget.style.borderColor = '#3b82f6'; }}
+                        onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; }}
                     />
-                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '20px' }}>
+                    <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>
                         We&apos;ll generate your order number and send confirmation via WhatsApp/Viber
                     </p>
                     <button
@@ -223,7 +232,7 @@ export default function CheckoutPage() {
                 <>
                     {/* Order Number */}
                     <div style={{
-                        background: '#f0fdf4',
+                        background: 'rgba(34, 197, 94, 0.1)',
                         border: '2px solid #22c55e',
                         borderRadius: '12px',
                         padding: '16px',
@@ -233,20 +242,21 @@ export default function CheckoutPage() {
                         <div style={{ fontSize: '0.8rem', color: '#15803d', marginBottom: '4px' }}>
                             Your Order Number
                         </div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', letterSpacing: '1px' }}>
+                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '1px' }}>
                             {orderNumber}
                         </div>
                     </div>
 
                     {/* QR Codes */}
                     <div style={{
-                        background: 'white',
+                        background: 'var(--card-bg)',
                         borderRadius: '16px',
-                        border: '1px solid #e2e8f0',
+                        border: '1px solid var(--border-color)',
                         padding: '20px',
-                        marginBottom: '20px'
+                        marginBottom: '20px',
+                        transition: 'var(--theme-transition)'
                     }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px', textAlign: 'center' }}>
+                        <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px', textAlign: 'center', color: 'var(--text-primary)' }}>
                             📱 Scan QR to Contact Us
                         </h3>
                         <div style={{
@@ -333,7 +343,7 @@ export default function CheckoutPage() {
                             }}
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M11.4 0C9.3 0 5.02.3 3.2 2.05c-1.32 1.32-1.77 3.3-1.87 5.74-.1 2.46-.05 4.73.91 6.23.52.8 1.25 1.45 2.15 1.95.9.5 1.82.8 2.82.91l.12 2.37c0 .12.08.15.16.08l2.32-2.45h.18c2.24 0 6.68-.3 8.53-2.08 1.32-1.32 1.82-3.2 1.89-5.6.09-2.57-.07-4.8-.95-6.25-.5-.8-1.23-1.47-2.13-1.97C16.4.48 15.48.15 14.48.05 13.8-.02 12.8 0 11.4 0zm.2 1.5c1.3 0 2.17.05 2.77.12.8.1 1.5.35 2.1.72.67.42 1.15.93 1.47 1.48.67 1.1.82 2.97.74 5.25-.06 2.05-.47 3.47-1.35 4.3-1.4 1.3-5.17 1.55-7.03 1.55h-.42l-1.52 1.6-.07-1.55-.4-.08c-.82-.17-1.55-.42-2.2-.78-.67-.38-1.15-.87-1.47-1.4-.73-1.17-.8-3.15-.72-5.3.08-2.08.4-3.53 1.3-4.43 1.28-1.28 4.52-1.48 6.8-1.48zm.18 2.77c-.18 0-.33.15-.33.33v.02c0 .18.15.33.33.33 1.24.05 2.27.52 3.07 1.32.8.82 1.22 1.85 1.25 3.08 0 .18.15.32.33.32h.02c.18 0 .32-.15.32-.33-.03-1.45-.53-2.67-1.47-3.62-.95-.95-2.15-1.45-3.52-1.45zm.03 1.65c-.18 0-.32.15-.32.33v.02c0 .18.15.32.32.32.8.03 1.42.32 1.93.85.5.52.77 1.15.8 1.92 0 .18.15.32.33.32h.02c.18 0 .32-.15.32-.33-.03-.97-.4-1.77-1.02-2.42-.63-.63-1.42-.98-2.38-1.01zm-2.36.28c-.4-.02-.77.12-.98.58l-.2.38c-.13.25-.22.42-.45.42-.17 0-.42-.22-.68-.52-.35-.38-.7-.87-.93-1.45-.15-.35-.08-.58.12-.75l.35-.32c.35-.32.38-.7.23-1.08-.42-.97-.75-1.53-.92-1.82-.28-.45-.6-.52-.92-.52h-.35c-.17 0-.48.03-.8.25-.52.4-.97 1.05-.97 1.87 0 1.23.87 2.77 2.07 4.07 1.57 1.77 3.75 3.12 5.5 3.12.82 0 1.3-.32 1.55-.68l.25-.4c.17-.27.17-.52.03-.75-.35-.52-.82-.95-1.4-1.28-.2-.12-.47-.12-.55-.12z" />
+                                <path d="M11.4 0C9.3 0 5.02.3 3.2 2.05c-1.32 1.32-1.77 3.3-1.87 5.74-.1 2.46-.05 4.73.91 6.23.52.8 1.25 1.45 2.15 1.95.9.5 1.82.8 2.82.91l.12 2.37c0 .12.08.15.16.08l2.32-2.45h.18c2.24 0 6.68-.3 8.53-2.08 1.32-1.32 1.82-3.2 1.89-5.6.09-2.57-.07-4.8-.95-6.25-.5-.8-1.23-1.47-2.13-1.97C16.4.48 15.48.15 14.48.05 13.8-.02 12.8 0 11.4 0zm.2 1.5c1.3 0 2.17.05 2.77.12.8.1 1.5.35 2.1.72.67.42 1.15.93 1.47 1.48.67 1.1.82 2.97.74 5.25-.06 2.05-.47 3.47-1.35 4.3-1.4 1.3-5.17 1.55-7.03 1.55h-.42l-1.52 1.6-.07-1.55-.4-.08c-.82-.17-1.55-.42-2.2-.78-.67-.38-1.15-.87-1.47-1.4-.73-1.17-.8-3.15-.72-5.3.08-2.08.4-3.53 1.3-4.43 1.28-1.28 4.52-1.48 6.8-1.48z" />
                             </svg>
                             Continue via Viber
                         </button>
@@ -341,7 +351,7 @@ export default function CheckoutPage() {
 
                     <p style={{
                         fontSize: '0.75rem',
-                        color: '#64748b',
+                        color: 'var(--text-secondary)',
                         textAlign: 'center',
                         marginTop: '16px'
                     }}>

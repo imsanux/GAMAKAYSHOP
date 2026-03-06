@@ -29,13 +29,14 @@ export default function TrackPage() {
             <h1 style={{
                 textAlign: 'center',
                 marginBottom: '8px',
-                fontSize: '1.5rem'
+                fontSize: '1.5rem',
+                color: 'var(--text-primary)'
             }}>
                 Track Your Order
             </h1>
             <p style={{
                 textAlign: 'center',
-                color: '#64748b',
+                color: 'var(--text-secondary)',
                 marginBottom: '32px',
                 fontSize: '0.9rem'
             }}>
@@ -43,10 +44,11 @@ export default function TrackPage() {
             </p>
 
             <div style={{
-                background: 'white',
+                background: 'var(--card-bg)',
                 borderRadius: '16px',
-                border: '1px solid #e2e8f0',
-                padding: '24px'
+                border: '1px solid var(--border-color)',
+                padding: '24px',
+                transition: 'var(--theme-transition)'
             }}>
                 {/* Phone Number */}
                 <div style={{ marginBottom: '24px' }}>
@@ -54,7 +56,8 @@ export default function TrackPage() {
                         display: 'block',
                         marginBottom: '8px',
                         fontWeight: 600,
-                        fontSize: '0.9rem'
+                        fontSize: '0.9rem',
+                        color: 'var(--text-primary)'
                     }}>
                         Your Phone Number
                     </label>
@@ -67,14 +70,19 @@ export default function TrackPage() {
                             width: '100%',
                             padding: '14px 16px',
                             fontSize: '1rem',
-                            border: '2px solid #e2e8f0',
+                            border: '2px solid var(--border-color)',
                             borderRadius: '10px',
-                            outline: 'none'
+                            outline: 'none',
+                            background: 'var(--input-bg)',
+                            color: 'var(--text-primary)',
+                            transition: 'border-color 0.15s ease'
                         }}
+                        onFocus={(e) => { e.currentTarget.style.borderColor = '#3b82f6'; }}
+                        onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; }}
                     />
                     <p style={{
                         fontSize: '0.75rem',
-                        color: '#64748b',
+                        color: 'var(--text-secondary)',
                         marginTop: '8px'
                     }}>
                         Enter the phone number you used while ordering
@@ -110,7 +118,7 @@ export default function TrackPage() {
             {/* Help Text */}
             <p style={{
                 textAlign: 'center',
-                color: '#64748b',
+                color: 'var(--text-secondary)',
                 marginTop: '24px',
                 fontSize: '0.8rem'
             }}>

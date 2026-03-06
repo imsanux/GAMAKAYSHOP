@@ -12,18 +12,19 @@ function SearchContent() {
     const results = searchProducts(query);
 
     return (
-        <div style={{ background: '#faf9f7', minHeight: '70vh' }}>
+        <div style={{ background: 'var(--bg-primary)', minHeight: '70vh', transition: 'var(--theme-transition)' }}>
             {/* Search Header */}
             <div style={{
-                background: 'white',
-                borderBottom: '1px solid rgba(0,0,0,0.06)',
-                padding: '32px 16px'
+                background: 'var(--card-bg)',
+                borderBottom: '1px solid var(--border-color)',
+                padding: '32px 16px',
+                transition: 'var(--theme-transition)'
             }}>
                 <div className="container">
                     {/* Breadcrumb with Back Button */}
                     <nav style={{
                         fontSize: '0.8rem',
-                        color: '#888',
+                        color: 'var(--text-muted)',
                         marginBottom: '16px',
                         display: 'flex',
                         alignItems: 'center',
@@ -38,13 +39,15 @@ function SearchContent() {
                                 padding: '8px 14px',
                                 fontSize: '0.85rem',
                                 fontWeight: 500,
-                                color: '#475569',
-                                background: '#f1f5f9',
+                                color: 'var(--text-secondary)',
+                                background: 'var(--btn-secondary-bg)',
                                 border: 'none',
                                 borderRadius: '8px',
                                 cursor: 'pointer',
                                 transition: 'all 0.15s ease'
                             }}
+                            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--btn-secondary-hover)'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--btn-secondary-bg)'; }}
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -52,11 +55,11 @@ function SearchContent() {
                             Back
                         </button>
                         <div>
-                            <Link href="/" style={{ color: '#888', textDecoration: 'none' }}>
+                            <Link href="/" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>
                                 Home
                             </Link>
-                            <span style={{ margin: '0 8px' }}>/</span>
-                            <span style={{ color: '#1a1a1a' }}>Search</span>
+                            <span style={{ margin: '0 8px', color: 'var(--text-muted)' }}>/</span>
+                            <span style={{ color: 'var(--text-primary)' }}>Search</span>
                         </div>
                     </nav>
 
@@ -68,10 +71,10 @@ function SearchContent() {
                             </svg>
                         </span>
                         <div>
-                            <h1 style={{ fontSize: '1.5rem', marginBottom: '4px' }}>
+                            <h1 style={{ fontSize: '1.5rem', marginBottom: '4px', color: 'var(--text-primary)' }}>
                                 Search Results
                             </h1>
-                            <p style={{ color: '#6b6b6b', fontSize: '0.9rem', margin: 0 }}>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>
                                 {query ? `Results for "${query}"` : 'Enter a search term'}
                             </p>
                         </div>
@@ -91,7 +94,7 @@ function SearchContent() {
                             height: '64px',
                             margin: '0 auto 16px',
                             borderRadius: '50%',
-                            background: '#f0ede8',
+                            background: 'var(--bg-secondary)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -99,10 +102,10 @@ function SearchContent() {
                         }}>
                             🔍
                         </div>
-                        <h2 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>
+                        <h2 style={{ fontSize: '1.25rem', marginBottom: '8px', color: 'var(--text-primary)' }}>
                             Search for products
                         </h2>
-                        <p style={{ color: '#6b6b6b', marginBottom: '20px' }}>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
                             Use the search bar to find gift cards and subscriptions.
                         </p>
                     </div>
@@ -116,7 +119,7 @@ function SearchContent() {
                             height: '64px',
                             margin: '0 auto 16px',
                             borderRadius: '50%',
-                            background: '#f0ede8',
+                            background: 'var(--bg-secondary)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -124,11 +127,11 @@ function SearchContent() {
                         }}>
                             📦
                         </div>
-                        <h2 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>
+                        <h2 style={{ fontSize: '1.25rem', marginBottom: '8px', color: 'var(--text-primary)' }}>
                             No results found
                         </h2>
-                        <p style={{ color: '#6b6b6b', marginBottom: '20px' }}>
-                            We couldn't find any products matching "{query}".
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
+                            We couldn&apos;t find any products matching &quot;{query}&quot;.
                         </p>
                         <Link href="/" className="btn btn-primary">
                             Browse All Products
@@ -139,7 +142,7 @@ function SearchContent() {
                         <div style={{
                             marginBottom: '20px',
                             fontSize: '0.85rem',
-                            color: '#888'
+                            color: 'var(--text-muted)'
                         }}>
                             {results.length} product{results.length !== 1 ? 's' : ''} found
                         </div>
@@ -163,11 +166,11 @@ export default function SearchPage() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: '#faf9f7'
+                background: 'var(--bg-primary)'
             }}>
                 <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', marginBottom: '8px' }}>🔍</div>
-                    <p style={{ color: '#888' }}>Loading search...</p>
+                    <p style={{ color: 'var(--text-muted)' }}>Loading search...</p>
                 </div>
             </div>
         }>
