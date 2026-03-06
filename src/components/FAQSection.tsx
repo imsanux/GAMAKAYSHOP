@@ -43,102 +43,131 @@ export default function FAQSection() {
 
     return (
         <section style={{
-            padding: '64px 16px',
+            padding: '80px 16px',
             background: 'var(--bg-primary)',
             transition: 'var(--theme-transition)'
         }}>
-            <div className="container" style={{ maxWidth: '800px' }}>
-                <h2 style={{
-                    fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-                    fontWeight: 700,
-                    color: 'var(--text-primary)',
-                    marginBottom: '40px'
-                }}>
-                    Frequently Asked Questions
-                </h2>
+            <div className="container" style={{ maxWidth: '720px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+                    <h2 style={{
+                        fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+                        fontWeight: 700,
+                        color: 'var(--text-primary)',
+                        marginBottom: '12px',
+                        letterSpacing: '-0.03em'
+                    }}>
+                        Questions? Answers.
+                    </h2>
+                    <p style={{
+                        fontSize: '1rem',
+                        color: 'var(--text-secondary)',
+                        maxWidth: '400px',
+                        margin: '0 auto'
+                    }}>
+                        Everything you need to know about buying gift cards from Gamakay.
+                    </p>
+                </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    {faqData.map((faq, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                borderBottom: index < faqData.length - 1 ? '1px solid var(--border-color)' : 'none'
-                            }}
-                        >
-                            <button
-                                onClick={() => toggleFAQ(index)}
+                    {faqData.map((faq, index) => {
+                        const isOpen = openIndex === index;
+                        return (
+                            <div
+                                key={index}
                                 style={{
-                                    width: '100%',
-                                    padding: '24px 0',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    background: 'none',
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    textAlign: 'left',
-                                    gap: '20px',
-                                    color: 'var(--text-primary)'
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.color = '#3b82f6';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.color = 'var(--text-primary)';
+                                    borderBottom: index < faqData.length - 1 ? '1px solid var(--border-light)' : 'none'
                                 }}
                             >
-                                <span style={{
-                                    fontSize: '1rem',
-                                    fontWeight: 500,
-                                    color: 'inherit',
-                                    flex: 1,
-                                    transition: 'color 0.15s ease'
-                                }}>
-                                    {faq.question}
-                                </span>
-
-                                {/* Chevron Icon */}
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="var(--text-muted)"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
+                                <button
+                                    onClick={() => toggleFAQ(index)}
                                     style={{
-                                        flexShrink: 0,
-                                        transition: 'transform 0.25s ease',
-                                        transform: openIndex === index ? 'rotate(180deg)' : 'rotate(0deg)'
+                                        width: '100%',
+                                        padding: '24px 0',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        background: 'none',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        textAlign: 'left',
+                                        gap: '24px',
+                                        color: 'var(--text-primary)',
+                                        transition: 'color 0.2s ease'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        (e.currentTarget.querySelector('.faq-q') as HTMLElement)?.style &&
+                                            ((e.currentTarget.firstElementChild as HTMLElement).style.color = 'var(--btn-primary-bg)');
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        ((e.currentTarget.firstElementChild as HTMLElement).style.color = 'var(--text-primary)');
                                     }}
                                 >
-                                    <polyline points="6 9 12 15 18 9" />
-                                </svg>
-                            </button>
-
-                            {/* Answer */}
-                            <div style={{
-                                maxHeight: openIndex === index ? '500px' : '0',
-                                overflow: 'hidden',
-                                transition: 'max-height 0.3s ease-out'
-                            }}>
-                                <div style={{
-                                    paddingBottom: '24px',
-                                    paddingRight: '40px'
-                                }}>
-                                    <p style={{
-                                        fontSize: '0.95rem',
-                                        color: 'var(--text-secondary)',
-                                        lineHeight: 1.7,
-                                        margin: 0
+                                    <span style={{
+                                        fontSize: '1.05rem',
+                                        fontWeight: 600,
+                                        color: 'inherit',
+                                        flex: 1,
+                                        transition: 'color 0.2s ease',
+                                        letterSpacing: '-0.01em'
                                     }}>
-                                        {faq.answer}
-                                    </p>
+                                        {faq.question}
+                                    </span>
+
+                                    {/* Plus/Minus icon — Apple FAQ style */}
+                                    <div style={{
+                                        width: '28px',
+                                        height: '28px',
+                                        borderRadius: '50%',
+                                        background: isOpen ? 'var(--btn-primary-bg)' : 'var(--bg-secondary)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        flexShrink: 0,
+                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    }}>
+                                        <svg
+                                            width="14"
+                                            height="14"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke={isOpen ? 'white' : 'var(--text-muted)'}
+                                            strokeWidth="2.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            style={{
+                                                transition: 'transform 0.3s ease, stroke 0.3s ease',
+                                                transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)'
+                                            }}
+                                        >
+                                            <line x1="12" y1="5" x2="12" y2="19" />
+                                            <line x1="5" y1="12" x2="19" y2="12" />
+                                        </svg>
+                                    </div>
+                                </button>
+
+                                {/* Answer */}
+                                <div style={{
+                                    maxHeight: isOpen ? '500px' : '0',
+                                    overflow: 'hidden',
+                                    transition: 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                }}>
+                                    <div style={{
+                                        paddingBottom: '24px',
+                                        paddingRight: '52px'
+                                    }}>
+                                        <p style={{
+                                            fontSize: '0.95rem',
+                                            color: 'var(--text-secondary)',
+                                            lineHeight: 1.75,
+                                            margin: 0
+                                        }}>
+                                            {faq.answer}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </section>

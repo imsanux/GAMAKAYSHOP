@@ -10,7 +10,7 @@ export default function CartPage() {
     if (items.length === 0) {
         return (
             <div className="container fade-in" style={{
-                padding: '64px 16px',
+                padding: '80px 16px',
                 textAlign: 'center'
             }}>
                 <div style={{
@@ -26,7 +26,7 @@ export default function CartPage() {
                 }}>
                     🛒
                 </div>
-                <h1 style={{ marginBottom: '10px', fontSize: '1.5rem', color: 'var(--text-primary)' }}>
+                <h1 style={{ marginBottom: '10px', fontSize: '1.75rem', color: 'var(--text-primary)', letterSpacing: '-0.03em' }}>
                     Your cart is empty
                 </h1>
                 <p style={{
@@ -46,13 +46,18 @@ export default function CartPage() {
     }
 
     return (
-        <div className="container fade-in" style={{ padding: '32px 16px 64px' }}>
-            <h1 style={{ marginBottom: '24px', fontSize: '1.5rem', color: 'var(--text-primary)' }}>
+        <div className="container fade-in" style={{ padding: '32px 16px 80px' }}>
+            <h1 style={{
+                marginBottom: '28px',
+                fontSize: '1.75rem',
+                color: 'var(--text-primary)',
+                letterSpacing: '-0.03em'
+            }}>
                 Shopping Cart
                 <span style={{
-                    fontSize: '0.9rem',
+                    fontSize: '0.85rem',
                     fontWeight: 400,
-                    color: 'var(--text-secondary)',
+                    color: 'var(--text-muted)',
                     marginLeft: '10px'
                 }}>
                     ({items.reduce((c, i) => c + i.quantity, 0)} items)
@@ -62,7 +67,7 @@ export default function CartPage() {
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr',
-                gap: '24px'
+                gap: '28px'
             }}>
                 {/* Cart Items */}
                 <div>
@@ -70,22 +75,23 @@ export default function CartPage() {
                         <div
                             key={`${item.product.id}-${item.denomination.value}`}
                             style={{
-                                padding: '16px',
+                                padding: '20px',
                                 marginBottom: '12px',
                                 background: 'var(--card-bg)',
-                                borderRadius: '12px',
-                                border: '1px solid var(--border-color)',
+                                borderRadius: 'var(--radius-xl)',
+                                border: '1px solid var(--border-light)',
                                 display: 'flex',
-                                gap: '12px',
+                                gap: '16px',
                                 alignItems: 'flex-start',
-                                transition: 'var(--theme-transition)'
+                                transition: 'all 0.2s ease',
+                                boxShadow: 'var(--shadow-sm)'
                             }}
                         >
                             {/* Product Image */}
                             <div style={{
-                                width: '64px',
-                                height: '64px',
-                                borderRadius: '8px',
+                                width: '72px',
+                                height: '72px',
+                                borderRadius: 'var(--radius-md)',
                                 background: 'var(--bg-secondary)',
                                 overflow: 'hidden',
                                 flexShrink: 0
@@ -108,7 +114,7 @@ export default function CartPage() {
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         fontSize: '1.25rem',
-                                        fontWeight: 600,
+                                        fontWeight: 700,
                                         color: 'var(--text-muted)'
                                     }}>
                                         {item.product.brand.charAt(0)}
@@ -119,11 +125,12 @@ export default function CartPage() {
                             {/* Product Info */}
                             <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{
-                                    fontSize: '0.7rem',
+                                    fontSize: '0.65rem',
                                     color: 'var(--text-muted)',
                                     textTransform: 'uppercase',
-                                    letterSpacing: '0.03em',
-                                    marginBottom: '2px'
+                                    letterSpacing: '0.06em',
+                                    marginBottom: '3px',
+                                    fontWeight: 600
                                 }}>
                                     {item.product.brand}
                                 </div>
@@ -142,7 +149,7 @@ export default function CartPage() {
                                 <div style={{
                                     fontSize: '0.8rem',
                                     color: 'var(--text-secondary)',
-                                    marginBottom: '10px'
+                                    marginBottom: '12px'
                                 }}>
                                     {item.denomination.value}
                                 </div>
@@ -160,26 +167,30 @@ export default function CartPage() {
                                         alignItems: 'center',
                                         gap: '0',
                                         background: 'var(--bg-secondary)',
-                                        borderRadius: '6px',
+                                        borderRadius: 'var(--radius-sm)',
                                         overflow: 'hidden',
-                                        border: '1px solid var(--border-color)'
+                                        border: '1px solid var(--border-light)'
                                     }}>
                                         <button
                                             onClick={() => updateQuantity(item.product.id, item.denomination.value, item.quantity - 1)}
                                             style={{
-                                                width: '32px',
-                                                height: '32px',
+                                                width: '36px',
+                                                height: '36px',
                                                 border: 'none',
                                                 background: 'transparent',
                                                 cursor: 'pointer',
                                                 fontSize: '1rem',
-                                                color: 'var(--text-primary)'
+                                                color: 'var(--text-primary)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                transition: 'background 0.15s ease'
                                             }}
                                         >
                                             −
                                         </button>
                                         <span style={{
-                                            minWidth: '28px',
+                                            minWidth: '32px',
                                             textAlign: 'center',
                                             fontSize: '0.9rem',
                                             fontWeight: 600,
@@ -190,13 +201,17 @@ export default function CartPage() {
                                         <button
                                             onClick={() => updateQuantity(item.product.id, item.denomination.value, item.quantity + 1)}
                                             style={{
-                                                width: '32px',
-                                                height: '32px',
+                                                width: '36px',
+                                                height: '36px',
                                                 border: 'none',
                                                 background: 'transparent',
                                                 cursor: 'pointer',
                                                 fontSize: '1rem',
-                                                color: 'var(--text-primary)'
+                                                color: 'var(--text-primary)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                transition: 'background 0.15s ease'
                                             }}
                                         >
                                             +
@@ -207,7 +222,8 @@ export default function CartPage() {
                                     <div style={{
                                         fontWeight: 700,
                                         fontSize: '1rem',
-                                        color: 'var(--text-primary)'
+                                        color: 'var(--text-primary)',
+                                        letterSpacing: '-0.02em'
                                     }}>
                                         Rs. {(item.denomination.price * item.quantity).toLocaleString()}
                                     </div>
@@ -218,16 +234,26 @@ export default function CartPage() {
                             <button
                                 onClick={() => removeItem(item.product.id, item.denomination.value)}
                                 style={{
-                                    padding: '6px',
+                                    padding: '8px',
                                     border: 'none',
                                     background: 'none',
                                     cursor: 'pointer',
                                     color: 'var(--text-muted)',
-                                    flexShrink: 0
+                                    flexShrink: 0,
+                                    borderRadius: '50%',
+                                    transition: 'all 0.2s ease'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = 'var(--bg-secondary)';
+                                    e.currentTarget.style.color = '#ff453a';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = 'none';
+                                    e.currentTarget.style.color = 'var(--text-muted)';
                                 }}
                                 aria-label="Remove item"
                             >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M18 6L6 18M6 6l12 12" />
                                 </svg>
                             </button>
@@ -243,8 +269,10 @@ export default function CartPage() {
                             color: 'var(--text-muted)',
                             fontSize: '0.85rem',
                             cursor: 'pointer',
-                            textDecoration: 'underline'
+                            transition: 'color 0.15s ease'
                         }}
+                        onMouseEnter={(e) => e.currentTarget.style.color = '#ff453a'}
+                        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
                     >
                         Clear cart
                     </button>
@@ -253,15 +281,23 @@ export default function CartPage() {
                 {/* Order Summary */}
                 <div style={{
                     background: 'var(--card-bg)',
-                    borderRadius: '12px',
-                    border: '1px solid var(--border-color)',
-                    padding: '20px',
+                    borderRadius: 'var(--radius-xl)',
+                    border: '1px solid var(--border-light)',
+                    padding: '24px',
                     position: 'sticky',
-                    top: '80px',
+                    top: '72px',
                     height: 'fit-content',
+                    boxShadow: 'var(--shadow-sm)',
                     transition: 'var(--theme-transition)'
                 }}>
-                    <h2 style={{ fontSize: '1.1rem', marginBottom: '20px', color: 'var(--text-primary)' }}>
+                    <h2 style={{
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        marginBottom: '20px',
+                        color: 'var(--text-muted)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em'
+                    }}>
                         Order Summary
                     </h2>
 
@@ -271,10 +307,8 @@ export default function CartPage() {
                         marginBottom: '10px',
                         fontSize: '0.9rem'
                     }}>
-                        <span style={{ color: 'var(--text-secondary)' }}>
-                            Subtotal
-                        </span>
-                        <span style={{ color: 'var(--text-primary)' }}>Rs. {getTotal().toLocaleString()}</span>
+                        <span style={{ color: 'var(--text-secondary)' }}>Subtotal</span>
+                        <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Rs. {getTotal().toLocaleString()}</span>
                     </div>
 
                     <div style={{
@@ -284,11 +318,11 @@ export default function CartPage() {
                         fontSize: '0.9rem'
                     }}>
                         <span style={{ color: 'var(--text-secondary)' }}>Delivery</span>
-                        <span style={{ color: 'var(--color-success)', fontWeight: 500 }}>Digital (Free)</span>
+                        <span style={{ color: '#30d158', fontWeight: 500 }}>Digital (Free)</span>
                     </div>
 
                     <div style={{
-                        borderTop: '1px solid var(--border-color)',
+                        borderTop: '1.5px solid var(--border-color)',
                         paddingTop: '16px',
                         marginBottom: '20px'
                     }}>
@@ -296,7 +330,8 @@ export default function CartPage() {
                             display: 'flex',
                             justifyContent: 'space-between',
                             fontSize: '1.2rem',
-                            fontWeight: 700
+                            fontWeight: 700,
+                            letterSpacing: '-0.02em'
                         }}>
                             <span style={{ color: 'var(--text-primary)' }}>Total</span>
                             <span style={{ color: 'var(--text-primary)' }}>Rs. {getTotal().toLocaleString()}</span>

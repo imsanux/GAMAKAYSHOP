@@ -13,45 +13,36 @@ export default function ProductCard({ product }: ProductCardProps) {
     const [selectedDenom, setSelectedDenom] = useState(product.denominations[0]);
     const [isAdding, setIsAdding] = useState(false);
     const [imageError, setImageError] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
 
     const handleAddToCart = () => {
         setIsAdding(true);
         addItem(product, selectedDenom);
-        setTimeout(() => setIsAdding(false), 600);
+        setTimeout(() => setIsAdding(false), 800);
     };
 
     return (
-        <div style={{
-            borderRadius: '18px',
-            background: 'var(--card-bg)',
-            overflow: 'hidden',
-            transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-            boxShadow: 'var(--shadow-card)',
-            border: '1px solid var(--border-color)',
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative'
-        }}
-            onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.5), 0 0 20px rgba(59, 130, 246, 0.15)';
-                e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.3)';
-                const img = e.currentTarget.querySelector('img');
-                if (img) img.style.transform = 'scale(1.08)';
+        <div
+            style={{
+                borderRadius: '20px',
+                background: 'var(--card-bg)',
+                overflow: 'hidden',
+                transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                boxShadow: isHovered ? 'var(--shadow-card-hover)' : 'var(--shadow-card)',
+                border: `1px solid ${isHovered ? 'var(--btn-primary-bg)' : 'var(--border-light)'}`,
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative',
+                transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
             }}
-            onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = 'var(--shadow-card)';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = 'var(--border-color)';
-                const img = e.currentTarget.querySelector('img');
-                if (img) img.style.transform = 'scale(1)';
-            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
             {/* Product Image */}
             <div style={{
                 position: 'relative',
                 width: '100%',
-                paddingTop: '70%',
+                paddingTop: '72%',
                 background: 'var(--bg-secondary)',
                 overflow: 'hidden'
             }}>
@@ -61,9 +52,9 @@ export default function ProductCard({ product }: ProductCardProps) {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: '85%',
-                        height: '85%',
-                        borderRadius: '12px',
+                        width: '82%',
+                        height: '82%',
+                        borderRadius: '14px',
                         overflow: 'hidden'
                     }}>
                         <img
@@ -75,7 +66,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                                 width: '100%',
                                 height: '100%',
                                 objectFit: 'cover',
-                                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
+                                transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                                transform: isHovered ? 'scale(1.06)' : 'scale(1)'
                             }}
                         />
                     </div>
@@ -89,9 +81,10 @@ export default function ProductCard({ product }: ProductCardProps) {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontSize: '3rem',
-                        fontWeight: 700,
-                        color: 'var(--text-muted)'
+                        fontSize: '2.5rem',
+                        fontWeight: 800,
+                        color: 'var(--text-muted)',
+                        opacity: 0.4
                     }}>
                         {product.brand.charAt(0)}
                     </div>
@@ -100,41 +93,42 @@ export default function ProductCard({ product }: ProductCardProps) {
 
             {/* Card Content */}
             <div style={{
-                padding: '10px',
+                padding: '14px',
                 display: 'flex',
                 flexDirection: 'column',
-                flex: 1
+                flex: 1,
+                gap: '6px'
             }}>
                 {/* Brand */}
                 <div style={{
-                    fontSize: '0.7rem',
+                    fontSize: '0.65rem',
                     fontWeight: 600,
                     color: 'var(--text-muted)',
                     textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    marginBottom: '4px'
+                    letterSpacing: '0.08em',
                 }}>
                     {product.brand}
                 </div>
 
                 {/* Product Name */}
                 <h3 style={{
-                    fontSize: '0.8rem',
+                    fontSize: '0.82rem',
                     fontWeight: 600,
                     color: 'var(--text-primary)',
-                    marginBottom: '8px',
-                    lineHeight: 1.3,
-                    minHeight: '2.6em',
+                    lineHeight: 1.35,
+                    minHeight: '2.7em',
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    letterSpacing: '-0.01em',
+                    margin: 0
                 }}>
                     {product.name}
                 </h3>
 
                 {/* Denomination Selector */}
-                <div style={{ marginBottom: '8px', marginTop: 'auto' }}>
+                <div style={{ marginTop: 'auto' }}>
                     <select
                         value={selectedDenom.value}
                         onChange={(e) => {
@@ -143,22 +137,29 @@ export default function ProductCard({ product }: ProductCardProps) {
                         }}
                         style={{
                             width: '100%',
-                            padding: '8px 28px 8px 10px',
+                            padding: '8px 30px 8px 12px',
                             fontSize: '0.75rem',
                             fontWeight: 500,
                             border: '1px solid var(--border-color)',
-                            borderRadius: '8px',
+                            borderRadius: '10px',
                             background: 'var(--input-bg)',
                             cursor: 'pointer',
                             appearance: 'none',
-                            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2386868b' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
                             backgroundRepeat: 'no-repeat',
-                            backgroundPosition: 'right 8px center',
-                            transition: 'border-color 0.15s ease',
-                            color: 'var(--text-primary)'
+                            backgroundPosition: 'right 10px center',
+                            transition: 'all 0.2s ease',
+                            color: 'var(--text-primary)',
+                            outline: 'none'
                         }}
-                        onFocus={(e) => e.currentTarget.style.borderColor = 'var(--btn-primary-bg)'}
-                        onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}
+                        onFocus={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--btn-primary-bg)';
+                            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0, 113, 227, 0.1)';
+                        }}
+                        onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-color)';
+                            e.currentTarget.style.boxShadow = 'none';
+                        }}
                     >
                         {product.denominations.map(denom => (
                             <option key={denom.value} value={denom.value}>
@@ -173,13 +174,15 @@ export default function ProductCard({ product }: ProductCardProps) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '10px'
+                    gap: '8px',
+                    marginTop: '6px'
                 }}>
                     <div>
                         <span style={{
-                            fontSize: '0.9rem',
+                            fontSize: '0.95rem',
                             fontWeight: 700,
-                            color: 'var(--text-primary)'
+                            color: 'var(--text-primary)',
+                            letterSpacing: '-0.02em'
                         }}>
                             Rs. {selectedDenom.price.toLocaleString()}
                         </span>
@@ -189,30 +192,46 @@ export default function ProductCard({ product }: ProductCardProps) {
                         onClick={handleAddToCart}
                         disabled={isAdding}
                         style={{
-                            padding: '8px 10px',
-                            fontSize: '0.7rem',
+                            padding: '8px 14px',
+                            fontSize: '0.72rem',
                             fontWeight: 600,
-                            background: isAdding ? '#22c55e' : 'var(--btn-primary-bg)',
+                            background: isAdding ? '#30d158' : 'var(--btn-primary-bg)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '8px',
+                            borderRadius: '10px',
                             cursor: isAdding ? 'default' : 'pointer',
-                            transition: 'all 0.15s ease',
+                            transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                             whiteSpace: 'nowrap',
-                            transform: isAdding ? 'scale(0.97)' : 'scale(1)'
+                            transform: isAdding ? 'scale(0.95)' : 'scale(1)',
+                            boxShadow: isAdding
+                                ? '0 2px 8px rgba(48, 209, 88, 0.3)'
+                                : '0 2px 8px rgba(0, 113, 227, 0.2)',
+                            letterSpacing: '-0.01em'
                         }}
                         onMouseEnter={(e) => {
-                            if (!isAdding) e.currentTarget.style.background = 'var(--btn-primary-hover)';
+                            if (!isAdding) {
+                                e.currentTarget.style.background = 'var(--btn-primary-hover)';
+                                e.currentTarget.style.transform = 'scale(1.03)';
+                            }
                         }}
                         onMouseLeave={(e) => {
-                            if (!isAdding) e.currentTarget.style.background = 'var(--btn-primary-bg)';
+                            if (!isAdding) {
+                                e.currentTarget.style.background = 'var(--btn-primary-bg)';
+                                e.currentTarget.style.transform = 'scale(1)';
+                            }
                         }}
                     >
-                        {isAdding ? '✓' : 'Add to Cart'}
+                        {isAdding ? (
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Added
+                            </span>
+                        ) : 'Add to Cart'}
                     </button>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
-

@@ -68,10 +68,20 @@ export default function DraggableMarquee({ items, direction = 'forward', speed =
                                 display: 'block',
                                 width: '160px',
                                 height: '100px',
-                                borderRadius: '12px',
+                                borderRadius: '14px',
                                 overflow: 'hidden',
-                                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                                position: 'relative'
+                                boxShadow: 'var(--shadow-sm)',
+                                position: 'relative',
+                                border: '1px solid var(--border-light)',
+                                transition: 'box-shadow 0.3s ease, transform 0.3s ease'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                                e.currentTarget.style.transform = 'translateY(-2px)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                                e.currentTarget.style.transform = 'translateY(0)';
                             }}
                         >
                             <Image

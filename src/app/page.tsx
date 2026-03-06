@@ -99,7 +99,13 @@ export default function Home() {
     }
   ];
 
-  // Auto-slide removed per user request
+  // Auto-slide hero carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [heroSlides.length]);
 
   const categories = [
     {
@@ -360,17 +366,17 @@ export default function Home() {
                   width: '100%',
                   padding: '14px 50px 14px 20px',
                   fontSize: '1rem',
-                  border: '2px solid var(--border-color)',
+                  border: '1.5px solid var(--border-color)',
                   color: 'var(--text-primary)',
                   borderRadius: showDropdown && searchResults.length > 0 ? '20px 20px 0 0' : '50px',
                   background: 'var(--input-bg)',
                   outline: 'none',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.25s ease'
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#3b82f6';
+                  e.currentTarget.style.borderColor = 'var(--btn-primary-bg)';
                   e.currentTarget.style.background = 'var(--input-bg-focus)';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(59,130,246,0.15)';
+                  e.currentTarget.style.boxShadow = '0 0 0 4px rgba(0, 113, 227, 0.1)';
                   if (searchQuery.trim().length > 0) {
                     setShowDropdown(true);
                   }
@@ -385,7 +391,7 @@ export default function Home() {
                   transform: 'translateY(-50%)',
                   width: '40px',
                   height: '40px',
-                  background: '#3b82f6',
+                  background: 'var(--btn-primary-bg)',
                   border: 'none',
                   borderRadius: '50%',
                   cursor: 'pointer',
@@ -411,10 +417,10 @@ export default function Home() {
                 left: 0,
                 right: 0,
                 background: 'var(--dropdown-bg)',
-                border: '2px solid var(--btn-primary-bg)',
+                border: '1.5px solid var(--btn-primary-bg)',
                 borderTop: 'none',
                 borderRadius: '0 0 20px 20px',
-                boxShadow: '0 8px 24px rgba(59,130,246,0.2)',
+                boxShadow: 'var(--shadow-lg)',
                 zIndex: 100,
                 maxHeight: '400px',
                 overflowY: 'auto'
@@ -577,7 +583,7 @@ export default function Home() {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = 'var(--btn-primary-bg)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(59,130,246,0.15)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,113,227,0.12)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = 'var(--border-color)';
@@ -676,17 +682,19 @@ export default function Home() {
               <h2 style={{
                 fontSize: '1.5rem',
                 fontWeight: 700,
-                color: 'var(--text-primary)'
+                color: 'var(--text-primary)',
+                letterSpacing: '-0.03em'
               }}>
                 🔥 Popular Gift Cards
               </h2>
               <Link
                 href="/category/gaming"
                 style={{
-                  fontSize: '0.9rem',
+                  fontSize: '0.85rem',
                   fontWeight: 600,
-                  color: '#3b82f6',
-                  textDecoration: 'none'
+                  color: 'var(--btn-primary-bg)',
+                  textDecoration: 'none',
+                  letterSpacing: '-0.01em'
                 }}
               >
                 View all →

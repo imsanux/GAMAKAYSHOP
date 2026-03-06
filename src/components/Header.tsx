@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useTheme } from '@/context/ThemeContext';
@@ -14,22 +13,12 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [cartBounce, setCartBounce] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
-
-    const handleSearch = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (searchQuery.trim()) {
-            router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-        }
-    };
 
     const itemCount = items.reduce((count, item) => count + item.quantity, 0);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-        window.addEventListener('scroll', handleScroll);
+        const handleScroll = () => setIsScrolled(window.scrollY > 10);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -42,54 +31,15 @@ export default function Header() {
     }, [itemCount]);
 
     useEffect(() => {
-        if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
+        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
         return () => { document.body.style.overflow = ''; };
     }, [isMenuOpen]);
 
     const navLinks = [
-        {
-            href: '/category/gaming', label: 'Gaming', icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="6" width="20" height="12" rx="2" />
-                    <circle cx="16" cy="12" r="1" fill="#10B981" stroke="none" />
-                    <circle cx="18" cy="10" r="1" fill="#10B981" stroke="none" />
-                    <path d="M6 12h4" />
-                    <path d="M8 10v4" />
-                </svg>
-            )
-        },
-        {
-            href: '/category/streaming', label: 'Streaming', icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F43F5E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="5" width="20" height="14" rx="2" />
-                    <path d="M10 9l5 3-5 3v-6z" fill="#F43F5E" />
-                    <path d="M8 22h8" />
-                    <path d="M12 19v3" />
-                </svg>
-            )
-        },
-        {
-            href: '/category/software', label: 'Software', icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="4" width="20" height="14" rx="2" />
-                    <path d="M8 22h8" />
-                    <path d="M12 18v4" />
-                    <path d="M7 9l2 2-2 2" />
-                    <path d="M11 13h5" />
-                </svg>
-            )
-        },
-        {
-            href: '/category/subscriptions', label: 'Subscriptions', icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" />
-                </svg>
-            )
-        },
+        { href: '/category/gaming', label: 'Gaming' },
+        { href: '/category/streaming', label: 'Streaming' },
+        { href: '/category/software', label: 'Software' },
+        { href: '/category/subscriptions', label: 'Subscriptions' },
     ];
 
     return (
@@ -99,24 +49,22 @@ export default function Header() {
                 top: 0,
                 zIndex: 100,
                 background: isScrolled ? 'var(--header-bg-scrolled)' : 'var(--header-bg)',
-                backdropFilter: isScrolled ? 'blur(24px) saturate(180%)' : 'none',
-                WebkitBackdropFilter: isScrolled ? 'blur(24px) saturate(180%)' : 'none',
-                boxShadow: isScrolled ? 'var(--shadow-sm)' : 'none',
-                borderBottom: '1px solid var(--border-color)',
-                transition: 'all 0.2s ease'
+                backdropFilter: 'blur(20px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                borderBottom: `1px solid ${isScrolled ? 'var(--border-color)' : 'transparent'}`,
+                transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)'
             }}>
                 <div className="container" style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    height: '64px',
-                    gap: '24px'
+                    height: '52px',
+                    gap: '20px'
                 }}>
                     {/* Logo */}
                     <Link href="/" style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '10px',
                         textDecoration: 'none',
                         flexShrink: 0
                     }}>
@@ -124,33 +72,35 @@ export default function Header() {
                             src="/gamakay-logo.png"
                             alt="Gamakay"
                             style={{
-                                height: '100px',
-                                maxHeight: '100px',
+                                height: '80px',
+                                maxHeight: '80px',
                                 width: 'auto',
                                 objectFit: 'contain',
-                                filter: isDark ? 'brightness(0) invert(1)' : 'none'
+                                filter: isDark ? 'brightness(0) invert(1)' : 'none',
+                                transition: 'filter 0.3s ease'
                             }}
                         />
                     </Link>
 
-                    {/* Desktop Navigation */}
+                    {/* Desktop Navigation — Apple-style minimal */}
                     <nav className="hide-mobile" style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '8px'
+                        gap: '4px'
                     }}>
                         {navLinks.map(link => (
                             <Link
                                 key={link.href}
                                 href={link.href}
                                 style={{
-                                    fontSize: '0.9rem',
+                                    fontSize: '0.82rem',
                                     fontWeight: 500,
                                     color: 'var(--text-secondary)',
                                     textDecoration: 'none',
-                                    padding: '8px 14px',
-                                    borderRadius: '8px',
-                                    transition: 'all 0.15s ease'
+                                    padding: '8px 16px',
+                                    borderRadius: 'var(--radius-full)',
+                                    transition: 'all 0.2s ease',
+                                    letterSpacing: '-0.01em'
                                 }}
                                 onMouseEnter={(e) => {
                                     e.currentTarget.style.background = 'var(--btn-secondary-bg)';
@@ -161,10 +111,7 @@ export default function Header() {
                                     e.currentTarget.style.color = 'var(--text-secondary)';
                                 }}
                             >
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                    {link.icon}
-                                    {link.label}
-                                </span>
+                                {link.label}
                             </Link>
                         ))}
                     </nav>
@@ -173,73 +120,56 @@ export default function Header() {
                     <div style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '8px'
+                        gap: '6px'
                     }}>
-                        {/* Theme Toggle Switch - Hidden on mobile, shown in mobile menu */}
+                        {/* Theme Toggle — Refined switch */}
                         <button
                             className="hide-mobile"
                             onClick={toggleTheme}
                             style={{
                                 position: 'relative',
-                                display: 'flex',
-                                alignItems: 'center',
-                                width: '56px',
-                                height: '28px',
-                                borderRadius: '50px',
-                                background: isDark ? '#333' : '#e2e8f0',
+                                width: '48px',
+                                height: '26px',
+                                borderRadius: '13px',
+                                background: isDark ? 'var(--color-accent)' : '#e5e5ea',
                                 border: 'none',
                                 cursor: 'pointer',
                                 transition: 'background 0.3s ease',
-                                padding: '3px'
+                                padding: '2px',
+                                display: 'flex',
+                                alignItems: 'center'
                             }}
                             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                         >
-                            {/* Sliding circle */}
                             <span style={{
-                                position: 'absolute',
-                                left: isDark ? '30px' : '3px',
                                 width: '22px',
                                 height: '22px',
                                 borderRadius: '50%',
                                 background: '#fff',
-                                transition: 'left 0.3s ease',
-                                boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
-                            }} />
-                            {/* Sun icon (left side) */}
-                            <span style={{
-                                position: 'absolute',
-                                left: '6px',
+                                transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                transform: isDark ? 'translateX(22px)' : 'translateX(0)',
+                                boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'center',
-                                opacity: isDark ? 0.5 : 0,
-                                transition: 'opacity 0.3s ease'
+                                justifyContent: 'center'
                             }}>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="12" cy="12" r="5" />
-                                    <line x1="12" y1="1" x2="12" y2="3" />
-                                    <line x1="12" y1="21" x2="12" y2="23" />
-                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                                    <line x1="1" y1="12" x2="3" y2="12" />
-                                    <line x1="21" y1="12" x2="23" y2="12" />
-                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                                </svg>
-                            </span>
-                            {/* Moon icon (right side) */}
-                            <span style={{
-                                position: 'absolute',
-                                right: '6px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                opacity: isDark ? 0 : 0.5,
-                                transition: 'opacity 0.3s ease'
-                            }}>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="#64748b" stroke="none">
-                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                                </svg>
+                                {isDark ? (
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#1d1d1f" stroke="none">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                                    </svg>
+                                ) : (
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="12" cy="12" r="4" />
+                                        <line x1="12" y1="2" x2="12" y2="4" />
+                                        <line x1="12" y1="20" x2="12" y2="22" />
+                                        <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" />
+                                        <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
+                                        <line x1="2" y1="12" x2="4" y2="12" />
+                                        <line x1="20" y1="12" x2="22" y2="12" />
+                                        <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" />
+                                        <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
+                                    </svg>
+                                )}
                             </span>
                         </button>
 
@@ -248,19 +178,21 @@ export default function Header() {
                             href="/track"
                             className="hide-mobile"
                             style={{
-                                fontSize: '0.85rem',
+                                fontSize: '0.82rem',
                                 fontWeight: 500,
                                 color: 'var(--text-secondary)',
                                 textDecoration: 'none',
                                 padding: '8px 14px',
-                                borderRadius: '8px',
-                                transition: 'all 0.15s ease'
+                                borderRadius: 'var(--radius-full)',
+                                transition: 'all 0.2s ease'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.background = 'var(--btn-secondary-bg)';
+                                e.currentTarget.style.color = 'var(--text-primary)';
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.background = 'transparent';
+                                e.currentTarget.style.color = 'var(--text-secondary)';
                             }}
                         >
                             Track Order
@@ -272,16 +204,16 @@ export default function Header() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: '44px',
-                            height: '44px',
-                            borderRadius: '10px',
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '50%',
                             background: 'transparent',
                             color: itemCount > 0 ? 'var(--btn-primary-bg)' : 'var(--text-secondary)',
                             textDecoration: 'none',
-                            transition: 'all 0.2s ease',
-                            transform: cartBounce ? 'scale(1.1)' : 'scale(1)'
+                            transition: 'all 0.25s ease',
+                            transform: cartBounce ? 'scale(1.15)' : 'scale(1)'
                         }}>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
                                 <line x1="3" y1="6" x2="21" y2="6" />
                                 <path d="M16 10a4 4 0 01-8 0" />
@@ -289,26 +221,27 @@ export default function Header() {
                             {itemCount > 0 && (
                                 <span style={{
                                     position: 'absolute',
-                                    top: '-4px',
-                                    right: '-4px',
-                                    minWidth: '20px',
-                                    height: '20px',
+                                    top: '0px',
+                                    right: '-2px',
+                                    minWidth: '18px',
+                                    height: '18px',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    background: '#ef4444',
+                                    background: '#ff453a',
                                     color: 'white',
-                                    fontSize: '0.7rem',
+                                    fontSize: '0.65rem',
                                     fontWeight: 700,
                                     borderRadius: '50px',
-                                    padding: '0 6px'
+                                    padding: '0 5px',
+                                    border: '2px solid var(--header-bg)',
                                 }}>
                                     {itemCount}
                                 </span>
                             )}
                         </Link>
 
-                        {/* Mobile Menu Button */}
+                        {/* Mobile Menu Button — Clean hamburger */}
                         <button
                             className="hide-desktop"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -316,17 +249,17 @@ export default function Header() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                width: '44px',
-                                height: '44px',
+                                width: '40px',
+                                height: '40px',
                                 background: 'transparent',
                                 border: 'none',
-                                borderRadius: '10px',
+                                borderRadius: '50%',
                                 cursor: 'pointer'
                             }}
                             aria-label="Toggle menu"
                         >
                             <div style={{
-                                width: '20px',
+                                width: '18px',
                                 height: '14px',
                                 position: 'relative'
                             }}>
@@ -334,10 +267,10 @@ export default function Header() {
                                     position: 'absolute',
                                     left: 0,
                                     width: '100%',
-                                    height: '2px',
+                                    height: '1.5px',
                                     background: 'var(--text-primary)',
                                     borderRadius: '1px',
-                                    transition: 'all 0.25s ease',
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     top: isMenuOpen ? '6px' : 0,
                                     transform: isMenuOpen ? 'rotate(45deg)' : 'none'
                                 }} />
@@ -346,20 +279,20 @@ export default function Header() {
                                     left: 0,
                                     top: '6px',
                                     width: '100%',
-                                    height: '2px',
+                                    height: '1.5px',
                                     background: 'var(--text-primary)',
                                     borderRadius: '1px',
-                                    transition: 'all 0.25s ease',
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     opacity: isMenuOpen ? 0 : 1
                                 }} />
                                 <span style={{
                                     position: 'absolute',
                                     left: 0,
                                     width: '100%',
-                                    height: '2px',
+                                    height: '1.5px',
                                     background: 'var(--text-primary)',
                                     borderRadius: '1px',
-                                    transition: 'all 0.25s ease',
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     top: isMenuOpen ? '6px' : '12px',
                                     transform: isMenuOpen ? 'rotate(-45deg)' : 'none'
                                 }} />
@@ -376,33 +309,38 @@ export default function Header() {
                 style={{
                     position: 'fixed',
                     inset: 0,
-                    background: 'var(--menu-overlay)',
+                    background: 'rgba(0, 0, 0, 0.3)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
                     opacity: isMenuOpen ? 1 : 0,
                     visibility: isMenuOpen ? 'visible' : 'hidden',
-                    transition: 'all 0.3s ease',
+                    transition: 'all 0.35s ease',
                     zIndex: 98
                 }}
             />
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu — Full-width Apple style */}
             <nav
                 className="hide-desktop"
                 style={{
                     position: 'fixed',
                     top: 0,
                     right: 0,
-                    width: '280px',
+                    width: '300px',
                     height: '100%',
                     background: 'var(--mobile-menu-bg)',
+                    backdropFilter: 'blur(40px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(40px) saturate(180%)',
                     zIndex: 99,
                     transform: isMenuOpen ? 'translateX(0)' : 'translateX(100%)',
-                    transition: 'transform 0.3s ease',
+                    transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     display: 'flex',
                     flexDirection: 'column',
-                    paddingTop: '80px'
+                    paddingTop: '80px',
+                    boxShadow: isMenuOpen ? '-10px 0 40px rgba(0,0,0,0.1)' : 'none'
                 }}
             >
-                <div style={{ padding: '0 24px', flex: 1 }}>
+                <div style={{ padding: '0 28px', flex: 1 }}>
                     {navLinks.map((link, index) => (
                         <Link
                             key={link.href}
@@ -410,28 +348,30 @@ export default function Header() {
                             onClick={() => setIsMenuOpen(false)}
                             style={{
                                 display: 'block',
-                                padding: '16px 0',
-                                fontSize: '1.1rem',
-                                fontWeight: 500,
+                                padding: '18px 0',
+                                fontSize: '1.15rem',
+                                fontWeight: 600,
                                 color: 'var(--text-primary)',
                                 textDecoration: 'none',
-                                borderBottom: index < navLinks.length - 1 ? '1px solid var(--border-color)' : 'none'
+                                borderBottom: index < navLinks.length - 1 ? '1px solid var(--border-light)' : 'none',
+                                letterSpacing: '-0.02em',
+                                transition: 'color 0.15s ease'
                             }}
                         >
                             {link.label}
                         </Link>
                     ))}
 
-                    <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid var(--border-color)' }}>
+                    <div style={{ marginTop: '28px', paddingTop: '28px', borderTop: '1px solid var(--border-color)' }}>
                         <Link
                             href="/track"
                             onClick={() => setIsMenuOpen(false)}
                             style={{
                                 display: 'block',
-                                padding: '16px 0',
+                                padding: '14px 0',
                                 fontSize: '1rem',
                                 fontWeight: 500,
-                                color: 'var(--text-muted)',
+                                color: 'var(--text-secondary)',
                                 textDecoration: 'none'
                             }}
                         >
@@ -439,18 +379,16 @@ export default function Header() {
                         </Link>
 
                         {/* Theme toggle in mobile menu */}
-                        <div
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                padding: '16px 0'
-                            }}
-                        >
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            padding: '14px 0'
+                        }}>
                             <span style={{
                                 fontSize: '1rem',
                                 fontWeight: 500,
-                                color: 'var(--text-muted)'
+                                color: 'var(--text-secondary)'
                             }}>
                                 {isDark ? 'Dark Mode' : 'Light Mode'}
                             </span>
@@ -458,74 +396,36 @@ export default function Header() {
                                 onClick={toggleTheme}
                                 style={{
                                     position: 'relative',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    width: '56px',
-                                    height: '28px',
-                                    borderRadius: '50px',
-                                    background: isDark ? '#333' : '#e2e8f0',
+                                    width: '48px',
+                                    height: '26px',
+                                    borderRadius: '13px',
+                                    background: isDark ? 'var(--color-accent)' : '#e5e5ea',
                                     border: 'none',
                                     cursor: 'pointer',
                                     transition: 'background 0.3s ease',
-                                    padding: '3px'
+                                    padding: '2px',
+                                    display: 'flex',
+                                    alignItems: 'center'
                                 }}
                                 aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                             >
-                                {/* Sliding circle */}
                                 <span style={{
-                                    position: 'absolute',
-                                    left: isDark ? '30px' : '3px',
                                     width: '22px',
                                     height: '22px',
                                     borderRadius: '50%',
                                     background: '#fff',
-                                    transition: 'left 0.3s ease',
-                                    boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
+                                    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    transform: isDark ? 'translateX(22px)' : 'translateX(0)',
+                                    boxShadow: '0 1px 3px rgba(0,0,0,0.15)'
                                 }} />
-                                {/* Sun icon (left side) */}
-                                <span style={{
-                                    position: 'absolute',
-                                    left: '6px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    opacity: isDark ? 0.5 : 0,
-                                    transition: 'opacity 0.3s ease'
-                                }}>
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="12" cy="12" r="5" />
-                                        <line x1="12" y1="1" x2="12" y2="3" />
-                                        <line x1="12" y1="21" x2="12" y2="23" />
-                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                                        <line x1="1" y1="12" x2="3" y2="12" />
-                                        <line x1="21" y1="12" x2="23" y2="12" />
-                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                                    </svg>
-                                </span>
-                                {/* Moon icon (right side) */}
-                                <span style={{
-                                    position: 'absolute',
-                                    right: '6px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    opacity: isDark ? 0 : 0.5,
-                                    transition: 'opacity 0.3s ease'
-                                }}>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#64748b" stroke="none">
-                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                                    </svg>
-                                </span>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <div style={{
-                    padding: '24px',
-                    borderTop: '1px solid var(--border-color)'
+                    padding: '24px 28px',
+                    borderTop: '1px solid var(--border-light)'
                 }}>
                     <Link
                         href="/cart"
@@ -539,9 +439,11 @@ export default function Header() {
                             padding: '14px',
                             background: 'var(--btn-primary-bg)',
                             color: 'white',
-                            borderRadius: '10px',
+                            borderRadius: 'var(--radius-full)',
                             fontWeight: 600,
-                            textDecoration: 'none'
+                            textDecoration: 'none',
+                            fontSize: '0.95rem',
+                            boxShadow: '0 2px 8px rgba(0, 113, 227, 0.25)'
                         }}
                     >
                         View Cart {itemCount > 0 && `(${itemCount})`}
@@ -551,4 +453,3 @@ export default function Header() {
         </>
     );
 }
-
