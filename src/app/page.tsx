@@ -26,6 +26,34 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
 
+  // Swipe State
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEndWrapper = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
+    }
+    if (isRightSwipe) {
+      setCurrentSlide(prev => (prev - 1 + heroSlides.length) % heroSlides.length);
+    }
+  };
+
   // Live search state
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<ReturnType<typeof searchProducts>>([]);
@@ -183,165 +211,269 @@ export default function Home() {
   return (
     <div style={{ background: 'var(--bg-primary)', transition: 'background-color 0.3s ease' }}>
       {/* Hero Carousel */}
-      <section style={{
-        position: 'relative',
-        overflow: 'hidden',
-        background: '#0f172a'
+      <section className="hero-section" style={{
+        padding: '16px 0',
+        background: 'var(--bg-primary)',
+        transition: 'var(--theme-transition)'
       }}>
-        <div style={{
-          display: 'flex',
-          transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-          transform: `translateX(-${currentSlide * 100}%)`
-        }}>
-          {heroSlides.map((slide, index) => (
-            <div
-              key={index}
-              className="hero-slide"
-              style={{
-                minWidth: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: slide.bg,
-                padding: '0',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
-            >
-              {/* Large transparent brand text background */}
-              <span style={{
-                position: 'absolute',
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                fontSize: 'clamp(80px, 20vw, 200px)',
-                fontWeight: 900,
-                color: 'rgba(255, 255, 255, 0.08)',
-                whiteSpace: 'nowrap',
-                letterSpacing: '0.05em',
-                pointerEvents: 'none',
-                userSelect: 'none',
-                zIndex: 0,
-                textTransform: 'uppercase'
-              }}>
-                {slide.brand}
-              </span>
-              {/* Horizontal layout - Image + Text side by side */}
-              <div className="container" style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 'clamp(16px, 4vw, 40px)',
-                height: '100%',
-                padding: '16px 24px',
-                position: 'relative',
-                zIndex: 1
-              }}>
-                {/* Product Image */}
-                <div style={{
-                  width: 'clamp(80px, 18vw, 160px)',
-                  aspectRatio: '1',
-                  borderRadius: '14px',
-                  overflow: 'hidden',
-                  background: 'rgba(255,255,255,0.1)',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-                  border: '2px solid rgba(255,255,255,0.2)',
-                  flexShrink: 0
-                }}>
-                  <img
-                    src={slide.image}
-                    alt={slide.title || 'Product'}
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                    fetchPriority={index === 0 ? 'high' : 'auto'}
-                    decoding="async"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
-                  />
-                </div>
-                {/* Text */}
-                <div style={{ maxWidth: '400px', zIndex: 2, textAlign: 'left' }}>
-                  <h2 style={{
-                    fontSize: 'clamp(1.1rem, 4vw, 2rem)',
-                    fontWeight: 800,
-                    color: 'white',
-                    marginBottom: '4px',
-                    lineHeight: 1.15,
-                    textShadow: '0 2px 10px rgba(0,0,0,0.2)'
+        <div className="container" style={{ padding: '0 16px' }}>
+          <div
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEndWrapper}
+            style={{
+              position: 'relative',
+              overflow: 'hidden',
+              borderRadius: '28px',
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+              background: '#0f172a',
+              touchAction: 'pan-y' // Allows vertical scrolling while tracking horizontal swipes
+            }}>
+            <div style={{
+              display: 'flex',
+              transition: 'transform 0.8s cubic-bezier(0.8, 0, 0.2, 1)',
+              transform: `translateX(-${currentSlide * 100}%)`
+            }}>
+              {heroSlides.map((slide, index) => (
+                <div
+                  key={index}
+                  className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
+                  style={{
+                    minWidth: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: slide.bg,
+                    padding: '0',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}
+                >
+                  {/* Large transparent brand text background (animated) */}
+                  <span className="brand-bg-text" style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    fontSize: 'clamp(100px, 25vw, 250px)',
+                    fontWeight: 900,
+                    color: 'rgba(255, 255, 255, 0.05)',
+                    whiteSpace: 'nowrap',
+                    letterSpacing: '0.08em',
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                    zIndex: 0,
+                    textTransform: 'uppercase'
                   }}>
-                    {slide.title}
-                  </h2>
-                  <p style={{
-                    fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
-                    color: 'rgba(255,255,255,0.9)',
-                    fontWeight: 500,
-                    margin: 0
+                    {slide.brand}
+                  </span>
+
+                  {/* Main Content container */}
+                  <div className="slide-container" style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: 'clamp(16px, 4vw, 60px)',
+                    height: '100%',
+                    padding: 'clamp(16px, 3vh, 32px) clamp(16px, 5vw, 40px)', // Reduced vertical padding so large images have more room to breathe
+                    position: 'relative',
+                    zIndex: 1,
+                    maxWidth: '1200px', // Increased bounds so the text and image sit side-by-side easily
+                    margin: '0 auto',
+                    flexWrap: 'wrap-reverse'
                   }}>
-                    {slide.subtitle}
-                  </p>
+                    {/* Text Content */}
+                    <div className="slide-content" style={{
+                      maxWidth: '700px', // Increased max-width to let titles sit natively on one line
+                      zIndex: 2,
+                      textAlign: 'left',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center', // Centers text vertically in its flex container
+                      gap: '16px',
+                      flex: '1 1 300px'
+                    }}>
+                      <div>
+                        <h2 style={{
+                          fontSize: 'clamp(1.5rem, 4vw, 3rem)', // Reduced max size so it stays on one line
+                          fontWeight: 500, // Unbolded to match website style
+                          color: 'white',
+                          margin: '0 0 12px 0',
+                          lineHeight: 1.1,
+                          textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                          whiteSpace: 'nowrap'
+                        }}>
+                          {slide.title}
+                        </h2>
+                        <p style={{
+                          fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+                          color: 'rgba(255,255,255,0.9)',
+                          fontWeight: 400,
+                          margin: 0,
+                          textShadow: '0 1px 4px rgba(0,0,0,0.3)',
+                          lineHeight: 1.5
+                        }}>
+                          {slide.subtitle}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Product Image */}
+                    <div className="slide-image-wrapper" style={{
+                      width: 'clamp(200px, 40vw, 400px)',
+                      maxHeight: '100%', // Ensure it never exceeds container height causing crops
+                      aspectRatio: '1',
+                      borderRadius: '24px',
+                      position: 'relative',
+                      flexShrink: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      {/* Image Glow/Shadow */}
+                      <div style={{
+                        position: 'absolute',
+                        top: '10%', left: '10%', width: '80%', height: '80%',
+                        background: 'rgba(0,0,0,0.5)',
+                        filter: 'blur(20px)',
+                        borderRadius: '50%',
+                        zIndex: 0
+                      }} />
+                      <img
+                        className="slide-image"
+                        src={slide.image}
+                        alt={slide.title || 'Product'}
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        fetchPriority={index === 0 ? 'high' : 'auto'}
+                        decoding="async"
+                        style={{
+                          maxWidth: '100%',
+                          maxHeight: '100%',
+                          objectFit: 'contain',
+                          position: 'relative',
+                          zIndex: 1,
+                          borderRadius: '24px',
+                          boxShadow: '0 8px 30px rgba(0,0,0,0.2)' // Add a subtle shadow so the card edge pops out clearly
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Dots */}
-        < div style={{
-          position: 'absolute',
-          bottom: '16px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          gap: '8px'
-        }}>
-          {
-            heroSlides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                style={{
-                  width: currentSlide === index ? '24px' : '8px',
-                  height: '8px',
-                  borderRadius: '4px',
-                  border: 'none',
-                  background: currentSlide === index ? 'white' : 'rgba(255,255,255,0.4)',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease'
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))
-          }
-        </div >
+            {/* Controls - Dots */}
+            <div style={{
+              position: 'absolute',
+              bottom: '24px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              gap: '12px',
+              zIndex: 10,
+              background: 'rgba(0,0,0,0.2)',
+              padding: '8px 16px',
+              borderRadius: '20px',
+              backdropFilter: 'blur(10px)'
+            }}>
+              {heroSlides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  style={{
+                    width: currentSlide === index ? '32px' : '8px',
+                    height: '8px',
+                    borderRadius: '4px',
+                    border: 'none',
+                    background: currentSlide === index ? 'white' : 'rgba(255,255,255,0.4)',
+                    cursor: 'pointer',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    padding: 0
+                  }}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
 
-        <style jsx>{`
+          <style jsx>{`
           .hero-slide {
-            height: 180px;
+            height: clamp(400px, 50vh, 500px);
           }
-          @media (min-width: 768px) {
+          
+          /* Initial non-active state for animations */
+          .slide-content {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease 0.2s;
+          }
+          .slide-image-wrapper {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.8s ease 0.2s;
+          }
+          .brand-bg-text {
+            transform: translate(-50%, -50%) scale(0.9);
+            transition: all 1.5s ease;
+          }
+          
+          /* Active state animations */
+          .hero-slide.active .slide-content {
+            opacity: 1;
+            transform: translateX(0);
+          }
+          .hero-slide.active .slide-image-wrapper {
+            opacity: 1;
+            transform: translateX(0);
+          }
+          .hero-slide.active .slide-image-wrapper:hover {
+            transform: scale(1.02);
+          }
+          .hero-slide.active .brand-bg-text {
+            transform: translate(-50%, -50%) scale(1);
+          }
+
+          @media (max-width: 640px) {
             .hero-slide {
-              height: 220px;
+              height: auto;
+              padding: 32px 0 60px 0 !important; /* Slightly less padding to keep it compact */
             }
-          }
-          @media (min-width: 1024px) {
-            .hero-slide {
-              height: 280px;
+            .slide-container {
+               padding: 12px !important;
+               gap: 12px !important;
+            }
+            .slide-content {
+              text-align: center !important;
+              align-items: center;
+              /* Removed translateY to eliminate vertical bouncing */
+            }
+            .slide-content h2 {
+              font-size: clamp(1.5rem, 6vw, 2rem) !important; /* Smaller text on mobile */
+              margin-bottom: 6px !important;
+              font-weight: 600 !important; /* Bolder mobile title */
+            }
+            .slide-content p {
+               font-size: 0.9rem !important; /* Smaller subtitle */
+            }
+            .slide-image-wrapper {
+              width: 150px !important; /* Smaller image on mobile */
+              margin: 0 auto !important; /* Center image explicitly on mobile */
+              /* Removed translateY to eliminate vertical bouncing */
             }
           }
         `}</style>
-      </section >
+        </div>
+      </section>
 
       {/* Search Bar Section */}
       <section style={{
         background: 'var(--card-bg)',
-        padding: '24px 16px',
+        padding: '24px 0',
         borderBottom: '1px solid var(--border-color)',
         transition: 'var(--theme-transition)'
       }}>
-        <div className="container" style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div className="container" style={{ maxWidth: '600px', margin: '0 auto', padding: '0 16px' }}>
           <div ref={searchRef} style={{ position: 'relative', width: '100%' }}>
             <form
               onSubmit={(e) => {
@@ -526,15 +658,17 @@ export default function Home() {
         </div>
       </section>
 
+
+
       {/* Promo Banners - Random Selection */}
       <ScrollReveal>
         <section style={{
           background: 'var(--card-bg)',
-          padding: '24px 16px',
+          padding: '24px 0',
           borderBottom: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container">
+          <div className="container" style={{ padding: '0 16px' }}>
             <PromoBanner variant="double" />
           </div>
         </section>
@@ -671,8 +805,8 @@ export default function Home() {
 
       {/* Popular Gift Cards */}
       <ScrollReveal threshold={0} duration={0.4} distance="20px">
-        < section style={{ padding: '48px 16px', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
-          <div className="container">
+        < section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
+          <div className="container" style={{ padding: '0 16px' }}>
             <div style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -709,8 +843,8 @@ export default function Home() {
         </section >
 
         {/* Gaming Section */}
-        < section style={{ padding: '48px 16px', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
-          <div className="container">
+        < section style={{ padding: '48px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
+          <div className="container" style={{ padding: '0 16px' }}>
             <div style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -756,8 +890,8 @@ export default function Home() {
 
       {/* Gaming Banner */}
       <ScrollReveal>
-        <section style={{ padding: '24px 16px', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
-          <div className="container">
+        <section style={{ padding: '24px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
+          <div className="container" style={{ padding: '0 16px' }}>
             <PromoBanner variant="single" category="gaming" />
           </div>
         </section>
@@ -765,8 +899,8 @@ export default function Home() {
 
       {/* Streaming Section */}
       <ScrollReveal>
-        < section style={{ padding: '48px 16px', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
-          <div className="container">
+        < section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
+          <div className="container" style={{ padding: '0 16px' }}>
             <div style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -808,8 +942,8 @@ export default function Home() {
 
       {/* Streaming/Software Banner */}
       <ScrollReveal>
-        <section style={{ padding: '24px 16px', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
-          <div className="container">
+        <section style={{ padding: '24px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
+          <div className="container" style={{ padding: '0 16px' }}>
             <PromoBanner variant="carousel" />
           </div>
         </section>
@@ -818,12 +952,12 @@ export default function Home() {
       {/* Trust Section */}
       <ScrollReveal>
         < section style={{
-          padding: '64px 16px',
+          padding: '64px 0',
           background: 'var(--card-bg)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ maxWidth: '900px' }}>
+          <div className="container" style={{ maxWidth: '900px', padding: '0 16px' }}>
             <div
               className="trust-grid"
               style={{
@@ -922,12 +1056,12 @@ export default function Home() {
       {/* How it Works Section */}
       <ScrollReveal>
         <section style={{
-          padding: '64px 16px',
+          padding: '64px 0',
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ maxWidth: '900px' }}>
+          <div className="container" style={{ maxWidth: '900px', padding: '0 16px' }}>
             <h2 style={{ textAlign: 'center', marginBottom: '48px', color: 'var(--text-primary)', fontSize: '1.75rem' }}>
               How it Works
             </h2>
@@ -1022,11 +1156,11 @@ export default function Home() {
       {/* Hamrobazar Section */}
       <ScrollReveal>
         <section style={{
-          padding: '56px 16px',
+          padding: '56px 0',
           background: 'var(--bg-secondary)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ maxWidth: '560px' }}>
+          <div className="container" style={{ maxWidth: '560px', padding: '0 16px' }}>
             {/* Card — always white in both modes */}
             <div style={{
               background: '#ffffff',
@@ -1213,13 +1347,13 @@ export default function Home() {
       {/* CTA Section */}
       <ScrollReveal>
         <section style={{
-          padding: '64px 16px',
+          padding: '64px 0',
           background: 'var(--card-bg)',
           textAlign: 'center',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ maxWidth: '500px' }}>
+          <div className="container" style={{ maxWidth: '500px', padding: '0 16px' }}>
             <h2 style={{ color: 'var(--text-primary)', fontSize: '1.75rem', marginBottom: '12px' }}>
               Need Help?
             </h2>
