@@ -60,6 +60,24 @@ export default function Home() {
   const [showDropdown, setShowDropdown] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
+  // Smart FAB: show after scrolling past hero, hide near bottom CTA
+  const [showFab, setShowFab] = useState(false);
+  const ctaRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleFabVisibility = () => {
+      const scrollY = window.scrollY;
+      const heroThreshold = window.innerHeight * 0.8;
+      // Hide when the bottom CTA section is within 300px of the viewport bottom
+      const nearBottom = ctaRef.current
+        ? ctaRef.current.getBoundingClientRect().top < window.innerHeight + 100
+        : false;
+      setShowFab(scrollY > heroThreshold && !nearBottom);
+    };
+    window.addEventListener('scroll', handleFabVisibility, { passive: true });
+    return () => window.removeEventListener('scroll', handleFabVisibility);
+  }, []);
+
   // Handle live search
   useEffect(() => {
     if (searchQuery.trim().length > 0) {
@@ -658,24 +676,8 @@ export default function Home() {
         </div>
       </section>
 
-
-
-      {/* Promo Banners - Random Selection */}
-      <ScrollReveal>
-        <section style={{
-          background: 'var(--card-bg)',
-          padding: '24px 0',
-          borderBottom: '1px solid var(--border-color)',
-          transition: 'var(--theme-transition)'
-        }}>
-          <div className="container" style={{ padding: '0 16px' }}>
-            <PromoBanner variant="double" />
-          </div>
-        </section>
-      </ScrollReveal>
-
-      {/* Category Icons - Horizontal scroll on mobile, grid on desktop */}
-      <ScrollReveal delay={0.1}>
+      {/* Category Icons - right below search bar */}
+      <ScrollReveal delay={0.05}>
         <section style={{
           background: 'var(--card-bg)',
           padding: '20px 0',
@@ -759,9 +761,25 @@ export default function Home() {
           }
         `}</style>
         </section>
+      </ScrollReveal>
 
-        {/* Brand Marquee - CoinGate Style */}
-        < section style={{
+      {/* Promo Banners */}
+      <ScrollReveal>
+        <section style={{
+          background: 'var(--card-bg)',
+          padding: '24px 0',
+          borderBottom: '1px solid var(--border-color)',
+          transition: 'var(--theme-transition)'
+        }}>
+          <div className="container" style={{ padding: '0 16px' }}>
+            <PromoBanner variant="double" />
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* Brand Marquee */}
+      <ScrollReveal>
+        <section style={{
           background: 'var(--bg-marquee)',
           padding: '32px 0',
           overflow: 'hidden',
@@ -800,38 +818,19 @@ export default function Home() {
             direction="backward"
             speed={0.5}
           />
-        </section >
+        </section>
       </ScrollReveal>
 
       {/* Popular Gift Cards */}
       <ScrollReveal threshold={0} duration={0.4} distance="20px">
         < section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
           <div className="container" style={{ padding: '0 16px' }}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '24px'
-            }}>
-              <h2 style={{
-                fontSize: '1.5rem',
-                fontWeight: 700,
-                color: 'var(--text-primary)',
-                letterSpacing: '-0.03em'
-              }}>
-                🔥 Popular Gift Cards
+            <div className="section-title-row">
+              <h2>
+                Best Seller
               </h2>
-              <Link
-                href="/category/gaming"
-                style={{
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  color: 'var(--btn-primary-bg)',
-                  textDecoration: 'none',
-                  letterSpacing: '-0.01em'
-                }}
-              >
-                View all →
+              <Link href="/category/gaming">
+                View All
               </Link>
             </div>
             <div className="product-grid">
@@ -845,21 +844,9 @@ export default function Home() {
         {/* Gaming Section */}
         < section style={{ padding: '48px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
           <div className="container" style={{ padding: '0 16px' }}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '24px'
-            }}>
-              <h2 style={{
-                fontSize: '1.5rem',
-                fontWeight: 700,
-                color: 'var(--text-primary)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px'
-              }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
+            <div className="section-title-row">
+              <h2>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="6" width="20" height="12" rx="2" />
                   <path d="M6 12h4M8 10v4" />
                   <circle cx="17" cy="10" r="1" fill="#10b981" />
@@ -867,16 +854,8 @@ export default function Home() {
                 </svg>
                 Gaming
               </h2>
-              <Link
-                href="/category/gaming"
-                style={{
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                  color: 'var(--btn-primary-bg)',
-                  textDecoration: 'none'
-                }}
-              >
-                Explore →
+              <Link href="/category/gaming">
+                View All
               </Link>
             </div>
             <div className="product-grid">
@@ -901,34 +880,17 @@ export default function Home() {
       <ScrollReveal>
         < section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
           <div className="container" style={{ padding: '0 16px' }}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '24px'
-            }}>
-              <h2 style={{
-                fontSize: '1.5rem',
-                fontWeight: 700,
-                color: 'var(--text-primary)'
-              }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
+            <div className="section-title-row">
+              <h2>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="3" width="20" height="14" rx="2" />
                   <path d="M8 21h8M12 17v4" />
                   <polygon points="10,8 10,12 14,10" fill="#f43f5e" />
                 </svg>
                 Streaming
               </h2>
-              <Link
-                href="/category/streaming"
-                style={{
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                  color: 'var(--btn-primary-bg)',
-                  textDecoration: 'none'
-                }}
-              >
-                Explore →
+              <Link href="/category/streaming">
+                View All
               </Link>
             </div>
             <div className="product-grid">
@@ -958,84 +920,71 @@ export default function Home() {
           transition: 'var(--theme-transition)'
         }}>
           <div className="container" style={{ maxWidth: '900px', padding: '0 16px' }}>
-            <div
+          <div
               className="trust-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '16px'
+                gap: '14px'
               }}
             >
               {[
                 {
                   icon: (
-                    <svg width="24\" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#F59E0B' }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#F59E0B' }}>
                       <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                     </svg>
                   ),
                   bg: '#FEF3C7',
+                  bgDark: 'rgba(245,158,11,0.15)',
                   title: 'Instant Delivery',
-                  desc: 'Get codes via WhatsApp'
+                  desc: 'Codes via WhatsApp'
                 },
                 {
                   icon: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#F97316' }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#F97316' }}>
                       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                       <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
                   ),
                   bg: '#FFEDD5',
+                  bgDark: 'rgba(249,115,22,0.15)',
                   title: 'Secure Payment',
-                  desc: 'Bank transfer or eSewa'
+                  desc: 'Bank transfer · eSewa'
                 },
                 {
                   icon: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#8B5CF6' }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#8B5CF6' }}>
                       <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                     </svg>
                   ),
                   bg: '#F3E8FF',
+                  bgDark: 'rgba(139,92,246,0.15)',
                   title: '24/7 Support',
                   desc: 'WhatsApp chat support'
                 },
                 {
                   icon: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#22C55E' }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#22C55E' }}>
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                       <polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
                   ),
                   bg: '#DCFCE7',
+                  bgDark: 'rgba(34,197,94,0.15)',
                   title: 'Verified Codes',
                   desc: '100% working guaranteed'
                 }
               ].map((item, i) => (
-                <div key={i} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  padding: '12px',
-                  background: 'var(--bg-elevated)',
-                  borderRadius: '12px',
-                  border: '1px solid var(--border-light)'
-                }}>
-                  <div style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '12px',
-                    background: item.bg,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}>
+                <div key={i} className="trust-card">
+                  <div className="trust-card-icon" style={{ background: item.bg }}>
                     {item.icon}
                   </div>
                   <div>
-                    <h3 style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: '2px', color: 'var(--text-primary)' }}>
+                    <h3 style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '3px', color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
                       {item.title}
                     </h3>
-                    <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: 0 }}>
+                    <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
                       {item.desc}
                     </p>
                   </div>
@@ -1056,22 +1005,27 @@ export default function Home() {
       {/* How it Works Section */}
       <ScrollReveal>
         <section style={{
-          padding: '64px 0',
+          padding: '72px 0',
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ maxWidth: '900px', padding: '0 16px' }}>
-            <h2 style={{ textAlign: 'center', marginBottom: '48px', color: 'var(--text-primary)', fontSize: '1.75rem' }}>
-              How it Works
-            </h2>
+          <div className="container" style={{ maxWidth: '880px', padding: '0 20px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '52px' }}>
+              <h2 style={{ color: 'var(--text-primary)', fontSize: 'clamp(1.5rem, 4vw, 2rem)', margin: 0 }}>
+                How it Works
+              </h2>
+              <p style={{ color: 'var(--text-secondary)', marginTop: '10px', fontSize: '1rem' }}>
+                Get your gift card in 3 easy steps
+              </p>
+            </div>
             <div style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'flex-start',
               flexWrap: 'wrap',
-              gap: '32px',
-              textAlign: 'center'
+              gap: '24px',
+              position: 'relative'
             }}>
               {[
                 {
@@ -1090,8 +1044,8 @@ export default function Home() {
                   desc: 'Pay via bank transfer or eSewa and send the receipt to our WhatsApp.',
                   icon: (
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#F59E0B' }}>
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                      <polyline points="22 4 12 14.01 9 11.01" />
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
                   )
                 },
@@ -1107,50 +1061,22 @@ export default function Home() {
                   )
                 }
               ].map((item, i) => (
-                <div key={i} style={{ flex: '1 1 250px', position: 'relative' }}>
-                  <div style={{
-                    width: '80px',
-                    height: '80px',
-                    margin: '0 auto 24px',
-                    borderRadius: '50%',
-                    background: 'var(--card-bg)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: 'var(--shadow-md)',
-                    position: 'relative'
-                  }}>
+                <div key={i} className="hiw-step">
+                  <div className="hiw-step-icon">
                     {item.icon}
-                    <div style={{
-                      position: 'absolute',
-                      top: '-4px',
-                      right: '-4px',
-                      width: '28px',
-                      height: '28px',
-                      background: 'var(--color-primary)',
-                      color: 'var(--text-inverted)',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '0.875rem',
-                      fontWeight: 'bold',
-                      border: '2px solid var(--card-bg)'
-                    }}>
-                      {item.step}
-                    </div>
+                    <div className="hiw-step-num">{item.step}</div>
                   </div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '12px', color: 'var(--text-primary)' }}>
+                  <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '10px', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
                     {item.title}
                   </h3>
-                  <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.65, maxWidth: '220px', margin: '0 auto' }}>
                     {item.desc}
                   </p>
                 </div>
               ))}
             </div>
           </div>
-        </section >
+        </section>
       </ScrollReveal>
 
       {/* Hamrobazar Section */}
@@ -1344,80 +1270,125 @@ export default function Home() {
         < FAQSection />
       </ScrollReveal>
 
-      {/* CTA Section */}
+      {/* CTA Section — gradient card */}
       <ScrollReveal>
-        <section style={{
-          padding: '64px 0',
-          background: 'var(--card-bg)',
-          textAlign: 'center',
-          borderTop: '1px solid var(--border-color)',
-          transition: 'var(--theme-transition)'
-        }}>
-          <div className="container" style={{ maxWidth: '500px', padding: '0 16px' }}>
-            <h2 style={{ color: 'var(--text-primary)', fontSize: '1.75rem', marginBottom: '12px' }}>
-              Need Help?
-            </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', marginBottom: '24px' }}>
-              Contact us on WhatsApp for quick support
-            </p>
-            <a
-              href="https://wa.me/9779862157864"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '14px 32px',
-                fontSize: '1rem',
-                fontWeight: 600,
-                background: '#22c55e',
-                color: 'white',
-                borderRadius: '50px',
-                textDecoration: 'none',
-                boxShadow: '0 4px 16px rgba(34,197,94,0.3)'
-              }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-              Chat on WhatsApp
-            </a>
-
-            <div style={{ marginTop: '16px' }}>
-              <Link
-                href="/guides"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '12px 24px',
-                  fontSize: '0.95rem',
-                  fontWeight: 600,
-                  color: 'var(--text-secondary)',
-                  background: 'var(--btn-secondary-bg)',
-                  borderRadius: '50px',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--btn-secondary-hover)';
-                  e.currentTarget.style.color = 'var(--text-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'var(--btn-secondary-bg)';
-                  e.currentTarget.style.color = 'var(--text-secondary)';
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                View Redemption Guides
-              </Link>
+        <section
+          ref={ctaRef}
+          style={{
+            padding: '56px 0',
+            background: 'var(--bg-primary)',
+            transition: 'var(--theme-transition)'
+          }}
+        >
+          <div className="container" style={{ maxWidth: '720px', padding: '0 16px' }}>
+            <div className="cta-card">
+              <h2 style={{ color: 'var(--text-primary)', fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', marginBottom: '10px', fontWeight: 800, letterSpacing: '-0.02em' }}>
+                Need Help?
+              </h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', marginBottom: '28px', lineHeight: 1.6, maxWidth: '400px', margin: '0 auto 28px' }}>
+                We're on WhatsApp 24/7 — reach us in seconds for orders, support, or custom requests.
+              </p>
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <a
+                  href="https://wa.me/9779862157864"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '14px 28px',
+                    fontSize: '1rem',
+                    fontWeight: 700,
+                    background: '#25D366',
+                    color: 'white',
+                    borderRadius: '50px',
+                    textDecoration: 'none',
+                    boxShadow: '0 4px 14px rgba(37,211,102,0.3)',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(37,211,102,0.4)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(37,211,102,0.3)'; }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                  Chat on WhatsApp
+                </a>
+                <Link
+                  href="/guides"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '14px 24px',
+                    fontSize: '0.95rem',
+                    fontWeight: 600,
+                    color: 'var(--text-primary)',
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '50px',
+                    textDecoration: 'none',
+                    border: '1px solid var(--border-color)',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--border-light)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--bg-secondary)'; }}
+                >
+                  Redemption Guides
+                </Link>
+              </div>
             </div>
           </div>
-        </section >
+        </section>
+        {/* ctaRef anchors the FAB hide logic */}
       </ScrollReveal>
+
+      {/* WhatsApp Floating Button — smart visibility */}
+      <a
+        href="https://wa.me/9779862157864"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '20px',
+          zIndex: 80,
+          width: '56px',
+          height: '56px',
+          borderRadius: '50%',
+          background: '#25D366',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 4px 20px rgba(37, 211, 102, 0.45)',
+          textDecoration: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          // Smart visibility
+          opacity: showFab ? 1 : 0,
+          transform: showFab ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.85)',
+          pointerEvents: showFab ? 'auto' : 'none',
+          transition: 'opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          if (showFab) {
+            e.currentTarget.style.transform = 'translateY(-2px) scale(1.1)';
+            e.currentTarget.style.boxShadow = '0 8px 32px rgba(37, 211, 102, 0.55)';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (showFab) {
+            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+            e.currentTarget.style.boxShadow = '0 4px 20px rgba(37, 211, 102, 0.45)';
+          }
+        }}
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+      </a>
     </div >
   );
 }

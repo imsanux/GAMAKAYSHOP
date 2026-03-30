@@ -18,207 +18,234 @@ export default function ProductCard({ product }: ProductCardProps) {
     const handleAddToCart = () => {
         setIsAdding(true);
         addItem(product, selectedDenom);
-        setTimeout(() => setIsAdding(false), 800);
+        setTimeout(() => setIsAdding(false), 900);
     };
+
+
+    /* ── colour accent per category ─────────────────── */
+    const categoryAccent: Record<string, string> = {
+        gaming:        '#10b981',
+        streaming:     '#f43f5e',
+        software:      '#3b82f6',
+        subscriptions: '#f59e0b',
+    };
+    const accent = categoryAccent[product.category] ?? 'var(--btn-primary-bg)';
 
     return (
         <div
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             style={{
-                borderRadius: '20px',
+                borderRadius: '24px',
                 background: 'var(--card-bg)',
                 overflow: 'hidden',
-                transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                boxShadow: isHovered ? 'var(--shadow-card-hover)' : 'var(--shadow-card)',
-                border: `1px solid ${isHovered ? 'var(--btn-primary-bg)' : 'var(--border-light)'}`,
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative',
-                transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+                boxShadow: isHovered
+                    ? '0 20px 60px rgba(0,0,0,0.14), 0 0 0 1.5px rgba(0,113,227,0.18)'
+                    : '0 2px 14px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.05)',
+                transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
+                transition: 'box-shadow 0.38s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94)',
             }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Product Image */}
+            {/* ── IMAGE AREA ──────────────────────────────────── */}
             <div style={{
                 position: 'relative',
                 width: '100%',
-                paddingTop: '72%',
+                paddingTop: '68%',
                 background: 'var(--bg-secondary)',
-                overflow: 'hidden'
+                overflow: 'hidden',
             }}>
+
+                {/* image or fallback */}
                 {product.image_url && !imageError ? (
-                    <div style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '82%',
-                        height: '82%',
-                        borderRadius: '14px',
-                        overflow: 'hidden'
-                    }}>
-                        <img
-                            src={product.image_url}
-                            alt={product.name}
-                            onError={() => setImageError(true)}
-                            loading="lazy"
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                                transform: isHovered ? 'scale(1.06)' : 'scale(1)'
-                            }}
-                        />
-                    </div>
+                    <img
+                        src={product.image_url}
+                        alt={product.name}
+                        onError={() => setImageError(true)}
+                        loading="lazy"
+                        style={{
+                            position: 'absolute',
+                            top: 0, left: 0,
+                            width: '100%', height: '100%',
+                            objectFit: 'cover',
+                            transition: 'transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94)',
+                            transform: isHovered ? 'scale(1.07)' : 'scale(1)',
+                        }}
+                    />
                 ) : (
                     <div style={{
                         position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '2.5rem',
-                        fontWeight: 800,
-                        color: 'var(--text-muted)',
-                        opacity: 0.4
+                        top: 0, left: 0, width: '100%', height: '100%',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: '3.5rem', fontWeight: 800,
+                        color: accent, opacity: 0.18,
+                        letterSpacing: '-0.05em',
                     }}>
-                        {product.brand.charAt(0)}
+                        {product.brand.toUpperCase().slice(0, 2)}
                     </div>
                 )}
-            </div>
 
-            {/* Card Content */}
-            <div style={{
-                padding: '12px',
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-                gap: '5px',
-                overflow: 'hidden',
-                boxSizing: 'border-box'
-            }}>
-                {/* Brand */}
+                {/* gradient overlay for bottom readability */}
                 <div style={{
-                    fontSize: '0.6rem',
-                    fontWeight: 600,
-                    color: 'var(--text-muted)',
+                    position: 'absolute',
+                    bottom: 0, left: 0, right: 0,
+                    height: '55%',
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)',
+                    zIndex: 1,
+                    pointerEvents: 'none',
+                }} />
+
+                {/* delivery badge removed */}
+
+                {/* region badge removed */}
+
+                {/* brand name overlay — bottom left, over gradient */}
+                <div style={{
+                    position: 'absolute',
+                    bottom: '10px', left: '12px',
+                    zIndex: 2,
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
+                    color: 'rgba(255,255,255,0.85)',
                     textTransform: 'uppercase',
-                    letterSpacing: '0.08em',
+                    letterSpacing: '0.1em',
                 }}>
                     {product.brand}
                 </div>
+            </div>
 
-                {/* Product Name */}
+            {/* ── CONTENT AREA ────────────────────────────────── */}
+            <div style={{
+                padding: '16px 16px 18px',
+                display: 'flex',
+                flexDirection: 'column',
+                flex: 1,
+                gap: '12px',
+            }}>
+
+                {/* Product name */}
                 <h3 style={{
-                    fontSize: '0.8rem',
-                    fontWeight: 600,
+                    fontSize: '1rem',
+                    fontWeight: 700,
                     color: 'var(--text-primary)',
-                    lineHeight: 1.35,
-                    minHeight: '2.7em',
+                    lineHeight: 1.3,
+                    letterSpacing: '-0.02em',
+                    margin: 0,
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
                     overflow: 'hidden',
-                    letterSpacing: '-0.01em',
-                    margin: 0
+                    minHeight: '2.6em',
                 }}>
                     {product.name}
                 </h3>
 
-                {/* Denomination Selector */}
-                <div style={{ marginTop: 'auto' }}>
-                    <select
-                        value={selectedDenom.value}
-                        onChange={(e) => {
-                            const denom = product.denominations.find(d => d.value === e.target.value);
-                            if (denom) setSelectedDenom(denom);
-                        }}
-                        style={{
-                            width: '100%',
-                            padding: '7px 28px 7px 10px',
-                            fontSize: '0.72rem',
-                            fontWeight: 500,
-                            border: '1px solid var(--border-color)',
-                            borderRadius: '10px',
-                            background: 'var(--input-bg)',
-                            cursor: 'pointer',
-                            appearance: 'none',
-                            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2386868b' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: 'right 8px center',
-                            transition: 'all 0.2s ease',
-                            color: 'var(--text-primary)',
-                            outline: 'none',
-                            boxSizing: 'border-box'
-                        }}
-                        onFocus={(e) => {
-                            e.currentTarget.style.borderColor = 'var(--btn-primary-bg)';
-                            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0, 113, 227, 0.1)';
-                        }}
-                        onBlur={(e) => {
-                            e.currentTarget.style.borderColor = 'var(--border-color)';
-                            e.currentTarget.style.boxShadow = 'none';
-                        }}
-                    >
-                        {product.denominations.map(denom => (
-                            <option key={denom.value} value={denom.value}>
+                {/* Denomination pills */}
+                <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '6px',
+                }}>
+                    {product.denominations.map(denom => {
+                        const active = denom.value === selectedDenom.value;
+                        return (
+                            <button
+                                key={denom.value}
+                                onClick={() => setSelectedDenom(denom)}
+                                style={{
+                                    padding: '7px 14px',
+                                    borderRadius: '20px',
+                                    fontSize: '0.85rem',
+                                    fontWeight: 600,
+                                    cursor: 'pointer',
+                                    border: active
+                                        ? '1.5px solid #30d158'
+                                        : '1.5px solid var(--border-color)',
+                                    background: active
+                                        ? 'rgba(48,209,88,0.12)'
+                                        : 'transparent',
+                                    color: active ? '#25a244' : 'var(--text-secondary)',
+                                    transition: 'all 0.18s ease',
+                                    letterSpacing: '-0.01em',
+                                    whiteSpace: 'nowrap',
+                                }}
+                            >
                                 {denom.value}
-                            </option>
-                        ))}
-                    </select>
+                            </button>
+                        );
+                    })}
                 </div>
 
-                {/* Price & Add Button */}
-                <div className="product-card-action">
-                    <div className="price-wrapper">
+                {/* Price + Add to Cart */}
+                <div style={{ marginTop: 'auto' }}>
+                    {/* price row */}
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'baseline',
+                        gap: '4px',
+                        marginBottom: '10px',
+                    }}>
                         <span style={{
-                            fontSize: '0.8rem',
-                            fontWeight: 700,
+                            fontSize: '0.75rem',
+                            fontWeight: 500,
+                            color: 'var(--text-muted)',
+                        }}>Rs.</span>
+                        <span style={{
+                            fontSize: '1.4rem',
+                            fontWeight: 800,
                             color: 'var(--text-primary)',
-                            letterSpacing: '-0.02em',
-                            whiteSpace: 'nowrap'
+                            letterSpacing: '-0.03em',
+                            lineHeight: 1,
                         }}>
-                            Rs. {selectedDenom.price.toLocaleString()}
+                            {selectedDenom.price.toLocaleString()}
                         </span>
                     </div>
 
+                    {/* full-width add to cart */}
                     <button
-                        className="add-to-cart-btn"
                         onClick={handleAddToCart}
                         disabled={isAdding}
                         style={{
-                            background: isAdding ? '#30d158' : 'var(--btn-primary-bg)',
+                            width: '100%',
+                            padding: '16px 20px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '8px',
+                            borderRadius: '16px',
+                            border: 'none',
+                            fontSize: '1.05rem',
+                            fontWeight: 700,
+                            letterSpacing: '-0.01em',
                             cursor: isAdding ? 'default' : 'pointer',
-                            transform: isAdding ? 'scale(0.95)' : 'scale(1)',
+                            background: isAdding
+                                ? 'linear-gradient(135deg, #30d158 0%, #25a244 100%)'
+                                : 'var(--btn-primary-bg)',
+                            color: 'white',
                             boxShadow: isAdding
-                                ? '0 2px 8px rgba(48, 209, 88, 0.3)'
-                                : '0 2px 6px rgba(0, 113, 227, 0.2)',
+                                ? '0 4px 16px rgba(48,209,88,0.35)'
+                                : '0 4px 16px rgba(0,113,227,0.3)',
+                            transform: isAdding ? 'scale(0.97)' : 'scale(1)',
+                            transition: 'all 0.22s cubic-bezier(0.4,0,0.2,1)',
                         }}
                         onMouseEnter={(e) => {
                             if (!isAdding) {
                                 e.currentTarget.style.background = 'var(--btn-primary-hover)';
-                                e.currentTarget.style.transform = 'scale(1.03)';
+                                e.currentTarget.style.transform = 'scale(1.02)';
+                                e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,113,227,0.4)';
                             }
                         }}
                         onMouseLeave={(e) => {
                             if (!isAdding) {
                                 e.currentTarget.style.background = 'var(--btn-primary-bg)';
                                 e.currentTarget.style.transform = 'scale(1)';
+                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,113,227,0.3)';
                             }
                         }}
                     >
-                        {isAdding ? (
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg>
-                                Added
-                            </span>
-                        ) : 'Add to Cart'}
+                        {isAdding ? 'Added to Cart' : 'Add to Cart'}
                     </button>
                 </div>
             </div>
