@@ -23,6 +23,7 @@ export default function Home() {
   const featuredProducts = getFeaturedProducts();
   const gamingProducts = getProductsByCategory('gaming').slice(0, 6);
   const streamingProducts = getProductsByCategory('streaming').slice(0, 6);
+  const subscriptionsProducts = getProductsByCategory('subscriptions').slice(0, 6);
   const [currentSlide, setCurrentSlide] = useState(0);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
 
@@ -907,6 +908,30 @@ export default function Home() {
         <section style={{ padding: '24px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
           <div className="container" style={{ padding: '0 16px' }}>
             <PromoBanner variant="carousel" />
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* Subscriptions Section */}
+      <ScrollReveal>
+        <section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
+          <div className="container" style={{ padding: '0 16px' }}>
+            <div className="section-title-row">
+              <h2>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+                </svg>
+                Subscriptions
+              </h2>
+              <Link href="/category/subscriptions">
+                View All
+              </Link>
+            </div>
+            <div className="product-grid">
+              {subscriptionsProducts.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
           </div>
         </section>
       </ScrollReveal>

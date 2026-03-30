@@ -122,55 +122,68 @@ export default function Header() {
                         alignItems: 'center',
                         gap: '6px'
                     }}>
-                        {/* Theme Toggle — Refined switch */}
+                        {/* Theme Toggle — Segmented Controller */}
                         <button
                             className="hide-mobile"
                             onClick={toggleTheme}
+                            aria-label="Toggle theme"
                             style={{
-                                position: 'relative',
-                                width: '48px',
-                                height: '26px',
-                                borderRadius: '13px',
-                                background: isDark ? 'var(--color-accent)' : '#e5e5ea',
-                                border: 'none',
-                                cursor: 'pointer',
-                                transition: 'background 0.3s ease',
-                                padding: '2px',
-                                display: 'flex',
-                                alignItems: 'center'
-                            }}
-                            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                        >
-                            <span style={{
-                                width: '22px',
-                                height: '22px',
-                                borderRadius: '50%',
-                                background: '#fff',
-                                transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                transform: isDark ? 'translateX(22px)' : 'translateX(0)',
-                                boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'center'
-                            }}>
-                                {isDark ? (
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#1d1d1f" stroke="none">
-                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                                    </svg>
-                                ) : (
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="12" cy="12" r="4" />
-                                        <line x1="12" y1="2" x2="12" y2="4" />
-                                        <line x1="12" y1="20" x2="12" y2="22" />
-                                        <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" />
-                                        <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
-                                        <line x1="2" y1="12" x2="4" y2="12" />
-                                        <line x1="20" y1="12" x2="22" y2="12" />
-                                        <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" />
-                                        <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
-                                    </svg>
-                                )}
-                            </span>
+                                background: 'var(--bg-secondary)',
+                                padding: '3px',
+                                borderRadius: '20px',
+                                border: '1px solid var(--border-light)',
+                                gap: '2px',
+                                cursor: 'pointer',
+                            }}
+                        >
+                            {/* Sun Segment */}
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '32px',
+                                    height: '24px',
+                                    borderRadius: '14px',
+                                    background: !isDark ? 'var(--card-bg)' : 'transparent',
+                                    boxShadow: !isDark ? '0 2px 6px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)' : 'none',
+                                    color: !isDark ? 'var(--text-primary)' : 'var(--text-secondary)',
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                }}
+                            >
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="12" cy="12" r="4" />
+                                    <line x1="12" y1="2" x2="12" y2="4" />
+                                    <line x1="12" y1="20" x2="12" y2="22" />
+                                    <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" />
+                                    <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
+                                    <line x1="2" y1="12" x2="4" y2="12" />
+                                    <line x1="20" y1="12" x2="22" y2="12" />
+                                    <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" />
+                                    <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
+                                </svg>
+                            </div>
+                            {/* Moon Segment */}
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '32px',
+                                    height: '24px',
+                                    borderRadius: '14px',
+                                    background: isDark ? 'var(--card-bg)' : 'transparent',
+                                    boxShadow: isDark ? '0 2px 6px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.05)' : 'none',
+                                    color: isDark ? 'var(--text-primary)' : 'var(--text-secondary)',
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                }}
+                            >
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                                </svg>
+                            </div>
                         </button>
 
                         {/* Track Order */}
@@ -394,30 +407,64 @@ export default function Header() {
                             </span>
                             <button
                                 onClick={toggleTheme}
+                                aria-label="Toggle theme"
                                 style={{
-                                    position: 'relative',
-                                    width: '48px',
-                                    height: '26px',
-                                    borderRadius: '13px',
-                                    background: isDark ? 'var(--color-accent)' : '#e5e5ea',
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    transition: 'background 0.3s ease',
-                                    padding: '2px',
                                     display: 'flex',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    background: 'var(--bg-secondary)',
+                                    padding: '3px',
+                                    borderRadius: '20px',
+                                    border: '1px solid var(--border-light)',
+                                    gap: '2px',
+                                    cursor: 'pointer',
                                 }}
-                                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                             >
-                                <span style={{
-                                    width: '22px',
-                                    height: '22px',
-                                    borderRadius: '50%',
-                                    background: '#fff',
-                                    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    transform: isDark ? 'translateX(22px)' : 'translateX(0)',
-                                    boxShadow: '0 1px 3px rgba(0,0,0,0.15)'
-                                }} />
+                                {/* Sun Segment */}
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        width: '32px',
+                                        height: '24px',
+                                        borderRadius: '14px',
+                                        background: !isDark ? 'var(--card-bg)' : 'transparent',
+                                        boxShadow: !isDark ? '0 2px 6px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)' : 'none',
+                                        color: !isDark ? 'var(--text-primary)' : 'var(--text-secondary)',
+                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    }}
+                                >
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="12" cy="12" r="4" />
+                                        <line x1="12" y1="2" x2="12" y2="4" />
+                                        <line x1="12" y1="20" x2="12" y2="22" />
+                                        <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" />
+                                        <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
+                                        <line x1="2" y1="12" x2="4" y2="12" />
+                                        <line x1="20" y1="12" x2="22" y2="12" />
+                                        <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" />
+                                        <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
+                                    </svg>
+                                </div>
+                                {/* Moon Segment */}
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        width: '32px',
+                                        height: '24px',
+                                        borderRadius: '14px',
+                                        background: isDark ? 'var(--card-bg)' : 'transparent',
+                                        boxShadow: isDark ? '0 2px 6px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.05)' : 'none',
+                                        color: isDark ? 'var(--text-primary)' : 'var(--text-secondary)',
+                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    }}
+                                >
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                                    </svg>
+                                </div>
                             </button>
                         </div>
                     </div>

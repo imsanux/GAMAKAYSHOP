@@ -10,7 +10,8 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
     const { addItem } = useCart();
-    const [selectedDenom, setSelectedDenom] = useState(product.denominations[0]);
+    const firstDenom = product.denominations[0] ?? { value: 'N/A', price: 0 };
+    const [selectedDenom, setSelectedDenom] = useState(firstDenom);
     const [isAdding, setIsAdding] = useState(false);
     const [imageError, setImageError] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
@@ -199,7 +200,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                             letterSpacing: '-0.03em',
                             lineHeight: 1,
                         }}>
-                            {selectedDenom.price.toLocaleString()}
+                            {(selectedDenom?.price ?? 0).toLocaleString()}
                         </span>
                     </div>
 

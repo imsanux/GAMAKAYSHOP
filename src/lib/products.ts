@@ -29,10 +29,10 @@ export const sampleProducts: Product[] = [
         category: 'gaming',
         region: 'India',
         denominations: [
-            { value: '₹500', price: 950 },
-            { value: '₹1000', price: 1900 },
+
+            { value: '₹1000', price: 1950 },
             { value: '₹2000', price: 3800 },
-            { value: '₹5000', price: 9500 }
+
         ],
         delivery_type: 'Manual',
         image_url: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_INR.png',
@@ -63,7 +63,7 @@ export const sampleProducts: Product[] = [
         category: 'gaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 500 }
+            { value: '1 Month', price: 2500 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/XBOX_GAMEPASS.png',
@@ -77,8 +77,7 @@ export const sampleProducts: Product[] = [
         category: 'gaming',
         region: 'India',
         denominations: [
-            { value: '1 Month', price: 499 },
-            { value: '3 Months', price: 1399 }
+            { value: '1 Month', price: 2500 },
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/XBOX_GAMEPASS_INR.png',
@@ -110,7 +109,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 3000 },
-            { value: '1 Year', price: 18000 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/EA_PLAY_PRO.png',
@@ -125,7 +123,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Sub', price: 385 },
-            { value: '5 Subs', price: 1850 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/TWITCH_PRIME.png',
@@ -205,10 +202,7 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 175 },
-            { value: '3 Months', price: 650 },
-            { value: '6 Months', price: 899 },
-            { value: '1 Year', price: 1699 }
+            { value: '1 Month', price: 450 },
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.png',
@@ -222,10 +216,7 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 150 },
-            { value: '3 Months', price: 399 },
-            { value: '6 Months', price: 749 },
-            { value: '1 Year', price: 1399 }
+            { value: '1 Month', price: 475 },
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.png',
@@ -239,8 +230,7 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month', price: 250 },
-            { value: '6 Months', price: 1199 }
+            { value: '1 Month', price: 275 },
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/APPLEMUSIC.png',
@@ -255,7 +245,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 200 },
-            { value: '3 Months', price: 550 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/APPLE_TV.png',
@@ -270,7 +259,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 375 },
-            { value: '3 Months', price: 1050 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/APPLE_ONE.png',
@@ -285,7 +273,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 250 },
-            { value: '3 Months', price: 699 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/CRUCHYROLL.png',
@@ -315,7 +302,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 450 },
-            { value: '1 Year', price: 4500 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/F1TV.png',
@@ -330,7 +316,6 @@ export const sampleProducts: Product[] = [
         region: 'US',
         denominations: [
             { value: '1 Month', price: 1950 },
-            { value: '1 Year', price: 17999 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/F1TV.png',
@@ -345,7 +330,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 350 },
-            { value: '1 Year', price: 3500 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/VIKI_RAKUTEN.png',
@@ -362,7 +346,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 450 },
-            { value: '3 Months', price: 1299 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.png',
@@ -391,7 +374,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 150 },
-            { value: '3 Months', price: 399 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.png',
@@ -534,7 +516,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 199 },
-            { value: '1 Year', price: 1799 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/NORD_VPN.png',
@@ -549,7 +530,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 350 },
-            { value: '6 Months', price: 1799 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/EXPRESS_VPN.png',
@@ -564,7 +544,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 150 },
-            { value: '1 Year', price: 1350 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/SURFSHARK_VPN.png',
@@ -579,7 +558,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 175 },
-            { value: '1 Year', price: 1599 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/CYBERGHOST_VPN.png',
@@ -596,7 +574,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 249 },
-            { value: '1 Year', price: 1500 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/MICROSOFT_OFFICE.png',
@@ -643,7 +620,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 200 },
-            { value: '1 Year', price: 1800 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/QUILLBOT.png',
@@ -672,7 +648,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 350 },
-            { value: '1 Year', price: 2999 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/SKILLSHARE.png',
@@ -703,7 +678,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 975 },
-            { value: '1 Year', price: 9750 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/ADOBE_EXPRESS.png',
@@ -718,7 +692,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 975 },
-            { value: '1 Year', price: 5999 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/FILMORA.png',
@@ -732,7 +705,8 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: 'Lifetime', price: 1950 }
+            { value: '1 Month', price: 0 }
+        
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/PROCREATE.png',
@@ -747,7 +721,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 1500 },
-            { value: '1 Year', price: 14999 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/ZOOM_WORKSPACE.png',
@@ -764,7 +737,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 450 },
-            { value: '3 Months', price: 1199 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/TINDER_GOLD.png',
@@ -779,7 +751,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 800 },
-            { value: '3 Months', price: 2199 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/TINDER_PLATINUM.png',
@@ -793,7 +764,6 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Week', price: 399 },
             { value: '1 Month', price: 975 }
         ],
         delivery_type: 'Instant',
@@ -808,7 +778,6 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Week', price: 200 },
             { value: '1 Month', price: 699 }
         ],
         delivery_type: 'Instant',
@@ -868,7 +837,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 150 },
-            { value: '1 Year', price: 1399 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/SNAPCHAT+.png',
@@ -913,7 +881,6 @@ export const sampleProducts: Product[] = [
         region: 'Global',
         denominations: [
             { value: '1 Month', price: 150 },
-            { value: '1 Year', price: 1350 }
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/TRUECALLER.png',
@@ -955,7 +922,8 @@ export const sampleProducts: Product[] = [
         category: 'subscriptions',
         region: 'Global',
         denominations: [
-            { value: '1 Year', price: 750 }
+            { value: '1 Month', price: 0 }
+        
         ],
         delivery_type: 'Instant',
         image_url: '/IMAGES/PRODUCTS/GOPRO_PREMIUM.png',
@@ -1646,7 +1614,19 @@ export function getProductsByCategory(category: string): Product[] {
 }
 
 export function getFeaturedProducts(): Product[] {
-    return sampleProducts.slice(0, 8);
+    const bestSellerOrder = [
+        'Apple Gift Card INR',
+        'Steam Giftcards US & INDIA',
+        'PlayStation Giftcards INR',
+        'Grok by xAI',
+        'Suno AI Pro',
+        'Netflix Monthly',
+        'Apple Music',
+        'Crunchyroll Premium',
+        'Tinder Gold'
+    ];
+    const productMap = new Map(sampleProducts.map(p => [p.name, p]));
+    return bestSellerOrder.map(name => productMap.get(name)).filter(Boolean) as Product[];
 }
 
 export function searchProducts(query: string): Product[] {
