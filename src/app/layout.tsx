@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://gamakay.com'),
   title: "Giftcards Nepal | Buy Steam, Apple, PlayStation Gift Cards Online - Gamakay",
   description: "Nepal's #1 trusted store for digital gift cards. Buy Steam gift cards Nepal, Apple gift cards Nepal, PlayStation, Xbox, Netflix, Spotify & more. Instant delivery via WhatsApp. Safe, fast & reliable.",
   keywords: "giftcards nepal, buy giftcards nepal, steam giftcard nepal, apple giftcards nepal, playstation gift card nepal, xbox gift card nepal, netflix nepal, spotify nepal, nintendo eshop nepal, google play nepal, gaming gift cards nepal, digital gift cards kathmandu, gift cards in nepal, buy digital gift cards nepal, steam wallet nepal, itunes gift card nepal, gamakay nepal, online gift cards nepal, esewa gift card, khalti gift card",
@@ -75,6 +76,35 @@ export default function RootLayout({
         <meta name="geo.placename" content="Kathmandu, Nepal" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Non-render-blocking font load */}
+        <link
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          media="print"
+          // @ts-expect-error onload trick for non-blocking fonts
+          onLoad="this.media='all'"
+        />
+        {/* Preload LCP hero — desktop */}
+        <link
+          rel="preload"
+          as="image"
+          href="/IMAGES/webpdesktop/Netflix_desktop.webp"
+          fetchPriority="high"
+          media="(min-width: 768px)"
+        />
+        {/* Preload LCP hero — mobile */}
+        <link
+          rel="preload"
+          as="image"
+          href="/IMAGES/webpmobile/Netflix_mobile.webp"
+          fetchPriority="high"
+          media="(max-width: 767px)"
+        />
         <link rel="preconnect" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://wa.me" />
 

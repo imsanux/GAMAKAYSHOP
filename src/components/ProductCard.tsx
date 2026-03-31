@@ -8,6 +8,14 @@ interface ProductCardProps {
     product: Product;
 }
 
+// Static lookup — defined once at module level, not recreated on every render
+const CATEGORY_ACCENT: Record<string, string> = {
+    gaming:        '#10b981',
+    streaming:     '#f43f5e',
+    software:      '#3b82f6',
+    subscriptions: '#f59e0b',
+};
+
 export default function ProductCard({ product }: ProductCardProps) {
     const { addItem } = useCart();
     const firstDenom = product.denominations[0] ?? { value: 'N/A', price: 0 };
@@ -23,14 +31,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     };
 
 
-    /* ── colour accent per category ─────────────────── */
-    const categoryAccent: Record<string, string> = {
-        gaming:        '#10b981',
-        streaming:     '#f43f5e',
-        software:      '#3b82f6',
-        subscriptions: '#f59e0b',
-    };
-    const accent = categoryAccent[product.category] ?? 'var(--btn-primary-bg)';
+    const accent = CATEGORY_ACCENT[product.category] ?? 'var(--btn-primary-bg)';
 
     return (
         <div
@@ -48,6 +49,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     : '0 2px 14px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.05)',
                 transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
                 transition: 'box-shadow 0.38s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94)',
+                willChange: 'transform, box-shadow',
             }}
         >
             {/* ── IMAGE AREA ──────────────────────────────────── */}
@@ -66,6 +68,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                         alt={product.name}
                         onError={() => setImageError(true)}
                         loading="lazy"
+                        decoding="async"
                         style={{
                             position: 'absolute',
                             top: 0, left: 0,
@@ -73,6 +76,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                             objectFit: 'cover',
                             transition: 'transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94)',
                             transform: isHovered ? 'scale(1.07)' : 'scale(1)',
+                            willChange: 'transform',
                         }}
                     />
                 ) : (
@@ -93,10 +97,30 @@ export default function ProductCard({ product }: ProductCardProps) {
                     position: 'absolute',
                     bottom: 0, left: 0, right: 0,
                     height: '55%',
-                    background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)',
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)',
                     zIndex: 1,
                     pointerEvents: 'none',
                 }} />
+
+                {/* category accent badge — top right */}
+                <div style={{
+                    position: 'absolute',
+                    top: '10px',
+                    right: '10px',
+                    zIndex: 3,
+                    background: accent,
+                    color: 'white',
+                    fontSize: '0.6rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    padding: '3px 8px',
+                    borderRadius: '99px',
+                    boxShadow: `0 2px 8px ${accent}55`,
+                    opacity: 0.92,
+                }}>
+                    {product.category}
+                </div>
 
                 {/* delivery badge removed */}
 

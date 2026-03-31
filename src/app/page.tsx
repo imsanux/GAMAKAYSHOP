@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 
 const DraggableMarquee = dynamic(() => import('@/components/DraggableMarquee'), {
   ssr: false,
-  loading: () => <div style={{ height: '116px', width: '100%', background: 'var(--bg-secondary)', opacity: 0.5, animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
+  loading: () => <div style={{ height: '116px', width: '100%', background: 'var(--bg-secondary)', opacity: 0.5 }} />
 });
 const FAQSection = dynamic(() => import('@/components/FAQSection'), {
   ssr: true,
@@ -18,12 +18,141 @@ const FAQSection = dynamic(() => import('@/components/FAQSection'), {
 });
 import { getFeaturedProducts, getProductsByCategory, searchProducts } from '@/lib/products';
 
+// ─── Hero banner slides ──────────────────────────────────────────────────────
+// Desktop images: /public/IMAGES/webpdesktop/
+// Mobile images:  /public/IMAGES/webpmobile/
+const HERO_SLIDES = [
+  {
+    desktop: '/IMAGES/webpdesktop/Netflix_desktop.webp',
+    mobile:  '/IMAGES/webpmobile/Netflix_mobile.webp',
+    alt:     'Netflix',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/Playstatio_Xbox_desktop.webp',
+    mobile:  '/IMAGES/webpmobile/Playstation_xbox_mobile.webp',
+    alt:     'PlayStation & Xbox',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/Steam_desktop.webp',
+    mobile:  '/IMAGES/webpmobile/Steam_mobile.webp',
+    alt:     'Steam Gift Cards',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/Apple_desktop.webp',
+    mobile:  '/IMAGES/webpmobile/Apple_mobile.webp',
+    alt:     'Apple Gift Cards',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/Grok_desktop.webp',
+    mobile:  '/IMAGES/webpmobile/Grok_mobile.webp',
+    alt:     'Grok AI',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/Suno_desktop.webp',
+    mobile:  '/IMAGES/webpmobile/Suno_mobile.webp',
+    alt:     'Suno AI',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/Udemy_desktop.webp',
+    mobile:  '/IMAGES/webpmobile/Udemy_mobile.webp',
+    alt:     'Udemy',
+  },
+];
+
+const CATEGORIES = [
+  {
+    name: 'Browse All', slug: 'all', icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+      </svg>
+    )
+  },
+  {
+    name: 'Gaming', slug: 'gaming', icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2" />
+        <path d="M6 12h4M8 10v4" />
+        <circle cx="17" cy="10" r="1" fill="#10b981" />
+        <circle cx="15" cy="12" r="1" fill="#10b981" />
+      </svg>
+    )
+  },
+  {
+    name: 'Streaming', slug: 'streaming', icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <path d="M8 21h8M12 17v4" />
+        <polygon points="10,8 10,12 14,10" fill="#f43f5e" />
+      </svg>
+    )
+  },
+  {
+    name: 'Software', slug: 'software', icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <path d="M8 21h8M12 17v4" />
+        <path d="M7 8l3 3-3 3M12 14h5" />
+      </svg>
+    )
+  },
+  {
+    name: 'Subscriptions', slug: 'subscriptions', icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+      </svg>
+    )
+  },
+  {
+    name: 'AI Tools', slug: 'software', icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#8b5cf6">
+        <path d="M9.5 2l1.5 4.5L15.5 8l-4.5 1.5L9.5 14l-1.5-4.5L3.5 8l4.5-1.5L9.5 2z" />
+        <path d="M18 12l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" />
+      </svg>
+    )
+  },
+  {
+    name: 'Social Media', slug: 'subscriptions', icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+      </svg>
+    )
+  },
+];
+
+// Pre-compute product lists once at module level (static data)
+const featuredProductsData = getFeaturedProducts();
+const gamingProductsData = getProductsByCategory('gaming').slice(0, 6);
+const streamingProductsData = getProductsByCategory('streaming').slice(0, 6);
+const subscriptionsProductsData = getProductsByCategory('subscriptions').slice(0, 6);
+
+// Marquee items — static
+const MARQUEE_ROW1 = [
+  { image: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.webp', link: '/search?q=playstation' },
+  { image: '/IMAGES/PRODUCTS/XBOX_GIFTCARDS.webp', link: '/search?q=xbox' },
+  { image: '/IMAGES/PRODUCTS/NETFLIX.webp', link: '/search?q=netflix' },
+  { image: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.webp', link: '/search?q=spotify' },
+  { image: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.webp', link: '/search?q=apple' },
+  { image: '/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.webp', link: '/search?q=nintendo' },
+  { image: '/IMAGES/PRODUCTS/DISCORD_NITRO.webp', link: '/search?q=discord' },
+  { image: '/IMAGES/PRODUCTS/CRUCHYROLL.webp', link: '/search?q=crunchyroll' },
+];
+const MARQUEE_ROW2 = [
+  { image: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.webp', link: '/search?q=youtube' },
+  { image: '/IMAGES/PRODUCTS/NORD_VPN.webp', link: '/search?q=nordvpn' },
+  { image: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.webp', link: '/search?q=gemini' },
+  { image: '/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.webp', link: '/search?q=claude' },
+  { image: '/IMAGES/PRODUCTS/CURSOR_AI.webp', link: '/search?q=cursor' },
+  { image: '/IMAGES/PRODUCTS/EXPRESS_VPN.webp', link: '/search?q=express' },
+  { image: '/IMAGES/PRODUCTS/DUOLINGO.webp', link: '/search?q=duolingo' },
+  { image: '/IMAGES/PRODUCTS/TINDER_GOLD.webp', link: '/search?q=tinder' },
+];
+
+
 export default function Home() {
   const router = useRouter();
-  const featuredProducts = getFeaturedProducts();
-  const gamingProducts = getProductsByCategory('gaming').slice(0, 6);
-  const streamingProducts = getProductsByCategory('streaming').slice(0, 6);
-  const subscriptionsProducts = getProductsByCategory('subscriptions').slice(0, 6);
   const [currentSlide, setCurrentSlide] = useState(0);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
 
@@ -48,10 +177,10 @@ export default function Home() {
     const isRightSwipe = distance < -minSwipeDistance;
 
     if (isLeftSwipe) {
-      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
+      setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
     }
     if (isRightSwipe) {
-      setCurrentSlide(prev => (prev - 1 + heroSlides.length) % heroSlides.length);
+      setCurrentSlide(prev => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
     }
   };
 
@@ -64,16 +193,22 @@ export default function Home() {
   // Smart FAB: show after scrolling past hero, hide near bottom CTA
   const [showFab, setShowFab] = useState(false);
   const ctaRef = useRef<HTMLElement>(null);
+  const rafPending = useRef(false);
 
   useEffect(() => {
     const handleFabVisibility = () => {
-      const scrollY = window.scrollY;
-      const heroThreshold = window.innerHeight * 0.8;
-      // Hide when the bottom CTA section is within 300px of the viewport bottom
-      const nearBottom = ctaRef.current
-        ? ctaRef.current.getBoundingClientRect().top < window.innerHeight + 100
-        : false;
-      setShowFab(scrollY > heroThreshold && !nearBottom);
+      // Throttle with rAF — only compute once per frame, not on every scroll tick
+      if (rafPending.current) return;
+      rafPending.current = true;
+      requestAnimationFrame(() => {
+        rafPending.current = false;
+        const scrollY = window.scrollY;
+        const heroThreshold = window.innerHeight * 0.8;
+        const nearBottom = ctaRef.current
+          ? ctaRef.current.getBoundingClientRect().top < window.innerHeight + 100
+          : false;
+        setShowFab(scrollY > heroThreshold && !nearBottom);
+      });
     };
     window.addEventListener('scroll', handleFabVisibility, { passive: true });
     return () => window.removeEventListener('scroll', handleFabVisibility);
@@ -83,7 +218,7 @@ export default function Home() {
   useEffect(() => {
     if (searchQuery.trim().length > 0) {
       const results = searchProducts(searchQuery);
-      setSearchResults(results.slice(0, 8)); // Limit to 8 results
+      setSearchResults(results.slice(0, 8));
       setShowDropdown(true);
     } else {
       setSearchResults([]);
@@ -102,120 +237,15 @@ export default function Home() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const heroSlides = [
-    // Product Slides
-    {
-      type: 'standard',
-      title: 'PlayStation Gift Cards',
-      subtitle: 'Level up your gaming experience',
-      image: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.png',
-      bg: 'linear-gradient(135deg, #003087 0%, #0070d1 100%)',
-      brand: 'PLAYSTATION'
-    },
-    {
-      type: 'standard',
-      title: 'Netflix & Streaming',
-      subtitle: 'Entertainment at your fingertips',
-      image: '/IMAGES/PRODUCTS/NETFLIX.png',
-      bg: 'linear-gradient(135deg, #8b0000 0%, #e50914 100%)',
-      brand: 'NETFLIX'
-    },
-    {
-      type: 'standard',
-      title: 'Xbox Game Pass',
-      subtitle: 'Hundreds of games, one low price',
-      image: '/IMAGES/PRODUCTS/XBOX_GAMEPASS.png',
-      bg: 'linear-gradient(135deg, #0e7a0d 0%, #107c10 100%)',
-      brand: 'XBOX'
-    },
-    {
-      type: 'standard',
-      title: 'Steam Gift Cards',
-      subtitle: 'Unlock your gaming library',
-      image: '/IMAGES/PRODUCTS/STEAM_GIFTCARDS.png',
-      bg: 'linear-gradient(135deg, #1b2838 0%, #2a475e 100%)',
-      brand: 'STEAM'
-    },
-    {
-      type: 'standard',
-      title: 'Apple Gift Cards',
-      subtitle: 'For all things Apple',
-      image: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.png',
-      bg: 'linear-gradient(135deg, #1d1d1f 0%, #555555 100%)',
-      brand: 'APPLE'
-    }
-  ];
-
-  // Auto-slide hero carousel
+  // Auto-slide hero carousel (uses module-level constant length)
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
+      setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [heroSlides.length]);
+  }, []);
 
-  const categories = [
-    {
-      name: 'Browse All', slug: 'all', icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2">
-          <rect x="3" y="3" width="7" height="7" rx="1" />
-          <rect x="14" y="3" width="7" height="7" rx="1" />
-          <rect x="3" y="14" width="7" height="7" rx="1" />
-          <rect x="14" y="14" width="7" height="7" rx="1" />
-        </svg>
-      )
-    },
-    {
-      name: 'Gaming', slug: 'gaming', icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="6" width="20" height="12" rx="2" />
-          <path d="M6 12h4M8 10v4" />
-          <circle cx="17" cy="10" r="1" fill="#10b981" />
-          <circle cx="15" cy="12" r="1" fill="#10b981" />
-        </svg>
-      )
-    },
-    {
-      name: 'Streaming', slug: 'streaming', icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" />
-          <path d="M8 21h8M12 17v4" />
-          <polygon points="10,8 10,12 14,10" fill="#f43f5e" />
-        </svg>
-      )
-    },
-    {
-      name: 'Software', slug: 'software', icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" />
-          <path d="M8 21h8M12 17v4" />
-          <path d="M7 8l3 3-3 3M12 14h5" />
-        </svg>
-      )
-    },
-    {
-      name: 'Subscriptions', slug: 'subscriptions', icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-        </svg>
-      )
-    },
-    {
-      name: 'AI Tools', slug: 'software', icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="#8b5cf6">
-          <path d="M9.5 2l1.5 4.5L15.5 8l-4.5 1.5L9.5 14l-1.5-4.5L3.5 8l4.5-1.5L9.5 2z" />
-          <path d="M18 12l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" />
-        </svg>
-      )
-    },
-    {
-      name: 'Social Media', slug: 'subscriptions', icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-        </svg>
-      )
-    },
-  ];
+
 
   const scrollCategories = (direction: 'left' | 'right') => {
     if (categoryScrollRef.current) {
@@ -253,131 +283,34 @@ export default function Home() {
               transition: 'transform 0.8s cubic-bezier(0.8, 0, 0.2, 1)',
               transform: `translateX(-${currentSlide * 100}%)`
             }}>
-              {heroSlides.map((slide, index) => (
+              {HERO_SLIDES.map((slide, index) => (
                 <div
                   key={index}
-                  className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
                   style={{
                     minWidth: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: slide.bg,
-                    padding: '0',
+                    height: 'clamp(200px, 38vw, 430px)',
                     position: 'relative',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
                   }}
                 >
-                  {/* Large transparent brand text background (animated) */}
-                  <span className="brand-bg-text" style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    fontSize: 'clamp(100px, 25vw, 250px)',
-                    fontWeight: 900,
-                    color: 'rgba(255, 255, 255, 0.05)',
-                    whiteSpace: 'nowrap',
-                    letterSpacing: '0.08em',
-                    pointerEvents: 'none',
-                    userSelect: 'none',
-                    zIndex: 0,
-                    textTransform: 'uppercase'
-                  }}>
-                    {slide.brand}
-                  </span>
-
-                  {/* Main Content container */}
-                  <div className="slide-container" style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: 'clamp(16px, 4vw, 60px)',
-                    height: '100%',
-                    padding: 'clamp(16px, 3vh, 32px) clamp(16px, 5vw, 40px)', // Reduced vertical padding so large images have more room to breathe
-                    position: 'relative',
-                    zIndex: 1,
-                    maxWidth: '1200px', // Increased bounds so the text and image sit side-by-side easily
-                    margin: '0 auto',
-                    flexWrap: 'wrap-reverse'
-                  }}>
-                    {/* Text Content */}
-                    <div className="slide-content" style={{
-                      maxWidth: '700px', // Increased max-width to let titles sit natively on one line
-                      zIndex: 2,
-                      textAlign: 'left',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center', // Centers text vertically in its flex container
-                      gap: '16px',
-                      flex: '1 1 300px'
-                    }}>
-                      <div>
-                        <h2 style={{
-                          fontSize: 'clamp(1.5rem, 4vw, 3rem)', // Reduced max size so it stays on one line
-                          fontWeight: 500, // Unbolded to match website style
-                          color: 'white',
-                          margin: '0 0 12px 0',
-                          lineHeight: 1.1,
-                          textShadow: '0 2px 10px rgba(0,0,0,0.3)',
-                          whiteSpace: 'nowrap'
-                        }}>
-                          {slide.title}
-                        </h2>
-                        <p style={{
-                          fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-                          color: 'rgba(255,255,255,0.9)',
-                          fontWeight: 400,
-                          margin: 0,
-                          textShadow: '0 1px 4px rgba(0,0,0,0.3)',
-                          lineHeight: 1.5
-                        }}>
-                          {slide.subtitle}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Product Image */}
-                    <div className="slide-image-wrapper" style={{
-                      width: 'clamp(200px, 40vw, 400px)',
-                      maxHeight: '100%', // Ensure it never exceeds container height causing crops
-                      aspectRatio: '1',
-                      borderRadius: '24px',
-                      position: 'relative',
-                      flexShrink: 0,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      {/* Image Glow/Shadow */}
-                      <div style={{
-                        position: 'absolute',
-                        top: '10%', left: '10%', width: '80%', height: '80%',
-                        background: 'rgba(0,0,0,0.5)',
-                        filter: 'blur(20px)',
-                        borderRadius: '50%',
-                        zIndex: 0
-                      }} />
-                      <img
-                        className="slide-image"
-                        src={slide.image}
-                        alt={slide.title || 'Product'}
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                        fetchPriority={index === 0 ? 'high' : 'auto'}
-                        decoding="async"
-                        style={{
-                          maxWidth: '100%',
-                          maxHeight: '100%',
-                          objectFit: 'contain',
-                          position: 'relative',
-                          zIndex: 1,
-                          borderRadius: '24px',
-                          boxShadow: '0 8px 30px rgba(0,0,0,0.2)' // Add a subtle shadow so the card edge pops out clearly
-                        }}
-                      />
-                    </div>
-                  </div>
+                  {/* Responsive banner — mobile WebP on small screens, desktop WebP on large */}
+                  <picture style={{ display: 'block', width: '100%', height: '100%' }}>
+                    <source media="(max-width: 767px)" srcSet={slide.mobile} type="image/webp" />
+                    <img
+                      src={slide.desktop}
+                      alt={slide.alt}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      fetchPriority={index === 0 ? 'high' : 'auto'}
+                      decoding="async"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        display: 'block',
+                      }}
+                    />
+                  </picture>
                 </div>
               ))}
             </div>
@@ -385,30 +318,30 @@ export default function Home() {
             {/* Controls - Dots */}
             <div style={{
               position: 'absolute',
-              bottom: '24px',
+              bottom: '16px',
               left: '50%',
               transform: 'translateX(-50%)',
               display: 'flex',
-              gap: '12px',
+              gap: '8px',
               zIndex: 10,
-              background: 'rgba(0,0,0,0.2)',
-              padding: '8px 16px',
+              background: 'rgba(0,0,0,0.25)',
+              padding: '7px 14px',
               borderRadius: '20px',
-              backdropFilter: 'blur(10px)'
+              backdropFilter: 'blur(8px)',
             }}>
-              {heroSlides.map((_, index) => (
+              {HERO_SLIDES.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   style={{
-                    width: currentSlide === index ? '32px' : '8px',
-                    height: '8px',
+                    width: currentSlide === index ? '28px' : '7px',
+                    height: '7px',
                     borderRadius: '4px',
                     border: 'none',
                     background: currentSlide === index ? 'white' : 'rgba(255,255,255,0.4)',
                     cursor: 'pointer',
-                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                    padding: 0
+                    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                    padding: 0,
                   }}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -417,73 +350,18 @@ export default function Home() {
           </div>
 
           <style jsx>{`
-          .hero-slide {
-            height: clamp(400px, 50vh, 500px);
-          }
-          
-          /* Initial non-active state for animations */
-          .slide-content {
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: all 0.8s ease 0.2s;
-          }
-          .slide-image-wrapper {
-            opacity: 0;
-            transform: translateX(30px);
-            transition: all 0.8s ease 0.2s;
-          }
-          .brand-bg-text {
-            transform: translate(-50%, -50%) scale(0.9);
-            transition: all 1.5s ease;
-          }
-          
-          /* Active state animations */
-          .hero-slide.active .slide-content {
-            opacity: 1;
-            transform: translateX(0);
-          }
-          .hero-slide.active .slide-image-wrapper {
-            opacity: 1;
-            transform: translateX(0);
-          }
-          .hero-slide.active .slide-image-wrapper:hover {
-            transform: scale(1.02);
-          }
-          .hero-slide.active .brand-bg-text {
-            transform: translate(-50%, -50%) scale(1);
-          }
-
-          @media (max-width: 640px) {
-            .hero-slide {
-              height: auto;
-              padding: 32px 0 60px 0 !important; /* Slightly less padding to keep it compact */
+            /* Hero banner: desktop tall, mobile compact */
+            .hero-carousel-inner {
+              display: flex;
+              transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
             }
-            .slide-container {
-               padding: 12px !important;
-               gap: 12px !important;
+            .hero-carousel-inner > div {
+              height: clamp(200px, 38vw, 430px);
             }
-            .slide-content {
-              text-align: center !important;
-              align-items: center;
-              /* Removed translateY to eliminate vertical bouncing */
-            }
-            .slide-content h2 {
-              font-size: clamp(1.5rem, 6vw, 2rem) !important; /* Smaller text on mobile */
-              margin-bottom: 6px !important;
-              font-weight: 600 !important; /* Bolder mobile title */
-            }
-            .slide-content p {
-               font-size: 0.9rem !important; /* Smaller subtitle */
-            }
-            .slide-image-wrapper {
-              width: 150px !important; /* Smaller image on mobile */
-              margin: 0 auto !important; /* Center image explicitly on mobile */
-              /* Removed translateY to eliminate vertical bouncing */
-            }
-          }
-        `}</style>
+          `}</style>
         </div>
       </section>
+
 
       {/* Search Bar Section */}
       <section style={{
@@ -699,7 +577,7 @@ export default function Home() {
                 paddingBottom: '4px'
               }}
             >
-              {categories.map((cat, index) => (
+              {CATEGORIES.map((cat, index) => (
                 <Link
                   key={index}
                   href={cat.slug ? `/category/${cat.slug}` : '/'}
@@ -711,7 +589,7 @@ export default function Home() {
                     gap: '8px',
                     padding: '16px 20px',
                     minWidth: '100px',
-                    borderRadius: '12px',
+                    borderRadius: '24px',
                     border: '1px solid var(--border-color)',
                     background: 'var(--card-bg)',
                     textDecoration: 'none',
@@ -789,14 +667,14 @@ export default function Home() {
           {/* Row 1 - Scrolling Left */}
           <DraggableMarquee
             items={[
-              { image: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.png', link: '/search?q=playstation' },
-              { image: '/IMAGES/PRODUCTS/XBOX_GIFTCARDS.png', link: '/search?q=xbox' },
-              { image: '/IMAGES/PRODUCTS/NETFLIX.png', link: '/search?q=netflix' },
-              { image: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.png', link: '/search?q=spotify' },
-              { image: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.png', link: '/search?q=apple' },
-              { image: '/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.png', link: '/search?q=nintendo' },
-              { image: '/IMAGES/PRODUCTS/DISCORD_NITRO.png', link: '/search?q=discord' },
-              { image: '/IMAGES/PRODUCTS/CRUCHYROLL.png', link: '/search?q=crunchyroll' },
+              { image: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.webp', link: '/search?q=playstation' },
+              { image: '/IMAGES/PRODUCTS/XBOX_GIFTCARDS.webp', link: '/search?q=xbox' },
+              { image: '/IMAGES/PRODUCTS/NETFLIX.webp', link: '/search?q=netflix' },
+              { image: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.webp', link: '/search?q=spotify' },
+              { image: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.webp', link: '/search?q=apple' },
+              { image: '/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.webp', link: '/search?q=nintendo' },
+              { image: '/IMAGES/PRODUCTS/DISCORD_NITRO.webp', link: '/search?q=discord' },
+              { image: '/IMAGES/PRODUCTS/CRUCHYROLL.webp', link: '/search?q=crunchyroll' },
             ]}
             direction="forward"
             speed={0.5}
@@ -807,14 +685,14 @@ export default function Home() {
           {/* Row 2 - Scrolling Right */}
           <DraggableMarquee
             items={[
-              { image: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.png', link: '/search?q=youtube' },
-              { image: '/IMAGES/PRODUCTS/NORD_VPN.png', link: '/search?q=nordvpn' },
-              { image: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.png', link: '/search?q=gemini' },
-              { image: '/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.png', link: '/search?q=claude' },
-              { image: '/IMAGES/PRODUCTS/CURSOR_AI.png', link: '/search?q=cursor' },
-              { image: '/IMAGES/PRODUCTS/EXPRESS_VPN.png', link: '/search?q=express' },
-              { image: '/IMAGES/PRODUCTS/DUOLINGO.png', link: '/search?q=duolingo' },
-              { image: '/IMAGES/PRODUCTS/TINDER_GOLD.png', link: '/search?q=tinder' },
+              { image: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.webp', link: '/search?q=youtube' },
+              { image: '/IMAGES/PRODUCTS/NORD_VPN.webp', link: '/search?q=nordvpn' },
+              { image: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.webp', link: '/search?q=gemini' },
+              { image: '/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.webp', link: '/search?q=claude' },
+              { image: '/IMAGES/PRODUCTS/CURSOR_AI.webp', link: '/search?q=cursor' },
+              { image: '/IMAGES/PRODUCTS/EXPRESS_VPN.webp', link: '/search?q=express' },
+              { image: '/IMAGES/PRODUCTS/DUOLINGO.webp', link: '/search?q=duolingo' },
+              { image: '/IMAGES/PRODUCTS/TINDER_GOLD.webp', link: '/search?q=tinder' },
             ]}
             direction="backward"
             speed={0.5}
@@ -824,7 +702,7 @@ export default function Home() {
 
       {/* Popular Gift Cards */}
       <ScrollReveal threshold={0} duration={0.4} distance="20px">
-        < section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
+        <section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
           <div className="container" style={{ padding: '0 16px' }}>
             <div className="section-title-row">
               <h2>
@@ -835,7 +713,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="product-grid">
-              {featuredProducts.map(product => (
+              {featuredProductsData.map((product, index) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
@@ -843,7 +721,7 @@ export default function Home() {
         </section >
 
         {/* Gaming Section */}
-        < section style={{ padding: '48px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
+        <section style={{ padding: '48px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }} className="below-fold">
           <div className="container" style={{ padding: '0 16px' }}>
             <div className="section-title-row">
               <h2>
@@ -860,7 +738,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="product-grid">
-              {gamingProducts.map(product => (
+              {gamingProductsData.map((product, index) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
@@ -879,7 +757,7 @@ export default function Home() {
 
       {/* Streaming Section */}
       <ScrollReveal>
-        < section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
+        <section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }} className="below-fold">
           <div className="container" style={{ padding: '0 16px' }}>
             <div className="section-title-row">
               <h2>
@@ -895,7 +773,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="product-grid">
-              {streamingProducts.map(product => (
+              {streamingProductsData.map((product, index) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
@@ -928,7 +806,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="product-grid">
-              {subscriptionsProducts.map(product => (
+              {subscriptionsProductsData.map((product, index) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>

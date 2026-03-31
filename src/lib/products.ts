@@ -18,7 +18,7 @@ export const sampleProducts: Product[] = [
             { value: '$100', price: 17000 }
         ],
         delivery_type: 'Manual',
-        image_url: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.png',
+        image_url: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.webp',
         logo_url: '',
         description: '🎮 Level Up Your Gaming! US PlayStation Store codes delivered via WhatsApp. Works on PS4/PS5.'
     },
@@ -35,7 +35,7 @@ export const sampleProducts: Product[] = [
 
         ],
         delivery_type: 'Manual',
-        image_url: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_INR.png',
+        image_url: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_INR.webp',
         logo_url: '',
         description: '🎮 Level Up Your Gaming! India PlayStation Store codes. Works on PS4/PS5.'
     },
@@ -52,7 +52,7 @@ export const sampleProducts: Product[] = [
             { value: '$100', price: 17000 }
         ],
         delivery_type: 'Manual',
-        image_url: '/IMAGES/PRODUCTS/XBOX_GIFTCARDS.png',
+        image_url: '/IMAGES/PRODUCTS/XBOX_GIFTCARDS.webp',
         logo_url: '',
         description: '🎮 Play More, Pay Less! Xbox Store credit for games, DLCs, and subscriptions.'
     },
@@ -66,7 +66,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 2500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/XBOX_GAMEPASS.png',
+        image_url: '/IMAGES/PRODUCTS/XBOX_GAMEPASS.webp',
         logo_url: '',
         description: '🎮 Play More, Pay Less! 100+ games on console, PC & cloud. Includes EA Play.'
     },
@@ -80,7 +80,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 2500 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/XBOX_GAMEPASS_INR.png',
+        image_url: '/IMAGES/PRODUCTS/XBOX_GAMEPASS_INR.webp',
         logo_url: '',
         description: '🎮 India region Gamepass. 100+ games, new releases included.'
     },
@@ -97,7 +97,7 @@ export const sampleProducts: Product[] = [
             { value: '$50', price: 9000 }
         ],
         delivery_type: 'Manual',
-        image_url: '/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.png',
+        image_url: '/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.webp',
         logo_url: '',
         description: '🎮 Nintendo Switch games and DLC! US eShop credit codes.'
     },
@@ -111,7 +111,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 3000 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/EA_PLAY_PRO.png',
+        image_url: '/IMAGES/PRODUCTS/EA_PLAY_PRO.webp',
         logo_url: '',
         description: '🎮 Play EA games first! FIFA, Battlefield, Need for Speed access.'
     },
@@ -125,7 +125,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Sub', price: 385 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/TWITCH_PRIME.png',
+        image_url: '/IMAGES/PRODUCTS/TWITCH_PRIME.webp',
         logo_url: '',
         description: '🎮 Support your favorite streamers with Twitch Prime subscription!'
     },
@@ -142,7 +142,7 @@ export const sampleProducts: Product[] = [
             { value: '$100', price: 17000 }
         ],
         delivery_type: 'Manual',
-        image_url: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_USD_INR.png',
+        image_url: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_USD_INR.webp',
         logo_url: '',
         description: '🍎 For all things Apple! App Store, Apple Music, iCloud, games & more.'
     },
@@ -154,12 +154,10 @@ export const sampleProducts: Product[] = [
         region: 'India',
         denominations: [
             { value: '₹500', price: 950 },
-            { value: '₹1000', price: 1900 },
-            { value: '₹2000', price: 3800 },
-            { value: '₹5000', price: 9500 }
+            { value: '₹1000', price: 1900 }
         ],
         delivery_type: 'Manual',
-        image_url: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.png',
+        image_url: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.webp',
         logo_url: '',
         description: '🍎 India Apple Store credit! Apps, games, music, movies & subscriptions.'
     },
@@ -174,7 +172,7 @@ export const sampleProducts: Product[] = [
             { value: '$50', price: 9000 }
         ],
         delivery_type: 'Manual',
-        image_url: '/IMAGES/PRODUCTS/META_GIFTCARDS.png',
+        image_url: '/IMAGES/PRODUCTS/META_GIFTCARDS.webp',
         logo_url: '',
         description: '🎮 VR Gaming! Buy games for Meta Quest 2/3 headsets.'
     },
@@ -187,11 +185,11 @@ export const sampleProducts: Product[] = [
         category: 'streaming',
         region: 'Global',
         denominations: [
-            { value: '1 Month 1080p', price: 250 },
+            { value: '1 Month 1080p', price: 1250 },
             { value: '1 Month 4K', price: 450 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/NETFLIX.png',
+        image_url: '/IMAGES/PRODUCTS/NETFLIX.webp',
         logo_url: '',
         description: '🍿 Stream in HD! Unlimited movies & TV shows. Private profile provided.'
     },
@@ -205,7 +203,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 450 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.png',
+        image_url: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.webp',
         logo_url: '',
         description: '🎵 Music Without Limits! Ad-free, offline downloads, high quality audio.'
     },
@@ -219,7 +217,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 475 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.png',
+        image_url: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.webp',
         logo_url: '',
         description: '📺 Ad-free YouTube! Background play, YouTube Music included.'
     },
@@ -233,7 +231,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 275 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/APPLEMUSIC.png',
+        image_url: '/IMAGES/PRODUCTS/APPLEMUSIC.webp',
         logo_url: '',
         description: '🎵 100 million songs. Spatial Audio with Dolby Atmos.'
     },
@@ -247,7 +245,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 200 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/APPLE_TV.png',
+        image_url: '/IMAGES/PRODUCTS/APPLE_TV.webp',
         logo_url: '',
         description: '📺 Award-winning Apple Originals. 4K HDR streaming.'
     },
@@ -261,7 +259,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 375 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/APPLE_ONE.png',
+        image_url: '/IMAGES/PRODUCTS/APPLE_ONE.webp',
         logo_url: '',
         description: '🍎 All-in-one! Apple Music, TV+, Arcade, iCloud+ bundled.'
     },
@@ -275,7 +273,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 250 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/CRUCHYROLL.png',
+        image_url: '/IMAGES/PRODUCTS/CRUCHYROLL.webp',
         logo_url: '',
         description: '⛩️ Ad-Free Anime! 1000+ anime titles, simulcasts, manga.'
     },
@@ -290,7 +288,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month Full', price: 1350 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/DISCORD_NITRO.png',
+        image_url: '/IMAGES/PRODUCTS/DISCORD_NITRO.webp',
         logo_url: '',
         description: '💬 Boost your server! Custom emojis, HD streaming, bigger uploads.'
     },
@@ -304,7 +302,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 450 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/F1TV.png',
+        image_url: '/IMAGES/PRODUCTS/F1TV.webp',
         logo_url: '',
         description: '🏎️ Live F1 races! Onboard cameras, full race replays, exclusive content.'
     },
@@ -318,7 +316,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1950 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/F1TV.png',
+        image_url: '/IMAGES/PRODUCTS/F1TV.webp',
         logo_url: '',
         description: '🏈 Live sports! UFC, NHL, MLB, soccer & more exclusive content.'
     },
@@ -332,7 +330,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 350 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/VIKI_RAKUTEN.png',
+        image_url: '/IMAGES/PRODUCTS/VIKI_RAKUTEN.webp',
         logo_url: '',
         description: '🎬 K-Drama & Asian content! Ad-free, HD streaming.'
     },
@@ -348,7 +346,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 450 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.png',
+        image_url: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.webp',
         logo_url: '',
         description: '🧠 GPT-4 Access! Faster responses, priority access, plugins.'
     },
@@ -362,7 +360,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 3750 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.png',
+        image_url: '/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.webp',
         logo_url: '',
         description: '🧠 Think Smarter! Claude Pro for advanced AI conversations & coding.'
     },
@@ -376,7 +374,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 150 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.png',
+        image_url: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.webp',
         logo_url: '',
         description: '🧠 Google\'s most capable AI! 2TB storage, Gemini in Docs & Gmail.'
     },
@@ -390,7 +388,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 350 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/CURSOR_AI.png',
+        image_url: '/IMAGES/PRODUCTS/CURSOR_AI.webp',
         logo_url: '',
         description: '💻 AI Code Editor! Write, edit & debug code with AI assistance.'
     },
@@ -404,7 +402,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1950 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/ELEVEN_LABS.png',
+        image_url: '/IMAGES/PRODUCTS/ELEVEN_LABS.webp',
         logo_url: '',
         description: '🎙️ Realistic AI Voices! Text-to-speech, voice cloning, dubbing.'
     },
@@ -418,7 +416,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1950 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/SUNO_AI.png',
+        image_url: '/IMAGES/PRODUCTS/SUNO_AI.webp',
         logo_url: '',
         description: '🎵 Create AI Music! Generate songs in any style with lyrics.'
     },
@@ -432,7 +430,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/GROK_BY_xAI.png',
+        image_url: '/IMAGES/PRODUCTS/GROK_BY_xAI.webp',
         logo_url: '',
         description: '🧠 Elon Musk\'s AI! Real-time info, witty responses, X integration.'
     },
@@ -446,7 +444,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 4575 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/REPLIT.png',
+        image_url: '/IMAGES/PRODUCTS/REPLIT.webp',
         logo_url: '',
         description: '💻 Build Better with AI! Cloud IDE with AI coding assistant.'
     },
@@ -460,7 +458,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1850 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/QUILLBOT.png',
+        image_url: '/IMAGES/PRODUCTS/QUILLBOT.webp',
         logo_url: '',
         description: '✍️ Write Better! Paraphrasing, grammar check, plagiarism detector.'
     },
@@ -474,7 +472,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 3750 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/ANYTHING_AI.png',
+        image_url: '/IMAGES/PRODUCTS/ANYTHING_AI.webp',
         logo_url: '',
         description: '🧠 All-in-one AI! Multiple AI models in one subscription.'
     },
@@ -488,7 +486,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 5350 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/RORK_AI.png',
+        image_url: '/IMAGES/PRODUCTS/RORK_AI.webp',
         logo_url: '',
         description: '🤖 Build AI Apps! No-code AI application builder.'
     },
@@ -502,7 +500,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/LOVEABLE_AI.png',
+        image_url: '/IMAGES/PRODUCTS/LOVEABLE_AI.webp',
         logo_url: '',
         description: '💻 AI Web Builder! Create websites with conversational AI.'
     },
@@ -518,7 +516,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 199 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/NORD_VPN.png',
+        image_url: '/IMAGES/PRODUCTS/NORD_VPN.webp',
         logo_url: '',
         description: '🛡️ Stay Safe Online! Fast VPN, 5500+ servers, no logs.'
     },
@@ -532,7 +530,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 350 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/EXPRESS_VPN.png',
+        image_url: '/IMAGES/PRODUCTS/EXPRESS_VPN.webp',
         logo_url: '',
         description: '🛡️ Lightning Fast VPN! 94 countries, unlimited bandwidth.'
     },
@@ -546,7 +544,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 150 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/SURFSHARK_VPN.png',
+        image_url: '/IMAGES/PRODUCTS/SURFSHARK_VPN.webp',
         logo_url: '',
         description: '🛡️ Unlimited Devices! Fast VPN with CleanWeb ad blocker.'
     },
@@ -560,7 +558,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 175 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/CYBERGHOST_VPN.png',
+        image_url: '/IMAGES/PRODUCTS/CYBERGHOST_VPN.webp',
         logo_url: '',
         description: '🛡️ 9000+ Servers! Optimized for streaming & gaming.'
     },
@@ -576,7 +574,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 249 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/MICROSOFT_OFFICE.png',
+        image_url: '/IMAGES/PRODUCTS/MICROSOFT_OFFICE.webp',
         logo_url: '',
         description: '💼 Word, Excel, PowerPoint! 1TB OneDrive cloud storage.'
     },
@@ -592,7 +590,7 @@ export const sampleProducts: Product[] = [
             { value: '2TB/Month', price: 750 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/GOOGLE_PLAY_INAPP_PURCHASES.png',
+        image_url: '/IMAGES/PRODUCTS/GOOGLE_PLAY_INAPP_PURCHASES.webp',
         logo_url: '',
         description: '☁️ Expand Your Storage! Google One cloud storage plans.'
     },
@@ -608,7 +606,7 @@ export const sampleProducts: Product[] = [
             { value: '2TB/Month', price: 1350 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/ICLOUD_STORAGE.png',
+        image_url: '/IMAGES/PRODUCTS/ICLOUD_STORAGE.webp',
         logo_url: '',
         description: '☁️ iCloud+ Features! Private Relay, Hide My Email, more storage.'
     },
@@ -622,7 +620,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 200 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/QUILLBOT.png',
+        image_url: '/IMAGES/PRODUCTS/QUILLBOT.webp',
         logo_url: '',
         description: '✍️ Write Confidently! Advanced grammar, style, plagiarism check.'
     },
@@ -636,7 +634,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 650 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/DUOLINGO.png',
+        image_url: '/IMAGES/PRODUCTS/DUOLINGO.webp',
         logo_url: '',
         description: '🦉 Learn Languages! No ads, unlimited hearts, progress tracking.'
     },
@@ -650,7 +648,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 350 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/SKILLSHARE.png',
+        image_url: '/IMAGES/PRODUCTS/SKILLSHARE.webp',
         logo_url: '',
         description: '🎓 Learn Creative Skills! 30,000+ classes in design, business, more.'
     },
@@ -664,7 +662,7 @@ export const sampleProducts: Product[] = [
             { value: 'Any Course', price: 350 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/UDEMY_COURSE_WITH_CERTIFICATION.png',
+        image_url: '/IMAGES/PRODUCTS/UDEMY_COURSE_WITH_CERTIFICATION.webp',
         logo_url: '',
         description: '🎓 Get Certified! Access any Udemy course with completion certificate.'
     },
@@ -680,7 +678,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 975 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/ADOBE_EXPRESS.png',
+        image_url: '/IMAGES/PRODUCTS/ADOBE_EXPRESS.webp',
         logo_url: '',
         description: '🎨 Design Made Easy! Create graphics, videos, social content.'
     },
@@ -694,7 +692,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 975 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/FILMORA.png',
+        image_url: '/IMAGES/PRODUCTS/FILMORA.webp',
         logo_url: '',
         description: '🎬 Edit Videos Like Pro! Easy editing, effects, transitions.'
     },
@@ -709,7 +707,7 @@ export const sampleProducts: Product[] = [
         
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/PROCREATE.png',
+        image_url: '/IMAGES/PRODUCTS/PROCREATE.webp',
         logo_url: '',
         description: '🎨 Digital Art! Professional illustration app for iPad.'
     },
@@ -723,7 +721,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1500 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/ZOOM_WORKSPACE.png',
+        image_url: '/IMAGES/PRODUCTS/ZOOM_WORKSPACE.webp',
         logo_url: '',
         description: '📹 Pro Video Meetings! No time limit, cloud recording, webinars.'
     },
@@ -739,7 +737,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 450 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/TINDER_GOLD.png',
+        image_url: '/IMAGES/PRODUCTS/TINDER_GOLD.webp',
         logo_url: '',
         description: '💘 See Who Likes You! Unlimited likes, passport, no ads.'
     },
@@ -753,7 +751,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 800 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/TINDER_PLATINUM.png',
+        image_url: '/IMAGES/PRODUCTS/TINDER_PLATINUM.webp',
         logo_url: '',
         description: '💎 Premium Priority! Message before matching, priority likes.'
     },
@@ -767,7 +765,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 975 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/BUMBLE.png',
+        image_url: '/IMAGES/PRODUCTS/BUMBLE.webp',
         logo_url: '',
         description: '💛 Boost Your Profile! Beeline, SuperSwipes, unlimited extends.'
     },
@@ -781,7 +779,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 699 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/HINGE.png',
+        image_url: '/IMAGES/PRODUCTS/HINGE.webp',
         logo_url: '',
         description: '💘 Better Matches! See who likes you, unlimited likes.'
     },
@@ -795,7 +793,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 2150 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/HAPPN.png',
+        image_url: '/IMAGES/PRODUCTS/HAPPN.webp',
         logo_url: '',
         description: '💕 Find Nearby Matches! See who crossed your path.'
     },
@@ -809,7 +807,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1950 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/TANTAN_VIP.png',
+        image_url: '/IMAGES/PRODUCTS/TANTAN_VIP.webp',
         logo_url: '',
         description: '💕 Asian Dating! Popular in Asia, see who likes you.'
     },
@@ -825,7 +823,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1150 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/X(TWITTER)_PREMIUM.png',
+        image_url: '/IMAGES/PRODUCTS/X(TWITTER)_PREMIUM.webp',
         logo_url: '',
         description: '🚀 Get Verified! Blue checkmark, longer posts, edit tweets.'
     },
@@ -839,7 +837,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 150 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/SNAPCHAT+.png',
+        image_url: '/IMAGES/PRODUCTS/SNAPCHAT+.webp',
         logo_url: '',
         description: '👻 Exclusive Features! Custom app icons, story rewatch, more.'
     },
@@ -853,7 +851,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 350 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/INSTAGRAM_VERIFIED.png',
+        image_url: '/IMAGES/PRODUCTS/INSTAGRAM_VERIFIED.webp',
         logo_url: '',
         description: '✓ Blue Badge! Verified badge, priority support, exclusive stickers.'
     },
@@ -867,7 +865,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 350 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/META_VERIFICATION.png',
+        image_url: '/IMAGES/PRODUCTS/META_VERIFICATION.webp',
         logo_url: '',
         description: '✓ Facebook + Instagram! Verified badge on both platforms.'
     },
@@ -883,7 +881,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 150 },
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/TRUECALLER.png',
+        image_url: '/IMAGES/PRODUCTS/TRUECALLER.webp',
         logo_url: '',
         description: '📞 Know Who\'s Calling! Caller ID, spam blocking, no ads.'
     },
@@ -897,7 +895,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 650 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/STRAVA.png',
+        image_url: '/IMAGES/PRODUCTS/STRAVA.webp',
         logo_url: '',
         description: '🏃 Track Your Runs! Advanced analytics, segments, training plans.'
     },
@@ -911,7 +909,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1450 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/FLIGHTRADAR24.png',
+        image_url: '/IMAGES/PRODUCTS/FLIGHTRADAR24.webp',
         logo_url: '',
         description: '✈️ Track Flights! Real-time flight tracking, 3D view, alerts.'
     },
@@ -926,7 +924,7 @@ export const sampleProducts: Product[] = [
         
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/GOPRO_PREMIUM.png',
+        image_url: '/IMAGES/PRODUCTS/GOPRO_PREMIUM.webp',
         logo_url: '',
         description: '📸 Cloud Storage! Unlimited backup, camera discounts, replacements.'
     },
@@ -940,7 +938,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 4850 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/UPWORK.png',
+        image_url: '/IMAGES/PRODUCTS/UPWORK.webp',
         logo_url: '',
         description: '💼 Win More Jobs! Extra connects, profile boost, earnings protection.'
     },
@@ -954,7 +952,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Domain', price: 1500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/NAMECHEAP_DOMAINS.png',
+        image_url: '/IMAGES/PRODUCTS/NAMECHEAP_DOMAINS.webp',
         logo_url: '',
         description: '🌐 Get Your Domain! .com, .io, .dev and more extensions.'
     },
@@ -970,7 +968,7 @@ export const sampleProducts: Product[] = [
             { value: '10GB', price: 2499 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/AIRALO_eSIM.png',
+        image_url: '/IMAGES/PRODUCTS/AIRALO_eSIM.webp',
         logo_url: '',
         description: '📱 Travel Data! eSIM for 200+ countries, instant activation.'
     },
@@ -986,7 +984,7 @@ export const sampleProducts: Product[] = [
             { value: '5GB', price: 1399 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/SAILY_eSIM.png',
+        image_url: '/IMAGES/PRODUCTS/SAILY_eSIM.webp',
         logo_url: '',
         description: '📱 Budget Travel Data! By NordVPN, reliable global coverage.'
     },
@@ -1000,7 +998,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 599 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/EXITLAG.png',
+        image_url: '/IMAGES/PRODUCTS/EXITLAG.webp',
         logo_url: '',
         description: '🎮 Lower Ping! Gaming VPN for better connection to game servers.'
     },
@@ -1014,7 +1012,7 @@ export const sampleProducts: Product[] = [
             { value: '1 Month', price: 1500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/APEUNI_PTE_VIP.png',
+        image_url: '/IMAGES/PRODUCTS/APEUNI_PTE_VIP.webp',
         logo_url: '',
         description: '📚 PTE Prep! Practice tests, AI scoring, study materials.'
     }
@@ -1031,7 +1029,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 825 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/1Password.png',
+        image_url: '/IMAGES/PRODUCTS/1Password.webp',
         logo_url: '',
         description: 'Contact via Viber/WhatsApp: 9862157864 ðŸ“· Or scan the QR code  ðŸ” Stay secure with 1Password. ðŸ—ï¸ Store and mana'
     },
@@ -1045,7 +1043,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 2500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Ape_Uni_VIP.png',
+        image_url: '/IMAGES/PRODUCTS/Ape_Uni_VIP.webp',
         logo_url: '',
         description: 'ðŸ¦ Level Up with Ape Uni VIP Monthly! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ“ Exclusive Ac'
     },
@@ -1059,7 +1057,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 200 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Apple_Arcade.png',
+        image_url: '/IMAGES/PRODUCTS/Apple_Arcade.webp',
         logo_url: '',
         description: 'ðŸŽ® Apple Arcade   ðŸ“± Contact: Viber / WhatsApp â€“ 9862157864 or Scan the QR code.   Features included:  ðŸŽ¯ Access'
     },
@@ -1073,7 +1071,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1150 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Apple_Books.png',
+        image_url: '/IMAGES/PRODUCTS/Apple_Books.webp',
         logo_url: '',
         description: 'ðŸ“š Apple Books  Access Appleâ€™s digital reading platform to purchase and keep books in your personal library.  ðŸ“± C'
     },
@@ -1087,7 +1085,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 825 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Apple_Creator_Studio.png',
+        image_url: '/IMAGES/PRODUCTS/Apple_Creator_Studio.webp',
         logo_url: '',
         description: 'ðŸ“±Contact via Viber/WhatsApp: 9862157864 Or scan the QR code Use the finest creative application, now at a fraction of'
     },
@@ -1101,7 +1099,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 15000 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Apple_Developer.png',
+        image_url: '/IMAGES/PRODUCTS/Apple_Developer.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ‘¨â€ðŸ’» Apple Developer Program ðŸš€ Build, test,'
     },
@@ -1115,7 +1113,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 2850 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Blackbox_for_Vision_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/Blackbox_for_Vision_Pro.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Dive into a spatial puzzle adventure that plays with y'
     },
@@ -1129,7 +1127,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/ChatGPT_PRO.png',
+        image_url: '/IMAGES/PRODUCTS/ChatGPT_PRO.webp',
         logo_url: '',
         description: 'ðŸ“ž Viber/WhatsApp: 9862157864 ðŸ“² Scan the QR to get started!  ðŸš€ Upgrade to ChatGPT Pro â€” unlock GPT-5.1, OpenAI'
     },
@@ -1143,7 +1141,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/ChatGPT_Shared.png',
+        image_url: '/IMAGES/PRODUCTS/ChatGPT_Shared.webp',
         logo_url: '',
         description: 'ðŸ¤– Unlock Smarter Conversations with ChatGPT 5.1! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ’¡'
     },
@@ -1157,7 +1155,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 2850 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Crouton_for_Vision_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/Crouton_for_Vision_Pro.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!   ðŸ½ï¸ Cook smarter with recipes in a fully immersiv'
     },
@@ -1171,7 +1169,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1350 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/djay_for_Vision_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/djay_for_Vision_Pro.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Nextâ€‘level DJing in spatial music reality, mix like'
     },
@@ -1185,7 +1183,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 3000 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/EA_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/EA_Pro.webp',
         logo_url: '',
         description: 'ðŸŽ® Play Without Limits with EA Play Pro! ðŸ† Latest Hits: Play FIFA 26 on day one and never miss a match! ðŸ“± Contac'
     },
@@ -1199,7 +1197,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1950 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/ESPN_Plus.png',
+        image_url: '/IMAGES/PRODUCTS/ESPN_Plus.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ† Stream live sports with ESPN+! âš½ Watch exclusiv'
     },
@@ -1213,7 +1211,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1175 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Exitlag_Renewable.png',
+        image_url: '/IMAGES/PRODUCTS/Exitlag_Renewable.webp',
         logo_url: '',
         description: 'âš¡ Game Without Limits with ExitLag! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ® 1 Month Premiu'
     },
@@ -1227,7 +1225,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 150 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Express_VPN_Weekly_Monthly.png',
+        image_url: '/IMAGES/PRODUCTS/Express_VPN_Weekly_Monthly.webp',
         logo_url: '',
         description: 'ðŸ“± Contact at Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸ®ðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° ðŸ”’ VPN Subscriptions â€“ Stay Safe & Private'
     },
@@ -1241,7 +1239,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 2950 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Feather_Draw_for_iPad.png',
+        image_url: '/IMAGES/PRODUCTS/Feather_Draw_for_iPad.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Bring your ideas to life in a fully immersive spatial'
     },
@@ -1255,7 +1253,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 975 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Filmora_Video_Editor_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/Filmora_Video_Editor_Pro.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ¬ Get Filmora Video Editor Pro! âœ¨ Edit videos lik'
     },
@@ -1269,7 +1267,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 50000 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Final_Cut_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/Final_Cut_Pro.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Professional video editing faster, smoother, smarter.'
     },
@@ -1283,7 +1281,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/FL_Studio_Mobile.png',
+        image_url: '/IMAGES/PRODUCTS/FL_Studio_Mobile.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Create professional music on your iPhone or iPad'
     },
@@ -1297,7 +1295,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1450 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Flight_Radar_24_Gold_Monthly.png',
+        image_url: '/IMAGES/PRODUCTS/Flight_Radar_24_Gold_Monthly.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  âœˆï¸ Track flights worldwide in real-time with advan'
     },
@@ -1311,7 +1309,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 850 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Google_Play_In_app_Purchases.png',
+        image_url: '/IMAGES/PRODUCTS/Google_Play_In_app_Purchases.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 ðŸš€ Fast Delivery: Google Play subscriptions within 10 minutes! ðŸ“± Easy P'
     },
@@ -1325,7 +1323,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Grok_4_By_xAI.png',
+        image_url: '/IMAGES/PRODUCTS/Grok_4_By_xAI.webp',
         logo_url: '',
         description: 'ðŸ¤– Unlock the Power of Grok AI â€“ Elon Muskâ€™s Smartest Chatbot  ðŸ“± Contact via Viber/WhatsApp: 9862157864  Lookin'
     },
@@ -1339,7 +1337,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 2150 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Hinge_X__.png',
+        image_url: '/IMAGES/PRODUCTS/Hinge_X__.webp',
         logo_url: '',
         description: 'Hinge+ ðŸ–¤   ðŸ“± Contact: Viber / WhatsApp â€“ 9862157864 (or scan QR code)  Features included: ðŸ’¬ Send unlimited li'
     },
@@ -1353,7 +1351,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 400 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/iCloud_Storage.png',
+        image_url: '/IMAGES/PRODUCTS/iCloud_Storage.webp',
         logo_url: '',
         description: 'ðŸ“± ð‚ð¨ð§ð­ðšðœð­: Viber/WhatsApp: 9862157864 or scan QR code. â˜ï¸ ð”ð©ð ð«ðšððž ð˜ð'
     },
@@ -1367,7 +1365,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1350 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/IMAX_for_Apple_Vision_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/IMAX_for_Apple_Vision_Pro.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  IMAX Experiences for Apple Vision Pro  Watch curated i'
     },
@@ -1381,7 +1379,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 850 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/iTunes_giftcard__Apple_Appstore_.png',
+        image_url: '/IMAGES/PRODUCTS/iTunes_giftcard__Apple_Appstore_.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 ðŸš€ Quick delivery: Game codes in 10 mins! ðŸ“± Easy redemption: Hassle-fre'
     },
@@ -1395,7 +1393,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 35000 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Logic_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/Logic_Pro.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Create professional music from your Mac.  ðŸŽ¹ Hu'
     },
@@ -1409,7 +1407,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1950 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/LumaFusion_for_iOS.png',
+        image_url: '/IMAGES/PRODUCTS/LumaFusion_for_iOS.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Professional video editing on iPhone & iPad. Fast, pow'
     },
@@ -1423,7 +1421,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 975 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Magnet_for_Macbook.png',
+        image_url: '/IMAGES/PRODUCTS/Magnet_for_Macbook.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Magnet, Window Management for Mac  ðŸ“ Snap windows i'
     },
@@ -1437,7 +1435,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 3850 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Nomad_Sculpt_for_iOS.png',
+        image_url: '/IMAGES/PRODUCTS/Nomad_Sculpt_for_iOS.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Bring your ideas to life with intuitive 3D modeling on'
     },
@@ -1451,7 +1449,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 2450 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Notion_AI.png',
+        image_url: '/IMAGES/PRODUCTS/Notion_AI.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ§  Boost your productivity with Notion AI. ðŸ’¬ Gene'
     },
@@ -1465,7 +1463,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 825 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Pixelmator_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/Pixelmator_Pro.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Stream millions of songs, ad-free. ðŸ“¥ Download'
     },
@@ -1479,7 +1477,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 850 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Playstation_Giftcards_US___INDIA.png',
+        image_url: '/IMAGES/PRODUCTS/Playstation_Giftcards_US___INDIA.webp',
         logo_url: '',
         description: 'ðŸ“± Order Now: Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸ®ðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° or scan the QR! ðŸ’³ Playstaion Gift Cards INR'
     },
@@ -1493,7 +1491,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 975 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Playstation_plus_for_Playstations.png',
+        image_url: '/IMAGES/PRODUCTS/Playstation_plus_for_Playstations.webp',
         logo_url: '',
         description: 'ðŸŽ® PlayStation Plus (India Region) â€“ Cheapest Worldwide!  ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR'
     },
@@ -1507,7 +1505,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 150 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Snapchat__.png',
+        image_url: '/IMAGES/PRODUCTS/Snapchat__.webp',
         logo_url: '',
         description: 'ðŸ‘» Unlock Exclusive Perks with Snapchat+! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŒŸ 1 Month'
     },
@@ -1521,7 +1519,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 850 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Steam_Giftcards_US___INDIA.png',
+        image_url: '/IMAGES/PRODUCTS/Steam_Giftcards_US___INDIA.webp',
         logo_url: '',
         description: 'ðŸ“± Order Now: Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸ®ðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° or scan the QR! ðŸ’³ Steam Gift Cards - Choose'
     },
@@ -1535,7 +1533,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 925 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Supercut_for_Vision_Pro.png',
+        image_url: '/IMAGES/PRODUCTS/Supercut_for_Vision_Pro.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  The ultimate way to watch Netflix & Prime Video in a s'
     },
@@ -1549,7 +1547,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1950 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Tantan_Dating_VIP.png',
+        image_url: '/IMAGES/PRODUCTS/Tantan_Dating_VIP.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  â¤ï¸ TanTan VIP â€“ Unlock premium dating features.'
     },
@@ -1563,7 +1561,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 385 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Twitch_Sub.png',
+        image_url: '/IMAGES/PRODUCTS/Twitch_Sub.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ’œ Get Twitch Subscriptions Instantly! â­ Support y'
     },
@@ -1577,7 +1575,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1500 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/Udemy_Courses_With_Certifications.png',
+        image_url: '/IMAGES/PRODUCTS/Udemy_Courses_With_Certifications.webp',
         logo_url: '',
         description: 'ðŸ“± ð‚ð¨ð§ð­ðšðœð­: Viber/WhatsApp: 9862157864 or scan QR code! ðŸŽ“ ð‹ðžðšð«ð§ ð¨ð§ ð˜ð'
     },
@@ -1591,7 +1589,7 @@ export const sampleProducts: Product[] = [
             { value: 'Standard', price: 1150 }
         ],
         delivery_type: 'Instant',
-        image_url: '/IMAGES/PRODUCTS/X_Twitter__Premium.png',
+        image_url: '/IMAGES/PRODUCTS/X_Twitter__Premium.webp',
         logo_url: '',
         description: 'ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ¦ Get Twitter/X Premium! âœ¨ Unlock exclusive featu'
     }

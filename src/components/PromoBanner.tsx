@@ -6,79 +6,79 @@ import Link from 'next/link';
 // Banner configuration with links to relevant categories
 const banners = [
     {
-        src: '/IMAGES/BANNERS/AI.png',
+        src: '/IMAGES/BANNERS/AI.webp',
         alt: 'AI Tools',
         link: '/category/software',
         category: 'software'
     },
     {
-        src: '/IMAGES/BANNERS/Apple_Creator_studio.png',
+        src: '/IMAGES/BANNERS/Apple_Creator_studio.webp',
         alt: 'Apple Creator Studio',
         link: '/category/subscriptions',
         category: 'subscriptions'
     },
     {
-        src: '/IMAGES/BANNERS/Apple_giftcards.png',
+        src: '/IMAGES/BANNERS/Apple_giftcards.webp',
         alt: 'Apple Gift Cards',
         link: '/category/gaming',
         category: 'gaming'
     },
     {
-        src: '/IMAGES/BANNERS/Claude.png',
+        src: '/IMAGES/BANNERS/Claude.webp',
         alt: 'Claude AI',
         link: '/category/software',
         category: 'software'
     },
     {
-        src: '/IMAGES/BANNERS/Crunchyroll.png',
+        src: '/IMAGES/BANNERS/Crunchyroll.webp',
         alt: 'Crunchyroll',
         link: '/category/streaming',
         category: 'streaming'
     },
     {
-        src: '/IMAGES/BANNERS/Dating.png',
+        src: '/IMAGES/BANNERS/Dating.webp',
         alt: 'Dating Apps',
         link: '/category/subscriptions',
         category: 'subscriptions'
     },
     {
-        src: '/IMAGES/BANNERS/Netflix.png',
+        src: '/IMAGES/BANNERS/Netflix.webp',
         alt: 'Netflix',
         link: '/category/streaming',
         category: 'streaming'
     },
     {
-        src: '/IMAGES/BANNERS/Playstation.png',
+        src: '/IMAGES/BANNERS/Playstation.webp',
         alt: 'PlayStation',
         link: '/category/gaming',
         category: 'gaming'
     },
     {
-        src: '/IMAGES/BANNERS/Steam.png',
+        src: '/IMAGES/BANNERS/Steam.webp',
         alt: 'Steam',
         link: '/category/gaming',
         category: 'gaming'
     },
     {
-        src: '/IMAGES/BANNERS/Suno.png',
+        src: '/IMAGES/BANNERS/Suno.webp',
         alt: 'Suno AI',
         link: '/category/software',
         category: 'software'
     },
     {
-        src: '/IMAGES/BANNERS/SuperGrok.png',
+        src: '/IMAGES/BANNERS/SuperGrok.webp',
         alt: 'SuperGrok AI',
         link: '/category/software',
         category: 'software'
     },
     {
-        src: '/IMAGES/BANNERS/TradingView.png',
+        src: '/IMAGES/BANNERS/TradingView.webp',
         alt: 'TradingView',
         link: '/category/subscriptions',
         category: 'subscriptions'
     },
     {
-        src: '/IMAGES/BANNERS/iCloud.png',
+        src: '/IMAGES/BANNERS/iCloud.webp',
         alt: 'iCloud Storage',
         link: '/category/subscriptions',
         category: 'subscriptions'
@@ -164,6 +164,8 @@ export default function PromoBanner({ variant = 'single', category, className }:
                 <img
                     src={banner.src}
                     alt={banner.alt}
+                    loading="lazy"
+                    decoding="async"
                     style={{
                         width: '100%',
                         height: 'auto',
@@ -217,6 +219,8 @@ export default function PromoBanner({ variant = 'single', category, className }:
                         <img
                             src={banner.src}
                             alt={banner.alt}
+                            loading="lazy"
+                            decoding="async"
                             style={{
                                 width: '100%',
                                 height: 'auto',
@@ -271,6 +275,8 @@ export default function PromoBanner({ variant = 'single', category, className }:
                             <img
                                 src={banner.src}
                                 alt={banner.alt}
+                                loading="lazy"
+                                decoding="async"
                                 style={{
                                     width: '100%',
                                     height: 'auto',

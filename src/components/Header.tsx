@@ -55,6 +55,7 @@ export default function Header() {
                 transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)'
             }}>
                 <div className="container" style={{
+                    position: 'relative',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
@@ -82,8 +83,11 @@ export default function Header() {
                         />
                     </Link>
 
-                    {/* Desktop Navigation — Apple-style minimal */}
+                    {/* Desktop Navigation — absolutely centered */}
                     <nav className="hide-mobile" style={{
+                        position: 'absolute',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
                         display: 'flex',
                         alignItems: 'center',
                         gap: '4px'

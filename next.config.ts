@@ -1,80 +1,72 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enable React strict mode for better development experience
   reactStrictMode: true,
 
-  // Optimize images
+  // ── Image optimization ────────────────────────────────────────────────────
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+    deviceSizes: [375, 640, 828, 1080, 1200, 1920],
+    imageSizes: [48, 64, 96, 128, 256, 384],
+    dangerouslyAllowSVG: false,
+    contentDispositionType: 'attachment',
   },
 
-  // Compress output
+  // ── Output ─────────────────────────────────────────────────────────────────
   compress: true,
-
-  // Optimize production build
   poweredByHeader: false,
 
-  // Enable experimental features for better performance
+  // ── Bundle optimization ────────────────────────────────────────────────────
   experimental: {
     optimizeCss: true,
+    optimizePackageImports: [
+      'embla-carousel-react',
+      'embla-carousel-auto-scroll',
+      '@supabase/supabase-js',
+      '@vercel/analytics',
+      '@vercel/speed-insights',
+    ],
   },
 
-  // Security Headers
+  // ── HTTP headers ────────────────────────────────────────────────────────────
   async headers() {
     return [
       {
+        // Security + performance headers on every route
         source: '/(.*)',
         headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on'
-          },
+          { key: 'X-DNS-Prefetch-Control',   value: 'on' },
+          { key: 'X-XSS-Protection',         value: '1; mode=block' },
+          { key: 'X-Frame-Options',           value: 'SAMEORIGIN' },
+          { key: 'X-Content-Type-Options',    value: 'nosniff' },
+          { key: 'Referrer-Policy',           value: 'origin-when-cross-origin' },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload'
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
           {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
           },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
-          }
         ],
       },
       {
-        // Cache static image assets for 30 days
+        // Immutable cache for product/banner WebP images — 30 days
         source: '/IMAGES/(.*)',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=2592000, immutable'
-          }
+          { key: 'Cache-Control', value: 'public, max-age=2592000, immutable' },
         ],
       },
       {
-        // Cache other static assets (logos, icons) for 7 days
-        source: '/:path*.(png|jpg|jpeg|gif|svg|webp|ico)',
+        // Long cache for other static assets — 7 days + stale-while-revalidate
+        source: '/:path*.(png|jpg|jpeg|gif|svg|webp|ico|woff2|woff)',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=604800, stale-while-revalidate=86400'
-          }
+          { key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' },
         ],
       },
     ];
-  }
+  },
 };
 
 export default nextConfig;

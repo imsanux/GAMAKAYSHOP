@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap');
+/* Google Fonts loaded via <link> in layout.tsx for faster non-blocking load */
 
 @tailwind base;
 @tailwind components;
@@ -20,6 +20,7 @@
   --color-secondary: #6e6e73;
   --color-accent: #0071e3;
   --color-accent-hover: #0077ed;
+
   --color-success: #30d158;
   --color-warning: #ff9f0a;
   --color-error: #ff453a;
@@ -30,7 +31,8 @@
   --bg-card: #ffffff;
   --bg-glass: rgba(251, 251, 253, 0.72);
   --bg-elevated: #ffffff;
-  --bg-marquee: #f5f5f7;
+  --bg-marquee: #f0f0f5;
+  --bg-hero-tint: rgba(0, 113, 227, 0.04);
 
   /* Text colors */
   --text-primary: #1d1d1f;
@@ -42,6 +44,7 @@
   --border-light: rgba(0, 0, 0, 0.04);
   --border-medium: rgba(0, 0, 0, 0.08);
   --border-color: #d2d2d7;
+  --border-accent: rgba(0, 113, 227, 0.2);
 
   /* Shadows — layered, natural depth */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -49,10 +52,10 @@
   --shadow-lg: 0 10px 32px rgba(0, 0, 0, 0.09), 0 4px 8px rgba(0, 0, 0, 0.04);
   --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.06);
   --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.04);
-  --shadow-card-hover: 0 12px 36px rgba(0, 0, 0, 0.13), 0 0 0 1px rgba(0, 113, 227, 0.12);
+  --shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.14), 0 0 0 1.5px rgba(0, 113, 227, 0.16);
 
   /* Component colors */
-  --header-bg: rgba(251, 251, 253, 0.8);
+  --header-bg: rgba(251, 251, 253, 0.82);
   --header-bg-scrolled: rgba(251, 251, 253, 0.72);
   --card-bg: #ffffff;
   --input-bg: #f5f5f7;
@@ -91,6 +94,12 @@
   --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
   --theme-transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+
+  /* Category accent colors */
+  --cat-gaming: #10b981;
+  --cat-streaming: #f43f5e;
+  --cat-software: #3b82f6;
+  --cat-subscriptions: #f59e0b;
 }
 
 /* Dark Mode — Refined Apple-style dark */
@@ -99,6 +108,7 @@
   --color-secondary: #a1a1a6;
   --color-accent: #2997ff;
   --color-accent-hover: #4da8ff;
+  --color-accent-glow: rgba(41, 151, 255, 0.25);
   --color-success: #30d158;
   --color-warning: #ffd60a;
   --color-error: #ff453a;
@@ -109,6 +119,7 @@
   --bg-glass: rgba(28, 28, 30, 0.72);
   --bg-elevated: #2c2c2e;
   --bg-marquee: #0a0a0a;
+  --bg-hero-tint: rgba(41, 151, 255, 0.05);
 
   --text-primary: #f5f5f7;
   --text-secondary: #a1a1a6;
@@ -118,15 +129,17 @@
   --border-light: rgba(255, 255, 255, 0.04);
   --border-medium: rgba(255, 255, 255, 0.08);
   --border-color: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(41, 151, 255, 0.25);
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 8px 28px rgba(0, 0, 0, 0.7);
   --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.8);
   --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
-  --shadow-card-hover: 0 8px 28px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.65), 0 0 0 1.5px rgba(41, 151, 255, 0.2);
+  --shadow-glow: 0 0 32px rgba(41, 151, 255, 0.18);
 
-  --header-bg: rgba(0, 0, 0, 0.8);
+  --header-bg: rgba(0, 0, 0, 0.85);
   --header-bg-scrolled: rgba(0, 0, 0, 0.72);
   --card-bg: #1c1c1e;
   --input-bg: #2c2c2e;
@@ -232,11 +245,12 @@ p {
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-card);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
 }
 
 .glass-card:hover {
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 /* === Buttons — Polished interactions === */
@@ -494,6 +508,8 @@ p {
     transform: translateY(-6px);
   }
 }
+
+
 
 .fade-in {
   animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -804,7 +820,7 @@ html.lenis body {
 /* === Section inline title row === */
 .section-title-row {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 28px;
   gap: 12px;
@@ -812,8 +828,8 @@ html.lenis body {
 
 .section-title-row h2 {
   font-size: clamp(1.4rem, 4vw, 1.8rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   color: var(--text-primary);
   margin: 0;
   display: flex;
@@ -822,22 +838,24 @@ html.lenis body {
 }
 
 .section-title-row a {
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--btn-primary-bg);
-  background: rgba(0, 113, 227, 0.1);
-  padding: 8px 18px;
+  background: rgba(0, 113, 227, 0.08);
+  padding: 7px 16px;
   border-radius: 20px;
   text-decoration: none;
   white-space: nowrap;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
+  border: 1px solid transparent;
 }
 
 .section-title-row a:hover {
   background: var(--btn-primary-bg);
   color: white;
-  transform: scale(1.05);
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px var(--color-accent-glow, rgba(0,113,227,0.3));
 }
 
 /* === Trust card hover === */
@@ -845,18 +863,36 @@ html.lenis body {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 16px;
+  padding: 18px;
   background: var(--bg-elevated);
-  border-radius: 16px;
+  border-radius: 18px;
   border: 1px solid var(--border-light);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle shimmer effect on trust cards */
+.trust-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+  background-size: 200% 200%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .trust-card:hover {
   box-shadow: var(--shadow-md);
-  border-color: var(--border-medium);
-  transform: translateY(-2px);
+  border-color: var(--border-accent, rgba(0,113,227,0.15));
+  transform: translateY(-3px);
+}
+
+.trust-card:hover::after {
+  opacity: 1;
 }
 
 .trust-card-icon {
@@ -970,8 +1006,6 @@ html.lenis body {
   border-radius: 28px;
   padding: clamp(40px, 6vw, 64px) clamp(24px, 5vw, 60px);
   text-align: center;
-  position: relative;
-  overflow: hidden;
   transition: var(--theme-transition);
 }
 
@@ -979,4 +1013,10 @@ html.lenis body {
 @keyframes shimmerBg {
   0%   { background-position: -200% 0; }
   100% { background-position:  200% 0; }
+}
+
+/* === Content-visibility for below-fold performance === */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
 }
