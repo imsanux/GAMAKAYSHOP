@@ -24,38 +24,38 @@ import { getFeaturedProducts, getProductsByCategory, searchProducts } from '@/li
 const HERO_SLIDES = [
   {
     desktop: '/IMAGES/webpdesktop/Netflix_desktop.webp',
-    mobile:  '/IMAGES/webpmobile/Netflix_mobile.webp',
-    alt:     'Netflix',
+    mobile: '/IMAGES/webpmobile/Netflix_mobile.webp',
+    alt: 'Netflix',
   },
   {
     desktop: '/IMAGES/webpdesktop/Playstatio_Xbox_desktop.webp',
-    mobile:  '/IMAGES/webpmobile/Playstation_xbox_mobile.webp',
-    alt:     'PlayStation & Xbox',
+    mobile: '/IMAGES/webpmobile/Playstation_xbox_mobile.webp',
+    alt: 'PlayStation & Xbox',
   },
   {
     desktop: '/IMAGES/webpdesktop/Steam_desktop.webp',
-    mobile:  '/IMAGES/webpmobile/Steam_mobile.webp',
-    alt:     'Steam Gift Cards',
+    mobile: '/IMAGES/webpmobile/Steam_mobile.webp',
+    alt: 'Steam Gift Cards',
   },
   {
     desktop: '/IMAGES/webpdesktop/Apple_desktop.webp',
-    mobile:  '/IMAGES/webpmobile/Apple_mobile.webp',
-    alt:     'Apple Gift Cards',
+    mobile: '/IMAGES/webpmobile/Apple_mobile.webp',
+    alt: 'Apple Gift Cards',
   },
   {
     desktop: '/IMAGES/webpdesktop/Grok_desktop.webp',
-    mobile:  '/IMAGES/webpmobile/Grok_mobile.webp',
-    alt:     'Grok AI',
+    mobile: '/IMAGES/webpmobile/Grok_mobile.webp',
+    alt: 'Grok AI',
   },
   {
     desktop: '/IMAGES/webpdesktop/Suno_desktop.webp',
-    mobile:  '/IMAGES/webpmobile/Suno_mobile.webp',
-    alt:     'Suno AI',
+    mobile: '/IMAGES/webpmobile/Suno_mobile.webp',
+    alt: 'Suno AI',
   },
   {
     desktop: '/IMAGES/webpdesktop/Udemy_desktop.webp',
-    mobile:  '/IMAGES/webpmobile/Udemy_mobile.webp',
-    alt:     'Udemy',
+    mobile: '/IMAGES/webpmobile/Udemy_mobile.webp',
+    alt: 'Udemy',
   },
 ];
 
@@ -823,7 +823,7 @@ export default function Home() {
           transition: 'var(--theme-transition)'
         }}>
           <div className="container" style={{ maxWidth: '900px', padding: '0 16px' }}>
-          <div
+            <div
               className="trust-grid"
               style={{
                 display: 'grid',

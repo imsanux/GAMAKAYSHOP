@@ -424,15 +424,15 @@ p {
 
 @media (min-width: 1024px) {
   .product-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 28px !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
   }
 }
 
 @media (min-width: 1280px) {
   .product-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 32px !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 24px !important;
   }
 }
 
@@ -445,7 +445,10 @@ p {
   margin-top: 6px;
 }
 
-.price-wrapper { min-width: 0; flex-shrink: 1; }
+.price-wrapper {
+  min-width: 0;
+  flex-shrink: 1;
+}
 
 .add-to-cart-btn {
   padding: 10px 16px;
@@ -855,7 +858,7 @@ html.lenis body {
   background: var(--btn-primary-bg);
   color: white;
   transform: scale(1.04);
-  box-shadow: 0 4px 14px var(--color-accent-glow, rgba(0,113,227,0.3));
+  box-shadow: 0 4px 14px var(--color-accent-glow, rgba(0, 113, 227, 0.3));
 }
 
 /* === Trust card hover === */
@@ -878,7 +881,7 @@ html.lenis body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.06) 50%, transparent 60%);
   background-size: 200% 200%;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -887,7 +890,7 @@ html.lenis body {
 
 .trust-card:hover {
   box-shadow: var(--shadow-md);
-  border-color: var(--border-accent, rgba(0,113,227,0.15));
+  border-color: var(--border-accent, rgba(0, 113, 227, 0.15));
   transform: translateY(-3px);
 }
 
@@ -1011,8 +1014,13 @@ html.lenis body {
 
 /* === Animate gradient shimmer on product image bg === */
 @keyframes shimmerBg {
-  0%   { background-position: -200% 0; }
-  100% { background-position:  200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* === Content-visibility for below-fold performance === */

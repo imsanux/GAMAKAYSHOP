@@ -72,12 +72,6 @@ const banners = [
         category: 'software'
     },
     {
-        src: '/IMAGES/BANNERS/TradingView.webp',
-        alt: 'TradingView',
-        link: '/category/subscriptions',
-        category: 'subscriptions'
-    },
-    {
         src: '/IMAGES/BANNERS/iCloud.webp',
         alt: 'iCloud Storage',
         link: '/category/subscriptions',

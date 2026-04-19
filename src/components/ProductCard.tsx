@@ -10,9 +10,9 @@ interface ProductCardProps {
 
 // Static lookup — defined once at module level, not recreated on every render
 const CATEGORY_ACCENT: Record<string, string> = {
-    gaming:        '#10b981',
-    streaming:     '#f43f5e',
-    software:      '#3b82f6',
+    gaming: '#10b981',
+    streaming: '#f43f5e',
+    software: '#3b82f6',
     subscriptions: '#f59e0b',
 };
 
