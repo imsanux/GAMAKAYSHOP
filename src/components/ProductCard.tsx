@@ -38,18 +38,17 @@ export default function ProductCard({ product }: ProductCardProps) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{
-                borderRadius: '24px',
+                borderRadius: 'var(--radius-2xl)',
                 background: 'var(--card-bg)',
                 overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative',
                 boxShadow: isHovered
-                    ? '0 20px 60px rgba(0,0,0,0.14), 0 0 0 1.5px rgba(0,113,227,0.18)'
-                    : '0 2px 14px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.05)',
-                transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
+                    ? 'var(--shadow-card-hover)'
+                    : 'var(--shadow-card)',
+                transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
                 transition: 'box-shadow 0.38s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94)',
-                willChange: 'transform, box-shadow',
             }}
         >
             {/* ── IMAGE AREA ──────────────────────────────────── */}
@@ -75,7 +74,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                             width: '100%', height: '100%',
                             objectFit: 'cover',
                             transition: 'transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94)',
-                            transform: isHovered ? 'scale(1.07)' : 'scale(1)',
+                            transform: isHovered ? 'scale(1.04)' : 'scale(1)',
                             willChange: 'transform',
                         }}
                     />
@@ -96,8 +95,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                 <div style={{
                     position: 'absolute',
                     bottom: 0, left: 0, right: 0,
-                    height: '55%',
-                    background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)',
+                    height: '50%',
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)',
                     zIndex: 1,
                     pointerEvents: 'none',
                 }} />
@@ -114,10 +113,9 @@ export default function ProductCard({ product }: ProductCardProps) {
                     fontWeight: 700,
                     textTransform: 'uppercase',
                     letterSpacing: '0.08em',
-                    padding: '3px 8px',
-                    borderRadius: '99px',
+                    padding: '4px 10px',
+                    borderRadius: 'var(--radius-full)',
                     boxShadow: `0 2px 8px ${accent}55`,
-                    opacity: 0.92,
                 }}>
                     {product.category}
                 </div>
@@ -180,17 +178,17 @@ export default function ProductCard({ product }: ProductCardProps) {
                                 key={denom.value}
                                 onClick={() => setSelectedDenom(denom)}
                                 style={{
-                                    padding: '7px 14px',
-                                    borderRadius: '20px',
+                                    padding: '8px 16px',
+                                    borderRadius: 'var(--radius-full)',
                                     fontSize: '0.85rem',
                                     fontWeight: 600,
                                     cursor: 'pointer',
                                     border: active
-                                        ? '1.5px solid #30d158'
+                                        ? '1.5px solid var(--color-success)'
                                         : '1.5px solid var(--border-color)',
                                     background: active
                                         ? 'rgba(48,209,88,0.12)'
-                                        : 'transparent',
+                                        : 'var(--btn-secondary-bg)',
                                     color: active ? '#25a244' : 'var(--text-secondary)',
                                     transition: 'all 0.18s ease',
                                     letterSpacing: '-0.01em',
@@ -234,14 +232,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                         disabled={isAdding}
                         style={{
                             width: '100%',
-                            padding: '16px 20px',
+                            padding: '13px 20px',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             gap: '8px',
-                            borderRadius: '16px',
+                            borderRadius: 'var(--radius-md)',
                             border: 'none',
-                            fontSize: '1.05rem',
+                            fontSize: '0.95rem',
                             fontWeight: 700,
                             letterSpacing: '-0.01em',
                             cursor: isAdding ? 'default' : 'pointer',
@@ -251,7 +249,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                             color: 'white',
                             boxShadow: isAdding
                                 ? '0 4px 16px rgba(48,209,88,0.35)'
-                                : '0 4px 16px rgba(0,113,227,0.3)',
+                                : '0 3px 12px rgba(0,113,227,0.25)',
                             transform: isAdding ? 'scale(0.97)' : 'scale(1)',
                             transition: 'all 0.22s cubic-bezier(0.4,0,0.2,1)',
                         }}
@@ -259,18 +257,28 @@ export default function ProductCard({ product }: ProductCardProps) {
                             if (!isAdding) {
                                 e.currentTarget.style.background = 'var(--btn-primary-hover)';
                                 e.currentTarget.style.transform = 'scale(1.02)';
-                                e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,113,227,0.4)';
+                                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,113,227,0.35)';
                             }
                         }}
                         onMouseLeave={(e) => {
                             if (!isAdding) {
                                 e.currentTarget.style.background = 'var(--btn-primary-bg)';
                                 e.currentTarget.style.transform = 'scale(1)';
-                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,113,227,0.3)';
+                                e.currentTarget.style.boxShadow = '0 3px 12px rgba(0,113,227,0.25)';
                             }
                         }}
                     >
-                        {isAdding ? 'Added to Cart' : 'Add to Cart'}
+                        {isAdding ? (
+                            <>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                                Added!
+                            </>
+                        ) : (
+                            <>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Add to Cart
+                            </>
+                        )}
                     </button>
                 </div>
             </div>

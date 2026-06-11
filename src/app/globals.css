@@ -171,7 +171,7 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  line-height: 1.5;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -250,7 +250,7 @@ p {
 
 .glass-card:hover {
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 /* === Buttons — Polished interactions === */
@@ -425,7 +425,7 @@ p {
 @media (min-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 20px !important;
+    gap: 24px !important;
   }
 }
 
@@ -582,6 +582,11 @@ p {
 /* === Selection === */
 ::selection {
   background: rgba(0, 113, 227, 0.15);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] ::selection {
+  background: rgba(41, 151, 255, 0.2);
   color: var(--text-primary);
 }
 
@@ -744,6 +749,7 @@ p {
 img {
   max-width: 100%;
   height: auto;
+  background-color: var(--bg-secondary);
 }
 
 /* === Prevent text selection on buttons === */

@@ -23,39 +23,52 @@ import { getFeaturedProducts, getProductsByCategory, searchProducts } from '@/li
 // Mobile images:  /public/IMAGES/webpmobile/
 const HERO_SLIDES = [
   {
+    desktop: '/IMAGES/webpdesktop/FIFA_desktop.webp',
+    mobile: '/IMAGES/webpmobile/FIFA_mobile.webp',
+    alt: 'FIFA World Cup 2026',
+    link: '/search?q=sports',
+  },
+  {
     desktop: '/IMAGES/webpdesktop/Netflix_desktop.webp',
     mobile: '/IMAGES/webpmobile/Netflix_mobile.webp',
     alt: 'Netflix',
+    link: '/search?q=netflix',
   },
   {
     desktop: '/IMAGES/webpdesktop/Playstatio_Xbox_desktop.webp',
     mobile: '/IMAGES/webpmobile/Playstation_xbox_mobile.webp',
     alt: 'PlayStation & Xbox',
+    link: '/category/gaming',
   },
   {
     desktop: '/IMAGES/webpdesktop/Steam_desktop.webp',
     mobile: '/IMAGES/webpmobile/Steam_mobile.webp',
     alt: 'Steam Gift Cards',
+    link: '/search?q=steam',
   },
   {
     desktop: '/IMAGES/webpdesktop/Apple_desktop.webp',
     mobile: '/IMAGES/webpmobile/Apple_mobile.webp',
     alt: 'Apple Gift Cards',
+    link: '/search?q=apple',
   },
   {
     desktop: '/IMAGES/webpdesktop/Grok_desktop.webp',
     mobile: '/IMAGES/webpmobile/Grok_mobile.webp',
     alt: 'Grok AI',
+    link: '/search?q=grok',
   },
   {
     desktop: '/IMAGES/webpdesktop/Suno_desktop.webp',
     mobile: '/IMAGES/webpmobile/Suno_mobile.webp',
     alt: 'Suno AI',
+    link: '/search?q=suno',
   },
   {
     desktop: '/IMAGES/webpdesktop/Udemy_desktop.webp',
     mobile: '/IMAGES/webpmobile/Udemy_mobile.webp',
     alt: 'Udemy',
+    link: '/search?q=udemy',
   },
 ];
 
@@ -154,6 +167,7 @@ const MARQUEE_ROW2 = [
 export default function Home() {
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [slideReady, setSlideReady] = useState(false);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
 
   // Swipe State
@@ -237,13 +251,21 @@ export default function Home() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Auto-slide hero carousel (uses module-level constant length)
+  // Randomize starting slide on mount (after hydration)
   useEffect(() => {
+    const random = Math.floor(Math.random() * HERO_SLIDES.length);
+    setCurrentSlide(random);
+    setSlideReady(true);
+  }, []);
+
+  // Auto-slide hero carousel — starts only after random slide is set
+  useEffect(() => {
+    if (!slideReady) return;
     const interval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [slideReady]);
 
 
 
@@ -280,7 +302,7 @@ export default function Home() {
             }}>
             <div style={{
               display: 'flex',
-              transition: 'transform 0.8s cubic-bezier(0.8, 0, 0.2, 1)',
+              transition: 'transform 0.6s cubic-bezier(0.8, 0, 0.2, 1)',
               transform: `translateX(-${currentSlide * 100}%)`
             }}>
               {HERO_SLIDES.map((slide, index) => (
@@ -293,24 +315,27 @@ export default function Home() {
                     overflow: 'hidden',
                   }}
                 >
-                  {/* Responsive banner — mobile WebP on small screens, desktop WebP on large */}
-                  <picture style={{ display: 'block', width: '100%', height: '100%' }}>
-                    <source media="(max-width: 767px)" srcSet={slide.mobile} type="image/webp" />
-                    <img
-                      src={slide.desktop}
-                      alt={slide.alt}
-                      loading={index === 0 ? 'eager' : 'lazy'}
-                      fetchPriority={index === 0 ? 'high' : 'auto'}
-                      decoding="async"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        objectPosition: 'center',
-                        display: 'block',
-                      }}
-                    />
-                  </picture>
+                  <Link href={slide.link} style={{ display: 'block', width: '100%', height: '100%', cursor: 'pointer' }}>
+                    {/* Responsive banner — mobile WebP on small screens, desktop WebP on large */}
+                    <picture style={{ display: 'block', width: '100%', height: '100%' }}>
+                      <source media="(max-width: 767px)" srcSet={slide.mobile} type="image/webp" />
+                      <img
+                        src={slide.desktop}
+                        alt={slide.alt}
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        fetchPriority={index === 0 ? 'high' : 'auto'}
+                        decoding="async"
+                        draggable={false}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          objectPosition: 'center',
+                          display: 'block',
+                        }}
+                      />
+                    </picture>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -353,7 +378,7 @@ export default function Home() {
             /* Hero banner: desktop tall, mobile compact */
             .hero-carousel-inner {
               display: flex;
-              transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+              transition: transform 0.6s cubic-bezier(0.8, 0, 0.2, 1);
             }
             .hero-carousel-inner > div {
               height: clamp(200px, 38vw, 430px);
@@ -702,7 +727,7 @@ export default function Home() {
 
       {/* Popular Gift Cards */}
       <ScrollReveal threshold={0} duration={0.4} distance="20px">
-        <section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
+        <section style={{ padding: '56px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
           <div className="container" style={{ padding: '0 16px' }}>
             <div className="section-title-row">
               <h2>
@@ -721,7 +746,7 @@ export default function Home() {
         </section >
 
         {/* Gaming Section */}
-        <section style={{ padding: '48px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }} className="below-fold">
+        <section style={{ padding: '56px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }} className="below-fold">
           <div className="container" style={{ padding: '0 16px' }}>
             <div className="section-title-row">
               <h2>
@@ -757,7 +782,7 @@ export default function Home() {
 
       {/* Streaming Section */}
       <ScrollReveal>
-        <section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }} className="below-fold">
+        <section style={{ padding: '56px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }} className="below-fold">
           <div className="container" style={{ padding: '0 16px' }}>
             <div className="section-title-row">
               <h2>
@@ -792,7 +817,7 @@ export default function Home() {
 
       {/* Subscriptions Section */}
       <ScrollReveal>
-        <section style={{ padding: '48px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
+        <section style={{ padding: '56px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
           <div className="container" style={{ padding: '0 16px' }}>
             <div className="section-title-row">
               <h2>
@@ -816,8 +841,8 @@ export default function Home() {
 
       {/* Trust Section */}
       <ScrollReveal>
-        < section style={{
-          padding: '64px 0',
+        <section style={{
+          padding: '56px 0',
           background: 'var(--card-bg)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
@@ -880,7 +905,7 @@ export default function Home() {
                 }
               ].map((item, i) => (
                 <div key={i} className="trust-card">
-                  <div className="trust-card-icon" style={{ background: item.bg }}>
+                  <div className="trust-card-icon" style={{ background: 'var(--bg-secondary)' }}>
                     {item.icon}
                   </div>
                   <div>
@@ -992,11 +1017,11 @@ export default function Home() {
           <div className="container" style={{ maxWidth: '560px', padding: '0 16px' }}>
             {/* Card — always white in both modes */}
             <div style={{
-              background: '#ffffff',
-              borderRadius: '24px',
+              background: 'var(--card-bg)',
+              borderRadius: 'var(--radius-2xl)',
               overflow: 'hidden',
-              boxShadow: '0 8px 40px rgba(0, 0, 0, 0.18)',
-              border: '1px solid rgba(0,0,0,0.06)'
+              boxShadow: 'var(--shadow-xl)',
+              border: '1px solid var(--border-light)'
             }}>
 
               <div style={{ padding: '36px 32px 32px', textAlign: 'center' }}>
@@ -1042,14 +1067,14 @@ export default function Home() {
                 <h2 style={{
                   fontSize: '1.5rem',
                   fontWeight: 700,
-                  color: '#0f172a',
+                  color: 'var(--text-primary)',
                   marginBottom: '8px',
                   letterSpacing: '-0.02em'
                 }}>
                   Also on Hamrobazar
                 </h2>
                 <p style={{
-                  color: '#64748b',
+                  color: 'var(--text-secondary)',
                   fontSize: '0.9rem',
                   marginBottom: '20px',
                   lineHeight: 1.6
@@ -1072,7 +1097,7 @@ export default function Home() {
                       </svg>
                     ))}
                   </div>
-                  <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 500 }}>5.0 · 5000+ Sales</span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 500 }}>5.0 · 5000+ Sales</span>
                 </div>
 
                 {/* Stats badges */}
@@ -1170,7 +1195,7 @@ export default function Home() {
 
       {/* FAQ Section */}
       <ScrollReveal>
-        < FAQSection />
+        <FAQSection />
       </ScrollReveal>
 
       {/* CTA Section — gradient card */}
@@ -1179,7 +1204,7 @@ export default function Home() {
           ref={ctaRef}
           style={{
             padding: '56px 0',
-            background: 'var(--bg-primary)',
+            background: 'var(--bg-secondary)',
             transition: 'var(--theme-transition)'
           }}
         >

@@ -135,22 +135,22 @@ export default function PromoBanner({ variant = 'single', category, className }:
                     display: 'block',
                     borderRadius: '24px',
                     overflow: 'hidden',
-                    boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                     transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                     position: 'relative',
-                    border: '1px solid rgba(255,255,255,0.05)'
+                    border: '1px solid var(--border-light)'
                 }}
                 onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'scale(1.02) translateY(-4px)';
-                    e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.7), 0 0 20px rgba(255, 255, 255, 0.1)';
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.12)';
+                    e.currentTarget.style.borderColor = 'var(--border-medium)';
                     const img = e.currentTarget.querySelector('img');
                     if (img) img.style.transform = 'scale(1.05)';
                 }}
                 onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'scale(1) translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.5)';
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+                    e.currentTarget.style.borderColor = 'var(--border-light)';
                     const img = e.currentTarget.querySelector('img');
                     if (img) img.style.transform = 'scale(1)';
                 }}
@@ -190,22 +190,22 @@ export default function PromoBanner({ variant = 'single', category, className }:
                             display: 'block',
                             borderRadius: '24px',
                             overflow: 'hidden',
-                            boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
+                            boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                             transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                             position: 'relative',
-                            border: '1px solid rgba(255,255,255,0.05)'
+                            border: '1px solid var(--border-light)'
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'scale(1.02) translateY(-4px)';
-                            e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.7), 0 0 20px rgba(255, 255, 255, 0.1)';
-                            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                            e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.12)';
+                            e.currentTarget.style.borderColor = 'var(--border-medium)';
                             const img = e.currentTarget.querySelector('img');
                             if (img) img.style.transform = 'scale(1.05)';
                         }}
                         onMouseLeave={(e) => {
                             e.currentTarget.style.transform = 'scale(1) translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.5)';
-                            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+                            e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+                            e.currentTarget.style.borderColor = 'var(--border-light)';
                             const img = e.currentTarget.querySelector('img');
                             if (img) img.style.transform = 'scale(1)';
                         }}
@@ -237,14 +237,14 @@ export default function PromoBanner({ variant = 'single', category, className }:
                     position: 'relative',
                     borderRadius: '24px',
                     overflow: 'hidden',
-                    boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
-                    border: '1px solid rgba(255,255,255,0.05)'
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                    border: '1px solid var(--border-light)'
                 }}
             >
                 <div
                     style={{
                         display: 'flex',
-                        transition: 'transform 0.5s ease-out',
+                        transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                         transform: `translateX(-${currentIndex * 100}%)`,
                     }}
                 >

@@ -43,6 +43,7 @@ export function searchProducts(query: string): Product[] {
     return sampleProducts.filter(p =>
         p.name.toLowerCase().includes(lowerQuery) ||
         p.brand.toLowerCase().includes(lowerQuery) ||
-        p.category.toLowerCase().includes(lowerQuery)
+        p.category.toLowerCase().includes(lowerQuery) ||
+        (p.description && p.description.toLowerCase().includes(lowerQuery))
     );
 }
