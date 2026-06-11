@@ -749,7 +749,6 @@ p {
 img {
   max-width: 100%;
   height: auto;
-  background-color: var(--bg-secondary);
 }
 
 /* === Prevent text selection on buttons === */
