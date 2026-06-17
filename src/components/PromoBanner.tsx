@@ -1,3 +1,4 @@
+import Image from 'next/image';
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -367,12 +368,12 @@ export default function PromoBanner({ variant = 'single', category, className }:
                     height: 'clamp(240px, 32vw, 400px)',
                 }}
             >
-                {a && <Link href={a.link} style={card('1', '1')} onMouseEnter={hi} onMouseLeave={ho}><img src={a.src} alt={a.alt} loading="lazy" decoding="async" style={imgStyle}/></Link>}
-                {b && <Link href={b.link} style={card('2 / 4', '1')} onMouseEnter={hi} onMouseLeave={ho}><img src={b.src} alt={b.alt} loading="lazy" decoding="async" style={imgStyle}/></Link>}
-                {c && <Link href={c.link} style={card('4', '1')} onMouseEnter={hi} onMouseLeave={ho}><img src={c.src} alt={c.alt} loading="lazy" decoding="async" style={imgStyle}/></Link>}
-                {d && <Link href={d.link} style={card('1 / 3', '2')} onMouseEnter={hi} onMouseLeave={ho}><img src={d.src} alt={d.alt} loading="lazy" decoding="async" style={imgStyle}/></Link>}
-                {e && <Link href={e.link} style={card('3', '2')} onMouseEnter={hi} onMouseLeave={ho}><img src={e.src} alt={e.alt} loading="lazy" decoding="async" style={imgStyle}/></Link>}
-                {f && <Link href={f.link} style={card('4', '2')} onMouseEnter={hi} onMouseLeave={ho}><img src={f.src} alt={f.alt} loading="lazy" decoding="async" style={imgStyle}/></Link>}
+                {a && <Link href={a.link} style={card('1', '1')} onMouseEnter={hi} onMouseLeave={ho}><Image src={a.src} alt={a.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {b && <Link href={b.link} style={card('2 / 4', '1')} onMouseEnter={hi} onMouseLeave={ho}><Image src={b.src} alt={b.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {c && <Link href={c.link} style={card('4', '1')} onMouseEnter={hi} onMouseLeave={ho}><Image src={c.src} alt={c.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {d && <Link href={d.link} style={card('1 / 3', '2')} onMouseEnter={hi} onMouseLeave={ho}><Image src={d.src} alt={d.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {e && <Link href={e.link} style={card('3', '2')} onMouseEnter={hi} onMouseLeave={ho}><Image src={e.src} alt={e.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {f && <Link href={f.link} style={card('4', '2')} onMouseEnter={hi} onMouseLeave={ho}><Image src={f.src} alt={f.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
             </div>
         );
     }
@@ -434,22 +435,22 @@ export default function PromoBanner({ variant = 'single', category, className }:
                 }}
             >
                 {/* Row 1 */}
-                {a && <Link href={a.link} style={cell('1','1')} onMouseEnter={hi} onMouseLeave={ho}><img src={a.src} alt={a.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {b && <Link href={b.link} style={cell('2 / 4','1')} onMouseEnter={hi} onMouseLeave={ho}><img src={b.src} alt={b.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {c && <Link href={c.link} style={cell('4','1')} onMouseEnter={hi} onMouseLeave={ho}><img src={c.src} alt={c.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {d && <Link href={d.link} style={cell('5','1')} onMouseEnter={hi} onMouseLeave={ho}><img src={d.src} alt={d.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
+                {a && <Link href={a.link} style={cell('1','1')} onMouseEnter={hi} onMouseLeave={ho}><Image src={a.src} alt={a.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {b && <Link href={b.link} style={cell('2 / 4','1')} onMouseEnter={hi} onMouseLeave={ho}><Image src={b.src} alt={b.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {c && <Link href={c.link} style={cell('4','1')} onMouseEnter={hi} onMouseLeave={ho}><Image src={c.src} alt={c.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {d && <Link href={d.link} style={cell('5','1')} onMouseEnter={hi} onMouseLeave={ho}><Image src={d.src} alt={d.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
 
                 {/* Row 2–3 — E is tall */}
-                {e && <Link href={e.link} style={cell('1','2 / 4')} onMouseEnter={hi} onMouseLeave={ho}><img src={e.src} alt={e.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {f && <Link href={f.link} style={cell('2','2')} onMouseEnter={hi} onMouseLeave={ho}><img src={f.src} alt={f.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {g && <Link href={g.link} style={cell('3','2')} onMouseEnter={hi} onMouseLeave={ho}><img src={g.src} alt={g.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {h && <Link href={h.link} style={cell('4 / 6','2')} onMouseEnter={hi} onMouseLeave={ho}><img src={h.src} alt={h.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
+                {e && <Link href={e.link} style={cell('1','2 / 4')} onMouseEnter={hi} onMouseLeave={ho}><Image src={e.src} alt={e.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {f && <Link href={f.link} style={cell('2','2')} onMouseEnter={hi} onMouseLeave={ho}><Image src={f.src} alt={f.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {g && <Link href={g.link} style={cell('3','2')} onMouseEnter={hi} onMouseLeave={ho}><Image src={g.src} alt={g.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {h && <Link href={h.link} style={cell('4 / 6','2')} onMouseEnter={hi} onMouseLeave={ho}><Image src={h.src} alt={h.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
 
                 {/* Row 3 */}
-                {i && <Link href={i.link} style={cell('2 / 4','3')} onMouseEnter={hi} onMouseLeave={ho}><img src={i.src} alt={i.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {j && <Link href={j.link} style={cell('4','3')} onMouseEnter={hi} onMouseLeave={ho}><img src={j.src} alt={j.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {k && <Link href={k.link} style={cell('5','3')} onMouseEnter={hi} onMouseLeave={ho}><img src={k.src} alt={k.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {l && <Link href={l.link} style={cell('5','2')} onMouseEnter={hi} onMouseLeave={ho}><img src={l.src} alt={l.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
+                {i && <Link href={i.link} style={cell('2 / 4','3')} onMouseEnter={hi} onMouseLeave={ho}><Image src={i.src} alt={i.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {j && <Link href={j.link} style={cell('4','3')} onMouseEnter={hi} onMouseLeave={ho}><Image src={j.src} alt={j.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {k && <Link href={k.link} style={cell('5','3')} onMouseEnter={hi} onMouseLeave={ho}><Image src={k.src} alt={k.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {l && <Link href={l.link} style={cell('5','2')} onMouseEnter={hi} onMouseLeave={ho}><Image src={l.src} alt={l.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
             </div>
         );
     }
@@ -504,12 +505,12 @@ export default function PromoBanner({ variant = 'single', category, className }:
                     height: 'clamp(240px, 32vw, 400px)',
                 }}
             >
-                {a && <Link href={a.link} style={card('1', '1 / 3')} onMouseEnter={hi} onMouseLeave={ho}><img src={a.src} alt={a.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {b && <Link href={b.link} style={card('2', '1')} onMouseEnter={hi} onMouseLeave={ho}><img src={b.src} alt={b.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {c && <Link href={c.link} style={card('3', '1')} onMouseEnter={hi} onMouseLeave={ho}><img src={c.src} alt={c.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {d && <Link href={d.link} style={card('2', '2')} onMouseEnter={hi} onMouseLeave={ho}><img src={d.src} alt={d.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {e && <Link href={e.link} style={card('3', '2')} onMouseEnter={hi} onMouseLeave={ho}><img src={e.src} alt={e.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
-                {f && <Link href={f.link} style={card('4', '1 / 3')} onMouseEnter={hi} onMouseLeave={ho}><img src={f.src} alt={f.alt} loading="lazy" decoding="async" style={imgFill}/></Link>}
+                {a && <Link href={a.link} style={card('1', '1 / 3')} onMouseEnter={hi} onMouseLeave={ho}><Image src={a.src} alt={a.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {b && <Link href={b.link} style={card('2', '1')} onMouseEnter={hi} onMouseLeave={ho}><Image src={b.src} alt={b.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {c && <Link href={c.link} style={card('3', '1')} onMouseEnter={hi} onMouseLeave={ho}><Image src={c.src} alt={c.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {d && <Link href={d.link} style={card('2', '2')} onMouseEnter={hi} onMouseLeave={ho}><Image src={d.src} alt={d.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {e && <Link href={e.link} style={card('3', '2')} onMouseEnter={hi} onMouseLeave={ho}><Image src={e.src} alt={e.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
+                {f && <Link href={f.link} style={card('4', '1 / 3')} onMouseEnter={hi} onMouseLeave={ho}><Image src={f.src} alt={f.alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "transform 0.4s ease" }} /></Link>}
             </div>
         );
     }

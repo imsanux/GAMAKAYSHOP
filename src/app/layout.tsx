@@ -83,7 +83,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/IMAGES/webpdesktop/Netflix_desktop.webp"
+          href="/IMAGES/webpdesktop/FIFA_desktop.webp"
           fetchPriority="high"
           media="(min-width: 768px)"
         />
@@ -91,7 +91,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/IMAGES/webpmobile/Netflix_mobile.webp"
+          href="/IMAGES/webpmobile/FIFA_mobile.webp"
           fetchPriority="high"
           media="(max-width: 767px)"
         />
