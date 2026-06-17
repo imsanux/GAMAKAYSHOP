@@ -1,37 +1,12 @@
 'use client';
 
-import { useEffect, useRef, ReactNode } from 'react';
-import Lenis from 'lenis';
+import { ReactNode } from 'react';
 
 interface SmoothScrollProps {
     children: ReactNode;
 }
 
 export default function SmoothScroll({ children }: SmoothScrollProps) {
-    const lenisRef = useRef<Lenis | null>(null);
-
-    useEffect(() => {
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            touchMultiplier: 2,
-            infinite: false,
-        });
-
-        lenisRef.current = lenis;
-
-        let rafId: number;
-        function raf(time: number) {
-            lenis.raf(time);
-            rafId = requestAnimationFrame(raf);
-        }
-        rafId = requestAnimationFrame(raf);
-
-        return () => {
-            cancelAnimationFrame(rafId);
-            lenis.destroy();
-        };
-    }, []);
-
+    // Disabled Lenis for raw performance, natively handles scroll
     return <>{children}</>;
 }

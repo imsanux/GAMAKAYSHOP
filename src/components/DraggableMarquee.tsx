@@ -1,10 +1,7 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
-import AutoScroll from 'embla-carousel-auto-scroll';
+import React from 'react';
 import Image from 'next/image';
-
 import Link from 'next/link';
 
 export interface MarqueeItem {
@@ -19,47 +16,34 @@ interface DraggableMarqueeProps {
 }
 
 export default function DraggableMarquee({ items, direction = 'forward', speed = 1 }: DraggableMarqueeProps) {
-    const [emblaRef, emblaApi] = useEmblaCarousel(
-        {
-            loop: true,
-            dragFree: true,
-        },
-        [
-            AutoScroll({
-                playOnInit: true,
-                speed: speed,
-                direction: direction,
-                stopOnInteraction: false,
-                stopOnMouseEnter: false,
-                stopOnFocusIn: false,
-            })
-        ]
-    );
+    const duration = 30 / speed;
 
     return (
-        <div
-            className="embla"
-            ref={emblaRef}
-            style={{
-                overflow: 'hidden',
-                width: '100%',
-                cursor: 'grab',
-                padding: '8px 0'
-            }}
-            onMouseDown={(e) => { e.currentTarget.style.cursor = 'grabbing'; }}
-            onMouseUp={(e) => { e.currentTarget.style.cursor = 'grab'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.cursor = 'grab'; }}
-        >
-            <div className="embla__container" style={{ display: 'flex', touchAction: 'pan-y' }}>
-                {/* We map the array multiple times to guarantee enough slides to fill ultrawide desktop screens for looping */}
-                {[...items, ...items, ...items, ...items].map((item, index) => (
+        <div style={{ overflow: 'hidden', width: '100%', padding: '8px 0', position: 'relative', display: 'flex' }}>
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes marquee-forward {
+                    0% { transform: translateX(0%); }
+                    100% { transform: translateX(-50%); }
+                }
+                @keyframes marquee-backward {
+                    0% { transform: translateX(-50%); }
+                    100% { transform: translateX(0%); }
+                }
+                .marquee-track-${direction} {
+                    display: flex;
+                    width: max-content;
+                    animation: marquee-${direction} ${duration}s linear infinite;
+                }
+            `}} />
+            <div className={`marquee-track-${direction}`} style={{ display: 'flex' }}>
+                {/* Render the array 8 times to guarantee enough slides to fill ultrawide screens for a seamless 50% loop */}
+                {[...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items].map((item, index) => (
                     <div
                         key={index}
-                        className="embla__slide"
                         style={{
                             flex: '0 0 auto',
-                            minWidth: 0,
-                            paddingLeft: '16px', // space between cards
+                            paddingLeft: '16px',
                         }}
                     >
                         <Link
@@ -99,3 +83,4 @@ export default function DraggableMarquee({ items, direction = 'forward', speed =
         </div>
     );
 }
+

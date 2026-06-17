@@ -336,9 +336,9 @@ export default function Home() {
                   position: 'absolute',
                   left: '50%',
                   top: '50%',
-                  transform: `translateX(${xOffset}) translateY(-50%)`,
-                  width: isActive ? 'min(72vw, 820px)' : 'min(22vw, 255px)',
-                  height: isActive ? '100%' : '80%',
+                  transform: `translateX(${xOffset}) translateY(-50%) scale(${isActive ? 1 : 0.85})`,
+                  width: 'min(72vw, 820px)',
+                  height: '100%',
                   borderRadius: '10px',
                   overflow: 'hidden',
                   opacity: isActive ? 1 : isVisible ? 0.52 : 0,
@@ -347,7 +347,7 @@ export default function Home() {
                   zIndex: isActive ? 2 : 1,
                   border: isActive ? '2px solid rgba(255,255,255,0.09)' : 'none',
                   boxShadow: isActive ? '0 8px 40px rgba(0,0,0,0.55)' : 'none',
-                  transition: 'transform 0.52s cubic-bezier(0.4,0,0.2,1), opacity 0.45s ease, width 0.52s cubic-bezier(0.4,0,0.2,1), height 0.52s cubic-bezier(0.4,0,0.2,1)',
+                  transition: 'transform 0.52s cubic-bezier(0.4,0,0.2,1), opacity 0.45s ease',
                 }}
               >
                 <Link href={slide.link} style={{ display: 'block', width: '100%', height: '100%' }}>
