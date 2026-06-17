@@ -75,7 +75,7 @@ const HERO_SLIDES = [
 const CATEGORIES = [
   {
     name: 'Browse All', slug: 'all', icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <rect x="3" y="3" width="7" height="7" rx="1" />
         <rect x="14" y="3" width="7" height="7" rx="1" />
         <rect x="3" y="14" width="7" height="7" rx="1" />
@@ -85,26 +85,26 @@ const CATEGORIES = [
   },
   {
     name: 'Gaming', slug: 'gaming', icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="6" width="20" height="12" rx="2" />
         <path d="M6 12h4M8 10v4" />
-        <circle cx="17" cy="10" r="1" fill="#10b981" />
-        <circle cx="15" cy="12" r="1" fill="#10b981" />
+        <circle cx="17" cy="10" r="1" fill="currentColor" />
+        <circle cx="15" cy="12" r="1" fill="currentColor" />
       </svg>
     )
   },
   {
     name: 'Streaming', slug: 'streaming', icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2" />
         <path d="M8 21h8M12 17v4" />
-        <polygon points="10,8 10,12 14,10" fill="#f43f5e" />
+        <polygon points="10,8 10,12 14,10" fill="currentColor" stroke="none" />
       </svg>
     )
   },
   {
     name: 'Software', slug: 'software', icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2" />
         <path d="M8 21h8M12 17v4" />
         <path d="M7 8l3 3-3 3M12 14h5" />
@@ -113,22 +113,22 @@ const CATEGORIES = [
   },
   {
     name: 'Subscriptions', slug: 'subscriptions', icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
       </svg>
     )
   },
   {
     name: 'AI Tools', slug: 'software', icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="#8b5cf6">
-        <path d="M9.5 2l1.5 4.5L15.5 8l-4.5 1.5L9.5 14l-1.5-4.5L3.5 8l4.5-1.5L9.5 2z" />
-        <path d="M18 12l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" />
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9.5 2l1.5 4.5L15.5 8l-4.5 1.5L9.5 14l-1.5-4.5L3.5 8l4.5-1.5L9.5 2z" opacity="0.9" />
+        <path d="M18 12l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" opacity="0.6" />
       </svg>
     )
   },
   {
     name: 'Social Media', slug: 'subscriptions', icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
       </svg>
     )
@@ -281,121 +281,136 @@ export default function Home() {
 
   return (
     <div style={{ background: 'var(--bg-primary)', transition: 'background-color 0.3s ease' }}>
-      {/* Hero Carousel */}
-      <section className="hero-section" style={{
-        padding: '16px 0',
-        background: 'var(--bg-primary)',
-        transition: 'var(--theme-transition)'
-      }}>
-        <div className="container" style={{ padding: '0 16px' }}>
-          <div
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEndWrapper}
-            style={{
-              position: 'relative',
-              overflow: 'hidden',
-              borderRadius: '28px',
-              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
-              background: '#0f172a',
-              touchAction: 'pan-y' // Allows vertical scrolling while tracking horizontal swipes
-            }}>
-            <div style={{
-              display: 'flex',
-              transition: 'transform 0.6s cubic-bezier(0.8, 0, 0.2, 1)',
-              transform: `translateX(-${currentSlide * 100}%)`
-            }}>
-              {HERO_SLIDES.map((slide, index) => (
-                <div
-                  key={index}
-                  style={{
-                    minWidth: '100%',
-                    height: 'clamp(200px, 38vw, 430px)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
-                >
-                  <Link href={slide.link} style={{ display: 'block', width: '100%', height: '100%', cursor: 'pointer' }}>
-                    {/* Responsive banner — mobile WebP on small screens, desktop WebP on large */}
-                    <picture style={{ display: 'block', width: '100%', height: '100%' }}>
-                      <source media="(max-width: 767px)" srcSet={slide.mobile} type="image/webp" />
-                      <img
-                        src={slide.desktop}
-                        alt={slide.alt}
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                        fetchPriority={index === 0 ? 'high' : 'auto'}
-                        decoding="async"
-                        draggable={false}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          objectPosition: 'center',
-                          display: 'block',
-                        }}
-                      />
-                    </picture>
-                  </Link>
-                </div>
-              ))}
-            </div>
+      {/* Hero Carousel — Coverflow / Center-Stage */}
+      <section
+        className="hero-section"
+        style={{
+          padding: '16px 0 20px',
+          background: '#0E1117',
+          overflow: 'hidden',
+        }}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEndWrapper}
+      >
+        {/*
+          Static-height container — never resizes on slide change.
+          Every slide is position:absolute, centered via translate(-50%,-50%).
+          Only the X offset changes per slide state.
+        */}
+        <div style={{
+          position: 'relative',
+          height: 'clamp(190px, 34vw, 400px)',  /* fixed — never animates */
+          width: '100%',
+        }}>
+          {HERO_SLIDES.map((slide, index) => {
+            const offset = index - currentSlide;
+            const isActive   = offset === 0;
+            const isPrev     = offset === -1;
+            const isNext     = offset === 1;
+            const isVisible  = Math.abs(offset) <= 1;
 
-            {/* Controls - Dots */}
-            <div style={{
-              position: 'absolute',
-              bottom: '16px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              display: 'flex',
-              gap: '8px',
-              zIndex: 10,
-              background: 'rgba(0,0,0,0.25)',
-              padding: '7px 14px',
-              borderRadius: '20px',
-              backdropFilter: 'blur(8px)',
-            }}>
-              {HERO_SLIDES.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  style={{
-                    width: currentSlide === index ? '28px' : '7px',
-                    height: '7px',
-                    borderRadius: '4px',
-                    border: 'none',
-                    background: currentSlide === index ? 'white' : 'rgba(255,255,255,0.4)',
-                    cursor: 'pointer',
-                    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-                    padding: 0,
-                  }}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
+            // X offset from center (50%)
+            // Active  → 0
+            // Prev    → shifted left (active half-width + side half-width + gap)
+            // Next    → shifted right
+            // Distant → far off-screen (no flash during transition)
+            const xOffset = isActive
+              ? '-50%'
+              : isPrev
+              ? 'calc(-50% - min(37vw, 428px))'
+              : isNext
+              ? 'calc(-50% + min(37vw, 428px))'
+              : offset < 0
+              ? 'calc(-50% - 200vw)'
+              : 'calc(-50% + 200vw)';
 
-          <style jsx>{`
-            /* Hero banner: desktop tall, mobile compact */
-            .hero-carousel-inner {
-              display: flex;
-              transition: transform 0.6s cubic-bezier(0.8, 0, 0.2, 1);
-            }
-            .hero-carousel-inner > div {
-              height: clamp(200px, 38vw, 430px);
-            }
-          `}</style>
+            return (
+              <div
+                key={index}
+                onClick={() => {
+                  if (isPrev) setCurrentSlide(p => (p - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+                  if (isNext) setCurrentSlide(p => (p + 1) % HERO_SLIDES.length);
+                }}
+                style={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: '50%',
+                  transform: `translateX(${xOffset}) translateY(-50%)`,
+                  width: isActive ? 'min(72vw, 820px)' : 'min(22vw, 255px)',
+                  height: isActive ? '100%' : '80%',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  opacity: isActive ? 1 : isVisible ? 0.52 : 0,
+                  cursor: isVisible && !isActive ? 'pointer' : 'default',
+                  pointerEvents: isVisible && !isActive ? 'auto' : isActive ? 'none' : 'none',
+                  zIndex: isActive ? 2 : 1,
+                  border: isActive ? '2px solid rgba(255,255,255,0.09)' : 'none',
+                  boxShadow: isActive ? '0 8px 40px rgba(0,0,0,0.55)' : 'none',
+                  transition: 'transform 0.52s cubic-bezier(0.4,0,0.2,1), opacity 0.45s ease, width 0.52s cubic-bezier(0.4,0,0.2,1), height 0.52s cubic-bezier(0.4,0,0.2,1)',
+                }}
+              >
+                <Link href={slide.link} style={{ display: 'block', width: '100%', height: '100%' }}>
+                  <picture style={{ display: 'block', width: '100%', height: '100%' }}>
+                    <source media="(max-width: 767px)" srcSet={slide.mobile} type="image/webp" />
+                    <img
+                      src={slide.desktop}
+                      alt={slide.alt}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      fetchPriority={index === 0 ? 'high' : undefined}
+                      decoding="async"
+                      draggable={false}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        display: 'block',
+                        filter: isActive ? 'none' : 'brightness(0.62)',
+                        transition: 'filter 0.45s ease',
+                        pointerEvents: 'none',
+                      }}
+                    />
+                  </picture>
+                </Link>
+              </div>
+            );
+          })}
+
+
+        </div>
+
+        {/* Dot indicators */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginTop: '14px' }}>
+          {HERO_SLIDES.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              style={{
+                width: currentSlide === index ? '22px' : '6px',
+                height: '6px',
+                borderRadius: '3px',
+                border: 'none',
+                background: currentSlide === index ? '#EAB308' : 'rgba(255,255,255,0.22)',
+                cursor: 'pointer',
+                transition: 'all 0.26s ease',
+                padding: 0,
+              }}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 
 
       {/* Search Bar Section */}
       <section style={{
-        background: 'var(--card-bg)',
-        padding: '24px 0',
-        borderBottom: '1px solid var(--border-color)',
+        background: 'var(--bg-primary)',
+        padding: '20px 0',
+        borderBottom: '2px solid var(--border-color)',
         transition: 'var(--theme-transition)'
       }}>
-        <div className="container" style={{ maxWidth: '600px', margin: '0 auto', padding: '0 16px' }}>
+        <div className="container" style={{ maxWidth: '680px', margin: '0 auto', padding: '0 16px' }}>
           <div ref={searchRef} style={{ position: 'relative', width: '100%' }}>
             <form
               onSubmit={(e) => {
@@ -405,10 +420,7 @@ export default function Home() {
                   router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
                 }
               }}
-              style={{
-                position: 'relative',
-                width: '100%'
-              }}
+              style={{ position: 'relative', width: '100%' }}
             >
               <input
                 type="text"
@@ -418,45 +430,49 @@ export default function Home() {
                 placeholder="Search for gift cards, subscriptions..."
                 style={{
                   width: '100%',
-                  padding: '14px 50px 14px 20px',
-                  fontSize: '1rem',
+                  padding: '13px 52px 13px 18px',
+                  fontSize: '0.95rem',
                   border: '1.5px solid var(--border-color)',
                   color: 'var(--text-primary)',
-                  borderRadius: showDropdown && searchResults.length > 0 ? '20px 20px 0 0' : '50px',
-                  background: 'var(--input-bg)',
+                  borderRadius: showDropdown && searchResults.length > 0 ? '6px 6px 0 0' : '6px',
+                  background: 'var(--card-bg)',
                   outline: 'none',
-                  transition: 'all 0.25s ease'
+                  transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+                  fontWeight: 500,
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--btn-primary-bg)';
-                  e.currentTarget.style.background = 'var(--input-bg-focus)';
-                  e.currentTarget.style.boxShadow = '0 0 0 4px rgba(0, 113, 227, 0.1)';
-                  if (searchQuery.trim().length > 0) {
-                    setShowDropdown(true);
-                  }
+                  e.currentTarget.style.borderColor = '#111111';
+                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(17,17,17,0.08)';
+                  if (searchQuery.trim().length > 0) setShowDropdown(true);
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--border-color)';
+                  e.currentTarget.style.boxShadow = 'none';
                 }}
               />
               <button
                 type="submit"
                 style={{
                   position: 'absolute',
-                  right: '6px',
+                  right: '5px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  width: '40px',
-                  height: '40px',
-                  background: 'var(--btn-primary-bg)',
+                  width: '38px',
+                  height: '34px',
+                  background: '#111111',
                   border: 'none',
-                  borderRadius: '50%',
+                  borderRadius: '4px',
                   cursor: 'pointer',
                   color: 'white',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  transition: 'all 0.15s ease'
+                  transition: 'background 0.15s ease',
                 }}
+                onMouseEnter={e => e.currentTarget.style.background = '#333333'}
+                onMouseLeave={e => e.currentTarget.style.background = '#111111'}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8" />
                   <path d="M21 21l-4.35-4.35" />
                 </svg>
@@ -471,9 +487,9 @@ export default function Home() {
                 left: 0,
                 right: 0,
                 background: 'var(--dropdown-bg)',
-                border: '1.5px solid var(--btn-primary-bg)',
+                border: '1.5px solid #111111',
                 borderTop: 'none',
-                borderRadius: '0 0 20px 20px',
+                borderRadius: '0 0 6px 6px',
                 boxShadow: 'var(--shadow-lg)',
                 zIndex: 100,
                 maxHeight: '400px',
@@ -483,67 +499,37 @@ export default function Home() {
                   <Link
                     key={product.id}
                     href={`/search?q=${encodeURIComponent(product.name)}`}
-                    onClick={() => {
-                      setShowDropdown(false);
-                      setSearchQuery('');
-                    }}
+                    onClick={() => { setShowDropdown(false); setSearchQuery(''); }}
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                       gap: '12px',
-                      padding: '12px 16px',
+                      padding: '11px 14px',
                       textDecoration: 'none',
                       color: 'var(--text-primary)',
                       borderBottom: '1px solid var(--border-color)',
-                      transition: 'background 0.15s ease'
+                      transition: 'background 0.12s ease',
                     }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'var(--bg-secondary)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'var(--dropdown-bg)';
-                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-secondary)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'var(--dropdown-bg)'}
                   >
                     <div style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '8px',
-                      overflow: 'hidden',
-                      flexShrink: 0,
-                      background: 'var(--bg-secondary)'
+                      width: '42px', height: '42px',
+                      borderRadius: '5px', overflow: 'hidden',
+                      flexShrink: 0, background: 'var(--bg-secondary)',
+                      border: '1px solid var(--border-color)',
                     }}>
-                      <img
-                        src={product.image_url}
-                        alt={product.name}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover'
-                        }}
-                      />
+                      <img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{
-                        fontWeight: 600,
-                        fontSize: '0.9rem',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                      }}>
+                      <div style={{ fontWeight: 700, fontSize: '0.88rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {product.name}
                       </div>
-                      <div style={{
-                        fontSize: '0.8rem',
-                        color: 'var(--text-muted)'
-                      }}>
-                        {product.brand} • {product.category}
+                      <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '1px' }}>
+                        {product.brand} · {product.category}
                       </div>
                     </div>
-                    <div style={{
-                      fontSize: '0.85rem',
-                      fontWeight: 600,
-                      color: 'var(--btn-primary-bg)'
-                    }}>
+                    <div style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>
                       Rs. {product.denominations[0]?.price.toLocaleString()}
                     </div>
                   </Link>
@@ -552,25 +538,25 @@ export default function Home() {
                 {/* View All Results */}
                 <Link
                   href={`/search?q=${encodeURIComponent(searchQuery.trim())}`}
-                  onClick={() => {
-                    setShowDropdown(false);
-                  }}
+                  onClick={() => setShowDropdown(false)}
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    padding: '14px 16px',
+                    display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', gap: '6px',
+                    padding: '13px 14px',
                     textDecoration: 'none',
-                    color: 'var(--btn-primary-bg)',
-                    fontWeight: 600,
-                    fontSize: '0.9rem',
+                    color: 'var(--text-primary)',
+                    fontWeight: 700,
+                    fontSize: '0.82rem',
                     background: 'var(--bg-secondary)',
-                    borderRadius: '0 0 18px 18px'
+                    borderRadius: '0 0 5px 5px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
                   }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'var(--border-color)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'var(--bg-secondary)'}
                 >
                   View all results for "{searchQuery}"
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </Link>
@@ -583,8 +569,8 @@ export default function Home() {
       {/* Category Icons - right below search bar */}
       <ScrollReveal delay={0.05}>
         <section style={{
-          background: 'var(--card-bg)',
-          padding: '20px 0',
+          background: 'var(--bg-primary)',
+          padding: '16px 0',
           borderBottom: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
@@ -593,13 +579,13 @@ export default function Home() {
               className="category-scroll"
               style={{
                 display: 'flex',
-                gap: '12px',
+                gap: '8px',
                 overflowX: 'auto',
                 scrollbarWidth: 'none',
                 msOverflowStyle: 'none',
                 paddingLeft: '16px',
                 paddingRight: '16px',
-                paddingBottom: '4px'
+                paddingBottom: '2px',
               }}
             >
               {CATEGORIES.map((cat, index) => (
@@ -611,34 +597,36 @@ export default function Home() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '8px',
-                    padding: '16px 20px',
-                    minWidth: '100px',
-                    borderRadius: '24px',
-                    border: '1px solid var(--border-color)',
+                    gap: '7px',
+                    padding: '12px 16px',
+                    minWidth: '88px',
+                    borderRadius: '6px',
+                    border: '1.5px solid var(--border-color)',
                     background: 'var(--card-bg)',
                     textDecoration: 'none',
-                    transition: 'all 0.15s ease',
-                    flexShrink: 0
+                    transition: 'border-color 0.15s ease, background 0.15s ease',
+                    flexShrink: 0,
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--btn-primary-bg)';
-                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,113,227,0.12)';
+                    e.currentTarget.style.borderColor = '#111111';
+                    e.currentTarget.style.background = 'var(--bg-secondary)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = 'var(--border-color)';
-                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.background = 'var(--card-bg)';
                   }}
                 >
-                  <span style={{ fontSize: '1.5rem' }}>
+                  <span style={{ fontSize: '1.3rem', lineHeight: 1, color: 'var(--text-secondary)' }}>
                     {typeof cat.icon === 'string' ? cat.icon : cat.icon}
                   </span>
                   <span style={{
-                    fontSize: '0.75rem',
-                    fontWeight: 500,
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
                     color: 'var(--text-primary)',
                     textAlign: 'center',
-                    whiteSpace: 'nowrap'
+                    whiteSpace: 'nowrap',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
                   }}>
                     {cat.name}
                   </span>
@@ -647,9 +635,7 @@ export default function Home() {
             </div>
           </div>
           <style jsx>{`
-          .category-scroll::-webkit-scrollbar {
-            display: none;
-          }
+          .category-scroll::-webkit-scrollbar { display: none; }
           @media (min-width: 768px) {
             .category-scroll {
               display: grid !important;
@@ -659,24 +645,41 @@ export default function Home() {
             }
           }
           @media (min-width: 1024px) {
-            .category-scroll {
-              grid-template-columns: repeat(7, 1fr) !important;
-            }
+            .category-scroll { grid-template-columns: repeat(7, 1fr) !important; }
           }
         `}</style>
         </section>
       </ScrollReveal>
 
-      {/* Promo Banners */}
+      {/* Best Sellers */}
+      <ScrollReveal threshold={0} duration={0.4} distance="20px">
+        <section style={{ padding: '44px 0', background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
+          <div className="container" style={{ padding: '0 16px' }}>
+            <div className="section-title-row">
+              <h2>Best Sellers</h2>
+              <Link href="/category/gaming">
+                View All
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
+            <div className="product-grid">
+              {featuredProductsData.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* Promo Banners — grid 1 */}
       <ScrollReveal>
         <section style={{
-          background: 'var(--card-bg)',
-          padding: '24px 0',
+          background: 'var(--bg-primary)',
+          padding: '20px 0',
           borderBottom: '1px solid var(--border-color)',
-          transition: 'var(--theme-transition)'
         }}>
           <div className="container" style={{ padding: '0 16px' }}>
-            <PromoBanner variant="double" />
+            <PromoBanner variant="grid" />
           </div>
         </section>
       </ScrollReveal>
@@ -685,8 +688,10 @@ export default function Home() {
       <ScrollReveal>
         <section style={{
           background: 'var(--bg-marquee)',
-          padding: '32px 0',
+          padding: '28px 0',
           overflow: 'hidden',
+          borderTop: '1px solid var(--border-color)',
+          borderBottom: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
           {/* Row 1 - Scrolling Left */}
@@ -725,113 +730,64 @@ export default function Home() {
         </section>
       </ScrollReveal>
 
-      {/* Popular Gift Cards */}
-      <ScrollReveal threshold={0} duration={0.4} distance="20px">
-        <section style={{ padding: '56px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
-          <div className="container" style={{ padding: '0 16px' }}>
-            <div className="section-title-row">
-              <h2>
-                Best Seller
-              </h2>
-              <Link href="/category/gaming">
-                View All
-              </Link>
-            </div>
-            <div className="product-grid">
-              {featuredProductsData.map((product, index) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-        </section >
 
-        {/* Gaming Section */}
-        <section style={{ padding: '56px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }} className="below-fold">
+
+      {/* Gaming Section */}
+      <ScrollReveal>
+        <section style={{ padding: '44px 0', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }} className="below-fold">
           <div className="container" style={{ padding: '0 16px' }}>
             <div className="section-title-row">
               <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A8F3C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="6" width="20" height="12" rx="2" />
                   <path d="M6 12h4M8 10v4" />
-                  <circle cx="17" cy="10" r="1" fill="#10b981" />
-                  <circle cx="15" cy="12" r="1" fill="#10b981" />
+                  <circle cx="17" cy="10" r="1" fill="#1A8F3C" />
+                  <circle cx="15" cy="12" r="1" fill="#1A8F3C" />
                 </svg>
                 Gaming
               </h2>
               <Link href="/category/gaming">
                 View All
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
             <div className="product-grid">
-              {gamingProductsData.map((product, index) => (
+              {gamingProductsData.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </div>
-        </section >
+        </section>
       </ScrollReveal>
 
-      {/* Gaming Banner */}
+
+      {/* Promo Banners — grid 2 */}
       <ScrollReveal>
-        <section style={{ padding: '24px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
+        <section style={{ padding: '20px 0', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
           <div className="container" style={{ padding: '0 16px' }}>
-            <PromoBanner variant="single" category="gaming" />
+            <PromoBanner variant="grid2" />
           </div>
         </section>
       </ScrollReveal>
 
-      {/* Streaming Section */}
+
       <ScrollReveal>
-        <section style={{ padding: '56px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }} className="below-fold">
+        <section style={{ padding: '44px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
           <div className="container" style={{ padding: '0 16px' }}>
             <div className="section-title-row">
               <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="3" width="20" height="14" rx="2" />
-                  <path d="M8 21h8M12 17v4" />
-                  <polygon points="10,8 10,12 14,10" fill="#f43f5e" />
-                </svg>
-                Streaming
-              </h2>
-              <Link href="/category/streaming">
-                View All
-              </Link>
-            </div>
-            <div className="product-grid">
-              {streamingProductsData.map((product, index) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-        </section >
-      </ScrollReveal>
-
-      {/* Streaming/Software Banner */}
-      <ScrollReveal>
-        <section style={{ padding: '24px 0', background: 'var(--card-bg)', transition: 'var(--theme-transition)' }}>
-          <div className="container" style={{ padding: '0 16px' }}>
-            <PromoBanner variant="carousel" />
-          </div>
-        </section>
-      </ScrollReveal>
-
-      {/* Subscriptions Section */}
-      <ScrollReveal>
-        <section style={{ padding: '56px 0', background: 'var(--bg-primary)', transition: 'var(--theme-transition)' }}>
-          <div className="container" style={{ padding: '0 16px' }}>
-            <div className="section-title-row">
-              <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E6A817" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                 </svg>
                 Subscriptions
               </h2>
               <Link href="/category/subscriptions">
                 View All
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
             <div className="product-grid">
-              {subscriptionsProductsData.map((product, index) => (
+              {subscriptionsProductsData.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
@@ -842,77 +798,70 @@ export default function Home() {
       {/* Trust Section */}
       <ScrollReveal>
         <section style={{
-          padding: '56px 0',
-          background: 'var(--card-bg)',
+          padding: '44px 0',
+          background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
+          borderBottom: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ maxWidth: '900px', padding: '0 16px' }}>
+          <div className="container" style={{ padding: '0 16px' }}>
             <div
               className="trust-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '14px'
+                gap: '12px'
               }}
             >
               {[
                 {
                   icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#F59E0B' }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                     </svg>
                   ),
-                  bg: '#FEF3C7',
-                  bgDark: 'rgba(245,158,11,0.15)',
                   title: 'Instant Delivery',
                   desc: 'Codes via WhatsApp'
                 },
                 {
                   icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#F97316' }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                       <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
                   ),
-                  bg: '#FFEDD5',
-                  bgDark: 'rgba(249,115,22,0.15)',
                   title: 'Secure Payment',
                   desc: 'Bank transfer · eSewa'
                 },
                 {
                   icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#8B5CF6' }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                     </svg>
                   ),
-                  bg: '#F3E8FF',
-                  bgDark: 'rgba(139,92,246,0.15)',
                   title: '24/7 Support',
                   desc: 'WhatsApp chat support'
                 },
                 {
                   icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#22C55E' }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                       <polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
                   ),
-                  bg: '#DCFCE7',
-                  bgDark: 'rgba(34,197,94,0.15)',
                   title: 'Verified Codes',
                   desc: '100% working guaranteed'
                 }
               ].map((item, i) => (
                 <div key={i} className="trust-card">
-                  <div className="trust-card-icon" style={{ background: 'var(--bg-secondary)' }}>
+                  <div className="trust-card-icon">
                     {item.icon}
                   </div>
                   <div>
-                    <h3 style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '3px', color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
+                    <h3 style={{ fontSize: '0.88rem', fontWeight: 800, marginBottom: '3px', color: 'var(--text-primary)', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
                       {item.title}
                     </h3>
-                    <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+                    <p style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
                       {item.desc}
                     </p>
                   </div>
@@ -922,9 +871,7 @@ export default function Home() {
           </div>
           <style jsx>{`
           @media (min-width: 768px) {
-            .trust-grid {
-              grid-template-columns: repeat(4, 1fr) !important;
-            }
+            .trust-grid { grid-template-columns: repeat(4, 1fr) !important; }
           }
         `}</style>
         </section >
@@ -933,19 +880,23 @@ export default function Home() {
       {/* How it Works Section */}
       <ScrollReveal>
         <section style={{
-          padding: '72px 0',
-          background: 'var(--bg-secondary)',
+          padding: '56px 0',
+          background: 'var(--bg-primary)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ maxWidth: '880px', padding: '0 20px' }}>
-            <div style={{ textAlign: 'center', marginBottom: '52px' }}>
-              <h2 style={{ color: 'var(--text-primary)', fontSize: 'clamp(1.5rem, 4vw, 2rem)', margin: 0 }}>
-                How it Works
+          <div className="container" style={{ maxWidth: '920px', padding: '0 20px' }}>
+            <div style={{ marginBottom: '36px' }}>
+              <div style={{
+                display: 'inline-block',
+                fontSize: '0.65rem', fontWeight: 800,
+                textTransform: 'uppercase', letterSpacing: '0.1em',
+                color: '#111111', background: '#FFCC00',
+                padding: '3px 9px', borderRadius: '3px', marginBottom: '10px',
+              }}>How It Works</div>
+              <h2 style={{ color: 'var(--text-primary)', fontSize: 'clamp(1.35rem, 3.5vw, 1.8rem)', margin: 0, fontWeight: 800, letterSpacing: '-0.025em' }}>
+                Get your gift card in 3 steps
               </h2>
-              <p style={{ color: 'var(--text-secondary)', marginTop: '10px', fontSize: '1rem' }}>
-                Get your gift card in 3 easy steps
-              </p>
             </div>
             <div style={{
               display: 'flex',
@@ -961,7 +912,7 @@ export default function Home() {
                   title: 'Browse & Select',
                   desc: 'Choose your desired gift card or subscription from our wide selection.',
                   icon: (
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#3B82F6' }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   )
@@ -971,7 +922,7 @@ export default function Home() {
                   title: 'Pay & Send Receipt',
                   desc: 'Pay via bank transfer or eSewa and send the receipt to our WhatsApp.',
                   icon: (
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#F59E0B' }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                       <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
@@ -982,7 +933,7 @@ export default function Home() {
                   title: 'Delivery & Guidance',
                   desc: 'Receive your code instantly and get help with redemption if needed.',
                   icon: (
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#10B981' }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 2L11 13" />
                       <path d="M22 2l-7 20-4-9-9-4 20-7z" />
                     </svg>
@@ -1010,116 +961,91 @@ export default function Home() {
       {/* Hamrobazar Section */}
       <ScrollReveal>
         <section style={{
-          padding: '56px 0',
+          padding: '48px 0',
           background: 'var(--bg-secondary)',
+          borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
           <div className="container" style={{ maxWidth: '560px', padding: '0 16px' }}>
-            {/* Card — always white in both modes */}
             <div style={{
               background: 'var(--card-bg)',
-              borderRadius: 'var(--radius-2xl)',
+              borderRadius: '10px',
               overflow: 'hidden',
-              boxShadow: 'var(--shadow-xl)',
-              border: '1px solid var(--border-light)'
+              border: '1.5px solid var(--border-color)',
+              boxShadow: 'var(--shadow-md)',
             }}>
+              {/* Yellow top accent */}
+              <div style={{ height: '4px', background: '#FFCC00' }} />
 
-              <div style={{ padding: '36px 32px 32px', textAlign: 'center' }}>
+              <div style={{ padding: '32px 28px 28px', textAlign: 'center' }}>
                 {/* Logo + verified badge */}
-                <div style={{ position: 'relative', display: 'inline-block', marginBottom: '20px' }}>
+                <div style={{ position: 'relative', display: 'inline-block', marginBottom: '18px' }}>
                   <div style={{
-                    width: '140px',
-                    height: '140px',
-                    borderRadius: '24px',
-                    overflow: 'hidden',
-                    border: '2px solid #f1f5f9',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                    width: '120px', height: '120px',
+                    borderRadius: '10px', overflow: 'hidden',
+                    border: '1.5px solid var(--border-color)',
                   }}>
                     <img
                       src="/hamrobazar-ok-logo.png"
                       alt="Hamrobazar"
-                      loading="lazy"
-                      decoding="async"
+                      loading="lazy" decoding="async"
                       style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
                   </div>
                   {/* Verified badge */}
                   <div style={{
-                    position: 'absolute',
-                    bottom: '-6px',
-                    right: '-6px',
-                    background: '#22c55e',
-                    borderRadius: '50%',
-                    width: '24px',
-                    height: '24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    border: '2px solid white',
-                    boxShadow: '0 2px 6px rgba(34,197,94,0.4)'
+                    position: 'absolute', bottom: '-5px', right: '-5px',
+                    background: '#1A8F3C', borderRadius: '4px',
+                    width: '22px', height: '22px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    border: '2px solid var(--card-bg)',
                   }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
                 </div>
 
                 <h2 style={{
-                  fontSize: '1.5rem',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  marginBottom: '8px',
-                  letterSpacing: '-0.02em'
+                  fontSize: '1.35rem', fontWeight: 800,
+                  color: 'var(--text-primary)', marginBottom: '6px',
+                  letterSpacing: '-0.025em',
                 }}>
                   Also on Hamrobazar
                 </h2>
-                <p style={{
-                  color: 'var(--text-secondary)',
-                  fontSize: '0.9rem',
-                  marginBottom: '20px',
-                  lineHeight: 1.6
-                }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '18px', lineHeight: 1.6 }}>
                   Visit our verified store for more products and exclusive deals
                 </p>
 
                 {/* Star rating */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  marginBottom: '20px'
-                }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '16px' }}>
                   <div style={{ display: 'flex', gap: '2px' }}>
                     {[1, 2, 3, 4, 5].map(i => (
-                      <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B" stroke="none">
+                      <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#FFCC00" stroke="none">
                         <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                       </svg>
                     ))}
                   </div>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 500 }}>5.0 · 5000+ Sales</span>
+                  <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 600 }}>5.0 · 5000+ Sales</span>
                 </div>
 
                 {/* Stats badges */}
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  gap: '10px',
-                  marginBottom: '28px',
-                  flexWrap: 'wrap'
-                }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
                   {[
-                    { label: 'Verified', color: '#dcfce7', text: '#16a34a' },
-                    { label: 'Highly Rated', color: '#fef9c3', text: '#ca8a04' },
-                    { label: 'Since 2015', color: '#eff6ff', text: '#2563eb' }
+                    { label: 'Verified',     bg: '#E8F5EE', text: '#1A8F3C', border: '#BBDDC9' },
+                    { label: 'Highly Rated', bg: '#FEF9CD', text: '#9A6700', border: '#EDD97A' },
+                    { label: 'Since 2015',   bg: '#EEF3FF', text: '#1A5EC8', border: '#C2D0F5' },
                   ].map(badge => (
                     <span key={badge.label} style={{
-                      padding: '5px 12px',
-                      borderRadius: '20px',
-                      background: badge.color,
+                      padding: '4px 10px',
+                      borderRadius: '4px',
+                      background: badge.bg,
                       color: badge.text,
-                      fontSize: '0.75rem',
-                      fontWeight: 600
+                      border: `1px solid ${badge.border}`,
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
                     }}>
                       {badge.label}
                     </span>
@@ -1127,32 +1053,24 @@ export default function Home() {
                 </div>
 
                 {/* Buttons */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <a
                     href="https://shareurl.hamrobazaar.com/MuP498AHV4jYiuDt6"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target="_blank" rel="noopener noreferrer"
                     style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '10px',
-                      padding: '15px 28px',
-                      fontSize: '0.95rem',
-                      fontWeight: 700,
-                      background: '#3D3D3D',
-                      color: 'white',
-                      borderRadius: '14px',
-                      textDecoration: 'none',
-                      boxShadow: '0 4px 20px rgba(61, 61, 61, 0.35)',
-                      transition: 'all 0.2s ease',
-                      whiteSpace: 'nowrap',
-                      letterSpacing: '-0.01em'
+                      display: 'inline-flex', alignItems: 'center',
+                      justifyContent: 'center', gap: '8px',
+                      padding: '13px 24px',
+                      fontSize: '0.88rem', fontWeight: 800,
+                      background: '#111111', color: 'white',
+                      borderRadius: '6px', textDecoration: 'none',
+                      transition: 'background 0.15s ease',
+                      letterSpacing: '0.02em', textTransform: 'uppercase',
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(61, 61, 61, 0.5)'; e.currentTarget.style.background = '#2a2a2a'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(61, 61, 61, 0.35)'; e.currentTarget.style.background = '#3D3D3D'; }}
+                    onMouseEnter={e => e.currentTarget.style.background = '#2A2A2A'}
+                    onMouseLeave={e => e.currentTarget.style.background = '#111111'}
                   >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
                       <polyline points="15,3 21,3 21,9" />
                       <line x1="10" y1="14" x2="21" y2="3" />
@@ -1161,27 +1079,28 @@ export default function Home() {
                   </a>
                   <a
                     href="https://www.instagram.com/gamakaygiftcards/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target="_blank" rel="noopener noreferrer"
                     style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '10px',
-                      padding: '13px 28px',
-                      fontSize: '0.9rem',
-                      fontWeight: 600,
-                      background: 'linear-gradient(135deg, #833AB4 0%, #E1306C 50%, #F77737 100%)',
-                      color: 'white',
-                      borderRadius: '14px',
-                      textDecoration: 'none',
-                      boxShadow: '0 4px 16px rgba(225, 48, 108, 0.3)',
-                      transition: 'all 0.2s ease'
+                      display: 'inline-flex', alignItems: 'center',
+                      justifyContent: 'center', gap: '8px',
+                      padding: '11px 24px',
+                      fontSize: '0.85rem', fontWeight: 700,
+                      background: 'transparent',
+                      color: 'var(--text-secondary)',
+                      border: '1.5px solid var(--border-color)',
+                      borderRadius: '6px', textDecoration: 'none',
+                      transition: 'border-color 0.15s ease, color 0.15s ease',
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(225, 48, 108, 0.4)'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(225, 48, 108, 0.3)'; }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = '#E1306C';
+                      e.currentTarget.style.color = '#E1306C';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'var(--border-color)';
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                    }}
                   >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                     Follow on Instagram
@@ -1198,47 +1117,44 @@ export default function Home() {
         <FAQSection />
       </ScrollReveal>
 
-      {/* CTA Section — gradient card */}
+      {/* CTA Section */}
       <ScrollReveal>
         <section
           ref={ctaRef}
           style={{
-            padding: '56px 0',
+            padding: '48px 0',
             background: 'var(--bg-secondary)',
+            borderTop: '1px solid var(--border-color)',
             transition: 'var(--theme-transition)'
           }}
         >
           <div className="container" style={{ maxWidth: '720px', padding: '0 16px' }}>
             <div className="cta-card">
-              <h2 style={{ color: 'var(--text-primary)', fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', marginBottom: '10px', fontWeight: 800, letterSpacing: '-0.02em' }}>
+              <h2 style={{ color: 'white', fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '10px', fontWeight: 800, letterSpacing: '-0.025em' }}>
                 Need Help?
               </h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', marginBottom: '28px', lineHeight: 1.6, maxWidth: '400px', margin: '0 auto 28px' }}>
+              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.95rem', marginBottom: '28px', lineHeight: 1.65, maxWidth: '380px', margin: '0 auto 28px' }}>
                 We're on WhatsApp 24/7 — reach us in seconds for orders, support, or custom requests.
               </p>
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <a
                   href="https://wa.me/9779862157864"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target="_blank" rel="noopener noreferrer"
                   style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    padding: '14px 28px',
-                    fontSize: '1rem',
-                    fontWeight: 700,
-                    background: '#25D366',
-                    color: 'white',
-                    borderRadius: '50px',
+                    display: 'inline-flex', alignItems: 'center', gap: '8px',
+                    padding: '13px 24px',
+                    fontSize: '0.9rem', fontWeight: 800,
+                    background: '#FFCC00',
+                    color: '#111111',
+                    borderRadius: '6px',
                     textDecoration: 'none',
-                    boxShadow: '0 4px 14px rgba(37,211,102,0.3)',
-                    transition: 'all 0.2s ease'
+                    transition: 'background 0.15s ease',
+                    textTransform: 'uppercase', letterSpacing: '0.03em',
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(37,211,102,0.4)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(37,211,102,0.3)'; }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#E6B800'}
+                  onMouseLeave={e => e.currentTarget.style.background = '#FFCC00'}
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                   </svg>
                   Chat on WhatsApp
@@ -1246,21 +1162,25 @@ export default function Home() {
                 <Link
                   href="/guides"
                   style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    padding: '14px 24px',
-                    fontSize: '0.95rem',
-                    fontWeight: 600,
-                    color: 'var(--text-primary)',
-                    background: 'var(--bg-secondary)',
-                    borderRadius: '50px',
+                    display: 'inline-flex', alignItems: 'center', gap: '7px',
+                    padding: '13px 22px',
+                    fontSize: '0.88rem', fontWeight: 700,
+                    color: 'rgba(255,255,255,0.75)',
+                    background: 'rgba(255,255,255,0.08)',
+                    borderRadius: '6px',
                     textDecoration: 'none',
-                    border: '1px solid var(--border-color)',
-                    transition: 'all 0.2s ease'
+                    border: '1.5px solid rgba(255,255,255,0.15)',
+                    transition: 'border-color 0.15s ease, color 0.15s ease',
+                    textTransform: 'uppercase', letterSpacing: '0.03em',
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--border-light)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--bg-secondary)'; }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)';
+                    e.currentTarget.style.color = 'white';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                    e.currentTarget.style.color = 'rgba(255,255,255,0.75)';
+                  }}
                 >
                   Redemption Guides
                 </Link>
@@ -1268,7 +1188,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {/* ctaRef anchors the FAB hide logic */}
       </ScrollReveal>
 
       {/* WhatsApp Floating Button — smart visibility */}
@@ -1282,38 +1201,37 @@ export default function Home() {
           bottom: '24px',
           right: '20px',
           zIndex: 80,
-          width: '56px',
-          height: '56px',
-          borderRadius: '50%',
+          width: '50px',
+          height: '50px',
+          borderRadius: '8px',
           background: '#25D366',
           color: 'white',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 4px 20px rgba(37, 211, 102, 0.45)',
+          boxShadow: '0 3px 14px rgba(37,211,102,0.4)',
           textDecoration: 'none',
           border: 'none',
           cursor: 'pointer',
-          // Smart visibility
           opacity: showFab ? 1 : 0,
-          transform: showFab ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.85)',
+          transform: showFab ? 'translateY(0)' : 'translateY(12px)',
           pointerEvents: showFab ? 'auto' : 'none',
-          transition: 'opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease',
+          transition: 'opacity 0.3s ease, transform 0.3s ease, box-shadow 0.2s ease',
         }}
         onMouseEnter={(e) => {
           if (showFab) {
-            e.currentTarget.style.transform = 'translateY(-2px) scale(1.1)';
-            e.currentTarget.style.boxShadow = '0 8px 32px rgba(37, 211, 102, 0.55)';
+            e.currentTarget.style.boxShadow = '0 6px 22px rgba(37,211,102,0.5)';
+            e.currentTarget.style.transform = 'translateY(-2px)';
           }
         }}
         onMouseLeave={(e) => {
           if (showFab) {
-            e.currentTarget.style.transform = 'translateY(0) scale(1)';
-            e.currentTarget.style.boxShadow = '0 4px 20px rgba(37, 211, 102, 0.45)';
+            e.currentTarget.style.boxShadow = '0 3px 14px rgba(37,211,102,0.4)';
+            e.currentTarget.style.transform = 'translateY(0)';
           }
         }}
       >
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
         </svg>
       </a>

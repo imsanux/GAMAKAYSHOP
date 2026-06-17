@@ -8,7 +8,7 @@ import { useTheme } from '@/context/ThemeContext';
 
 export default function Header() {
     const { items } = useCart();
-    const { theme, toggleTheme, isDark } = useTheme();
+    const { toggleTheme } = useTheme(); // kept to avoid unused-import lint error — noop
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -36,83 +36,85 @@ export default function Header() {
     }, [isMenuOpen]);
 
     const navLinks = [
-        { href: '/category/gaming', label: 'Gaming' },
-        { href: '/category/streaming', label: 'Streaming' },
-        { href: '/category/software', label: 'Software' },
+        { href: '/category/gaming',        label: 'Gaming' },
+        { href: '/category/streaming',     label: 'Streaming' },
+        { href: '/category/software',      label: 'Software' },
         { href: '/category/subscriptions', label: 'Subscriptions' },
     ];
 
     return (
         <>
+            {/* ── HEADER ─────────────────────────────────────── */}
             <header style={{
                 position: 'sticky',
                 top: 0,
                 zIndex: 100,
-                background: isScrolled ? 'var(--header-bg-scrolled)' : 'var(--header-bg)',
-                backdropFilter: 'blur(20px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-                borderBottom: `1px solid ${isScrolled ? 'var(--border-color)' : 'transparent'}`,
-                transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)'
+            background: '#111111',
+                borderBottom: isScrolled
+                    ? '1px solid rgba(255,255,255,0.06)'
+                    : '1px solid transparent',
+                transition: 'border-color 0.25s ease',
             }}>
                 <div className="container" style={{
-                    position: 'relative',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    height: '52px',
-                    gap: '20px'
+                    height: '56px',
+                    gap: '24px',
+                    position: 'relative',
                 }}>
                     {/* Logo */}
                     <Link href="/" style={{
                         display: 'flex',
                         alignItems: 'center',
                         textDecoration: 'none',
-                        flexShrink: 0
+                        flexShrink: 0,
                     }}>
                         <img
                             src="/gamakay-logo.png"
                             alt="Gamakay"
                             style={{
-                                height: '80px',
-                                maxHeight: '80px',
+                                height: '72px',
+                                maxHeight: '72px',
                                 width: 'auto',
                                 objectFit: 'contain',
-                                filter: isDark ? 'brightness(0) invert(1)' : 'none',
-                                transition: 'filter 0.3s ease'
+                                filter: 'brightness(0) invert(1)',
+                                transition: 'opacity 0.2s ease',
                             }}
                         />
                     </Link>
 
-                    {/* Desktop Navigation — absolutely centered */}
+                    {/* Desktop Nav — centered */}
                     <nav className="hide-mobile" style={{
                         position: 'absolute',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '4px'
+                        gap: '2px',
                     }}>
                         {navLinks.map(link => (
                             <Link
                                 key={link.href}
                                 href={link.href}
                                 style={{
-                                    fontSize: '0.82rem',
-                                    fontWeight: 500,
-                                    color: 'var(--text-secondary)',
+                                    fontSize: '0.8rem',
+                                    fontWeight: 600,
+                                    color: 'rgba(255,255,255,0.7)',
                                     textDecoration: 'none',
-                                    padding: '8px 16px',
-                                    borderRadius: 'var(--radius-full)',
-                                    transition: 'all 0.2s ease',
-                                    letterSpacing: '-0.01em'
+                                    padding: '6px 14px',
+                                    borderRadius: '4px',
+                                    transition: 'color 0.15s ease, background 0.15s ease',
+                                    letterSpacing: '0.02em',
+                                    textTransform: 'uppercase',
                                 }}
                                 onMouseEnter={(e) => {
-                                    e.currentTarget.style.background = 'var(--btn-secondary-bg)';
-                                    e.currentTarget.style.color = 'var(--text-primary)';
+                                    e.currentTarget.style.color = '#FFFFFF';
+                                    e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
                                 }}
                                 onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
                                     e.currentTarget.style.background = 'transparent';
-                                    e.currentTarget.style.color = 'var(--text-secondary)';
                                 }}
                             >
                                 {link.label}
@@ -121,95 +123,32 @@ export default function Header() {
                     </nav>
 
                     {/* Right Actions */}
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px'
-                    }}>
-                        {/* Theme Toggle — Segmented Controller */}
-                        <button
-                            className="hide-mobile"
-                            onClick={toggleTheme}
-                            aria-label="Toggle theme"
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                background: 'var(--bg-secondary)',
-                                padding: '3px',
-                                borderRadius: '20px',
-                                border: '1px solid var(--border-light)',
-                                gap: '2px',
-                                cursor: 'pointer',
-                            }}
-                        >
-                            {/* Sun Segment */}
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    width: '32px',
-                                    height: '24px',
-                                    borderRadius: '14px',
-                                    background: !isDark ? 'var(--card-bg)' : 'transparent',
-                                    boxShadow: !isDark ? '0 2px 6px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)' : 'none',
-                                    color: !isDark ? 'var(--text-primary)' : 'var(--text-secondary)',
-                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                }}
-                            >
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="12" cy="12" r="4" />
-                                    <line x1="12" y1="2" x2="12" y2="4" />
-                                    <line x1="12" y1="20" x2="12" y2="22" />
-                                    <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" />
-                                    <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
-                                    <line x1="2" y1="12" x2="4" y2="12" />
-                                    <line x1="20" y1="12" x2="22" y2="12" />
-                                    <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" />
-                                    <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
-                                </svg>
-                            </div>
-                            {/* Moon Segment */}
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    width: '32px',
-                                    height: '24px',
-                                    borderRadius: '14px',
-                                    background: isDark ? 'var(--card-bg)' : 'transparent',
-                                    boxShadow: isDark ? '0 2px 6px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.05)' : 'none',
-                                    color: isDark ? 'var(--text-primary)' : 'var(--text-secondary)',
-                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                }}
-                            >
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                                </svg>
-                            </div>
-                        </button>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+
 
                         {/* Track Order */}
                         <Link
                             href="/track"
                             className="hide-mobile"
                             style={{
-                                fontSize: '0.82rem',
-                                fontWeight: 500,
-                                color: 'var(--text-secondary)',
+                                fontSize: '0.78rem',
+                                fontWeight: 600,
+                                color: 'rgba(255,255,255,0.7)',
                                 textDecoration: 'none',
-                                padding: '8px 14px',
-                                borderRadius: 'var(--radius-full)',
-                                transition: 'all 0.2s ease'
+                                padding: '6px 12px',
+                                borderRadius: '4px',
+                                transition: 'color 0.15s ease, background 0.15s ease',
+                                letterSpacing: '0.02em',
+                                textTransform: 'uppercase',
+                                whiteSpace: 'nowrap',
                             }}
                             onMouseEnter={(e) => {
-                                e.currentTarget.style.background = 'var(--btn-secondary-bg)';
-                                e.currentTarget.style.color = 'var(--text-primary)';
+                                e.currentTarget.style.color = '#FFFFFF';
+                                e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
                             }}
                             onMouseLeave={(e) => {
+                                e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
                                 e.currentTarget.style.background = 'transparent';
-                                e.currentTarget.style.color = 'var(--text-secondary)';
                             }}
                         >
                             Track Order
@@ -221,16 +160,17 @@ export default function Header() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: '40px',
-                            height: '40px',
-                            borderRadius: '50%',
-                            background: 'transparent',
-                            color: itemCount > 0 ? 'var(--btn-primary-bg)' : 'var(--text-secondary)',
+                            width: '38px',
+                            height: '34px',
+                            borderRadius: '4px',
+                            background: itemCount > 0 ? '#FFCC00' : 'rgba(255,255,255,0.08)',
+                            color: itemCount > 0 ? '#111111' : 'rgba(255,255,255,0.85)',
                             textDecoration: 'none',
-                            transition: 'all 0.25s ease',
-                            transform: cartBounce ? 'scale(1.15)' : 'scale(1)'
+                            transition: 'background 0.2s ease, color 0.2s ease, transform 0.2s ease',
+                            border: itemCount > 0 ? '1px solid transparent' : '1px solid rgba(255,255,255,0.12)',
+                            transform: cartBounce ? 'scale(1.12)' : 'scale(1)',
                         }}>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
                                 <line x1="3" y1="6" x2="21" y2="6" />
                                 <path d="M16 10a4 4 0 01-8 0" />
@@ -238,27 +178,27 @@ export default function Header() {
                             {itemCount > 0 && (
                                 <span style={{
                                     position: 'absolute',
-                                    top: '0px',
-                                    right: '-2px',
-                                    minWidth: '18px',
-                                    height: '18px',
+                                    top: '-5px',
+                                    right: '-5px',
+                                    minWidth: '16px',
+                                    height: '16px',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    background: '#ff453a',
+                                    background: '#D93025',
                                     color: 'white',
-                                    fontSize: '0.65rem',
-                                    fontWeight: 700,
-                                    borderRadius: '50px',
-                                    padding: '0 5px',
-                                    border: '2px solid var(--header-bg)',
+                                    fontSize: '0.6rem',
+                                    fontWeight: 800,
+                                    borderRadius: '3px',
+                                    padding: '0 4px',
+                                    border: '1.5px solid #111111',
                                 }}>
                                     {itemCount}
                                 </span>
                             )}
                         </Link>
 
-                        {/* Mobile Menu Button — Clean hamburger */}
+                        {/* Mobile Hamburger */}
                         <button
                             className="hide-desktop"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -266,52 +206,36 @@ export default function Header() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                width: '40px',
-                                height: '40px',
-                                background: 'transparent',
-                                border: 'none',
-                                borderRadius: '50%',
-                                cursor: 'pointer'
+                                width: '36px',
+                                height: '34px',
+                                background: 'rgba(255,255,255,0.08)',
+                                border: '1px solid rgba(255,255,255,0.12)',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                flexShrink: 0,
                             }}
                             aria-label="Toggle menu"
                         >
-                            <div style={{
-                                width: '18px',
-                                height: '14px',
-                                position: 'relative'
-                            }}>
+                            <div style={{ width: '16px', height: '12px', position: 'relative' }}>
                                 <span style={{
-                                    position: 'absolute',
-                                    left: 0,
-                                    width: '100%',
-                                    height: '1.5px',
-                                    background: 'var(--text-primary)',
-                                    borderRadius: '1px',
-                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    top: isMenuOpen ? '6px' : 0,
-                                    transform: isMenuOpen ? 'rotate(45deg)' : 'none'
+                                    position: 'absolute', left: 0, width: '100%', height: '1.5px',
+                                    background: 'white', borderRadius: '1px',
+                                    transition: 'all 0.25s ease',
+                                    top: isMenuOpen ? '5px' : 0,
+                                    transform: isMenuOpen ? 'rotate(45deg)' : 'none',
                                 }} />
                                 <span style={{
-                                    position: 'absolute',
-                                    left: 0,
-                                    top: '6px',
-                                    width: '100%',
-                                    height: '1.5px',
-                                    background: 'var(--text-primary)',
-                                    borderRadius: '1px',
-                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    opacity: isMenuOpen ? 0 : 1
+                                    position: 'absolute', left: 0, top: '5px', width: '100%', height: '1.5px',
+                                    background: 'white', borderRadius: '1px',
+                                    transition: 'all 0.25s ease',
+                                    opacity: isMenuOpen ? 0 : 1,
                                 }} />
                                 <span style={{
-                                    position: 'absolute',
-                                    left: 0,
-                                    width: '100%',
-                                    height: '1.5px',
-                                    background: 'var(--text-primary)',
-                                    borderRadius: '1px',
-                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    top: isMenuOpen ? '6px' : '12px',
-                                    transform: isMenuOpen ? 'rotate(-45deg)' : 'none'
+                                    position: 'absolute', left: 0, width: '100%', height: '1.5px',
+                                    background: 'white', borderRadius: '1px',
+                                    transition: 'all 0.25s ease',
+                                    top: isMenuOpen ? '5px' : '10px',
+                                    transform: isMenuOpen ? 'rotate(-45deg)' : 'none',
                                 }} />
                             </div>
                         </button>
@@ -324,40 +248,35 @@ export default function Header() {
                 className="hide-desktop"
                 onClick={() => setIsMenuOpen(false)}
                 style={{
-                    position: 'fixed',
-                    inset: 0,
-                    background: 'rgba(0, 0, 0, 0.3)',
-                    backdropFilter: 'blur(8px)',
-                    WebkitBackdropFilter: 'blur(8px)',
+                    position: 'fixed', inset: 0,
+                    background: 'rgba(0,0,0,0.55)',
                     opacity: isMenuOpen ? 1 : 0,
                     visibility: isMenuOpen ? 'visible' : 'hidden',
-                    transition: 'all 0.35s ease',
-                    zIndex: 98
+                    transition: 'all 0.3s ease',
+                    zIndex: 98,
                 }}
             />
 
-            {/* Mobile Menu — Full-width Apple style */}
+            {/* Mobile Menu Drawer */}
             <nav
                 className="hide-desktop"
                 style={{
                     position: 'fixed',
-                    top: 0,
-                    right: 0,
-                    width: '300px',
+                    top: 0, right: 0,
+                    width: '280px',
                     height: '100%',
-                    background: 'var(--mobile-menu-bg)',
-                    backdropFilter: 'blur(40px) saturate(180%)',
-                    WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+                    background: '#0A0A0A',
+                    borderLeft: '1px solid rgba(255,255,255,0.07)',
                     zIndex: 99,
                     transform: isMenuOpen ? 'translateX(0)' : 'translateX(100%)',
-                    transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
                     display: 'flex',
                     flexDirection: 'column',
-                    paddingTop: '80px',
-                    boxShadow: isMenuOpen ? '-10px 0 40px rgba(0,0,0,0.1)' : 'none'
+                    paddingTop: '72px',
+                    boxShadow: isMenuOpen ? '-8px 0 32px rgba(0,0,0,0.3)' : 'none',
                 }}
             >
-                <div style={{ padding: '0 28px', flex: 1 }}>
+                <div style={{ padding: '0 24px', flex: 1 }}>
                     {navLinks.map((link, index) => (
                         <Link
                             key={link.href}
@@ -365,136 +284,63 @@ export default function Header() {
                             onClick={() => setIsMenuOpen(false)}
                             style={{
                                 display: 'block',
-                                padding: '18px 0',
-                                fontSize: '1.15rem',
-                                fontWeight: 600,
-                                color: 'var(--text-primary)',
+                                padding: '16px 0',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                color: 'rgba(255,255,255,0.85)',
                                 textDecoration: 'none',
-                                borderBottom: index < navLinks.length - 1 ? '1px solid var(--border-light)' : 'none',
-                                letterSpacing: '-0.02em',
-                                transition: 'color 0.15s ease'
+                                borderBottom: index < navLinks.length - 1
+                                    ? '1px solid rgba(255,255,255,0.06)'
+                                    : 'none',
+                                letterSpacing: '0.02em',
+                                textTransform: 'uppercase',
+                                transition: 'color 0.15s ease',
                             }}
+                            onMouseEnter={e => e.currentTarget.style.color = '#FFCC00'}
+                            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.85)'}
                         >
                             {link.label}
                         </Link>
                     ))}
 
-                    <div style={{ marginTop: '28px', paddingTop: '28px', borderTop: '1px solid var(--border-color)' }}>
+                    <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                         <Link
                             href="/track"
                             onClick={() => setIsMenuOpen(false)}
                             style={{
-                                display: 'block',
-                                padding: '14px 0',
-                                fontSize: '1rem',
-                                fontWeight: 500,
-                                color: 'var(--text-secondary)',
-                                textDecoration: 'none'
+                                display: 'block', padding: '12px 0',
+                                fontSize: '0.88rem', fontWeight: 600,
+                                color: 'rgba(255,255,255,0.5)',
+                                textDecoration: 'none',
+                                letterSpacing: '0.02em', textTransform: 'uppercase',
+                                transition: 'color 0.15s ease',
                             }}
+                            onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.85)'}
+                            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
                         >
                             Track Order
                         </Link>
 
-                        {/* Theme toggle in mobile menu */}
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: '14px 0'
-                        }}>
-                            <span style={{
-                                fontSize: '1rem',
-                                fontWeight: 500,
-                                color: 'var(--text-secondary)'
-                            }}>
-                                {isDark ? 'Dark Mode' : 'Light Mode'}
-                            </span>
-                            <button
-                                onClick={toggleTheme}
-                                aria-label="Toggle theme"
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    background: 'var(--bg-secondary)',
-                                    padding: '3px',
-                                    borderRadius: '20px',
-                                    border: '1px solid var(--border-light)',
-                                    gap: '2px',
-                                    cursor: 'pointer',
-                                }}
-                            >
-                                {/* Sun Segment */}
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        width: '32px',
-                                        height: '24px',
-                                        borderRadius: '14px',
-                                        background: !isDark ? 'var(--card-bg)' : 'transparent',
-                                        boxShadow: !isDark ? '0 2px 6px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)' : 'none',
-                                        color: !isDark ? 'var(--text-primary)' : 'var(--text-secondary)',
-                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    }}
-                                >
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="12" cy="12" r="4" />
-                                        <line x1="12" y1="2" x2="12" y2="4" />
-                                        <line x1="12" y1="20" x2="12" y2="22" />
-                                        <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" />
-                                        <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
-                                        <line x1="2" y1="12" x2="4" y2="12" />
-                                        <line x1="20" y1="12" x2="22" y2="12" />
-                                        <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" />
-                                        <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
-                                    </svg>
-                                </div>
-                                {/* Moon Segment */}
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        width: '32px',
-                                        height: '24px',
-                                        borderRadius: '14px',
-                                        background: isDark ? 'var(--card-bg)' : 'transparent',
-                                        boxShadow: isDark ? '0 2px 6px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.05)' : 'none',
-                                        color: isDark ? 'var(--text-primary)' : 'var(--text-secondary)',
-                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    }}
-                                >
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </div>
+
                     </div>
                 </div>
 
-                <div style={{
-                    padding: '24px 28px',
-                    borderTop: '1px solid var(--border-light)'
-                }}>
+                {/* Cart CTA */}
+                <div style={{ padding: '20px 24px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
                     <Link
                         href="/cart"
                         onClick={() => setIsMenuOpen(false)}
                         style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '8px',
-                            width: '100%',
-                            padding: '14px',
-                            background: 'var(--btn-primary-bg)',
-                            color: 'white',
-                            borderRadius: 'var(--radius-full)',
-                            fontWeight: 600,
-                            textDecoration: 'none',
-                            fontSize: '0.95rem',
-                            boxShadow: '0 2px 8px rgba(0, 113, 227, 0.25)'
+                            display: 'flex', alignItems: 'center',
+                            justifyContent: 'center', gap: '8px',
+                            width: '100%', padding: '13px',
+                            background: '#FFCC00',
+                            color: '#111111',
+                            borderRadius: '6px',
+                            fontWeight: 800, textDecoration: 'none',
+                            fontSize: '0.88rem',
+                            letterSpacing: '0.02em',
+                            textTransform: 'uppercase',
                         }}
                     >
                         View Cart {itemCount > 0 && `(${itemCount})`}

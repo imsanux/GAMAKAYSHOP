@@ -58,9 +58,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  minimumScale: 1,
-  userScalable: false,
   themeColor: "#fbfbfd",
 };
 
@@ -98,6 +95,8 @@ export default function RootLayout({
           fetchPriority="high"
           media="(max-width: 767px)"
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://wa.me" />
 
@@ -181,40 +180,8 @@ export default function RootLayout({
           }}
         />
 
-        {/* Theme initialization + suppress transitions on first paint */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  document.documentElement.classList.add('no-transitions');
-                  var theme = localStorage.getItem('theme');
-                  var isDarkMode = false;
-                  
-                  if (theme) {
-                    isDarkMode = theme === 'dark';
-                  } else {
-                    // Fallback to time-based: Dark mode between 6 PM and 6 AM
-                    var hours = new Date().getHours();
-                    isDarkMode = hours < 6 || hours >= 18;
-                  }
-                  
-                  if (isDarkMode) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                  }
-                  
-                  requestAnimationFrame(function() {
-                    requestAnimationFrame(function() {
-                      document.documentElement.classList.remove('no-transitions');
-                    });
-                  });
-                } catch (e) {
-                  document.documentElement.classList.remove('no-transitions');
-                }
-              })();
-            `,
-          }}
-        />
+        {/* Prevent flash of unstyled content */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body suppressHydrationWarning style={{
         display: 'flex',

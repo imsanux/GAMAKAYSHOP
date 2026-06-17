@@ -1,23 +1,10 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://gamakay.com/sitemap.xml
-
-# Crawl-delay for all bots
-Crawl-delay: 1
-
-# Block specific paths
+# Block internal/utility routes
 Disallow: /api/
 Disallow: /_next/
-Disallow: /checkout/
-Disallow: /confirmation/
+Disallow: /admin/
 
-# Allow important assets
-Allow: /*.js$
-Allow: /*.css$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.gif$
-Allow: /*.svg$
-Allow: /*.webp$
+# Sitemap
+Sitemap: https://gamakay.com/sitemap.xml

@@ -43,100 +43,122 @@ export default function FAQSection() {
 
     return (
         <section style={{
-            padding: '80px 16px',
-            background: 'var(--bg-primary)',
-            transition: 'var(--theme-transition)'
+            padding: '72px 0',
+            background: 'var(--bg-secondary)',
+            borderTop: '1px solid var(--border-color)',
+            transition: 'var(--theme-transition)',
         }}>
-            <div className="container" style={{ maxWidth: '720px' }}>
-                <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-                    <h2 style={{
-                        fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
-                        fontWeight: 700,
-                        color: 'var(--text-primary)',
+            <div className="container" style={{ maxWidth: '740px' }}>
+                {/* Header — left-aligned, editorial */}
+                <div style={{ marginBottom: '40px' }}>
+                    <div style={{
+                        display: 'inline-block',
+                        fontSize: '0.65rem',
+                        fontWeight: 800,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em',
+                        color: '#111111',
+                        background: '#FFCC00',
+                        padding: '3px 9px',
+                        borderRadius: '3px',
                         marginBottom: '12px',
-                        letterSpacing: '-0.03em'
+                    }}>
+                        FAQ
+                    </div>
+                    <h2 style={{
+                        fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+                        fontWeight: 800,
+                        color: 'var(--text-primary)',
+                        margin: '0 0 8px',
+                        letterSpacing: '-0.03em',
                     }}>
                         Questions? Answers.
                     </h2>
                     <p style={{
-                        fontSize: '1rem',
+                        fontSize: '0.95rem',
                         color: 'var(--text-secondary)',
-                        maxWidth: '400px',
-                        margin: '0 auto'
+                        margin: 0,
+                        lineHeight: 1.6,
                     }}>
                         Everything you need to know about buying gift cards from Gamakay.
                     </p>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {/* FAQ Items */}
+                <div style={{
+                    border: '1.5px solid var(--border-color)',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    background: 'var(--bg-card)',
+                }}>
                     {faqData.map((faq, index) => {
                         const isOpen = openIndex === index;
                         return (
                             <div
                                 key={index}
                                 style={{
-                                    borderBottom: index < faqData.length - 1 ? '1px solid var(--border-light)' : 'none'
+                                    borderBottom: index < faqData.length - 1
+                                        ? '1px solid var(--border-color)'
+                                        : 'none',
                                 }}
                             >
                                 <button
                                     onClick={() => toggleFAQ(index)}
                                     style={{
                                         width: '100%',
-                                        padding: '24px 0',
+                                        padding: '20px 22px',
                                         display: 'flex',
                                         justifyContent: 'space-between',
                                         alignItems: 'center',
-                                        background: 'none',
+                                        background: isOpen ? 'var(--bg-secondary)' : 'transparent',
                                         border: 'none',
                                         cursor: 'pointer',
                                         textAlign: 'left',
-                                        gap: '24px',
-                                        color: 'var(--text-primary)',
-                                        transition: 'color 0.2s ease'
+                                        gap: '20px',
+                                        transition: 'background 0.15s ease',
                                     }}
                                     onMouseEnter={(e) => {
-                                        (e.currentTarget.querySelector('.faq-q') as HTMLElement)?.style &&
-                                            ((e.currentTarget.firstElementChild as HTMLElement).style.color = 'var(--btn-primary-bg)');
+                                        if (!isOpen) e.currentTarget.style.background = 'var(--bg-secondary)';
                                     }}
                                     onMouseLeave={(e) => {
-                                        ((e.currentTarget.firstElementChild as HTMLElement).style.color = 'var(--text-primary)');
+                                        if (!isOpen) e.currentTarget.style.background = 'transparent';
                                     }}
                                 >
                                     <span style={{
-                                        fontSize: '1.05rem',
-                                        fontWeight: 600,
-                                        color: 'inherit',
+                                        fontSize: '0.95rem',
+                                        fontWeight: 700,
+                                        color: 'var(--text-primary)',
                                         flex: 1,
-                                        transition: 'color 0.2s ease',
-                                        letterSpacing: '-0.01em'
+                                        letterSpacing: '-0.01em',
+                                        lineHeight: 1.4,
                                     }}>
                                         {faq.question}
                                     </span>
 
-                                    {/* Plus/Minus icon — Apple FAQ style */}
+                                    {/* Plus/minus — flat square button */}
                                     <div style={{
-                                        width: '28px',
-                                        height: '28px',
-                                        borderRadius: '50%',
-                                        background: isOpen ? 'var(--btn-primary-bg)' : 'var(--bg-secondary)',
+                                        width: '26px',
+                                        height: '26px',
+                                        borderRadius: '4px',
+                                        background: isOpen ? '#111111' : 'var(--border-color)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         flexShrink: 0,
-                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                        transition: 'background 0.2s ease',
                                     }}>
                                         <svg
-                                            width="14"
-                                            height="14"
+                                            width="12"
+                                            height="12"
                                             viewBox="0 0 24 24"
                                             fill="none"
-                                            stroke={isOpen ? 'white' : 'var(--text-muted)'}
-                                            strokeWidth="2.5"
+                                            stroke={isOpen ? 'white' : 'var(--text-secondary)'}
+                                            strokeWidth="3"
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             style={{
-                                                transition: 'transform 0.3s ease, stroke 0.3s ease',
-                                                transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)'
+                                                transition: 'transform 0.25s ease, stroke 0.2s ease',
+                                                transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
                                             }}
                                         >
                                             <line x1="12" y1="5" x2="12" y2="19" />
@@ -145,21 +167,18 @@ export default function FAQSection() {
                                     </div>
                                 </button>
 
-                                {/* Answer */}
+                                {/* Answer panel */}
                                 <div style={{
-                                    maxHeight: isOpen ? '500px' : '0',
+                                    maxHeight: isOpen ? '400px' : '0',
                                     overflow: 'hidden',
-                                    transition: 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    transition: 'max-height 0.35s ease',
                                 }}>
-                                    <div style={{
-                                        paddingBottom: '24px',
-                                        paddingRight: '52px'
-                                    }}>
+                                    <div style={{ padding: '0 22px 20px', paddingRight: '60px' }}>
                                         <p style={{
-                                            fontSize: '0.95rem',
+                                            fontSize: '0.9rem',
                                             color: 'var(--text-secondary)',
                                             lineHeight: 1.75,
-                                            margin: 0
+                                            margin: 0,
                                         }}>
                                             {faq.answer}
                                         </p>
