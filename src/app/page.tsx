@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import PromoBanner from '@/components/PromoBanner';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -16,59 +15,65 @@ const FAQSection = dynamic(() => import('@/components/FAQSection'), {
   ssr: true,
   loading: () => <div style={{ minHeight: '400px', width: '100%', background: 'var(--bg-primary)' }} />
 });
-import { getFeaturedProducts, getProductsByCategory, searchProducts } from '@/lib/products';
+import { getFeaturedProducts, getProductsByCategory } from '@/lib/products';
 
 // ─── Hero banner slides ──────────────────────────────────────────────────────
 // Desktop images: /public/IMAGES/webpdesktop/
 // Mobile images:  /public/IMAGES/webpmobile/
 const HERO_SLIDES = [
   {
-    desktop: '/IMAGES/webpdesktop/FIFA_desktop.webp',
-    mobile: '/IMAGES/webpmobile/FIFA_mobile.webp',
-    alt: 'FIFA World Cup 2026',
-    link: '/search?q=sports',
+    desktop: '/IMAGES/webpdesktop/AI_web.webp',
+    mobile: '/IMAGES/webpmobile/AI_mobile.webp',
+    alt: 'AI Tools',
+    link: '/category/software',
   },
   {
-    desktop: '/IMAGES/webpdesktop/Netflix_desktop.webp',
-    mobile: '/IMAGES/webpmobile/Netflix_mobile.webp',
-    alt: 'Netflix',
-    link: '/search?q=netflix',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/Playstatio_Xbox_desktop.webp',
-    mobile: '/IMAGES/webpmobile/Playstation_xbox_mobile.webp',
-    alt: 'PlayStation & Xbox',
-    link: '/category/gaming',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/Steam_desktop.webp',
-    mobile: '/IMAGES/webpmobile/Steam_mobile.webp',
-    alt: 'Steam Gift Cards',
-    link: '/search?q=steam',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/Apple_desktop.webp',
-    mobile: '/IMAGES/webpmobile/Apple_mobile.webp',
+    desktop: '/IMAGES/webpdesktop/AppleGiftcard_web.webp',
+    mobile: '/IMAGES/webpmobile/Applegiftcard_mobile.webp',
     alt: 'Apple Gift Cards',
     link: '/search?q=apple',
   },
   {
-    desktop: '/IMAGES/webpdesktop/Grok_desktop.webp',
-    mobile: '/IMAGES/webpmobile/Grok_mobile.webp',
+    desktop: '/IMAGES/webpdesktop/Applemusic_web.webp',
+    mobile: '/IMAGES/webpmobile/Applemusic_mobile.webp',
+    alt: 'Apple Music',
+    link: '/search?q=apple+music',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/FIFA_web.webp',
+    mobile: '/IMAGES/webpmobile/FIFA_mobile.webp',
+    alt: 'FIFA',
+    link: '/search?q=fifa',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/GROK_web.webp',
+    mobile: '/IMAGES/webpmobile/Grok_mobile_new.webp',
     alt: 'Grok AI',
     link: '/search?q=grok',
   },
   {
-    desktop: '/IMAGES/webpdesktop/Suno_desktop.webp',
-    mobile: '/IMAGES/webpmobile/Suno_mobile.webp',
-    alt: 'Suno AI',
-    link: '/search?q=suno',
+    desktop: '/IMAGES/webpdesktop/Gamepass_web.webp',
+    mobile: '/IMAGES/webpmobile/Gamepass_mobile.webp',
+    alt: 'Xbox Game Pass',
+    link: '/search?q=xbox',
   },
   {
-    desktop: '/IMAGES/webpdesktop/Udemy_desktop.webp',
-    mobile: '/IMAGES/webpmobile/Udemy_mobile.webp',
-    alt: 'Udemy',
-    link: '/search?q=udemy',
+    desktop: '/IMAGES/webpdesktop/NETFLIX_web.webp',
+    mobile: '/IMAGES/webpmobile/Netflix_mobile_new.webp',
+    alt: 'Netflix',
+    link: '/search?q=netflix',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/Playstation_web.webp',
+    mobile: '/IMAGES/webpmobile/Playstation_mobile.webp',
+    alt: 'PlayStation',
+    link: '/search?q=playstation',
+  },
+  {
+    desktop: '/IMAGES/webpdesktop/Steam_web.webp',
+    mobile: '/IMAGES/webpmobile/Steam_mobile_new.webp',
+    alt: 'Steam Gift Cards',
+    link: '/search?q=steam',
   },
 ];
 
@@ -165,7 +170,6 @@ const MARQUEE_ROW2 = [
 
 
 export default function Home() {
-  const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slideReady, setSlideReady] = useState(false);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
@@ -198,12 +202,6 @@ export default function Home() {
     }
   };
 
-  // Live search state
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<ReturnType<typeof searchProducts>>([]);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
-
   // Smart FAB: show after scrolling past hero, hide near bottom CTA
   const [showFab, setShowFab] = useState(false);
   const ctaRef = useRef<HTMLElement>(null);
@@ -226,29 +224,6 @@ export default function Home() {
     };
     window.addEventListener('scroll', handleFabVisibility, { passive: true });
     return () => window.removeEventListener('scroll', handleFabVisibility);
-  }, []);
-
-  // Handle live search
-  useEffect(() => {
-    if (searchQuery.trim().length > 0) {
-      const results = searchProducts(searchQuery);
-      setSearchResults(results.slice(0, 8));
-      setShowDropdown(true);
-    } else {
-      setSearchResults([]);
-      setShowDropdown(false);
-    }
-  }, [searchQuery]);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowDropdown(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   // Randomize starting slide on mount (after hydration)
@@ -281,76 +256,53 @@ export default function Home() {
 
   return (
     <div style={{ background: 'var(--bg-primary)', transition: 'background-color 0.3s ease' }}>
-      {/* Hero Carousel — Coverflow / Center-Stage */}
+      {/* Hero Carousel — Contained */}
       <section
         className="hero-section"
         style={{
-          padding: '16px 0 20px',
-          background: '#0E1117',
+          paddingTop: 'var(--header-height, 110px)',
+          background: 'var(--bg-primary)',
           overflow: 'hidden',
         }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEndWrapper}
       >
-        {/*
-          Static-height container — never resizes on slide change.
-          Every slide is position:absolute, centered via translate(-50%,-50%).
-          Only the X offset changes per slide state.
-        */}
-        <div style={{
-          position: 'relative',
-          height: 'clamp(190px, 34vw, 400px)',  /* fixed — never animates */
-          width: '100%',
-        }}>
+        <div className="container" style={{ paddingTop: 'clamp(12px, 2vw, 20px)', paddingBottom: '20px' }}>
+          {/* Slide Track */}
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: 'clamp(180px, 32vw, 380px)',
+            background: '#0E1117',
+            overflow: 'hidden',
+            borderRadius: '16px',
+            boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
+          }}>
+            {/* Slides */}
           {HERO_SLIDES.map((slide, index) => {
-            const offset = index - currentSlide;
-            const isActive   = offset === 0;
-            const isPrev     = offset === -1;
-            const isNext     = offset === 1;
-            const isVisible  = Math.abs(offset) <= 1;
-
-            // X offset from center (50%)
-            // Active  → 0
-            // Prev    → shifted left (active half-width + side half-width + gap)
-            // Next    → shifted right
-            // Distant → far off-screen (no flash during transition)
-            const xOffset = isActive
-              ? '-50%'
-              : isPrev
-              ? 'calc(-50% - min(37vw, 428px))'
-              : isNext
-              ? 'calc(-50% + min(37vw, 428px))'
-              : offset < 0
-              ? 'calc(-50% - 200vw)'
-              : 'calc(-50% + 200vw)';
-
+            const isActive = index === currentSlide;
             return (
               <div
                 key={index}
-                onClick={() => {
-                  if (isPrev) setCurrentSlide(p => (p - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-                  if (isNext) setCurrentSlide(p => (p + 1) % HERO_SLIDES.length);
-                }}
                 style={{
                   position: 'absolute',
-                  left: '50%',
-                  top: '50%',
-                  transform: `translateX(${xOffset}) translateY(-50%) scale(${isActive ? 1 : 0.85})`,
-                  width: 'min(72vw, 820px)',
-                  height: '100%',
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  opacity: isActive ? 1 : isVisible ? 0.52 : 0,
-                  cursor: isVisible && !isActive ? 'pointer' : 'default',
-                  pointerEvents: isVisible && !isActive ? 'auto' : isActive ? 'none' : 'none',
-                  zIndex: isActive ? 2 : 1,
-                  border: isActive ? '2px solid rgba(255,255,255,0.09)' : 'none',
-                  boxShadow: isActive ? '0 8px 40px rgba(0,0,0,0.55)' : 'none',
-                  transition: 'transform 0.52s cubic-bezier(0.4,0,0.2,1), opacity 0.45s ease',
+                  inset: 0,
+                  opacity: isActive ? 1 : 0,
+                  transition: 'opacity 0.55s ease',
+                  zIndex: isActive ? 1 : 0,
+                  pointerEvents: isActive ? 'auto' : 'none',
                 }}
               >
-                <Link href={slide.link} style={{ display: 'block', width: '100%', height: '100%' }}>
+                <Link
+                  href={slide.link}
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    cursor: 'pointer',
+                  }}
+                >
                   <picture style={{ display: 'block', width: '100%', height: '100%' }}>
                     <source media="(max-width: 767px)" srcSet={slide.mobile} type="image/webp" />
                     <img
@@ -366,22 +318,88 @@ export default function Home() {
                         objectFit: 'cover',
                         objectPosition: 'center',
                         display: 'block',
-                        filter: isActive ? 'none' : 'brightness(0.62)',
-                        transition: 'filter 0.45s ease',
-                        pointerEvents: 'none',
                       }}
                     />
                   </picture>
                 </Link>
+                {/* Slide content end */}
               </div>
             );
           })}
 
+          {/* Left Arrow */}
+          <button
+            onClick={() => setCurrentSlide(p => (p - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
+            aria-label="Previous slide"
+            style={{
+              position: 'absolute',
+              left: '8px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 10,
+              width: '40px',
+              height: '40px',
+              background: 'transparent',
+              border: 'none',
+              color: '#FFFFFF',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'transform 0.2s ease, color 0.2s ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+              e.currentTarget.style.color = '#EAB308';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+              e.currentTarget.style.color = '#FFFFFF';
+            }}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}>
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
 
+          {/* Right Arrow */}
+          <button
+            onClick={() => setCurrentSlide(p => (p + 1) % HERO_SLIDES.length)}
+            aria-label="Next slide"
+            style={{
+              position: 'absolute',
+              right: '8px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 10,
+              width: '40px',
+              height: '40px',
+              background: 'transparent',
+              border: 'none',
+              color: '#FFFFFF',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'transform 0.2s ease, color 0.2s ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+              e.currentTarget.style.color = '#EAB308';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+              e.currentTarget.style.color = '#FFFFFF';
+            }}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}>
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
 
         {/* Dot indicators */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginTop: '14px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', padding: '12px 0 10px' }}>
           {HERO_SLIDES.map((_, index) => (
             <button
               key={index}
@@ -391,7 +409,7 @@ export default function Home() {
                 height: '6px',
                 borderRadius: '3px',
                 border: 'none',
-                background: currentSlide === index ? '#EAB308' : 'rgba(255,255,255,0.22)',
+                background: currentSlide === index ? '#EAB308' : 'rgba(255,255,255,0.28)',
                 cursor: 'pointer',
                 transition: 'all 0.26s ease',
                 padding: 0,
@@ -400,169 +418,6 @@ export default function Home() {
             />
           ))}
         </div>
-      </section>
-
-
-      {/* Search Bar Section */}
-      <section style={{
-        background: 'var(--bg-primary)',
-        padding: '20px 0',
-        borderBottom: '2px solid var(--border-color)',
-        transition: 'var(--theme-transition)'
-      }}>
-        <div className="container" style={{ maxWidth: '680px', margin: '0 auto', padding: '0 16px' }}>
-          <div ref={searchRef} style={{ position: 'relative', width: '100%' }}>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (searchQuery.trim()) {
-                  setShowDropdown(false);
-                  router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-                }
-              }}
-              style={{ position: 'relative', width: '100%' }}
-            >
-              <input
-                type="text"
-                name="search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for gift cards, subscriptions..."
-                style={{
-                  width: '100%',
-                  padding: '13px 52px 13px 18px',
-                  fontSize: '0.95rem',
-                  border: '1.5px solid var(--border-color)',
-                  color: 'var(--text-primary)',
-                  borderRadius: showDropdown && searchResults.length > 0 ? '6px 6px 0 0' : '6px',
-                  background: 'var(--card-bg)',
-                  outline: 'none',
-                  transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-                  fontWeight: 500,
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#111111';
-                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(17,17,17,0.08)';
-                  if (searchQuery.trim().length > 0) setShowDropdown(true);
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--border-color)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-              />
-              <button
-                type="submit"
-                style={{
-                  position: 'absolute',
-                  right: '5px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  width: '38px',
-                  height: '34px',
-                  background: '#111111',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'background 0.15s ease',
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = '#333333'}
-                onMouseLeave={e => e.currentTarget.style.background = '#111111'}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="M21 21l-4.35-4.35" />
-                </svg>
-              </button>
-            </form>
-
-            {/* Live Search Dropdown */}
-            {showDropdown && searchResults.length > 0 && (
-              <div style={{
-                position: 'absolute',
-                top: '100%',
-                left: 0,
-                right: 0,
-                background: 'var(--dropdown-bg)',
-                border: '1.5px solid #111111',
-                borderTop: 'none',
-                borderRadius: '0 0 6px 6px',
-                boxShadow: 'var(--shadow-lg)',
-                zIndex: 100,
-                maxHeight: '400px',
-                overflowY: 'auto'
-              }}>
-                {searchResults.map((product) => (
-                  <Link
-                    key={product.id}
-                    href={`/search?q=${encodeURIComponent(product.name)}`}
-                    onClick={() => { setShowDropdown(false); setSearchQuery(''); }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      padding: '11px 14px',
-                      textDecoration: 'none',
-                      color: 'var(--text-primary)',
-                      borderBottom: '1px solid var(--border-color)',
-                      transition: 'background 0.12s ease',
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-secondary)'}
-                    onMouseLeave={(e) => e.currentTarget.style.background = 'var(--dropdown-bg)'}
-                  >
-                    <div style={{
-                      width: '42px', height: '42px',
-                      borderRadius: '5px', overflow: 'hidden',
-                      flexShrink: 0, background: 'var(--bg-secondary)',
-                      border: '1px solid var(--border-color)',
-                    }}>
-                      <img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontWeight: 700, fontSize: '0.88rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {product.name}
-                      </div>
-                      <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '1px' }}>
-                        {product.brand} · {product.category}
-                      </div>
-                    </div>
-                    <div style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>
-                      Rs. {product.denominations[0]?.price.toLocaleString()}
-                    </div>
-                  </Link>
-                ))}
-
-                {/* View All Results */}
-                <Link
-                  href={`/search?q=${encodeURIComponent(searchQuery.trim())}`}
-                  onClick={() => setShowDropdown(false)}
-                  style={{
-                    display: 'flex', alignItems: 'center',
-                    justifyContent: 'center', gap: '6px',
-                    padding: '13px 14px',
-                    textDecoration: 'none',
-                    color: 'var(--text-primary)',
-                    fontWeight: 700,
-                    fontSize: '0.82rem',
-                    background: 'var(--bg-secondary)',
-                    borderRadius: '0 0 5px 5px',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.04em',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'var(--border-color)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'var(--bg-secondary)'}
-                >
-                  View all results for "{searchQuery}"
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            )}
-          </div>
         </div>
       </section>
 
@@ -574,38 +429,25 @@ export default function Home() {
           borderBottom: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ padding: '0' }}>
-            <div
-              className="category-scroll"
-              style={{
-                display: 'flex',
-                gap: '8px',
-                overflowX: 'auto',
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none',
-                paddingLeft: '16px',
-                paddingRight: '16px',
-                paddingBottom: '2px',
-              }}
-            >
+          <div className="container">
+            <div className="category-row">
               {CATEGORIES.map((cat, index) => (
                 <Link
                   key={index}
                   href={cat.slug ? `/category/${cat.slug}` : '/'}
+                  className="category-item"
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '7px',
-                    padding: '12px 16px',
-                    minWidth: '88px',
+                    padding: '12px 8px',
                     borderRadius: '6px',
                     border: '1.5px solid var(--border-color)',
                     background: 'var(--card-bg)',
                     textDecoration: 'none',
                     transition: 'border-color 0.15s ease, background 0.15s ease',
-                    flexShrink: 0,
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = '#111111';
@@ -620,13 +462,13 @@ export default function Home() {
                     {typeof cat.icon === 'string' ? cat.icon : cat.icon}
                   </span>
                   <span style={{
-                    fontSize: '0.7rem',
+                    fontSize: '0.65rem',
                     fontWeight: 700,
                     color: 'var(--text-primary)',
                     textAlign: 'center',
-                    whiteSpace: 'nowrap',
                     textTransform: 'uppercase',
                     letterSpacing: '0.04em',
+                    lineHeight: 1.2,
                   }}>
                     {cat.name}
                   </span>
@@ -653,8 +495,8 @@ export default function Home() {
 
       {/* Best Sellers */}
       <ScrollReveal threshold={0} duration={0.4} distance="20px">
-        <section style={{ padding: '44px 0', background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
-          <div className="container" style={{ padding: '0 16px' }}>
+        <section className="section-padding" style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
+          <div className="container">
             <div className="section-title-row">
               <h2>Best Sellers</h2>
               <Link href="/category/gaming">
@@ -673,12 +515,11 @@ export default function Home() {
 
       {/* Promo Banners — grid 1 */}
       <ScrollReveal>
-        <section style={{
+        <section className="promo-padding" style={{
           background: 'var(--bg-primary)',
-          padding: '20px 0',
           borderBottom: '1px solid var(--border-color)',
         }}>
-          <div className="container" style={{ padding: '0 16px' }}>
+          <div className="container">
             <PromoBanner variant="grid" />
           </div>
         </section>
@@ -734,8 +575,8 @@ export default function Home() {
 
       {/* Gaming Section */}
       <ScrollReveal>
-        <section style={{ padding: '44px 0', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }} className="below-fold">
-          <div className="container" style={{ padding: '0 16px' }}>
+        <section className="section-padding below-fold" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
+          <div className="container">
             <div className="section-title-row">
               <h2>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A8F3C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -763,8 +604,8 @@ export default function Home() {
 
       {/* Promo Banners — grid 2 */}
       <ScrollReveal>
-        <section style={{ padding: '20px 0', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
-          <div className="container" style={{ padding: '0 16px' }}>
+        <section className="promo-padding" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
+          <div className="container">
             <PromoBanner variant="grid2" />
           </div>
         </section>
@@ -772,8 +613,8 @@ export default function Home() {
 
 
       <ScrollReveal>
-        <section style={{ padding: '44px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
-          <div className="container" style={{ padding: '0 16px' }}>
+        <section className="section-padding" style={{ background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
+          <div className="container">
             <div className="section-title-row">
               <h2>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E6A817" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -795,16 +636,15 @@ export default function Home() {
         </section>
       </ScrollReveal>
 
-      {/* Trust Section */}
+      {/* Trust Badges */}
       <ScrollReveal>
-        <section style={{
-          padding: '44px 0',
+        <section className="section-padding" style={{
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
           borderBottom: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ padding: '0 16px' }}>
+          <div className="container">
             <div
               className="trust-grid"
               style={{
@@ -879,8 +719,7 @@ export default function Home() {
 
       {/* How it Works Section */}
       <ScrollReveal>
-        <section style={{
-          padding: '56px 0',
+        <section className="section-padding" style={{
           background: 'var(--bg-primary)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
@@ -960,13 +799,12 @@ export default function Home() {
 
       {/* Hamrobazar Section */}
       <ScrollReveal>
-        <section style={{
-          padding: '48px 0',
+        <section className="section-padding" style={{
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ maxWidth: '560px', padding: '0 16px' }}>
+          <div className="container" style={{ maxWidth: '560px' }}>
             <div style={{
               background: 'var(--card-bg)',
               borderRadius: '10px',
@@ -1128,7 +966,7 @@ export default function Home() {
             transition: 'var(--theme-transition)'
           }}
         >
-          <div className="container" style={{ maxWidth: '720px', padding: '0 16px' }}>
+          <div className="container" style={{ maxWidth: '720px' }}>
             <div className="cta-card">
               <h2 style={{ color: 'white', fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '10px', fontWeight: 800, letterSpacing: '-0.025em' }}>
                 Need Help?

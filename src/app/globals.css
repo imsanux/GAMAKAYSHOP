@@ -15,6 +15,9 @@
 }
 
 :root {
+  /* ── Header ─────────────────────────────────────── */
+  --header-height: 80px;   /* desktop nav = 80px single row */
+
   /* ── Core palette ───────────────────────────────── */
   --color-ink:          #111111;
   --color-paper:        #F7F7F5;
@@ -198,6 +201,24 @@ p {
 
 @media (min-width: 1024px) {
   .container { padding: 0 40px; }
+}
+
+/* ── Section Spacing ── */
+.section-padding {
+  padding: 40px 0;
+}
+
+.promo-padding {
+  padding: 24px 0;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 64px 0;
+  }
+  .promo-padding {
+    padding: 32px 0;
+  }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -927,5 +948,51 @@ html.lenis body        { height: auto; }
     grid-row: auto !important;
     aspect-ratio: 4 / 3;
     height: auto !important;
+  }
+}
+
+/* ── Responsive Header Heights ── */
+.nav-top-row {
+  height: 80px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 108px; /* 56px top row + ~52px mobile search row */
+  }
+  .nav-top-row {
+    height: 56px;
+  }
+}
+
+/* ── Responsive Category Row ── */
+.category-row {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 2px;
+}
+
+.category-item {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 767px) {
+  .category-row {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Negative margin to pull it edge-to-edge out of the container on mobile */
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .category-row::-webkit-scrollbar {
+    display: none;
+  }
+  .category-item {
+    flex: 0 0 auto;
+    min-width: 88px;
   }
 }
