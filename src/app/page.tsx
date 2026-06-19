@@ -949,7 +949,8 @@ export default function Home() {
                   href="https://wa.me/9779862157864"
                   target="_blank" rel="noopener noreferrer"
                   style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                    width: '100%', maxWidth: '260px',
                     padding: '13px 22px',
                     fontSize: '0.9rem', fontWeight: 700,
                     background: '#FFCC00',
@@ -970,7 +971,8 @@ export default function Home() {
                 <Link
                   href="/guides"
                   style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '7px',
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '7px',
+                    width: '100%', maxWidth: '260px',
                     padding: '13px 22px',
                     fontSize: '0.88rem', fontWeight: 700,
                     color: 'rgba(255,255,255,0.75)',
