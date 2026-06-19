@@ -742,7 +742,7 @@ export default function Home() {
                 padding: '3px 9px', borderRadius: '3px', marginBottom: '10px',
               }}>How It Works</div>
               <h2 style={{ color: 'var(--text-primary)', fontSize: 'clamp(1.35rem, 3.5vw, 1.8rem)', margin: 0, fontWeight: 800, letterSpacing: '-0.025em' }}>
-                Get your gift card in 3 steps
+                Get your product In 3 simple steps
               </h2>
               </div>
             </ScrollReveal>
