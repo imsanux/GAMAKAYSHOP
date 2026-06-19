@@ -205,19 +205,19 @@ p {
 
 /* ── Section Spacing ── */
 .section-padding {
-  padding: 40px 0;
+  padding: 48px 0;
 }
 
 .promo-padding {
-  padding: 24px 0;
+  padding: 32px 0;
 }
 
 @media (min-width: 768px) {
   .section-padding {
-    padding: 64px 0;
+    padding: 72px 0;
   }
   .promo-padding {
-    padding: 32px 0;
+    padding: 48px 0;
   }
 }
 

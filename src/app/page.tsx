@@ -536,9 +536,8 @@ export default function Home() {
 
       {/* Brand Marquee */}
       <ScrollReveal>
-        <section style={{
+        <section className="promo-padding" style={{
           background: 'var(--bg-marquee)',
-          padding: '28px 0',
           overflow: 'hidden',
           borderTop: '1px solid var(--border-color)',
           borderBottom: '1px solid var(--border-color)',
@@ -732,7 +731,7 @@ export default function Home() {
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
-          <div className="container" style={{ maxWidth: '920px', padding: '0 20px' }}>
+          <div className="container" style={{ maxWidth: '920px' }}>
             <ScrollReveal>
               <div className="hiw-header" style={{ marginBottom: '36px' }}>
               <div style={{
@@ -806,8 +805,7 @@ export default function Home() {
         <section className="section-padding" style={{
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
-          transition: 'var(--theme-transition)',
-          paddingBottom: '48px'
+          transition: 'var(--theme-transition)'
         }}>
           <div className="container" style={{ maxWidth: '1000px' }}>
             <div style={{
