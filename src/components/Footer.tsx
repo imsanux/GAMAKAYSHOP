@@ -14,8 +14,6 @@ export default function Footer() {
             paddingTop: '0',
             transition: 'background 0.35s ease',
         }}>
-            {/* Yellow accent top bar */}
-            <div style={{ height: '3px', background: '#FFCC00' }} />
 
             <div className="container" style={{ paddingTop: '48px' }}>
                 {/* Main Footer Grid */}

@@ -22,9 +22,9 @@
   --color-ink:          #111111;
   --color-paper:        #F7F7F5;
   --color-card:         #FFFFFF;
-  --color-yellow:       #FFCC00;
-  --color-yellow-dark:  #E6B800;
-  --color-yellow-light: #FFF8CC;
+  --color-yellow:       #F4D97A;
+  --color-yellow-dark:  #D4B859;
+  --color-yellow-light: #FDF7E3;
   --color-red:          #D93025;
   --color-green:        #1A8F3C;
   --color-green-light:  #E8F5EE;
@@ -33,8 +33,8 @@
   /* ── Semantic roles ─────────────────────────────── */
   --color-primary:      #111111;
   --color-secondary:    #555555;
-  --color-accent:       #FFCC00;
-  --color-accent-hover: #E6B800;
+  --color-accent:       #F4D97A;
+  --color-accent-hover: #D4B859;
   --color-success:      #1A8F3C;
   --color-warning:      #E6A817;
   --color-error:        #D93025;
@@ -57,7 +57,7 @@
   --border-light:  rgba(0,0,0,0.06);
   --border-medium: rgba(0,0,0,0.12);
   --border-color:  #E0E0DE;
-  --border-accent: rgba(255,204,0,0.4);
+  --border-accent: rgba(244,217,122,0.4);
 
   /* ── Shadows — tight, intentional ──────────────── */
   --shadow-sm:   0 1px 3px rgba(0,0,0,0.08);
@@ -81,7 +81,7 @@
 
   /* ── Buttons ─────────────────────────────────────── */
   --btn-primary-bg:    #111111;
-  --btn-primary-hover: #EAB308;
+  --btn-primary-hover: #F4D97A;
   --btn-primary-text:  #FFFFFF;
   --btn-secondary-bg:  rgba(0,0,0,0.05);
   --btn-secondary-hover: rgba(0,0,0,0.09);

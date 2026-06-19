@@ -295,9 +295,12 @@ export default function Home() {
                   position: 'absolute',
                   inset: 0,
                   opacity: isActive ? 1 : 0,
-                  transition: 'opacity 0.55s ease',
+                  transition: 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s',
+                  transform: isActive ? 'scale(1)' : 'scale(1.03)',
                   zIndex: isActive ? 1 : 0,
                   pointerEvents: isActive ? 'auto' : 'none',
+                  willChange: 'opacity, transform',
+                  visibility: isActive ? 'visible' : 'hidden',
                 }}
               >
                 <Link
@@ -803,26 +806,34 @@ export default function Home() {
         </section>
       </ScrollReveal>
 
-      {/* Hamrobazar Section */}
+            {/* Cards Section: Hamrobazar & Need Help */}
       <ScrollReveal>
         <section className="section-padding" style={{
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
-          transition: 'var(--theme-transition)'
+          transition: 'var(--theme-transition)',
+          paddingBottom: '48px'
         }}>
-          <div className="container" style={{ maxWidth: '560px' }}>
+          <div className="container" style={{ maxWidth: '1000px' }}>
             <div style={{
-              background: 'var(--card-bg)',
-              borderRadius: '10px',
-              overflow: 'hidden',
-              border: '1.5px solid var(--border-color)',
-              boxShadow: 'var(--shadow-md)',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '24px',
+              alignItems: 'stretch'
             }}>
-              {/* Yellow top accent */}
-              <div style={{ height: '4px', background: '#FFCC00' }} />
-
-              <div style={{ padding: '32px 28px 28px', textAlign: 'center' }}>
-                {/* Logo + verified badge */}
+              
+              {/* Hamrobazar Card */}
+              <div style={{
+                background: 'var(--card-bg)',
+                borderRadius: '10px',
+                overflow: 'hidden',
+                border: '1.5px solid var(--border-color)',
+                boxShadow: 'var(--shadow-md)',
+                display: 'flex',
+                flexDirection: 'column'
+              }}>
+                <div style={{ padding: '32px 28px 28px', textAlign: 'center', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                {/* Logo */}
                 <div style={{ position: 'relative', display: 'inline-block', marginBottom: '18px' }}>
                   <div style={{
                     width: '120px', height: '120px',
@@ -835,18 +846,6 @@ export default function Home() {
                       loading="lazy" decoding="async"
                       style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
-                  </div>
-                  {/* Verified badge */}
-                  <div style={{
-                    position: 'absolute', bottom: '-5px', right: '-5px',
-                    background: '#1A8F3C', borderRadius: '4px',
-                    width: '22px', height: '22px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    border: '2px solid var(--card-bg)',
-                  }}>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
                   </div>
                 </div>
 
@@ -864,36 +863,26 @@ export default function Home() {
                 {/* Star rating */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '16px' }}>
                   <div style={{ display: 'flex', gap: '2px' }}>
+                    <svg width="0" height="0">
+                      <defs>
+                        <linearGradient id="halfStar">
+                          <stop offset="60%" stopColor="#FFCC00" />
+                          <stop offset="60%" stopColor="transparent" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
                     {[1, 2, 3, 4, 5].map(i => (
-                      <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#FFCC00" stroke="none">
+                      <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={i <= 4 ? "#FFCC00" : (i === 5 ? "url(#halfStar)" : "#FFCC00")} stroke={i === 5 ? "#FFCC00" : "none"} strokeWidth="2">
                         <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                       </svg>
                     ))}
                   </div>
-                  <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 600 }}>5.0 · 5000+ Sales</span>
+                  <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 600 }}>4.6 · 5000+ Sales</span>
                 </div>
 
-                {/* Stats badges */}
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
-                  {[
-                    { label: 'Verified',     bg: '#E8F5EE', text: '#1A8F3C', border: '#BBDDC9' },
-                    { label: 'Highly Rated', bg: '#FEF9CD', text: '#9A6700', border: '#EDD97A' },
-                    { label: 'Since 2015',   bg: '#EEF3FF', text: '#1A5EC8', border: '#C2D0F5' },
-                  ].map(badge => (
-                    <span key={badge.label} style={{
-                      padding: '4px 10px',
-                      borderRadius: '4px',
-                      background: badge.bg,
-                      color: badge.text,
-                      border: `1px solid ${badge.border}`,
-                      fontSize: '0.72rem',
-                      fontWeight: 700,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                    }}>
-                      {badge.label}
-                    </span>
-                  ))}
+                {/* Stats */}
+                <div style={{ marginBottom: '24px', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  Since 2015
                 </div>
 
                 {/* Buttons */}
@@ -950,31 +939,13 @@ export default function Home() {
                     Follow on Instagram
                   </a>
                 </div>
+                            </div>
               </div>
-            </div>
-          </div>
-        </section>
-      </ScrollReveal>
 
-      {/* FAQ Section */}
-      <ScrollReveal>
-        <FAQSection />
-      </ScrollReveal>
 
-      {/* CTA Section */}
-      <ScrollReveal>
-        <section
-          ref={ctaRef}
-          style={{
-            padding: '48px 0',
-            background: 'var(--bg-secondary)',
-            borderTop: '1px solid var(--border-color)',
-            transition: 'var(--theme-transition)'
-          }}
-        >
-          <div className="container" style={{ maxWidth: '720px' }}>
-            <div className="cta-card">
-              <h2 style={{ color: 'white', fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '10px', fontWeight: 800, letterSpacing: '-0.025em' }}>
+              {/* Need Help CTA Card */}
+              <section className="cta-card" ref={ctaRef} style={{ margin: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
+<h2 style={{ color: 'white', fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '10px', fontWeight: 800, letterSpacing: '-0.025em' }}>
                 Need Help?
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.95rem', marginBottom: '28px', lineHeight: 1.65, maxWidth: '380px', margin: '0 auto 28px' }}>
@@ -1029,12 +1000,19 @@ export default function Home() {
                   Redemption Guides
                 </Link>
               </div>
+            </section>
+
             </div>
           </div>
         </section>
       </ScrollReveal>
 
-      {/* WhatsApp Floating Button — smart visibility */}
+      {/* FAQ Section */}
+      <ScrollReveal>
+        <FAQSection />
+      </ScrollReveal>
+
+{/* WhatsApp Floating Button — smart visibility */}
       <a
         href="https://wa.me/9779862157864"
         target="_blank"

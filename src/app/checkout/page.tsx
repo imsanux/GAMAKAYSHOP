@@ -7,13 +7,24 @@ import Link from 'next/link';
 export default function CheckoutPage() {
     const { items, getTotal, clearCart } = useCart();
     const [phone, setPhone] = useState('');
+    const [phoneError, setPhoneError] = useState('');
     const [showPayment, setShowPayment] = useState(false);
     const [orderNumber, setOrderNumber] = useState('');
 
-    const generateOrderNumber = (phoneNum: string) => {
-        const timestamp = Date.now().toString(36).toUpperCase();
-        const phoneSuffix = phoneNum.slice(-4) || '0000';
-        return `GK-${phoneSuffix}-${timestamp}`;
+    const generateOrderNumber = () => {
+        const date = new Date();
+        const dateToday = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
+        
+        let productName = 'MIX';
+        if (items.length > 0) {
+            productName = items[0].product.name.split(' ')[0].toUpperCase().replace(/[^A-Z0-9]/g, '');
+            if (productName.length > 12) productName = productName.substring(0, 12);
+            if (!productName) productName = 'ITEM';
+        }
+
+        const amountBackwards = getTotal().toString().split('').reverse().join('');
+        
+        return `GMK-${dateToday}-${productName}-${amountBackwards}`;
     };
 
     const createOrderMessage = () => {
@@ -51,11 +62,13 @@ export default function CheckoutPage() {
     };
 
     const handleProceedToPayment = () => {
-        if (!phone.trim() || phone.length < 10) {
-            alert('Please enter a valid phone number');
+        setPhoneError('');
+        const phoneRegex = /^9\d{9}$/;
+        if (!phoneRegex.test(phone)) {
+            setPhoneError('Please enter a correct phone number');
             return;
         }
-        const newOrderNumber = generateOrderNumber(phone);
+        const newOrderNumber = generateOrderNumber();
         setOrderNumber(newOrderNumber);
         saveOrderToLocalStorage(newOrderNumber);
         setShowPayment(true);
@@ -76,7 +89,10 @@ export default function CheckoutPage() {
     if (items.length === 0) {
         return (
             <div className="container fade-in" style={{
-                padding: '80px 16px',
+                paddingTop: '110px',
+                paddingBottom: '80px',
+                paddingLeft: '16px',
+                paddingRight: '16px',
                 textAlign: 'center'
             }}>
                 <div style={{
@@ -117,9 +133,14 @@ export default function CheckoutPage() {
     }
 
     return (
-        <div className="container fade-in" style={{ padding: '32px 16px 80px',  }}>
+        <div className="container fade-in" style={{
+            paddingTop: '100px',
+            paddingBottom: '80px',
+            paddingLeft: '16px',
+            paddingRight: '16px'
+        }}>
             {/* Page Title */}
-            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <div style={{ position: 'relative', textAlign: 'left', marginBottom: '32px' }}>
                 <h1 style={{
                     fontSize: '1.75rem',
                     fontWeight: 700,
@@ -130,31 +151,72 @@ export default function CheckoutPage() {
                     {showPayment ? 'Complete Payment' : 'Checkout'}
                 </h1>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>
-                    {showPayment ? 'Send your order via WhatsApp or Viber' : 'Review your order and proceed'}
+                    {showPayment ? 'Send your order with WhatsApp or Viber' : 'Review your order and proceed'}
                 </p>
+                
+                <Link href="/" style={{
+                    position: 'absolute',
+                    right: 0,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '36px',
+                    height: '36px',
+                    color: 'var(--text-secondary)',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                }}
+                >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </Link>
             </div>
 
-            <div className="checkout-grid">
-                {/* Order Summary */}
+            <div className={`checkout-grid ${showPayment ? 'is-payment-grid' : ''}`}>
                 <div className="order-summary" style={{
                     background: 'var(--card-bg)',
                     borderRadius: 'var(--radius-xl)',
-                border: '1px solid var(--border-light)',
-                padding: '24px',
-                marginBottom: '20px',
-                boxShadow: 'var(--shadow-sm)',
-                transition: 'var(--theme-transition)'
-            }}>
-                <h2 style={{
-                    fontSize: '0.8rem',
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.06em',
-                    marginBottom: '16px',
-                    color: 'var(--text-muted)'
+                    border: '1px solid var(--border-light)',
+                    padding: '24px',
+                    marginBottom: '20px',
+                    boxShadow: 'var(--shadow-sm)',
+                    transition: 'var(--theme-transition)'
                 }}>
-                    Order Summary
-                </h2>
+                    {showPayment && (
+                        <div className="order-number-container" style={{
+                            marginBottom: '24px',
+                            paddingBottom: '20px',
+                            borderBottom: '1px dashed var(--border-color)',
+                            textAlign: 'center'
+                        }}>
+                            <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                                Order Number
+                            </div>
+                            <div className="order-number-val" style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.02em', wordBreak: 'break-all' }}>
+                                {orderNumber}
+                            </div>
+                        </div>
+                    )}
+                    <h2 style={{
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
+                        marginBottom: '16px',
+                        color: 'var(--text-muted)'
+                    }}>
+                        Order Summary
+                    </h2>
 
                 {items.map((item, index) => (
                     <div
@@ -215,6 +277,16 @@ export default function CheckoutPage() {
                     boxShadow: 'var(--shadow-sm)',
                     transition: 'var(--theme-transition)'
                 }}>
+                    <h2 style={{
+                        fontSize: '1.5rem',
+                        fontWeight: 700,
+                        marginBottom: '24px',
+                        color: 'var(--text-primary)',
+                        textAlign: 'left',
+                        letterSpacing: '-0.02em'
+                    }}>
+                        Checkout Confirmation
+                    </h2>
                     <label style={{
                         display: 'block',
                         marginBottom: '10px',
@@ -234,7 +306,7 @@ export default function CheckoutPage() {
                             padding: '14px 18px',
                             fontSize: '1rem',
                             border: '1.5px solid var(--border-color)',
-                            borderRadius: 'var(--radius-md)',
+                            borderRadius: 'var(--radius-xl)',
                             marginBottom: '12px',
                             outline: 'none',
                             background: 'var(--input-bg)',
@@ -250,6 +322,11 @@ export default function CheckoutPage() {
                             e.currentTarget.style.boxShadow = 'none';
                         }}
                     />
+                    {phoneError && (
+                        <div style={{ color: '#ff3b30', fontSize: '0.85rem', marginTop: '-8px', marginBottom: '12px', fontWeight: 500 }}>
+                            {phoneError}
+                        </div>
+                    )}
                     <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '20px' }}>
                         We&apos;ll generate your order number and send confirmation
                     </p>
@@ -263,7 +340,7 @@ export default function CheckoutPage() {
                             background: 'var(--btn-primary-bg)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: 'var(--radius-full)',
+                            borderRadius: 'var(--radius-xl)',
                             cursor: 'pointer',
                             boxShadow: '0 2px 8px rgba(0, 113, 227, 0.25)',
                             transition: 'all 0.25s ease'
@@ -282,23 +359,6 @@ export default function CheckoutPage() {
                 </div>
             ) : (
                 <>
-                    {/* Order Number */}
-                    <div style={{
-                        background: 'rgba(48, 209, 88, 0.08)',
-                        border: '1.5px solid rgba(48, 209, 88, 0.3)',
-                        borderRadius: 'var(--radius-xl)',
-                        padding: '20px',
-                        marginBottom: '20px',
-                        textAlign: 'center'
-                    }}>
-                        <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#30d158', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                            Order Number
-                        </div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.02em' }}>
-                            {orderNumber}
-                        </div>
-                    </div>
-
                     {/* QR Codes */}
                     <div style={{
                         background: 'var(--card-bg)',
@@ -331,7 +391,7 @@ export default function CheckoutPage() {
                                     alt="Viber QR"
                                     style={{
                                         width: '100%',
-                                        maxWidth: '140px',
+                                        maxWidth: '180px',
                                         borderRadius: 'var(--radius-md)',
                                         border: '1px solid var(--border-light)'
                                     }}
@@ -346,7 +406,7 @@ export default function CheckoutPage() {
                                     alt="WhatsApp QR"
                                     style={{
                                         width: '100%',
-                                        maxWidth: '140px',
+                                        maxWidth: '180px',
                                         borderRadius: 'var(--radius-md)',
                                         border: '1px solid var(--border-light)'
                                     }}
@@ -360,81 +420,83 @@ export default function CheckoutPage() {
 
                     {/* Payment Buttons */}
                     <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
+                        display: 'grid',
+                        gridTemplateColumns: '1fr 1fr',
                         gap: '12px'
                     }}>
-                        <button
-                            onClick={handleWhatsAppPayment}
-                            style={{
-                                width: '100%',
-                                padding: '16px',
-                                fontSize: '1rem',
-                                fontWeight: 600,
-                                background: '#25D366',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: 'var(--radius-full)',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '10px',
-                                boxShadow: '0 4px 16px rgba(37, 211, 102, 0.3)',
-                                transition: 'all 0.25s ease'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-2px)';
-                                e.currentTarget.style.boxShadow = '0 6px 24px rgba(37, 211, 102, 0.4)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(37, 211, 102, 0.3)';
-                            }}
-                        >
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                            </svg>
-                            Continue via WhatsApp
-                        </button>
                         <button
                             onClick={handleViberPayment}
                             style={{
                                 width: '100%',
-                                padding: '16px',
-                                fontSize: '1rem',
+                                padding: '12px 4px',
+                                fontSize: 'clamp(0.7rem, 3vw, 0.95rem)',
                                 fontWeight: 600,
-                                background: '#7360F2',
+                                background: '#826BF0',
                                 color: 'white',
                                 border: 'none',
-                                borderRadius: 'var(--radius-full)',
+                                borderRadius: 'var(--radius-xl)',
                                 cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                gap: '10px',
-                                boxShadow: '0 4px 16px rgba(115, 96, 242, 0.3)',
-                                transition: 'all 0.25s ease'
+                                gap: '6px',
+                                boxShadow: '0 4px 16px rgba(130, 107, 240, 0.3)',
+                                transition: 'all 0.25s ease',
+                                whiteSpace: 'nowrap'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-2px)';
-                                e.currentTarget.style.boxShadow = '0 6px 24px rgba(115, 96, 242, 0.4)';
+                                e.currentTarget.style.boxShadow = '0 6px 24px rgba(130, 107, 240, 0.4)';
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(115, 96, 242, 0.3)';
+                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(130, 107, 240, 0.3)';
                             }}
                         >
                             <img
                                 src="/viber-logo.png"
                                 alt="Viber"
                                 style={{
-                                    width: '22px',
-                                    height: '22px',
+                                    width: '18px',
+                                    height: '18px',
                                     filter: 'brightness(0) invert(1)'
                                 }}
                             />
-                            Continue via Viber
+                            Continue with Viber
+                        </button>
+                        <button
+                            onClick={handleWhatsAppPayment}
+                            style={{
+                                width: '100%',
+                                padding: '12px 4px',
+                                fontSize: 'clamp(0.7rem, 3vw, 0.95rem)',
+                                fontWeight: 600,
+                                background: '#5AD17A',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: 'var(--radius-xl)',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '6px',
+                                boxShadow: '0 4px 16px rgba(90, 209, 122, 0.3)',
+                                transition: 'all 0.25s ease',
+                                whiteSpace: 'nowrap'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-2px)';
+                                e.currentTarget.style.boxShadow = '0 6px 24px rgba(90, 209, 122, 0.4)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(90, 209, 122, 0.3)';
+                            }}
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Continue with WhatsApp
                         </button>
                     </div>
 
@@ -457,16 +519,29 @@ export default function CheckoutPage() {
                     flex-direction: column;
                     gap: 28px;
                 }
+                .order-summary {
+                    order: 2;
+                }
+                .form-payment {
+                    order: 1;
+                }
+                @media (max-width: 899px) {
+                    .is-payment-grid .order-summary {
+                        padding: 16px !important;
+                        font-size: 0.9em;
+                    }
+                    .is-payment-grid .order-summary .order-number-val {
+                        font-size: 1.35rem !important;
+                    }
+                    .is-payment-grid .order-summary .order-number-container {
+                        margin-bottom: 16px !important;
+                        padding-bottom: 16px !important;
+                    }
+                }
                 @media (min-width: 900px) {
                     .checkout-grid {
                         display: grid !important;
                         grid-template-columns: 1fr 340px !important;
-                    }
-                    .order-summary {
-                        order: 2;
-                    }
-                    .form-payment {
-                        order: 1;
                     }
                 }
             `}</style>

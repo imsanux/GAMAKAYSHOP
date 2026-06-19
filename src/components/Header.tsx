@@ -141,10 +141,23 @@ export default function Header() {
                     </Link>
 
                     {/* Search Bar — Centered on Desktop */}
-                    {!hideSearch && <div ref={desktopSearchRef} className="hide-mobile" style={{
-                        position: 'absolute',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
+                    {hideSearch ? (
+                        <div style={{
+                            position: 'absolute',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            fontWeight: 600,
+                            fontSize: '1.25rem',
+                            color: '#FFFFFF',
+                            letterSpacing: '0.02em'
+                        }}>
+                            {/* Page Title Removed */}
+                        </div>
+                    ) : (
+                        <div ref={desktopSearchRef} className="hide-mobile" style={{
+                            position: 'absolute',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
                         width: '100%',
                         maxWidth: '560px',
                         zIndex: 10,
@@ -324,7 +337,7 @@ export default function Header() {
                                 </Link>
                             </div>
                         )}
-                    </div>}
+                    </div>)}
 
                     {/* Right Actions */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>

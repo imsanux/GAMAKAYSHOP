@@ -10,7 +10,10 @@ export default function CartPage() {
     if (items.length === 0) {
         return (
             <div className="container fade-in" style={{
-                padding: '80px 16px',
+                paddingTop: '110px',
+                paddingBottom: '80px',
+                paddingLeft: '16px',
+                paddingRight: '16px',
                 textAlign: 'center'
             }}>
                 <div style={{
@@ -24,7 +27,11 @@ export default function CartPage() {
                     justifyContent: 'center',
                     fontSize: '2rem'
                 }}>
-                    🛒
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.8 }}>
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <path d="M16 10a4 4 0 01-8 0" />
+                    </svg>
                 </div>
                 <h1 style={{ marginBottom: '10px', fontSize: '1.75rem', color: 'var(--text-primary)', letterSpacing: '-0.03em' }}>
                     Your cart is empty
@@ -38,7 +45,7 @@ export default function CartPage() {
                 }}>
                     Add some gift cards and they&apos;ll appear here.
                 </p>
-                <Link href="/" className="btn btn-primary btn-lg">
+                <Link href="/" className="btn btn-primary btn-lg" style={{ borderRadius: 'var(--radius-xl)' }}>
                     Start Shopping
                 </Link>
             </div>
@@ -46,23 +53,58 @@ export default function CartPage() {
     }
 
     return (
-        <div className="container fade-in" style={{ padding: '32px 16px 80px' }}>
-            <h1 style={{
-                marginBottom: '28px',
-                fontSize: '1.75rem',
-                color: 'var(--text-primary)',
-                letterSpacing: '-0.03em'
+        <div className="container fade-in" style={{ 
+            paddingTop: '100px', 
+            paddingBottom: '80px', 
+            paddingLeft: '16px', 
+            paddingRight: '16px' 
+        }}>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '28px'
             }}>
-                Shopping Cart
-                <span style={{
-                    fontSize: '0.85rem',
-                    fontWeight: 400,
-                    color: 'var(--text-muted)',
-                    marginLeft: '10px'
+                <h1 style={{
+                    fontSize: '1.75rem',
+                    color: 'var(--text-primary)',
+                    letterSpacing: '-0.03em',
+                    margin: 0
                 }}>
-                    ({items.reduce((c, i) => c + i.quantity, 0)} items)
-                </span>
-            </h1>
+                    Shopping Cart
+                    <span style={{
+                        fontSize: '0.85rem',
+                        fontWeight: 400,
+                        color: 'var(--text-muted)',
+                        marginLeft: '10px'
+                    }}>
+                        ({items.reduce((c, i) => c + i.quantity, 0)} items)
+                    </span>
+                </h1>
+                
+                <Link href="/" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '36px',
+                    height: '36px',
+                    color: 'var(--text-secondary)',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                }}
+                >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </Link>
+            </div>
 
             <div className="cart-grid" style={{
                 display: 'flex',
@@ -71,6 +113,43 @@ export default function CartPage() {
             }}>
                 {/* Cart Items */}
                 <div>
+                    {items.length >= 2 && (
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
+                            <button
+                                onClick={clearCart}
+                                style={{
+                                    padding: '8px 16px',
+                                    background: 'none',
+                                    border: '1px solid var(--border-light)',
+                                    borderRadius: 'var(--radius-full)',
+                                    color: 'var(--text-muted)',
+                                    fontSize: '0.8rem',
+                                    fontWeight: 600,
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s ease',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '6px'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = '#ff453a';
+                                    e.currentTarget.style.borderColor = 'rgba(255, 69, 58, 0.3)';
+                                    e.currentTarget.style.background = 'rgba(255, 69, 58, 0.05)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'var(--text-muted)';
+                                    e.currentTarget.style.borderColor = 'var(--border-light)';
+                                    e.currentTarget.style.background = 'none';
+                                }}
+                            >
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                                Clear cart
+                            </button>
+                        </div>
+                    )}
                     {items.map((item) => (
                         <div
                             key={`${item.product.id}-${item.denomination.value}`}
@@ -223,7 +302,8 @@ export default function CartPage() {
                                         fontWeight: 700,
                                         fontSize: '1rem',
                                         color: 'var(--text-primary)',
-                                        letterSpacing: '-0.02em'
+                                        letterSpacing: '-0.02em',
+                                        whiteSpace: 'nowrap'
                                     }}>
                                         Rs. {(item.denomination.price * item.quantity).toLocaleString()}
                                     </div>
@@ -259,23 +339,6 @@ export default function CartPage() {
                             </button>
                         </div>
                     ))}
-
-                    <button
-                        onClick={clearCart}
-                        style={{
-                            padding: '10px 16px',
-                            background: 'none',
-                            border: 'none',
-                            color: 'var(--text-muted)',
-                            fontSize: '0.85rem',
-                            cursor: 'pointer',
-                            transition: 'color 0.15s ease'
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.color = '#ff453a'}
-                        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-                    >
-                        Clear cart
-                    </button>
                 </div>
 
                 {/* Order Summary */}
@@ -345,6 +408,32 @@ export default function CartPage() {
                     >
                         Proceed to Checkout
                     </Link>
+
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px', marginTop: '16px' }}>
+                        <a 
+                            href={`https://wa.me/9779862157864?text=${encodeURIComponent(`I would like to know more about ${items.map(item => item.product.name).join(', ')}`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                color: 'var(--text-secondary)',
+                                fontSize: '0.9rem',
+                                textDecoration: 'none',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                transition: 'color 0.2s ease'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.color = '#25D366'}
+                            onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                            Need Help?
+                        </a>
+                    </div>
                 </div>
             </div>
 
