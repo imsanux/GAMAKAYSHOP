@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: "Nepal's trusted store for digital gift cards. Steam, Apple, PlayStation, Xbox, Netflix & more. Instant WhatsApp delivery!",
     images: [
       {
-        url: "/og-image.png",
+        url: "/gamakay-logo.png",
         width: 1200,
         height: 630,
         alt: "Gamakay Giftcards Nepal - Digital Gift Cards Store",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Giftcards Nepal | Buy Digital Gift Cards Online - Gamakay",
     description: "Nepal's #1 trusted store for Steam, Apple, PlayStation & more gift cards. Instant delivery!",
-    images: ["/og-image.png"],
+    images: ["/gamakay-logo.png"],
   },
   verification: {
     google: "your-google-verification-code",
