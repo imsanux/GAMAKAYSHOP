@@ -117,7 +117,7 @@ export default function CheckoutPage() {
     }
 
     return (
-        <div className="container fade-in" style={{ padding: '32px 16px 80px', maxWidth: '580px' }}>
+        <div className="container fade-in" style={{ padding: '32px 16px 80px',  }}>
             {/* Page Title */}
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
                 <h1 style={{
@@ -134,10 +134,11 @@ export default function CheckoutPage() {
                 </p>
             </div>
 
-            {/* Order Summary */}
-            <div style={{
-                background: 'var(--card-bg)',
-                borderRadius: 'var(--radius-xl)',
+            <div className="checkout-grid">
+                {/* Order Summary */}
+                <div className="order-summary" style={{
+                    background: 'var(--card-bg)',
+                    borderRadius: 'var(--radius-xl)',
                 border: '1px solid var(--border-light)',
                 padding: '24px',
                 marginBottom: '20px',
@@ -203,8 +204,9 @@ export default function CheckoutPage() {
                 </div>
             </div>
 
-            {!showPayment ? (
-                /* Phone Number Entry */
+            <div className="form-payment">
+                {!showPayment ? (
+                    /* Phone Number Entry */
                 <div style={{
                     background: 'var(--card-bg)',
                     borderRadius: 'var(--radius-xl)',
@@ -446,6 +448,29 @@ export default function CheckoutPage() {
                     </p>
                 </>
             )}
+                </div>
+            </div>
+
+            <style jsx>{`
+                .checkout-grid {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 28px;
+                }
+                @media (min-width: 900px) {
+                    .checkout-grid {
+                        display: grid !important;
+                        grid-template-columns: 1fr 340px !important;
+                    }
+                    .order-summary {
+                        order: 2;
+                    }
+                    .form-payment {
+                        order: 1;
+                    }
+                }
+            `}</style>
         </div>
     );
 }
+

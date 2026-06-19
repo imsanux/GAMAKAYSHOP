@@ -12,7 +12,7 @@ function SearchContent() {
     const results = searchProducts(query);
 
     return (
-        <div style={{ background: 'var(--bg-primary)', minHeight: '70vh', transition: 'var(--theme-transition)' }}>
+        <div style={{ background: 'var(--bg-primary)', minHeight: '70vh', transition: 'var(--theme-transition)', paddingTop: 'var(--header-height)' }}>
             {/* Search Header */}
             <div style={{
                 background: 'var(--card-bg)',

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useTheme } from '@/context/ThemeContext';
 import { searchProducts } from '@/lib/products';
@@ -19,10 +19,18 @@ export default function Header() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState<ReturnType<typeof searchProducts>>([]);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [searchFocused, setSearchFocused] = useState(false);
     const desktopSearchRef = useRef<HTMLDivElement>(null);
     const mobileSearchRef = useRef<HTMLDivElement>(null);
 
+    // Rotating placeholder words
+    const PLACEHOLDER_WORDS = ['Giftcards', 'Games', 'Subscriptions', 'Streaming'];
+    const [wordIndex, setWordIndex] = useState(0);
+    const [wordVisible, setWordVisible] = useState(true);
+
     const itemCount = items.reduce((count, item) => count + item.quantity, 0);
+    const pathname = usePathname();
+    const hideSearch = ['/cart', '/checkout'].some(p => pathname === p || pathname?.startsWith(p));
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -41,6 +49,18 @@ export default function Header() {
             setShowDropdown(false);
         }
     }, [searchQuery]);
+
+    // Rotate placeholder words
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setWordVisible(false);
+            setTimeout(() => {
+                setWordIndex(i => (i + 1) % PLACEHOLDER_WORDS.length);
+                setWordVisible(true);
+            }, 350);
+        }, 2500);
+        return () => clearInterval(interval);
+    }, []);
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -121,7 +141,7 @@ export default function Header() {
                     </Link>
 
                     {/* Search Bar — Centered on Desktop */}
-                    <div ref={desktopSearchRef} className="hide-mobile" style={{
+                    {!hideSearch && <div ref={desktopSearchRef} className="hide-mobile" style={{
                         position: 'absolute',
                         left: '50%',
                         transform: 'translateX(-50%)',
@@ -144,7 +164,7 @@ export default function Header() {
                                 name="search"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Search gift cards, games..."
+                                placeholder=""
                                 style={{
                                     width: '100%',
                                     padding: '12px 48px 12px 18px',
@@ -160,13 +180,42 @@ export default function Header() {
                                 onFocus={(e) => {
                                     e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
                                     e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                                    setSearchFocused(true);
                                     if (searchQuery.trim().length > 0) setShowDropdown(true);
                                 }}
                                 onBlur={(e) => {
                                     e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
                                     e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
+                                    setSearchFocused(false);
                                 }}
                             />
+                            {/* Animated placeholder — desktop */}
+                            {!searchQuery && !searchFocused && (
+                                <div style={{
+                                    position: 'absolute',
+                                    left: '18px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '4px',
+                                    pointerEvents: 'none',
+                                    userSelect: 'none',
+                                    fontSize: '0.98rem',
+                                    fontWeight: 500,
+                                    color: 'rgba(255,255,255,0.38)',
+                                    overflow: 'hidden',
+                                    whiteSpace: 'nowrap',
+                                }}>
+                                    <span>Search for </span>
+                                    <span style={{
+                                        display: 'inline-block',
+                                        opacity: wordVisible ? 1 : 0,
+                                        transform: wordVisible ? 'translateY(0)' : 'translateY(6px)',
+                                        transition: 'opacity 0.3s ease, transform 0.3s ease',
+                                    }}>{PLACEHOLDER_WORDS[wordIndex]}</span>
+                                </div>
+                            )}
                             <button
                                 type="submit"
                                 style={{
@@ -275,7 +324,7 @@ export default function Header() {
                                 </Link>
                             </div>
                         )}
-                    </div>
+                    </div>}
 
                     {/* Right Actions */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -396,7 +445,7 @@ export default function Header() {
                 </div>
 
                 {/* Mobile Search Bar Row — only visible on mobile */}
-                <div ref={mobileSearchRef} className="hide-desktop" style={{
+                {!hideSearch && <div ref={mobileSearchRef} className="hide-desktop" style={{
                     padding: '0 16px 12px 16px',
                     background: '#111111',
                     position: 'relative',
@@ -417,7 +466,7 @@ export default function Header() {
                             name="search"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="Search gift cards, games..."
+                            placeholder=""
                             style={{
                                 width: '100%',
                                 padding: '8px 40px 8px 14px',
@@ -433,13 +482,42 @@ export default function Header() {
                             onFocus={(e) => {
                                 e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
                                 e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                                setSearchFocused(true);
                                 if (searchQuery.trim().length > 0) setShowDropdown(true);
                             }}
                             onBlur={(e) => {
                                 e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
                                 e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
+                                setSearchFocused(false);
                             }}
                         />
+                        {/* Animated placeholder — mobile */}
+                        {!searchQuery && !searchFocused && (
+                            <div style={{
+                                position: 'absolute',
+                                left: '14px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                pointerEvents: 'none',
+                                userSelect: 'none',
+                                fontSize: '0.88rem',
+                                fontWeight: 500,
+                                color: 'rgba(255,255,255,0.38)',
+                                overflow: 'hidden',
+                                whiteSpace: 'nowrap',
+                            }}>
+                                <span>Search for </span>
+                                <span style={{
+                                    display: 'inline-block',
+                                    opacity: wordVisible ? 1 : 0,
+                                    transform: wordVisible ? 'translateY(0)' : 'translateY(6px)',
+                                    transition: 'opacity 0.3s ease, transform 0.3s ease',
+                                }}>{PLACEHOLDER_WORDS[wordIndex]}</span>
+                            </div>
+                        )}
                         <button
                             type="submit"
                             style={{
@@ -544,7 +622,7 @@ export default function Header() {
                             </Link>
                         </div>
                     )}
-                </div>
+                </div>}
             </header>
 
             {/* Mobile Menu Overlay */}
@@ -576,7 +654,7 @@ export default function Header() {
                     transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
                     display: 'flex',
                     flexDirection: 'column',
-                    paddingTop: '72px',
+                    paddingTop: '108px',
                     boxShadow: isMenuOpen ? '-8px 0 32px rgba(0,0,0,0.3)' : 'none',
                 }}
             >

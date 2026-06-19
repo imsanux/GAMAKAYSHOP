@@ -22,7 +22,7 @@ import { getFeaturedProducts, getProductsByCategory } from '@/lib/products';
 // Mobile images:  /public/IMAGES/webpmobile/
 const HERO_SLIDES = [
   {
-    desktop: '/IMAGES/webpdesktop/AI_web.webp',
+    desktop: '/IMAGES/webpmobile/AI_mobile.webp',
     mobile: '/IMAGES/webpmobile/AI_mobile.webp',
     alt: 'AI Tools',
     link: '/category/software',
@@ -52,7 +52,7 @@ const HERO_SLIDES = [
     link: '/search?q=grok',
   },
   {
-    desktop: '/IMAGES/webpdesktop/Gamepass_web.webp',
+    desktop: '/IMAGES/webpmobile/Gamepass_mobile.webp',
     mobile: '/IMAGES/webpmobile/Gamepass_mobile.webp',
     alt: 'Xbox Game Pass',
     link: '/search?q=xbox',
@@ -74,6 +74,12 @@ const HERO_SLIDES = [
     mobile: '/IMAGES/webpmobile/Steam_mobile_new.webp',
     alt: 'Steam Gift Cards',
     link: '/search?q=steam',
+  },
+  {
+    desktop: '/IMAGES/webpmobile/GTA_mobile.webp',
+    mobile: '/IMAGES/webpmobile/GTA_mobile.webp',
+    alt: 'GTA',
+    link: '/category/gaming',
   },
 ];
 

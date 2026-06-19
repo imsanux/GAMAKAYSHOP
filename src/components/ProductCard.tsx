@@ -231,7 +231,10 @@ export default function ProductCard({ product }: ProductCardProps) {
                             }
                         }}
                         onMouseLeave={(e) => {
-                            if (!isAdding) {
+                            if (isAdding) {
+                                e.currentTarget.style.background = '#16A34A';
+                                e.currentTarget.style.color = '#FFFFFF';
+                            } else {
                                 e.currentTarget.style.background = '#111111';
                                 e.currentTarget.style.color = '#FFFFFF';
                             }

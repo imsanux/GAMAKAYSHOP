@@ -23,7 +23,7 @@ export default function TrackPage() {
 
     return (
         <div className="container fade-in" style={{
-            padding: '48px 16px 80px',
+            padding: 'var(--header-height) 16px 80px',
             maxWidth: '480px'
         }}>
             {/* Header */}

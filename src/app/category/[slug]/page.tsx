@@ -74,7 +74,7 @@ export default function CategoryPage() {
     };
 
     return (
-        <div style={{ background: 'var(--bg-primary)', minHeight: '70vh', transition: 'var(--theme-transition)' }}>
+        <div style={{ background: 'var(--bg-primary)', minHeight: '70vh', transition: 'var(--theme-transition)', paddingTop: 'var(--header-height)' }}>
             {/* Category Header */}
             <div style={{
                 background: 'var(--card-bg)',

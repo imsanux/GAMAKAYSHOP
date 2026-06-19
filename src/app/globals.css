@@ -16,7 +16,7 @@
 
 :root {
   /* ── Header ─────────────────────────────────────── */
-  --header-height: 80px;   /* desktop nav = 80px single row */
+  --header-height: 96px;   /* desktop nav = 96px (logo height drives row height */
 
   /* ── Core palette ───────────────────────────────── */
   --color-ink:          #111111;
@@ -953,7 +953,7 @@ html.lenis body        { height: auto; }
 
 /* ── Responsive Header Heights ── */
 .nav-top-row {
-  height: 80px;
+  height: 96px;
 }
 
 @media (max-width: 767px) {

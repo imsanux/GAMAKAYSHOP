@@ -64,9 +64,9 @@ export default function CartPage() {
                 </span>
             </h1>
 
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr',
+            <div className="cart-grid" style={{
+                display: 'flex',
+                flexDirection: 'column-reverse',
                 gap: '28px'
             }}>
                 {/* Cart Items */}
@@ -350,7 +350,8 @@ export default function CartPage() {
 
             <style jsx>{`
                 @media (min-width: 900px) {
-                    .container > div {
+                    .cart-grid {
+                        display: grid !important;
                         grid-template-columns: 1fr 340px !important;
                     }
                 }
