@@ -418,7 +418,7 @@ export default function Home() {
                 height: '6px',
                 borderRadius: '3px',
                 border: 'none',
-                background: currentSlide === index ? '#EAB308' : 'rgba(255,255,255,0.28)',
+                background: currentSlide === index ? '#EAB308' : '#D1D5DB',
                 cursor: 'pointer',
                 transition: 'all 0.26s ease',
                 padding: 0,
