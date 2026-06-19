@@ -189,7 +189,7 @@ export default function CheckoutPage() {
                     border: '1px solid var(--border-light)',
                     padding: '24px',
                     marginBottom: '20px',
-                    boxShadow: 'var(--shadow-sm)',
+                    boxShadow: 'var(--shadow-md)',
                     transition: 'var(--theme-transition)'
                 }}>
                     {showPayment && (
@@ -314,8 +314,8 @@ export default function CheckoutPage() {
                             transition: 'all 0.2s ease'
                         }}
                         onFocus={(e) => {
-                            e.currentTarget.style.borderColor = 'var(--btn-primary-bg)';
-                            e.currentTarget.style.boxShadow = '0 0 0 4px rgba(0, 113, 227, 0.1)';
+                            e.currentTarget.style.borderColor = 'var(--color-ink)';
+                            e.currentTarget.style.boxShadow = '0 0 0 4px rgba(244, 217, 122, 0.3)';
                         }}
                         onBlur={(e) => {
                             e.currentTarget.style.borderColor = 'var(--border-color)';
@@ -342,7 +342,7 @@ export default function CheckoutPage() {
                             border: 'none',
                             borderRadius: 'var(--radius-xl)',
                             cursor: 'pointer',
-                            boxShadow: '0 2px 8px rgba(0, 113, 227, 0.25)',
+                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
                             transition: 'all 0.25s ease'
                         }}
                         onMouseEnter={(e) => {
@@ -366,7 +366,7 @@ export default function CheckoutPage() {
                         border: '1px solid var(--border-light)',
                         padding: '24px',
                         marginBottom: '20px',
-                        boxShadow: 'var(--shadow-sm)',
+                        boxShadow: 'var(--shadow-md)',
                         transition: 'var(--theme-transition)'
                     }}>
                         <h3 style={{
