@@ -274,7 +274,7 @@ export default function Home() {
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEndWrapper}
       >
-        <div className="container" style={{ paddingTop: 'clamp(12px, 2vw, 20px)', paddingBottom: '20px' }}>
+        <div className="container" style={{ paddingTop: 'clamp(12px, 2vw, 20px)' }}>
           {/* Slide Track */}
           <div style={{
             position: 'relative',
