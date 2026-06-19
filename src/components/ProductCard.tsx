@@ -47,7 +47,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{
-                borderRadius: '7px',
+                borderRadius: 'var(--radius-md)',
                 background: 'var(--card-bg)',
                 border: isHovered
                     ? '1px solid #1A1A1A'

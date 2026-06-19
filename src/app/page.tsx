@@ -282,7 +282,7 @@ export default function Home() {
             height: 'clamp(180px, 32vw, 380px)',
             background: '#0E1117',
             overflow: 'hidden',
-            borderRadius: '16px',
+            borderRadius: 'var(--radius-xl)',
             boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
           }}>
             {/* Slides */}
@@ -452,7 +452,7 @@ export default function Home() {
                     justifyContent: 'center',
                     gap: '7px',
                     padding: '12px 8px',
-                    borderRadius: '6px',
+                    borderRadius: 'var(--radius-md)',
                     border: '1.5px solid var(--border-color)',
                     background: 'var(--card-bg)',
                     textDecoration: 'none',
@@ -818,7 +818,7 @@ export default function Home() {
               {/* Hamrobazar Card */}
               <div style={{
                 background: 'var(--card-bg)',
-                borderRadius: '10px',
+                borderRadius: 'var(--radius-lg)',
                 overflow: 'hidden',
                 border: '1.5px solid var(--border-color)',
                 boxShadow: 'var(--shadow-md)',
@@ -830,7 +830,7 @@ export default function Home() {
                 <div style={{ position: 'relative', display: 'inline-block', marginBottom: '18px' }}>
                   <div style={{
                     width: '120px', height: '120px',
-                    borderRadius: '10px', overflow: 'hidden',
+                    borderRadius: 'var(--radius-lg)', overflow: 'hidden',
                     border: '1.5px solid var(--border-color)',
                   }}>
                     <img
@@ -889,7 +889,7 @@ export default function Home() {
                       padding: '13px 24px',
                       fontSize: '0.88rem', fontWeight: 800,
                       background: '#111111', color: 'white',
-                      borderRadius: '6px', textDecoration: 'none',
+                      borderRadius: 'var(--radius-md)', textDecoration: 'none',
                       transition: 'background 0.15s ease',
                       letterSpacing: '0.02em', textTransform: 'uppercase',
                     }}
@@ -909,12 +909,12 @@ export default function Home() {
                     style={{
                       display: 'inline-flex', alignItems: 'center',
                       justifyContent: 'center', gap: '8px',
-                      padding: '11px 24px',
+                      padding: '13px 24px',
                       fontSize: '0.85rem', fontWeight: 700,
-                      background: 'transparent',
+                      background: 'var(--bg-secondary)',
                       color: 'var(--text-secondary)',
                       border: '1.5px solid var(--border-color)',
-                      borderRadius: '6px', textDecoration: 'none',
+                      borderRadius: 'var(--radius-md)', textDecoration: 'none',
                       transition: 'border-color 0.15s ease, color 0.15s ease',
                     }}
                     onMouseEnter={e => {
@@ -950,11 +950,11 @@ export default function Home() {
                   target="_blank" rel="noopener noreferrer"
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    padding: '13px 24px',
-                    fontSize: '0.9rem', fontWeight: 800,
+                    padding: '13px 22px',
+                    fontSize: '0.9rem', fontWeight: 700,
                     background: '#FFCC00',
                     color: '#111111',
-                    borderRadius: '6px',
+                    borderRadius: 'var(--radius-md)',
                     textDecoration: 'none',
                     transition: 'background 0.15s ease',
                     textTransform: 'uppercase', letterSpacing: '0.03em',
@@ -975,7 +975,7 @@ export default function Home() {
                     fontSize: '0.88rem', fontWeight: 700,
                     color: 'rgba(255,255,255,0.75)',
                     background: 'rgba(255,255,255,0.08)',
-                    borderRadius: '6px',
+                    borderRadius: 'var(--radius-md)',
                     textDecoration: 'none',
                     border: '1.5px solid rgba(255,255,255,0.15)',
                     transition: 'border-color 0.15s ease, color 0.15s ease',
@@ -1014,11 +1014,11 @@ export default function Home() {
         style={{
           position: 'fixed',
           bottom: '24px',
-          right: '20px',
-          zIndex: 80,
-          width: '50px',
-          height: '50px',
-          borderRadius: '8px',
+          right: '24px',
+          zIndex: 99,
+          width: '52px',
+          height: '52px',
+          borderRadius: 'var(--radius-md)',
           background: '#25D366',
           color: 'white',
           display: 'flex',
