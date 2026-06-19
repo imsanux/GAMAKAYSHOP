@@ -727,14 +727,14 @@ export default function Home() {
       </ScrollReveal>
 
       {/* How it Works Section */}
-      <ScrollReveal>
         <section className="section-padding" style={{
           background: 'var(--bg-primary)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
         }}>
           <div className="container" style={{ maxWidth: '920px', padding: '0 20px' }}>
-            <div style={{ marginBottom: '36px' }}>
+            <ScrollReveal>
+              <div className="hiw-header" style={{ marginBottom: '36px' }}>
               <div style={{
                 display: 'inline-block',
                 fontSize: '0.65rem', fontWeight: 800,
@@ -745,15 +745,9 @@ export default function Home() {
               <h2 style={{ color: 'var(--text-primary)', fontSize: 'clamp(1.35rem, 3.5vw, 1.8rem)', margin: 0, fontWeight: 800, letterSpacing: '-0.025em' }}>
                 Get your gift card in 3 steps
               </h2>
-            </div>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              flexWrap: 'wrap',
-              gap: '24px',
-              position: 'relative'
-            }}>
+              </div>
+            </ScrollReveal>
+            <div className="hiw-steps-container">
               {[
                 {
                   step: '1',
@@ -788,8 +782,9 @@ export default function Home() {
                   )
                 }
               ].map((item, i) => (
-                <div key={i} className="hiw-step">
-                  <div className="hiw-step-icon">
+                <ScrollReveal key={i} delay={0.15 * (i + 1)}>
+                  <div className="hiw-step">
+                    <div className="hiw-step-icon">
                     {item.icon}
                     <div className="hiw-step-num">{item.step}</div>
                   </div>
@@ -799,12 +794,12 @@ export default function Home() {
                   <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.65, maxWidth: '220px', margin: '0 auto' }}>
                     {item.desc}
                   </p>
-                </div>
+                  </div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
         </section>
-      </ScrollReveal>
 
             {/* Cards Section: Hamrobazar & Need Help */}
       <ScrollReveal>
