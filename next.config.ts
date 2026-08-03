@@ -26,11 +26,10 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: [
-      'embla-carousel-react',
-      'embla-carousel-auto-scroll',
       '@supabase/supabase-js',
       '@vercel/analytics',
       '@vercel/speed-insights',
+      'lenis',
     ],
   },
 
@@ -72,7 +71,7 @@ const nextConfig: NextConfig = {
         // Immutable cache for product/banner WebP images — 30 days
         source: '/IMAGES/(.*)',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=2592000, immutable' },
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
       {

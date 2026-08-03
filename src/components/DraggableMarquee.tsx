@@ -38,7 +38,7 @@ export default function DraggableMarquee({ items, direction = 'forward', speed =
             `}} />
             <div className={`marquee-track-${direction}`} style={{ display: 'flex' }}>
                 {/* Render the array 8 times to guarantee enough slides to fill ultrawide screens for a seamless 50% loop */}
-                {[...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items].map((item, index) => (
+                {[...items, ...items, ...items, ...items].map((item, index) => (
                     <div
                         key={index}
                         style={{
@@ -72,9 +72,8 @@ export default function DraggableMarquee({ items, direction = 'forward', speed =
                                 src={item.image}
                                 alt="Gift Card Brand"
                                 fill
-                                sizes="(max-width: 768px) 160px, 160px"
+                                sizes="160px"
                                 style={{ objectFit: 'cover' }}
-                                unoptimized
                             />
                         </Link>
                     </div>

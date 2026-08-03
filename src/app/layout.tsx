@@ -5,7 +5,6 @@ import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -85,7 +84,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/IMAGES/webpdesktop/FIFA_desktop.webp"
+          href="/IMAGES/webpmobile/AI_mobile.webp"
           fetchPriority="high"
           media="(min-width: 768px)"
         />
@@ -93,12 +92,10 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/IMAGES/webpmobile/FIFA_mobile.webp"
+          href="/IMAGES/webpmobile/AI_mobile.webp"
           fetchPriority="high"
           media="(max-width: 767px)"
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://wa.me" />
 
@@ -192,7 +189,6 @@ export default function RootLayout({
       }}>
         <ThemeProvider>
           <CartProvider>
-            <SmoothScroll>
               <Header />
               <main style={{ flex: 1 }}>
                 {children}
@@ -200,7 +196,6 @@ export default function RootLayout({
               <Footer />
               <Analytics />
               <SpeedInsights />
-            </SmoothScroll>
           </CartProvider>
         </ThemeProvider>
       </body>

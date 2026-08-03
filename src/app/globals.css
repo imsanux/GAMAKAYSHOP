@@ -499,6 +499,14 @@ p {
 .stagger-children > *:nth-child(8) { animation-delay: 0.32s; }
 
 /* ══════════════════════════════════════════════════════
+   CONTENT VISIBILITY — Skip rendering off-screen sections
+══════════════════════════════════════════════════════ */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* ══════════════════════════════════════════════════════
    SCROLLBAR
 ══════════════════════════════════════════════════════ */
 /* ── Scrollbar — classic grey ── */

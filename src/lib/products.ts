@@ -22,7 +22,7 @@ export function getProductsByCategory(category: string): Product[] {
     return sampleProducts.filter(p => p.category === category);
 }
 
-export function getFeaturedProducts(): Product[] {
+export function getFeaturedProducts(count = 6): Product[] {
     const bestSellerOrder = [
         'Apple Gift Card INR',
         'Steam Giftcards US & INDIA',
@@ -32,10 +32,23 @@ export function getFeaturedProducts(): Product[] {
         'Netflix Monthly',
         'Apple Music',
         'Crunchyroll Premium',
-        'Tinder Gold'
+        'Tinder Gold',
+        'ChatGPT Plus',
+        'Spotify Premium',
+        'Discord Nitro',
+        'Xbox Gamepass Ultimate',
+        'YouTube Premium'
     ];
     const productMap = new Map(sampleProducts.map(p => [p.name, p]));
-    return bestSellerOrder.map(name => productMap.get(name)).filter(Boolean) as Product[];
+    const available = bestSellerOrder.map(name => productMap.get(name)).filter(Boolean) as Product[];
+    
+    // Shuffle array (Fisher-Yates) and pick 'count' items
+    const shuffled = [...available];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled.slice(0, count);
 }
 
 export function searchProducts(query: string): Product[] {

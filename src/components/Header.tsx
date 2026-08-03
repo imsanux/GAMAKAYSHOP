@@ -38,16 +38,19 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Handle live search
+    // Handle live search — debounced for performance
     useEffect(() => {
-        if (searchQuery.trim().length > 0) {
+        if (searchQuery.trim().length === 0) {
+            setSearchResults([]);
+            setShowDropdown(false);
+            return;
+        }
+        const timer = setTimeout(() => {
             const results = searchProducts(searchQuery);
             setSearchResults(results.slice(0, 6));
             setShowDropdown(true);
-        } else {
-            setSearchResults([]);
-            setShowDropdown(false);
-        }
+        }, 150);
+        return () => clearTimeout(timer);
     }, [searchQuery]);
 
     // Rotate placeholder words

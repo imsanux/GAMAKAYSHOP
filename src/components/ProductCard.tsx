@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Product } from '@/lib/supabase';
 import { useCart } from '@/context/CartContext';
 
@@ -24,7 +25,7 @@ const CATEGORY_ACCENT_DARK: Record<string, { bg: string; text: string }> = {
     subscriptions: { bg: 'rgba(146,64,14,0.15)', text: '#FCD34D' },
 };
 
-export default function ProductCard({ product }: ProductCardProps) {
+function ProductCardInner({ product }: ProductCardProps) {
     const { addItem } = useCart();
     const firstDenom = product.denominations[0] ?? { value: 'N/A', price: 0 };
     const [selectedDenom, setSelectedDenom] = useState(firstDenom);
@@ -72,16 +73,13 @@ export default function ProductCard({ product }: ProductCardProps) {
             }}>
                 {/* Product image */}
                 {product.image_url && !imageError ? (
-                    <img
+                    <Image
                         src={product.image_url}
                         alt={product.name}
+                        fill
+                        sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                         onError={() => setImageError(true)}
-                        loading="lazy"
-                        decoding="async"
                         style={{
-                            position: 'absolute',
-                            top: 0, left: 0,
-                            width: '100%', height: '100%',
                             objectFit: 'cover',
                             transition: 'transform 0.5s ease',
                             transform: isHovered ? 'scale(1.02)' : 'scale(1)',
@@ -258,3 +256,5 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
     );
 }
+
+export default React.memo(ProductCardInner);

@@ -16,6 +16,7 @@ const FAQSection = dynamic(() => import('@/components/FAQSection'), {
   loading: () => <div style={{ minHeight: '400px', width: '100%', background: 'var(--bg-primary)' }} />
 });
 import { getFeaturedProducts, getProductsByCategory } from '@/lib/products';
+import { Product } from '@/lib/supabase';
 
 // ─── Hero banner slides ──────────────────────────────────────────────────────
 // Desktop images: /public/IMAGES/webpdesktop/
@@ -38,12 +39,6 @@ const HERO_SLIDES = [
     mobile: '/IMAGES/webpmobile/Applemusic_mobile.webp',
     alt: 'Apple Music',
     link: '/search?q=apple+music',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/FIFA_web.webp',
-    mobile: '/IMAGES/webpmobile/FIFA_mobile.webp',
-    alt: 'FIFA',
-    link: '/search?q=fifa',
   },
   {
     desktop: '/IMAGES/webpdesktop/GROK_web.webp',
@@ -176,9 +171,12 @@ const MARQUEE_ROW2 = [
 
 
 export default function Home() {
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>(() => featuredProductsData.slice(0, 6));
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [slideReady, setSlideReady] = useState(false);
-  const categoryScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setFeaturedProducts(getFeaturedProducts(6));
+  }, []);
 
   // Swipe State
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -232,33 +230,15 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleFabVisibility);
   }, []);
 
-  // Randomize starting slide on mount (after hydration)
+  // Auto-slide hero carousel
   useEffect(() => {
-    const random = Math.floor(Math.random() * HERO_SLIDES.length);
-    setCurrentSlide(random);
-    setSlideReady(true);
-  }, []);
-
-  // Auto-slide hero carousel — starts only after random slide is set
-  useEffect(() => {
-    if (!slideReady) return;
     const interval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [slideReady]);
+  }, []);
 
 
-
-  const scrollCategories = (direction: 'left' | 'right') => {
-    if (categoryScrollRef.current) {
-      const scrollAmount = 200;
-      categoryScrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   return (
     <div style={{ background: 'var(--bg-primary)', transition: 'background-color 0.3s ease' }}>
@@ -299,7 +279,6 @@ export default function Home() {
                   transform: isActive ? 'scale(1)' : 'scale(1.03)',
                   zIndex: isActive ? 1 : 0,
                   pointerEvents: isActive ? 'auto' : 'none',
-                  willChange: 'opacity, transform',
                   visibility: isActive ? 'visible' : 'hidden',
                 }}
               >
@@ -514,7 +493,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="product-grid">
-              {featuredProductsData.map((product) => (
+              {featuredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
@@ -612,7 +591,7 @@ export default function Home() {
 
       {/* Promo Banners — grid 2 */}
       <ScrollReveal>
-        <section className="promo-padding" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
+        <section className="promo-padding below-fold" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
           <div className="container">
             <PromoBanner variant="grid2" />
           </div>
@@ -621,7 +600,7 @@ export default function Home() {
 
 
       <ScrollReveal>
-        <section className="section-padding" style={{ background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
+        <section className="section-padding below-fold" style={{ background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
           <div className="container">
             <div className="section-title-row">
               <h2>
@@ -646,7 +625,7 @@ export default function Home() {
 
       {/* Trust Badges */}
       <ScrollReveal>
-        <section className="section-padding" style={{
+        <section className="section-padding below-fold" style={{
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
           borderBottom: '1px solid var(--border-color)',
@@ -726,7 +705,7 @@ export default function Home() {
       </ScrollReveal>
 
       {/* How it Works Section */}
-        <section className="section-padding" style={{
+        <section className="section-padding below-fold" style={{
           background: 'var(--bg-primary)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
@@ -802,7 +781,7 @@ export default function Home() {
 
             {/* Cards Section: Hamrobazar & Need Help */}
       <ScrollReveal>
-        <section className="section-padding" style={{
+        <section className="section-padding below-fold" style={{
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
           transition: 'var(--theme-transition)'
