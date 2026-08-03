@@ -49,25 +49,23 @@ function ProductCardInner({ product }: ProductCardProps) {
             onMouseLeave={() => setIsHovered(false)}
             style={{
                 borderRadius: 'var(--radius-md)',
-                background: 'var(--card-bg)',
-                border: isHovered
-                    ? '1px solid #1A1A1A'
-                    : '1px solid var(--border-color)',
+                background: 'var(--bg-secondary)',
+                border: 'none',
                 overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative',
                 boxShadow: isHovered
-                    ? 'var(--shadow-md)'
-                    : '0 1px 2px rgba(0,0,0,0.04)',
-                transition: 'border-color 0.18s ease, box-shadow 0.2s ease',
+                    ? '0 10px 40px -10px rgba(0,0,0,0.1)'
+                    : '0 2px 4px rgba(0,0,0,0.02)',
+                transition: 'box-shadow 0.3s ease',
             }}
         >
             {/* ── IMAGE AREA ──────────────────────────────────── */}
             <div style={{
                 position: 'relative',
                 width: '100%',
-                paddingTop: '51%',   /* ~25% shorter than before — text-first hierarchy */
+                paddingTop: '100%',
                 background: 'var(--bg-secondary)',
                 overflow: 'hidden',
             }}>
@@ -152,7 +150,7 @@ function ProductCardInner({ product }: ProductCardProps) {
                                     onClick={() => setSelectedDenom(denom)}
                                     style={{
                                         padding: '4px 9px',
-                                        borderRadius: '4px',
+                                        borderRadius: '99px',
                                         fontSize: '0.74rem',
                                         fontWeight: 600,
                                         cursor: 'pointer',
@@ -213,28 +211,30 @@ function ProductCardInner({ product }: ProductCardProps) {
                             justifyContent: 'center',
                             gap: '6px',
                             borderRadius: '5px',
-                            border: 'none',
+                            border: isAdding ? '1.5px solid #16A34A' : '1.5px solid #111111',
                             fontSize: '0.79rem',
                             fontWeight: 700,
                             letterSpacing: '0.005em',
                             cursor: isAdding ? 'default' : 'pointer',
-                            background: isAdding ? '#16A34A' : '#111111',
-                            color: isAdding ? '#FFFFFF' : '#FFFFFF',
-                            transition: 'background 0.16s ease, color 0.14s ease',
+                            background: isAdding ? '#16A34A' : 'transparent',
+                            color: isAdding ? '#FFFFFF' : '#111111',
+                            transition: 'all 0.16s ease',
                         }}
                         onMouseEnter={(e) => {
                             if (!isAdding) {
-                                e.currentTarget.style.background = '#EAB308';
-                                e.currentTarget.style.color = '#111111';
+                                e.currentTarget.style.background = '#111111';
+                                e.currentTarget.style.color = '#FFFFFF';
                             }
                         }}
                         onMouseLeave={(e) => {
                             if (isAdding) {
                                 e.currentTarget.style.background = '#16A34A';
                                 e.currentTarget.style.color = '#FFFFFF';
+                                e.currentTarget.style.border = '1.5px solid #16A34A';
                             } else {
-                                e.currentTarget.style.background = '#111111';
-                                e.currentTarget.style.color = '#FFFFFF';
+                                e.currentTarget.style.background = 'transparent';
+                                e.currentTarget.style.color = '#111111';
+                                e.currentTarget.style.border = '1.5px solid #111111';
                             }
                         }}
                     >

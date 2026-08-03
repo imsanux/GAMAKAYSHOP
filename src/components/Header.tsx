@@ -183,25 +183,27 @@ export default function Header() {
                                 placeholder=""
                                 style={{
                                     width: '100%',
-                                    padding: '12px 48px 12px 18px',
+                                    padding: '12px 48px 12px 24px',
                                     fontSize: '0.98rem',
                                     border: '1px solid rgba(255,255,255,0.12)',
                                     color: '#FFFFFF',
-                                    borderRadius: showDropdown && searchResults.length > 0 ? '6px 6px 0 0' : '6px',
+                                    borderRadius: '99px',
                                     background: 'rgba(255,255,255,0.06)',
                                     outline: 'none',
-                                    transition: 'border-color 0.2s ease, background-color 0.2s ease',
+                                    transition: 'border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease',
                                     fontWeight: 500,
                                 }}
                                 onFocus={(e) => {
-                                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
+                                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)';
                                     e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                                    e.currentTarget.style.boxShadow = '0 0 15px rgba(255,255,255,0.15)';
                                     setSearchFocused(true);
                                     if (searchQuery.trim().length > 0) setShowDropdown(true);
                                 }}
                                 onBlur={(e) => {
                                     e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
                                     e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
+                                    e.currentTarget.style.boxShadow = 'none';
                                     setSearchFocused(false);
                                 }}
                             />
@@ -209,7 +211,7 @@ export default function Header() {
                             {!searchQuery && !searchFocused && (
                                 <div style={{
                                     position: 'absolute',
-                                    left: '18px',
+                                    left: '24px',
                                     top: '50%',
                                     transform: 'translateY(-50%)',
                                     display: 'flex',
@@ -264,13 +266,13 @@ export default function Header() {
                         {showDropdown && searchResults.length > 0 && (
                             <div style={{
                                 position: 'absolute',
-                                top: '100%',
+                                top: 'calc(100% + 8px)',
                                 left: 0,
                                 right: 0,
-                                background: '#18181B',
+                                background: 'rgba(17, 17, 17, 0.85)',
+                                backdropFilter: 'blur(16px)',
                                 border: '1px solid rgba(255,255,255,0.15)',
-                                borderTop: 'none',
-                                borderRadius: '0 0 6px 6px',
+                                borderRadius: '12px',
                                 boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
                                 zIndex: 100,
                                 maxHeight: '320px',
@@ -397,20 +399,19 @@ export default function Header() {
                             {itemCount > 0 && (
                                 <span style={{
                                     position: 'absolute',
-                                    top: '-5px',
-                                    right: '-5px',
-                                    minWidth: '16px',
-                                    height: '16px',
+                                    top: '-6px',
+                                    right: '-6px',
+                                    width: '20px',
+                                    height: '20px',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    background: '#D93025',
-                                    color: 'white',
-                                    fontSize: '0.6rem',
+                                    background: '#FFCC00',
+                                    color: '#111111',
+                                    fontSize: '0.65rem',
                                     fontWeight: 800,
-                                    borderRadius: '3px',
-                                    padding: '0 4px',
-                                    border: '1.5px solid #111111',
+                                    borderRadius: '50%',
+                                    border: '2px solid #111111',
                                 }}>
                                     {itemCount}
                                 </span>
@@ -485,25 +486,27 @@ export default function Header() {
                             placeholder=""
                             style={{
                                 width: '100%',
-                                padding: '8px 40px 8px 14px',
+                                padding: '8px 40px 8px 16px',
                                 fontSize: '0.88rem',
                                 border: '1px solid rgba(255,255,255,0.12)',
                                 color: '#FFFFFF',
-                                borderRadius: showDropdown && searchResults.length > 0 ? '6px 6px 0 0' : '6px',
+                                borderRadius: '99px',
                                 background: 'rgba(255,255,255,0.06)',
                                 outline: 'none',
-                                transition: 'border-color 0.2s ease, background-color 0.2s ease',
+                                transition: 'border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease',
                                 fontWeight: 500,
                             }}
                             onFocus={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
+                                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)';
                                 e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                                e.currentTarget.style.boxShadow = '0 0 12px rgba(255,255,255,0.15)';
                                 setSearchFocused(true);
                                 if (searchQuery.trim().length > 0) setShowDropdown(true);
                             }}
                             onBlur={(e) => {
                                 e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
                                 e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
+                                e.currentTarget.style.boxShadow = 'none';
                                 setSearchFocused(false);
                             }}
                         />
@@ -511,7 +514,7 @@ export default function Header() {
                         {!searchQuery && !searchFocused && (
                             <div style={{
                                 position: 'absolute',
-                                left: '14px',
+                                left: '16px',
                                 top: '50%',
                                 transform: 'translateY(-50%)',
                                 display: 'flex',
@@ -563,13 +566,13 @@ export default function Header() {
                     {showDropdown && searchResults.length > 0 && (
                         <div style={{
                             position: 'absolute',
-                            top: '100%',
+                            top: 'calc(100% + 8px)',
                             left: '16px',
                             right: '16px',
-                            background: '#18181B',
+                            background: 'rgba(17, 17, 17, 0.85)',
+                            backdropFilter: 'blur(16px)',
                             border: '1px solid rgba(255,255,255,0.15)',
-                            borderTop: 'none',
-                            borderRadius: '0 0 6px 6px',
+                            borderRadius: '12px',
                             boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
                             zIndex: 100,
                             maxHeight: '280px',
