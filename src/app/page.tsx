@@ -390,37 +390,12 @@ export default function Home() {
           transition: 'var(--theme-transition)'
         }}>
           <div className="container">
-            <div style={{
-              display: 'flex',
-              gap: '12px',
-              overflowX: 'auto',
-              paddingBottom: '16px',
-              WebkitOverflowScrolling: 'touch',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-            }}>
-              <style>{`.hide-scroll::-webkit-scrollbar { display: none; }`}</style>
+            <div className="pill-category-row">
               {CATEGORIES.map((cat, index) => (
                 <Link
                   key={index}
                   href={cat.slug ? `/category/${cat.slug}` : '/'}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    padding: '12px 24px',
-                    background: 'var(--color-card)',
-                    border: '1px solid var(--border-color)',
-                    borderRadius: '99px',
-                    color: 'var(--text-primary)',
-                    textDecoration: 'none',
-                    fontWeight: 700,
-                    fontSize: '0.9rem',
-                    letterSpacing: '0.01em',
-                    whiteSpace: 'nowrap',
-                    transition: 'all 0.2s ease',
-                    boxShadow: 'var(--shadow-sm)'
-                  }}
+                  className="pill-category-item"
                   onMouseEnter={e => {
                     e.currentTarget.style.background = '#111111';
                     e.currentTarget.style.color = '#FFFFFF';
@@ -438,20 +413,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <style jsx>{`
-          .category-scroll::-webkit-scrollbar { display: none; }
-          @media (min-width: 768px) {
-            .category-scroll {
-              display: grid !important;
-              grid-template-columns: repeat(4, 1fr) !important;
-              overflow-x: visible !important;
-              padding: 0 16px !important;
-            }
-          }
-          @media (min-width: 1024px) {
-            .category-scroll { grid-template-columns: repeat(7, 1fr) !important; }
-          }
-        `}</style>
         </section>
       </ScrollReveal>
 

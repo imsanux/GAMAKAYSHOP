@@ -102,12 +102,12 @@ export default function Footer() {
                         </h4>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             <Link
-                                href="/track"
+                                href="/support"
                                 style={{ fontSize: '0.83rem', color: '#888888', textDecoration: 'none', transition: 'color 0.15s ease' }}
                                 onMouseEnter={(e) => e.currentTarget.style.color = '#F5F5F7'}
                                 onMouseLeave={(e) => e.currentTarget.style.color = '#888888'}
                             >
-                                Track Order
+                                Support & Terms
                             </Link>
                             <Link
                                 href="/guides"
@@ -127,6 +127,14 @@ export default function Footer() {
                             >
                                 WhatsApp Support
                             </a>
+                            <Link
+                                href="/student"
+                                style={{ fontSize: '0.83rem', color: '#888888', textDecoration: 'none', transition: 'color 0.15s ease' }}
+                                onMouseEnter={(e) => e.currentTarget.style.color = '#F5F5F7'}
+                                onMouseLeave={(e) => e.currentTarget.style.color = '#888888'}
+                            >
+                                Student Support
+                            </Link>
                         </div>
                     </div>
 
