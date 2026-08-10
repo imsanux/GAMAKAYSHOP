@@ -190,6 +190,11 @@ export default function Home() {
   useGsapCardStagger(streamingGridRef);
   useGsapCardStagger(subsGridRef);
 
+  // Randomize starting slide on each visit (client-side only to avoid SSR mismatch)
+  useEffect(() => {
+    setCurrentSlide(Math.floor(Math.random() * HERO_SLIDES.length));
+  }, []);
+
   // Swipe State
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
