@@ -5,6 +5,8 @@ import { useState, useEffect, useRef } from 'react';
 import ProductCard from '@/components/ProductCard';
 import PromoBanner from '@/components/PromoBanner';
 import ScrollReveal from '@/components/ScrollReveal';
+import ClipReveal from '@/components/ClipReveal';
+import { useGsapCardStagger, useHeroParallax } from '@/hooks/useGsapAnimations';
 import dynamic from 'next/dynamic';
 
 const DraggableMarquee = dynamic(() => import('@/components/DraggableMarquee'), {
@@ -174,6 +176,20 @@ export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>(() => featuredProductsData.slice(0, 6));
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Refs for GSAP animations
+  const heroRef = useRef<HTMLElement>(null);
+  const featuredGridRef = useRef<HTMLDivElement>(null);
+  const gamingGridRef = useRef<HTMLDivElement>(null);
+  const streamingGridRef = useRef<HTMLDivElement>(null);
+  const subsGridRef = useRef<HTMLDivElement>(null);
+
+  // Wire up GSAP animations
+  useHeroParallax(heroRef);
+  useGsapCardStagger(featuredGridRef);
+  useGsapCardStagger(gamingGridRef);
+  useGsapCardStagger(streamingGridRef);
+  useGsapCardStagger(subsGridRef);
+
   // Swipe State
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -215,6 +231,20 @@ export default function Home() {
   const ctaRef = useRef<HTMLElement>(null);
   const rafPending = useRef(false);
 
+  // Scroll progress bar
+  useEffect(() => {
+    const bar = document.getElementById('scroll-progress-bar');
+    if (!bar) return;
+    const update = () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = total > 0 ? (scrolled / total) * 100 : 0;
+      bar.style.setProperty('--scroll-progress', `${pct.toFixed(2)}%`);
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+
   useEffect(() => {
     const handleFabVisibility = () => {
       // Throttle with rAF
@@ -236,8 +266,12 @@ export default function Home() {
 
   return (
     <div style={{ background: 'var(--bg-primary)', transition: 'background-color 0.3s ease' }}>
+      {/* Scroll Progress Bar */}
+      <div id="scroll-progress-bar" aria-hidden="true" />
+
       {/* Premium Hero Carousel */}
       <section
+        ref={heroRef}
         className="hero-section"
         style={{
           paddingTop: 'var(--header-height, 110px)',
@@ -421,13 +455,13 @@ export default function Home() {
         <section className="section-padding" style={{ paddingTop: '8px', background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
           <div className="container">
             <div className="section-title-row">
-              <h2>Best Sellers</h2>
+              <h2><ClipReveal>Best Sellers</ClipReveal></h2>
               <Link href="/category/gaming">
                 View All
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
-            <div className="product-grid">
+            <div className="product-grid" ref={featuredGridRef}>
               {featuredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -507,14 +541,14 @@ export default function Home() {
                   <circle cx="17" cy="10" r="1" fill="#1A8F3C" />
                   <circle cx="15" cy="12" r="1" fill="#1A8F3C" />
                 </svg>
-                Gaming
+                <ClipReveal>Gaming</ClipReveal>
               </h2>
               <Link href="/category/gaming">
                 View All
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
-            <div className="product-grid">
+            <div className="product-grid" ref={gamingGridRef}>
               {gamingProductsData.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -542,14 +576,14 @@ export default function Home() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E6A817" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                 </svg>
-                Subscriptions
+                <ClipReveal>Subscriptions</ClipReveal>
               </h2>
               <Link href="/category/subscriptions">
                 View All
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
-            <div className="product-grid">
+            <div className="product-grid" ref={subsGridRef}>
               {subscriptionsProductsData.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Product } from '@/lib/supabase';
 import { useCart } from '@/context/CartContext';
+import MagneticButton from '@/components/MagneticButton';
 
 interface ProductCardProps {
     product: Product;
@@ -45,6 +46,7 @@ function ProductCardInner({ product }: ProductCardProps) {
 
     return (
         <div
+            className="gsap-card"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{
@@ -58,7 +60,8 @@ function ProductCardInner({ product }: ProductCardProps) {
                 boxShadow: isHovered
                     ? '0 10px 40px -10px rgba(0,0,0,0.1)'
                     : '0 2px 4px rgba(0,0,0,0.02)',
-                transition: 'box-shadow 0.3s ease',
+                transition: 'box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.23,1,0.32,1)',
+                transform: isHovered ? 'translateY(-3px)' : 'translateY(0)',
             }}
         >
             {/* ── IMAGE AREA ──────────────────────────────────── */}
@@ -199,58 +202,58 @@ function ProductCardInner({ product }: ProductCardProps) {
                         </span>
                     </div>
 
-                    {/* Add to Cart — black primary, yellow on hover */}
-                    <button
-                        onClick={handleAddToCart}
-                        disabled={isAdding}
-                        style={{
-                            width: '100%',
-                            padding: '10px 14px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '6px',
-                            borderRadius: '5px',
-                            border: isAdding ? '1.5px solid #16A34A' : '1.5px solid #111111',
-                            fontSize: '0.79rem',
-                            fontWeight: 700,
-                            letterSpacing: '0.005em',
-                            cursor: isAdding ? 'default' : 'pointer',
-                            background: isAdding ? '#16A34A' : 'transparent',
-                            color: isAdding ? '#FFFFFF' : '#111111',
-                            transition: 'all 0.16s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                            if (!isAdding) {
-                                e.currentTarget.style.background = '#111111';
-                                e.currentTarget.style.color = '#FFFFFF';
-                            }
-                        }}
-                        onMouseLeave={(e) => {
-                            if (isAdding) {
-                                e.currentTarget.style.background = '#16A34A';
-                                e.currentTarget.style.color = '#FFFFFF';
-                                e.currentTarget.style.border = '1.5px solid #16A34A';
-                            } else {
-                                e.currentTarget.style.background = 'transparent';
-                                e.currentTarget.style.color = '#111111';
-                                e.currentTarget.style.border = '1.5px solid #111111';
-                            }
-                        }}
-                    >
-                        {isAdding ? (
-                            <>
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg>
-                                Added
-                            </>
-                        ) : (
-                            <>
-                                Add to Cart
-                            </>
-                        )}
-                    </button>
+                    {/* Add to Cart — magnetic + black primary, yellow on hover */}
+                    <MagneticButton strength={0.25}>
+                        <button
+                            onClick={handleAddToCart}
+                            disabled={isAdding}
+                            style={{
+                                width: '100%',
+                                padding: '10px 14px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '6px',
+                                borderRadius: '5px',
+                                border: isAdding ? '1.5px solid #16A34A' : '1.5px solid #111111',
+                                fontSize: '0.79rem',
+                                fontWeight: 700,
+                                letterSpacing: '0.005em',
+                                cursor: isAdding ? 'default' : 'pointer',
+                                background: isAdding ? '#16A34A' : 'transparent',
+                                color: isAdding ? '#FFFFFF' : '#111111',
+                                transition: 'all 0.16s ease',
+                            }}
+                            onMouseEnter={(e) => {
+                                if (!isAdding) {
+                                    e.currentTarget.style.background = '#111111';
+                                    e.currentTarget.style.color = '#FFFFFF';
+                                }
+                            }}
+                            onMouseLeave={(e) => {
+                                if (isAdding) {
+                                    e.currentTarget.style.background = '#16A34A';
+                                    e.currentTarget.style.color = '#FFFFFF';
+                                    e.currentTarget.style.border = '1.5px solid #16A34A';
+                                } else {
+                                    e.currentTarget.style.background = 'transparent';
+                                    e.currentTarget.style.color = '#111111';
+                                    e.currentTarget.style.border = '1.5px solid #111111';
+                                }
+                            }}
+                        >
+                            {isAdding ? (
+                                <>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                    Added
+                                </>
+                            ) : (
+                                <>Add to Cart</>
+                            )}
+                        </button>
+                    </MagneticButton>
                 </div>
             </div>
         </div>
