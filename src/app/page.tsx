@@ -8,6 +8,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 import ClipReveal from '@/components/ClipReveal';
 import { useGsapCardStagger, useHeroParallax } from '@/hooks/useGsapAnimations';
 import dynamic from 'next/dynamic';
+import AnimatedBannerText from '@/components/AnimatedBannerText';
 
 const DraggableMarquee = dynamic(() => import('@/components/DraggableMarquee'), {
   ssr: false,
@@ -148,6 +149,7 @@ const featuredProductsData = getFeaturedProducts();
 const gamingProductsData = getProductsByCategory('gaming').slice(0, 6);
 const streamingProductsData = getProductsByCategory('streaming').slice(0, 6);
 const subscriptionsProductsData = getProductsByCategory('subscriptions').slice(0, 6);
+const aiProductsData = getProductsByCategory('software').slice(0, 6);
 
 // Marquee items — static
 const MARQUEE_ROW1 = [
@@ -182,6 +184,7 @@ export default function Home() {
   const gamingGridRef = useRef<HTMLDivElement>(null);
   const streamingGridRef = useRef<HTMLDivElement>(null);
   const subsGridRef = useRef<HTMLDivElement>(null);
+  const aiGridRef = useRef<HTMLDivElement>(null);
 
   // Wire up GSAP animations
   useHeroParallax(heroRef);
@@ -189,6 +192,7 @@ export default function Home() {
   useGsapCardStagger(gamingGridRef);
   useGsapCardStagger(streamingGridRef);
   useGsapCardStagger(subsGridRef);
+  useGsapCardStagger(aiGridRef);
 
   // Randomize starting slide on each visit (client-side only to avoid SSR mismatch)
   useEffect(() => {
@@ -236,20 +240,6 @@ export default function Home() {
   const ctaRef = useRef<HTMLElement>(null);
   const rafPending = useRef(false);
 
-  // Scroll progress bar
-  useEffect(() => {
-    const bar = document.getElementById('scroll-progress-bar');
-    if (!bar) return;
-    const update = () => {
-      const scrolled = window.scrollY;
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = total > 0 ? (scrolled / total) * 100 : 0;
-      bar.style.setProperty('--scroll-progress', `${pct.toFixed(2)}%`);
-    };
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
-  }, []);
-
   useEffect(() => {
     const handleFabVisibility = () => {
       // Throttle with rAF
@@ -271,9 +261,6 @@ export default function Home() {
 
   return (
     <div style={{ background: 'var(--bg-primary)', transition: 'background-color 0.3s ease' }}>
-      {/* Scroll Progress Bar */}
-      <div id="scroll-progress-bar" aria-hidden="true" />
-
       {/* Premium Hero Carousel */}
       <section
         ref={heroRef}
@@ -460,7 +447,7 @@ export default function Home() {
         <section className="section-padding" style={{ paddingTop: '8px', background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
           <div className="container">
             <div className="section-title-row">
-              <h2><ClipReveal>Best Sellers</ClipReveal></h2>
+              <h2>BEST SELLERS</h2>
               <Link href="/category/gaming">
                 View All
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -483,6 +470,21 @@ export default function Home() {
         }}>
           <div className="container">
             <PromoBanner variant="grid" />
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* Typographic Stat Banner */}
+      <ScrollReveal>
+        <section className="promo-padding" style={{
+          background: 'var(--bg-primary)',
+          textAlign: 'center',
+          borderBottom: '1px solid var(--border-color)'
+        }}>
+          <div className="container" style={{ overflow: 'hidden' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'center', padding: '20px 0' }}>
+              <AnimatedBannerText />
+            </div>
           </div>
         </section>
       </ScrollReveal>
@@ -539,15 +541,7 @@ export default function Home() {
         <section className="section-padding below-fold" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
           <div className="container">
             <div className="section-title-row">
-              <h2>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A8F3C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="6" width="20" height="12" rx="2" />
-                  <path d="M6 12h4M8 10v4" />
-                  <circle cx="17" cy="10" r="1" fill="#1A8F3C" />
-                  <circle cx="15" cy="12" r="1" fill="#1A8F3C" />
-                </svg>
-                <ClipReveal>Gaming</ClipReveal>
-              </h2>
+              <h2>GAMING</h2>
               <Link href="/category/gaming">
                 View All
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -577,12 +571,7 @@ export default function Home() {
         <section className="section-padding below-fold" style={{ background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
           <div className="container">
             <div className="section-title-row">
-              <h2>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E6A817" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-                </svg>
-                <ClipReveal>Subscriptions</ClipReveal>
-              </h2>
+              <h2>SUBSCRIPTIONS</h2>
               <Link href="/category/subscriptions">
                 View All
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -664,6 +653,26 @@ export default function Home() {
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A5EC8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
                 24/7 Support
               </div>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* AI Tools Section */}
+      <ScrollReveal>
+        <section className="section-padding below-fold" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', transition: 'var(--theme-transition)' }}>
+          <div className="container">
+            <div className="section-title-row">
+              <h2>AI TOOLS</h2>
+              <Link href="/category/software">
+                View All
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '3px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
+            <div className="product-grid" ref={aiGridRef}>
+              {aiProductsData.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
             </div>
           </div>
         </section>

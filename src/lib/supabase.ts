@@ -8,6 +8,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 // Types
 export interface Product {
     id: string;
+    slug: string;
     name: string;
     brand: string;
     category: 'gaming' | 'streaming' | 'software' | 'subscriptions';

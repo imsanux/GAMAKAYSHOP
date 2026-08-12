@@ -132,7 +132,8 @@ html {
   -webkit-tap-highlight-color: transparent;
   text-size-adjust: 100%;
   overflow-x: hidden;
-  width: 100%;
+  width: 100vw;
+  max-width: 100%;
   position: relative;
 }
 
@@ -144,6 +145,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100vw;
+  max-width: 100%;
   transition: var(--theme-transition);
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
@@ -788,14 +791,15 @@ html.lenis body        { height: auto; }
 }
 
 .section-title-row h2 {
-  font-size: clamp(1.05rem, 2.8vw, 1.35rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
   color: var(--text-primary);
+  text-transform: uppercase;
   margin: 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .section-title-row a {

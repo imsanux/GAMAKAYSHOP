@@ -5,6 +5,7 @@ import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -207,6 +208,7 @@ export default function RootLayout({
       }}>
         <ThemeProvider>
           <CartProvider>
+            <SmoothScrollProvider>
               <Header />
               <main style={{ flex: 1 }}>
                 {children}
@@ -214,6 +216,7 @@ export default function RootLayout({
               <Footer />
               <Analytics />
               <SpeedInsights />
+            </SmoothScrollProvider>
           </CartProvider>
         </ThemeProvider>
       </body>

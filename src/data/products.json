@@ -26,7 +26,8 @@
         "delivery_type": "Manual",
         "image_url": "/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.webp",
         "logo_url": "",
-        "description": "🎮 Level Up Your Gaming! US PlayStation Store codes delivered via WhatsApp. Works on PS4/PS5."
+        "description": "Fuel your PlayStation experience with US PlayStation Store credit — the official way to buy games, DLC, in-game currency, and subscriptions on PS4 and PS5.\n\nWhat's included:\n• Redeemable on any US PlayStation Store account\n• Works for PS4, PS5, and PS VR\n• Buy full games, season passes, in-game items, and PSN subscriptions\n• No expiry date — use it whenever you're ready\n\nHow to redeem:\n1. Sign in to your US PlayStation account\n2. Go to PlayStation Store → Redeem Codes\n3. Enter the code and enjoy!\n\nCodes are delivered to your WhatsApp — usually within minutes of payment.",
+        "slug": "playstation-giftcards-usd"
     },
     {
         "id": "2",
@@ -47,7 +48,8 @@
         "delivery_type": "Manual",
         "image_url": "/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_INR.webp",
         "logo_url": "",
-        "description": "🎮 Level Up Your Gaming! India PlayStation Store codes. Works on PS4/PS5."
+        "description": "Power up your India PlayStation account with official INR store credit — buy the latest games, DLC packs, and in-game currency directly on PS4 and PS5.\n\nWhat's included:\n• Valid for India region PlayStation Store accounts\n• Works for PS4, PS5 titles and PS VR\n• Buy full-price games, add-ons, and PlayStation Plus top-ups\n• No expiry — redeem whenever you want\n\nHow to redeem:\n1. Sign in to your India PlayStation account\n2. Go to Store → Redeem Codes\n3. Enter code and it's credited instantly!\n\nDelivered via WhatsApp after payment confirmation.",
+        "slug": "playstation-giftcards-inr"
     },
     {
         "id": "3",
@@ -76,7 +78,8 @@
         "delivery_type": "Manual",
         "image_url": "/IMAGES/PRODUCTS/XBOX_GIFTCARDS.webp",
         "logo_url": "",
-        "description": "🎮 Play More, Pay Less! Xbox Store credit for games, DLCs, and subscriptions."
+        "description": "Load up your Xbox wallet with US Microsoft Store credit — spend it on Xbox games, DLC, Game Pass upgrades, movies, and more.\n\nWhat's included:\n• Compatible with Xbox Series X|S, Xbox One, and Windows PC\n• Spend on games, add-ons, Game Pass, and movies\n• Use on Microsoft Store website too\n• No expiry date on credit\n\nHow to redeem:\n1. Press the Xbox button → Sign in\n2. Go to Microsoft Store → Use a code\n3. Enter the code — credit added instantly\n\nCode delivered to WhatsApp within minutes.",
+        "slug": "xbox-giftcards"
     },
     {
         "id": "4",
@@ -93,7 +96,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/XBOX_GAMEPASS.webp",
         "logo_url": "",
-        "description": "🎮 Play More, Pay Less! 100+ games on console, PC & cloud. Includes EA Play."
+        "description": "Xbox Game Pass Ultimate gives you access to 100+ high-quality games on console, PC, and cloud — plus Xbox Live Gold and EA Play, all in one subscription.\n\nWhat's included:\n• 100+ games downloadable and playable instantly\n• Xbox Live Gold for online multiplayer\n• EA Play membership (FIFA, Battlefield, NFS, etc.)\n• Cloud gaming on phone, tablet, and browser\n• Day-one access to all Microsoft Studios releases\n\nHow to redeem:\n1. Sign into your Xbox/Microsoft account\n2. Go to microsoft.com/redeem\n3. Enter code and activate Game Pass Ultimate\n\nInstant delivery via WhatsApp.",
+        "slug": "xbox-gamepass-ultimate"
     },
     {
         "id": "5",
@@ -110,7 +114,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/XBOX_GAMEPASS_INR.webp",
         "logo_url": "",
-        "description": "🎮 India region Gamepass. 100+ games, new releases included."
+        "description": "Xbox Game Pass for India region — access the same library of 100+ games at a local price, with online multiplayer and cloud gaming included.\n\nWhat's included:\n• Full Game Pass library accessible from India\n• Online multiplayer via Xbox Live Gold\n• Cloud gaming on Android devices\n• New games added every month\n\nHow to redeem:\n1. Sign in to your India region Xbox account\n2. Redeem at microsoft.com/redeem\n3. Enjoy the full library\n\nInstant delivery via WhatsApp.",
+        "slug": "xbox-gamepass-inr"
     },
     {
         "id": "6",
@@ -139,7 +144,8 @@
         "delivery_type": "Manual",
         "image_url": "/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.webp",
         "logo_url": "",
-        "description": "🎮 Nintendo Switch games and DLC! US eShop credit codes."
+        "description": "Nintendo eShop credit for the US store — use it to buy Switch games, DLC, Nintendo Switch Online, and in-game currency across all Nintendo titles.\n\nWhat's included:\n• US Nintendo eShop gift card codes\n• Buy full games: Zelda, Mario, Pokemon, and more\n• Purchase DLC, season passes, and NSO subscriptions\n• No expiry date\n\nHow to redeem:\n1. On Nintendo Switch, open eShop\n2. Select your account → Enter Code\n3. Credit added to your wallet immediately\n\nCodes delivered via WhatsApp.",
+        "slug": "nintendo-eshop-giftcards"
     },
     {
         "id": "7",
@@ -156,7 +162,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/EA_PLAY_PRO.webp",
         "logo_url": "",
-        "description": "🎮 Play EA games first! FIFA, Battlefield, Need for Speed access."
+        "description": "EA Play Pro gives you full access to EA's entire library of PC titles — play new releases day one, plus thousands of hours of classics.\n\nWhat's included:\n• Full EA PC games library (no time limit)\n• New EA titles on day of release\n• FIFA, Battlefield, Mass Effect, Dragon Age, Dead Space & more\n• 10-hour early access trials on upcoming releases\n• 10% discount on EA digital purchases\n\nHow to redeem:\n1. Download EA App on PC\n2. Sign in and go to EA Play\n3. Enter code to activate subscription\n\nInstant delivery via WhatsApp.",
+        "slug": "ea-play-pro"
     },
     {
         "id": "8",
@@ -173,7 +180,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/TWITCH_PRIME.webp",
         "logo_url": "",
-        "description": "🎮 Support your favorite streamers with Twitch Prime subscription!"
+        "description": "Use your Twitch Prime Sub to support your favorite streamer for free — ad-free viewing, exclusive emotes, and channel badges included.\n\nWhat's included:\n• 1 free channel subscription per month\n• Ad-free viewing on subscribed channel\n• Exclusive subscriber emotes and badges\n• Support your streamer directly\n\nHow to redeem:\n1. Sign in to Twitch account\n2. Navigate to your chosen streamer's channel\n3. Click Subscribe and select Prime\n\nInstant delivery via WhatsApp.",
+        "slug": "twitch-prime-sub"
     },
     {
         "id": "50",
@@ -202,7 +210,8 @@
         "delivery_type": "Manual",
         "image_url": "/IMAGES/PRODUCTS/APPLE_GIFTCARD_USD_INR.webp",
         "logo_url": "",
-        "description": "🍎 For all things Apple! App Store, Apple Music, iCloud, games & more."
+        "description": "Apple Gift Card for the US App Store — spend on apps, games, in-app purchases, Apple Music, Apple TV+, iCloud storage, and more.\n\nWhat's included:\n• US Apple ID / App Store credit\n• Spend on: apps, games, movies, music, iCloud+, Apple subscriptions\n• Works on iPhone, iPad, Mac, and Apple TV\n• Never expires\n\nHow to redeem:\n1. Open App Store → tap profile icon\n2. Tap 'Redeem Gift Card or Code'\n3. Enter code — credit added immediately\n\nDelivered via WhatsApp right after payment.",
+        "slug": "apple-gift-card-usd"
     },
     {
         "id": "51",
@@ -223,7 +232,8 @@
         "delivery_type": "Manual",
         "image_url": "/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.webp",
         "logo_url": "",
-        "description": "🍎 India Apple Store credit! Apps, games, music, movies & subscriptions."
+        "description": "India Apple Store credit — top up your Apple ID wallet and spend on Indian App Store apps, games, subscriptions, iCloud+, and more.\n\nWhat's included:\n• Valid for India region Apple ID accounts\n• Buy apps, games, Apple Music, iCloud+ upgrades\n• Works across iPhone, iPad, Mac\n• No expiry\n\nHow to redeem:\n1. Open App Store on your device\n2. Tap profile → Redeem Gift Card or Code\n3. Enter and confirm — balance added instantly\n\nCode delivered via WhatsApp after verification.",
+        "slug": "apple-gift-card-inr"
     },
     {
         "id": "9",
@@ -244,7 +254,8 @@
         "delivery_type": "Manual",
         "image_url": "/IMAGES/PRODUCTS/META_GIFTCARDS.webp",
         "logo_url": "",
-        "description": "🎮 VR Gaming! Buy games for Meta Quest 2/3 headsets."
+        "description": "Meta Quest gift cards let you buy VR games, apps, and experiences directly on your Quest 2 or Quest 3 headset from the Meta Horizon Store.\n\nWhat's included:\n• Credit for the Meta Horizon Store\n• Buy VR games: Beat Saber, Among Us VR, Superhot, and more\n• Works on Meta Quest 2 and Quest 3\n• No expiry date\n\nHow to redeem:\n1. Open Meta Quest Store on headset or phone app\n2. Go to Payment → Redeem Code\n3. Enter your code — balance credited\n\nDelivered to WhatsApp shortly after payment.",
+        "slug": "meta-quest-giftcards"
     },
     {
         "id": "10",
@@ -265,7 +276,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/NETFLIX.webp",
         "logo_url": "",
-        "description": "🍿 Stream in HD! Unlimited movies & TV shows. Private profile provided."
+        "description": "Stream unlimited movies and TV shows in Full HD or 4K on Netflix — a private profile is provided, ready to use immediately.\n\nWhat's included:\n• Access to Netflix's full content library\n• 1080p Full HD or 4K Ultra HD quality (based on plan)\n• Your own private profile within the account\n• Works on mobile, tablet, PC, Smart TV, and gaming consoles\n• Subtitles available in multiple languages\n\nHow to use:\n1. You receive login credentials via WhatsApp\n2. Sign in at netflix.com or the app\n3. Select your profile and start watching!\n\n️ Do not change passwords or account details.\nDelivered instantly via WhatsApp.",
+        "slug": "netflix-monthly"
     },
     {
         "id": "11",
@@ -282,7 +294,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.webp",
         "logo_url": "",
-        "description": "🎵 Music Without Limits! Ad-free, offline downloads, high quality audio."
+        "description": "Spotify Premium for 3 months — ad-free music, offline downloads, on-demand playback, and the highest audio quality on any device.\n\nWhat's included:\n• 3 months of Spotify Premium\n• Ad-free listening on all devices\n• Download songs, albums, and playlists for offline listening\n• On-demand play — any song, any time\n• High quality audio (320kbps)\n\nHow to activate:\n1. You receive login credentials via WhatsApp\n2. Sign in to the Spotify app\n3. Premium is already active — enjoy!\n\nInstant delivery via WhatsApp.",
+        "slug": "spotify-premium"
     },
     {
         "id": "12",
@@ -299,7 +312,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.webp",
         "logo_url": "",
-        "description": "📺 Ad-free YouTube! Background play, YouTube Music included."
+        "description": "YouTube Premium removes all ads and adds background play, offline downloads, and YouTube Music — delivered instantly via WhatsApp.\n\nWhat's included:\n• Ad-free YouTube across all devices\n• Background playback (music/videos continue when screen is off)\n• Download videos for offline viewing\n• Full YouTube Music Premium access\n• YouTube Originals access\n\nHow to use:\n1. Receive your access details via WhatsApp\n2. Sign in and enjoy ad-free YouTube\n\nInstant delivery — no waiting.",
+        "slug": "youtube-premium"
     },
     {
         "id": "13",
@@ -316,7 +330,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/APPLEMUSIC.webp",
         "logo_url": "",
-        "description": "🎵 100 million songs. Spatial Audio with Dolby Atmos."
+        "description": "Apple Music gives you access to 100 million songs with Spatial Audio — delivered as a monthly subscription via WhatsApp.\n\nWhat's included:\n• 100M+ songs on-demand, no ads\n• Spatial Audio with Dolby Atmos support\n• Offline downloads on up to 10 devices\n• Radio stations and DJ-curated playlists\n• Lyrics in real time\n• Works on iPhone, Android, Mac, Windows\n\nHow to activate:\n1. You receive login credentials via WhatsApp\n2. Open Apple Music app and sign in\n3. Start listening — immediately!\n\nDelivered instantly via WhatsApp.",
+        "slug": "apple-music"
     },
     {
         "id": "14",
@@ -333,7 +348,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/APPLE_TV.webp",
         "logo_url": "",
-        "description": "📺 Award-winning Apple Originals. 4K HDR streaming."
+        "description": "Apple TV+ lets you watch all Apple Original series and films in 4K HDR — award-winning content with no ads.\n\nWhat's included:\n• All Apple Original movies and series (Ted Lasso, Severance, The Morning Show, etc.)\n• 4K HDR and Dolby Vision quality\n• Dolby Atmos audio\n• Available on Apple devices, Smart TVs, and web browsers\n• Up to 6 users on a Family Sharing plan\n\nHow to use:\n1. Receive login via WhatsApp\n2. Sign in to Apple TV app or tv.apple.com\n3. Enjoy Apple Originals in stunning quality!\n\nInstant delivery via WhatsApp.",
+        "slug": "apple-tv"
     },
     {
         "id": "15",
@@ -350,7 +366,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/APPLE_ONE.webp",
         "logo_url": "",
-        "description": "🍎 All-in-one! Apple Music, TV+, Arcade, iCloud+ bundled."
+        "description": "Apple One bundles Apple Music, Apple TV+, Apple Arcade, and iCloud+ into a single subscription — delivered and ready to use.\n\nWhat's included:\n• Apple Music: 100M+ songs\n• Apple TV+: Award-winning originals\n• Apple Arcade: 200+ premium games, no ads\n• iCloud+ with 50GB storage\n• Use across all your Apple devices\n\nHow to use:\n1. Get access details via WhatsApp\n2. Sign into your Apple account\n3. All services are active instantly\n\nInstant delivery via WhatsApp.",
+        "slug": "apple-one"
     },
     {
         "id": "16",
@@ -371,7 +388,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/CRUCHYROLL.webp",
         "logo_url": "",
-        "description": "⛩️ Ad-Free Anime! 1000+ anime titles, simulcasts, manga."
+        "description": "Crunchyroll Premium gives you ad-free access to 1,000+ anime titles with new episodes available 1 hour after Japan broadcast.\n\nWhat's included:\n• Simulcast episodes — 1 hour after Japan airing\n• 1,000+ anime series and 200+ manga titles\n• HD streaming up to 1080p, ad-free\n• 1 Year Mega Fan plan includes offline downloads\n• Available on all devices including Smart TVs\n\nHow to use:\n1. Receive login via WhatsApp\n2. Sign in at crunchyroll.com or the app\n3. Stream any anime instantly!\n\nDelivered instantly via WhatsApp.",
+        "slug": "crunchyroll-premium"
     },
     {
         "id": "17",
@@ -392,7 +410,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/DISCORD_NITRO.webp",
         "logo_url": "",
-        "description": "💬 Boost your server! Custom emojis, HD streaming, bigger uploads."
+        "description": "Discord Nitro gives you animated avatars, custom tags, boosted servers, HD streaming, and bigger file uploads — available in Basic and Full plans.\n\nWhat's included (Full Nitro):\n• Animated avatar, banner, and profile\n• Custom Discord tag\n• 2 Server Boosts (Level 1)\n• HD video streaming (1080p/60fps)\n• 500MB file upload limit\n• Access to all custom emojis globally\n\nBasic Nitro includes:\n• Animated avatar\n• Custom emoji usage\n• 50MB upload limit\n\nHow to activate:\n1. You get a gift link or code via WhatsApp\n2. Open Discord and redeem the gift\n3. Nitro is activated immediately!\n\nInstant delivery via WhatsApp.",
+        "slug": "discord-nitro"
     },
     {
         "id": "18",
@@ -409,7 +428,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/F1TV.webp",
         "logo_url": "",
-        "description": "🏎️ Live F1 races! Onboard cameras, full race replays, exclusive content."
+        "description": "️ Live F1 races! Onboard cameras, full race replays, exclusive content.",
+        "slug": "f1-tv-pro"
     },
     {
         "id": "19",
@@ -426,7 +446,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/F1TV.webp",
         "logo_url": "",
-        "description": "🏈 Live sports! UFC, NHL, MLB, soccer & more exclusive content."
+        "description": "Live sports! UFC, NHL, MLB, soccer & more exclusive content.",
+        "slug": "espn-monthly"
     },
     {
         "id": "20",
@@ -443,7 +464,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/VIKI_RAKUTEN.webp",
         "logo_url": "",
-        "description": "🎬 K-Drama & Asian content! Ad-free, HD streaming."
+        "description": "K-Drama & Asian content! Ad-free, HD streaming.",
+        "slug": "viki-rakuten-premium"
     },
     {
         "id": "21",
@@ -460,7 +482,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.webp",
         "logo_url": "",
-        "description": "🧠 GPT-4 Access! Faster responses, priority access, plugins."
+        "description": "ChatGPT Plus gives you access to GPT-4, faster responses, and priority access even during peak hours — delivered as a monthly subscription.\n\nWhat's included:\n• GPT-4 access (most advanced OpenAI model)\n• Priority access — no queues or slowdowns\n• Faster response times\n• Access to DALL-E image generation\n• Advanced Data Analysis (Code Interpreter)\n• Browse the web with Bing integration\n\nHow to use:\n1. Receive login credentials via WhatsApp\n2. Sign into chat.openai.com\n3. Select GPT-4 from the model picker and start!\n\nInstant delivery via WhatsApp.",
+        "slug": "chatgpt-plus"
     },
     {
         "id": "22",
@@ -477,7 +500,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.webp",
         "logo_url": "",
-        "description": "🧠 Think Smarter! Claude Pro for advanced AI conversations & coding."
+        "description": "Claude Pro by Anthropic — the most capable version of Claude AI, for complex reasoning, long documents, and advanced coding tasks.\n\nWhat's included:\n• Access to Claude 3 Opus (most powerful model)\n• 5x more usage than free tier\n• Priority access during high traffic\n• 200K context window — analyze entire books or codebases\n• Early access to new Claude features\n\nHow to use:\n1. Receive credentials via WhatsApp\n2. Sign in at claude.ai\n3. Start chatting with Claude Pro immediately\n\nInstant delivery via WhatsApp.",
+        "slug": "claude-ai-anthropic"
     },
     {
         "id": "23",
@@ -494,7 +518,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.webp",
         "logo_url": "",
-        "description": "🧠 Google\"s most capable AI! 2TB storage, Gemini in Docs & Gmail."
+        "description": "Google Gemini Advanced gives you access to Gemini Ultra 1.0 — Google's most capable AI model, plus 2TB of Google One storage.\n\nWhat's included:\n• Gemini Ultra 1.0 — Google's best AI model\n• 2TB Google One cloud storage\n• Gemini in Gmail, Docs, Sheets, Slides\n• Access in 150+ countries\n• Google Photos AI editing features\n\nHow to use:\n1. Receive login details via WhatsApp\n2. Sign in at gemini.google.com\n3. Gemini Advanced is active and ready!\n\nInstant delivery via WhatsApp.",
+        "slug": "google-gemini-advanced"
     },
     {
         "id": "24",
@@ -511,7 +536,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/CURSOR_AI.webp",
         "logo_url": "",
-        "description": "💻 AI Code Editor! Write, edit & debug code with AI assistance."
+        "description": "Cursor AI Pro — the AI-first code editor built on VS Code. Write, edit, and debug code faster with AI that understands your codebase.\n\nWhat's included:\n• GPT-4 and Claude-powered code generation\n• Multi-line edits with natural language instructions\n• Chat with your entire codebase\n• Automatic bug detection and fixes\n• Supports all major programming languages\n• Built on VS Code — familiar interface\n\nHow to activate:\n1. Download Cursor from cursor.sh\n2. Receive license/login details via WhatsApp\n3. Activate Pro and start coding with AI!\n\nInstant delivery via WhatsApp.",
+        "slug": "cursor-ai"
     },
     {
         "id": "25",
@@ -528,7 +554,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ELEVEN_LABS.webp",
         "logo_url": "",
-        "description": "🎙️ Realistic AI Voices! Text-to-speech, voice cloning, dubbing."
+        "description": "️ Realistic AI Voices! Text-to-speech, voice cloning, dubbing.",
+        "slug": "elevenlabs-ai-voice"
     },
     {
         "id": "26",
@@ -545,7 +572,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/SUNO_AI.webp",
         "logo_url": "",
-        "description": "🎵 Create AI Music! Generate songs in any style with lyrics."
+        "description": "Suno AI Pro — create full songs complete with vocals and instrumentation using just a text prompt. No music experience needed.\n\nWhat's included:\n• 2,500 credits/month (~830 songs)\n• Commercial use rights for generated songs\n• No queue — priority processing\n• Download songs as MP3\n• All genres supported\n\nHow to use:\n1. Get login details via WhatsApp\n2. Sign in at suno.ai\n3. Type your song idea and generate instantly!\n\nInstant delivery via WhatsApp.",
+        "slug": "suno-ai-pro"
     },
     {
         "id": "27",
@@ -562,7 +590,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/GROK_BY_xAI.webp",
         "logo_url": "",
-        "description": "🧠 Elon Musk\"s AI! Real-time info, witty responses, X integration."
+        "description": "Grok by xAI — Elon Musk's AI with real-time access to X (Twitter) data and a uniquely witty, unfiltered personality.\n\nWhat's included:\n• Grok 1.5 (most advanced xAI model)\n• Real-time information from X/Twitter\n• Image understanding and analysis\n• Longer context window\n• Unique personality — less restricted than other AI\n• Access via X Premium subscription\n\nHow to use:\n1. Receive account details via WhatsApp\n2. Sign in to X (Twitter) platform\n3. Access Grok from the sidebar\n\nInstant delivery via WhatsApp.",
+        "slug": "grok-by-xai"
     },
     {
         "id": "28",
@@ -579,7 +608,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/REPLIT.webp",
         "logo_url": "",
-        "description": "💻 Build Better with AI! Cloud IDE with AI coding assistant."
+        "description": "Build Better with AI! Cloud IDE with AI coding assistant.",
+        "slug": "replit-ai-core"
     },
     {
         "id": "29",
@@ -596,7 +626,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/QUILLBOT.webp",
         "logo_url": "",
-        "description": "✍️ Write Better! Paraphrasing, grammar check, plagiarism detector."
+        "description": "️ Write Better! Paraphrasing, grammar check, plagiarism detector.",
+        "slug": "quillbot-premium"
     },
     {
         "id": "30",
@@ -613,7 +644,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ANYTHING_AI.webp",
         "logo_url": "",
-        "description": "🧠 All-in-one AI! Multiple AI models in one subscription."
+        "description": "All-in-one AI! Multiple AI models in one subscription.",
+        "slug": "anything-ai"
     },
     {
         "id": "31",
@@ -630,7 +662,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/RORK_AI.webp",
         "logo_url": "",
-        "description": "🤖 Build AI Apps! No-code AI application builder."
+        "description": "Build AI Apps! No-code AI application builder.",
+        "slug": "rork-ai"
     },
     {
         "id": "32",
@@ -647,7 +680,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/LOVEABLE_AI.webp",
         "logo_url": "",
-        "description": "💻 AI Web Builder! Create websites with conversational AI."
+        "description": "AI Web Builder! Create websites with conversational AI.",
+        "slug": "loveable-ai"
     },
     {
         "id": "33",
@@ -664,7 +698,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/NORD_VPN.webp",
         "logo_url": "",
-        "description": "🛡️ Stay Safe Online! Fast VPN, 5500+ servers, no logs."
+        "description": "NordVPN keeps you safe online with military-grade encryption, 5,500+ servers in 60 countries, and a strict no-logs policy.\n\nWhat's included:\n• 5,500+ servers in 60 countries\n• Military-grade AES-256 encryption\n• No-logs policy — zero data stored\n• Kill switch and DNS leak protection\n• Threat Protection (ad & malware blocker)\n• 6 simultaneous device connections\n\nHow to activate:\n1. Get login credentials via WhatsApp\n2. Download NordVPN on your device\n3. Sign in and connect — you're protected!\n\nInstant delivery via WhatsApp.",
+        "slug": "nordvpn"
     },
     {
         "id": "34",
@@ -685,7 +720,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/EXPRESS_VPN.webp",
         "logo_url": "",
-        "description": "🛡️ Lightning Fast VPN! 94 countries, unlimited bandwidth."
+        "description": "ExpressVPN is the fastest VPN on the market — 94 countries, Lightspeed protocol, and easy setup on any device.\n\nWhat's included:\n• Servers in 94 countries, 160 locations\n• Lightning-fast Lightway protocol\n• Strict no-logs policy, audited by third parties\n• Split tunneling support\n• Works with Netflix, Hulu, BBC iPlayer\n• 5 simultaneous device connections\n\nHow to activate:\n1. Receive login via WhatsApp\n2. Download ExpressVPN on any device\n3. Sign in and connect — instant protection!\n\nInstant delivery via WhatsApp.",
+        "slug": "expressvpn"
     },
     {
         "id": "35",
@@ -706,7 +742,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/SURFSHARK_VPN.webp",
         "logo_url": "",
-        "description": "🛡️ Unlimited Devices! Fast VPN with CleanWeb ad blocker."
+        "description": "️ Unlimited Devices! Fast VPN with CleanWeb ad blocker.",
+        "slug": "surfshark-vpn"
     },
     {
         "id": "36",
@@ -723,7 +760,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/CYBERGHOST_VPN.webp",
         "logo_url": "",
-        "description": "🛡️ 9000+ Servers! Optimized for streaming & gaming."
+        "description": "️ 9000+ Servers! Optimized for streaming & gaming.",
+        "slug": "cyberghost-vpn"
     },
     {
         "id": "37",
@@ -740,7 +778,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/MICROSOFT_OFFICE.webp",
         "logo_url": "",
-        "description": "💼 Word, Excel, PowerPoint! 1TB OneDrive cloud storage."
+        "description": "Microsoft 365 gives you the full Office suite — Word, Excel, PowerPoint, Outlook — plus 1TB of OneDrive cloud storage.\n\nWhat's included:\n• Word, Excel, PowerPoint, Outlook, OneNote\n• 1TB OneDrive cloud storage\n• Works on PC, Mac, iPhone, Android\n• Real-time collaboration with others\n• Always up-to-date with latest features\n\nHow to activate:\n1. Receive Microsoft account details via WhatsApp\n2. Sign in at microsoft365.com\n3. Download apps or use in browser — ready instantly!\n\nInstant delivery via WhatsApp.",
+        "slug": "microsoft-365"
     },
     {
         "id": "38",
@@ -765,7 +804,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/GOOGLE_PLAY_INAPP_PURCHASES.webp",
         "logo_url": "",
-        "description": "☁️ Expand Your Storage! Google One cloud storage plans."
+        "description": "️ Expand Your Storage! Google One cloud storage plans.",
+        "slug": "google-drive-storage"
     },
     {
         "id": "39",
@@ -790,7 +830,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ICLOUD_STORAGE.webp",
         "logo_url": "",
-        "description": "☁️ iCloud+ Features! Private Relay, Hide My Email, more storage."
+        "description": "️ iCloud+ Features! Private Relay, Hide My Email, more storage.",
+        "slug": "icloud-storage"
     },
     {
         "id": "40",
@@ -807,7 +848,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/QUILLBOT.webp",
         "logo_url": "",
-        "description": "✍️ Write Confidently! Advanced grammar, style, plagiarism check."
+        "description": "Grammarly Premium catches every grammar mistake and gives you advanced style, tone, and clarity suggestions — for students and professionals alike.\n\nWhat's included:\n• Grammar, spelling, and punctuation correction\n• Advanced suggestions for clarity, conciseness, and tone\n• Plagiarism detector (checks 16B+ web pages)\n• Works in Google Docs, Gmail, Word, and 500k+ sites\n• Tone detector and formality suggestions\n\nHow to activate:\n1. Receive credentials via WhatsApp\n2. Sign in at grammarly.com\n3. Install the browser extension — works everywhere!\n\nInstant delivery via WhatsApp.",
+        "slug": "grammarly-premium"
     },
     {
         "id": "41",
@@ -824,7 +866,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/DUOLINGO.webp",
         "logo_url": "",
-        "description": "🦉 Learn Languages! No ads, unlimited hearts, progress tracking."
+        "description": "Duolingo Super removes all ads and gives you unlimited hearts so you never stop your learning streak — perfect for language learners.\n\nWhat's included:\n• No ads — distraction-free learning\n• Unlimited hearts — never lose progress\n• Access to all Duolingo courses (40+ languages)\n• Personalized practice\n• Progress quizzes and detailed analytics\n• Streak repair feature\n\nHow to activate:\n1. Receive login via WhatsApp\n2. Sign in to Duolingo\n3. Super features are active!\n\nInstant delivery via WhatsApp.",
+        "slug": "duolingo-super"
     },
     {
         "id": "42",
@@ -841,7 +884,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/SKILLSHARE.webp",
         "logo_url": "",
-        "description": "🎓 Learn Creative Skills! 30,000+ classes in design, business, more."
+        "description": "Learn Creative Skills! 30,000+ classes in design, business, more.",
+        "slug": "skillshare-premium"
     },
     {
         "id": "43",
@@ -858,7 +902,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/UDEMY_COURSE_WITH_CERTIFICATION.webp",
         "logo_url": "",
-        "description": "🎓 Get Certified! Access any Udemy course with completion certificate."
+        "description": "Get Certified! Access any Udemy course with completion certificate.",
+        "slug": "udemy-course-access"
     },
     {
         "id": "44",
@@ -875,7 +920,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ADOBE_EXPRESS.webp",
         "logo_url": "",
-        "description": "🎨 Design Made Easy! Create graphics, videos, social content."
+        "description": "Design Made Easy! Create graphics, videos, social content.",
+        "slug": "adobe-express"
     },
     {
         "id": "45",
@@ -892,7 +938,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/FILMORA.webp",
         "logo_url": "",
-        "description": "🎬 Edit Videos Like Pro! Easy editing, effects, transitions."
+        "description": "Edit Videos Like Pro! Easy editing, effects, transitions.",
+        "slug": "filmora-wondershare"
     },
     {
         "id": "46",
@@ -909,7 +956,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/PROCREATE.webp",
         "logo_url": "",
-        "description": "🎨 Digital Art! Professional illustration app for iPad."
+        "description": "Digital Art! Professional illustration app for iPad.",
+        "slug": "procreate"
     },
     {
         "id": "47",
@@ -926,7 +974,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ZOOM_WORKSPACE.webp",
         "logo_url": "",
-        "description": "📹 Pro Video Meetings! No time limit, cloud recording, webinars."
+        "description": "Pro Video Meetings! No time limit, cloud recording, webinars.",
+        "slug": "zoom-workspace"
     },
     {
         "id": "48",
@@ -947,7 +996,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/TINDER_GOLD.webp",
         "logo_url": "",
-        "description": "💘 See Who Likes You! Unlimited likes, passport, no ads."
+        "description": "Tinder Gold unlocks the most desired Tinder features — see everyone who already liked you and match instantly.\n\nWhat's included:\n• See who liked you before you swipe\n• Unlimited right swipes\n• Passport — match with people anywhere in the world\n• 5 Super Likes per day\n• 1 Boost per month\n• Top Picks — curated potential matches\n• No ads\n\nHow to activate:\n1. Receive access details via WhatsApp\n2. Sign in to Tinder\n3. Gold features are live immediately!\n\nInstant delivery via WhatsApp.",
+        "slug": "tinder-gold"
     },
     {
         "id": "49",
@@ -964,7 +1014,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/TINDER_PLATINUM.webp",
         "logo_url": "",
-        "description": "💎 Premium Priority! Message before matching, priority likes."
+        "description": "Premium Priority! Message before matching, priority likes.",
+        "slug": "tinder-platinum"
     },
     {
         "id": "134",
@@ -981,7 +1032,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/BUMBLE.webp",
         "logo_url": "",
-        "description": "💛 Boost Your Profile! Beeline, SuperSwipes, unlimited extends."
+        "description": "Boost Your Profile! Beeline, SuperSwipes, unlimited extends.",
+        "slug": "bumble-premium"
     },
     {
         "id": "135",
@@ -998,7 +1050,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/HINGE.webp",
         "logo_url": "",
-        "description": "💘 Better Matches! See who likes you, unlimited likes."
+        "description": "Better Matches! See who likes you, unlimited likes.",
+        "slug": "hinge-x"
     },
     {
         "id": "52",
@@ -1015,7 +1068,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/HAPPN.webp",
         "logo_url": "",
-        "description": "💕 Find Nearby Matches! See who crossed your path."
+        "description": "Find Nearby Matches! See who crossed your path.",
+        "slug": "happn-premium"
     },
     {
         "id": "53",
@@ -1032,7 +1086,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/TANTAN_VIP.webp",
         "logo_url": "",
-        "description": "💕 Asian Dating! Popular in Asia, see who likes you."
+        "description": "Asian Dating! Popular in Asia, see who likes you.",
+        "slug": "tantan-vip"
     },
     {
         "id": "54",
@@ -1049,7 +1104,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/X(TWITTER)_PREMIUM.webp",
         "logo_url": "",
-        "description": "🚀 Get Verified! Blue checkmark, longer posts, edit tweets."
+        "description": "Get Verified! Blue checkmark, longer posts, edit tweets.",
+        "slug": "x-twitter-premium"
     },
     {
         "id": "55",
@@ -1066,7 +1122,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/SNAPCHAT+.webp",
         "logo_url": "",
-        "description": "👻 Exclusive Features! Custom app icons, story rewatch, more."
+        "description": "Exclusive Features! Custom app icons, story rewatch, more.",
+        "slug": "snapchat"
     },
     {
         "id": "56",
@@ -1083,7 +1140,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/INSTAGRAM_VERIFIED.webp",
         "logo_url": "",
-        "description": "✓ Blue Badge! Verified badge, priority support, exclusive stickers."
+        "description": "Blue Badge! Verified badge, priority support, exclusive stickers.",
+        "slug": "instagram-verified"
     },
     {
         "id": "57",
@@ -1100,7 +1158,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/META_VERIFICATION.webp",
         "logo_url": "",
-        "description": "✓ Facebook + Instagram! Verified badge on both platforms."
+        "description": "Facebook + Instagram! Verified badge on both platforms.",
+        "slug": "meta-verified"
     },
     {
         "id": "58",
@@ -1117,7 +1176,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/TRUECALLER.webp",
         "logo_url": "",
-        "description": "📞 Know Who\"s Calling! Caller ID, spam blocking, no ads."
+        "description": "Know Who\"s Calling! Caller ID, spam blocking, no ads.",
+        "slug": "truecaller-premium"
     },
     {
         "id": "59",
@@ -1134,7 +1194,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/STRAVA.webp",
         "logo_url": "",
-        "description": "🏃 Track Your Runs! Advanced analytics, segments, training plans."
+        "description": "Track Your Runs! Advanced analytics, segments, training plans.",
+        "slug": "strava-premium"
     },
     {
         "id": "60",
@@ -1151,7 +1212,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/FLIGHTRADAR24.webp",
         "logo_url": "",
-        "description": "✈️ Track Flights! Real-time flight tracking, 3D view, alerts."
+        "description": "️ Track Flights! Real-time flight tracking, 3D view, alerts.",
+        "slug": "flightradar24-gold"
     },
     {
         "id": "61",
@@ -1168,7 +1230,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/GOPRO_PREMIUM.webp",
         "logo_url": "",
-        "description": "📸 Cloud Storage! Unlimited backup, camera discounts, replacements."
+        "description": "Cloud Storage! Unlimited backup, camera discounts, replacements.",
+        "slug": "gopro-premium"
     },
     {
         "id": "62",
@@ -1185,7 +1248,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/UPWORK.webp",
         "logo_url": "",
-        "description": "💼 Win More Jobs! Extra connects, profile boost, earnings protection."
+        "description": "Win More Jobs! Extra connects, profile boost, earnings protection.",
+        "slug": "upwork-plus"
     },
     {
         "id": "63",
@@ -1202,7 +1266,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/NAMECHEAP_DOMAINS.webp",
         "logo_url": "",
-        "description": "🌐 Get Your Domain! .com, .io, .dev and more extensions."
+        "description": "Get Your Domain! .com, .io, .dev and more extensions.",
+        "slug": "namecheap-domains"
     },
     {
         "id": "64",
@@ -1223,7 +1288,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/AIRALO_eSIM.webp",
         "logo_url": "",
-        "description": "📱 Travel Data! eSIM for 200+ countries, instant activation."
+        "description": "Travel Data! eSIM for 200+ countries, instant activation.",
+        "slug": "airalo-esim"
     },
     {
         "id": "65",
@@ -1244,7 +1310,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/SAILY_eSIM.webp",
         "logo_url": "",
-        "description": "📱 Budget Travel Data! By NordVPN, reliable global coverage."
+        "description": "Budget Travel Data! By NordVPN, reliable global coverage.",
+        "slug": "saily-esim"
     },
     {
         "id": "66",
@@ -1261,7 +1328,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/EXITLAG.webp",
         "logo_url": "",
-        "description": "🎮 Lower Ping! Gaming VPN for better connection to game servers."
+        "description": "Lower Ping! Gaming VPN for better connection to game servers.",
+        "slug": "exitlag-gaming-vpn"
     },
     {
         "id": "67",
@@ -1282,7 +1350,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/APEUNI_PTE_VIP.webp",
         "logo_url": "",
-        "description": "📚 PTE Prep! Practice tests, AI scoring, study materials."
+        "description": "PTE Prep! Practice tests, AI scoring, study materials.",
+        "slug": "apeuni-pte-vip"
     },
     {
         "id": "68",
@@ -1299,7 +1368,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/1Password.webp",
         "logo_url": "",
-        "description": "Contact via Viber/WhatsApp: 9862157864 ðŸ“· Or scan the QR code  ðŸ” Stay secure with 1Password. ðŸ—ï¸ Store and mana"
+        "description": "Contact via Viber/WhatsApp: 9862157864 ðŸ“· Or scan the QR code  ðŸ” Stay secure with 1Password. ðŸ—ï¸ Store and mana",
+        "slug": "1password"
     },
     {
         "id": "69",
@@ -1316,7 +1386,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Ape_Uni_VIP.webp",
         "logo_url": "",
-        "description": "ðŸ¦ Level Up with Ape Uni VIP Monthly! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ“ Exclusive Ac"
+        "description": "ðŸ¦ Level Up with Ape Uni VIP Monthly! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ“ Exclusive Ac",
+        "slug": "ape-uni-vip"
     },
     {
         "id": "70",
@@ -1333,7 +1404,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Apple_Arcade.webp",
         "logo_url": "",
-        "description": "ðŸŽ® Apple Arcade   ðŸ“± Contact: Viber / WhatsApp â€“ 9862157864 or Scan the QR code.   Features included:  ðŸŽ¯ Access"
+        "description": "ðŸŽ Apple Arcade   ðŸ“± Contact: Viber / WhatsApp â€“ 9862157864 or Scan the QR code.   Features included:  ðŸŽ¯ Access",
+        "slug": "apple-arcade"
     },
     {
         "id": "71",
@@ -1350,7 +1422,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Apple_Books.webp",
         "logo_url": "",
-        "description": "ðŸ“š Apple Books  Access Appleâ€™s digital reading platform to purchase and keep books in your personal library.  ðŸ“± C"
+        "description": "ðŸ“š Apple Books  Access Appleâ€s digital reading platform to purchase and keep books in your personal library.  ðŸ“± C",
+        "slug": "apple-books"
     },
     {
         "id": "72",
@@ -1367,7 +1440,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Apple_Creator_Studio.webp",
         "logo_url": "",
-        "description": "ðŸ“±Contact via Viber/WhatsApp: 9862157864 Or scan the QR code Use the finest creative application, now at a fraction of"
+        "description": "ðŸ“±Contact via Viber/WhatsApp: 9862157864 Or scan the QR code Use the finest creative application, now at a fraction of",
+        "slug": "apple-creator-studio"
     },
     {
         "id": "73",
@@ -1384,7 +1458,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Apple_Developer.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ‘¨â€ðŸ’» Apple Developer Program ðŸš€ Build, test,"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ‘¨â€ðŸ’» Apple Developer Program ðŸš€ Build, test,",
+        "slug": "apple-developer"
     },
     {
         "id": "74",
@@ -1401,7 +1476,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Blackbox_for_Vision_Pro.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Dive into a spatial puzzle adventure that plays with y"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Dive into a spatial puzzle adventure that plays with y",
+        "slug": "blackbox-for-vision-pro"
     },
     {
         "id": "75",
@@ -1418,7 +1494,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ChatGPT_PRO.webp",
         "logo_url": "",
-        "description": "ðŸ“ž Viber/WhatsApp: 9862157864 ðŸ“² Scan the QR to get started!  ðŸš€ Upgrade to ChatGPT Pro â€” unlock GPT-5.1, OpenAI"
+        "description": "ðŸ“ž Viber/WhatsApp: 9862157864 ðŸ“² Scan the QR to get started!  ðŸš€ Upgrade to ChatGPT Pro â€” unlock GPT-5.1, OpenAI",
+        "slug": "chatgpt-pro"
     },
     {
         "id": "76",
@@ -1435,7 +1512,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ChatGPT_Shared.webp",
         "logo_url": "",
-        "description": "ðŸ¤– Unlock Smarter Conversations with ChatGPT 5.1! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ’¡"
+        "description": "ðŸ¤– Unlock Smarter Conversations with ChatGPT 5.1! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ’¡",
+        "slug": "chatgpt-shared"
     },
     {
         "id": "77",
@@ -1452,7 +1530,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Crouton_for_Vision_Pro.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!   ðŸ½ï¸ Cook smarter with recipes in a fully immersiv"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!   ðŸ½ï¸ Cook smarter with recipes in a fully immersiv",
+        "slug": "crouton-for-vision-pro"
     },
     {
         "id": "78",
@@ -1469,7 +1548,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/djay_for_Vision_Pro.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Nextâ€‘level DJing in spatial music reality, mix like"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Nextâ€‘level DJing in spatial music reality, mix like",
+        "slug": "djay-for-vision-pro"
     },
     {
         "id": "79",
@@ -1486,7 +1566,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/EA_Pro.webp",
         "logo_url": "",
-        "description": "ðŸŽ® Play Without Limits with EA Play Pro! ðŸ† Latest Hits: Play FIFA 26 on day one and never miss a match! ðŸ“± Contac"
+        "description": "ðŸŽ Play Without Limits with EA Play Pro! ðŸ† Latest Hits: Play FIFA 26 on day one and never miss a match! ðŸ“± Contac",
+        "slug": "ea-pro"
     },
     {
         "id": "80",
@@ -1503,7 +1584,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ESPN_Plus.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ† Stream live sports with ESPN+! âš½ Watch exclusiv"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ† Stream live sports with ESPN+! âš½ Watch exclusiv",
+        "slug": "espn-plus"
     },
     {
         "id": "81",
@@ -1520,7 +1602,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Exitlag_Renewable.webp",
         "logo_url": "",
-        "description": "âš¡ Game Without Limits with ExitLag! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ® 1 Month Premiu"
+        "description": "âš¡ Game Without Limits with ExitLag! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ 1 Month Premiu",
+        "slug": "exitlag-renewable"
     },
     {
         "id": "82",
@@ -1537,7 +1620,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Express_VPN_Weekly_Monthly.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact at Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸ®ðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° ðŸ”’ VPN Subscriptions â€“ Stay Safe & Private"
+        "description": "ðŸ“± Contact at Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° ðŸ”’ VPN Subscriptions â€“ Stay Safe & Private",
+        "slug": "express-vpn-weekly-monthly"
     },
     {
         "id": "83",
@@ -1554,7 +1638,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Feather_Draw_for_iPad.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Bring your ideas to life in a fully immersive spatial"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Bring your ideas to life in a fully immersive spatial",
+        "slug": "feather-draw-for-ipad"
     },
     {
         "id": "84",
@@ -1571,7 +1656,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Filmora_Video_Editor_Pro.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ¬ Get Filmora Video Editor Pro! âœ¨ Edit videos lik"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ¬ Get Filmora Video Editor Pro! âœ¨ Edit videos lik",
+        "slug": "filmora-video-editor-pro"
     },
     {
         "id": "85",
@@ -1588,7 +1674,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Final_Cut_Pro.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Professional video editing faster, smoother, smarter."
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Professional video editing faster, smoother, smarter.",
+        "slug": "final-cut-pro"
     },
     {
         "id": "86",
@@ -1605,7 +1692,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/FL_Studio_Mobile.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Create professional music on your iPhone or iPad"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Create professional music on your iPhone or iPad",
+        "slug": "fl-studio-mobile"
     },
     {
         "id": "87",
@@ -1622,7 +1710,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Flight_Radar_24_Gold_Monthly.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  âœˆï¸ Track flights worldwide in real-time with advan"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  âœˆï¸ Track flights worldwide in real-time with advan",
+        "slug": "flight-radar-24-gold-monthly"
     },
     {
         "id": "88",
@@ -1639,7 +1728,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Google_Play_In_app_Purchases.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 ðŸš€ Fast Delivery: Google Play subscriptions within 10 minutes! ðŸ“± Easy P"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 ðŸš€ Fast Delivery: Google Play subscriptions within 10 minutes! ðŸ“± Easy P",
+        "slug": "google-play-in-app-purchases"
     },
     {
         "id": "89",
@@ -1656,7 +1746,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Grok_4_By_xAI.webp",
         "logo_url": "",
-        "description": "ðŸ¤– Unlock the Power of Grok AI â€“ Elon Muskâ€™s Smartest Chatbot  ðŸ“± Contact via Viber/WhatsApp: 9862157864  Lookin"
+        "description": "ðŸ¤– Unlock the Power of Grok AI â€“ Elon Muskâ€s Smartest Chatbot  ðŸ“± Contact via Viber/WhatsApp: 9862157864  Lookin",
+        "slug": "grok-4-by-xai"
     },
     {
         "id": "90",
@@ -1673,7 +1764,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Hinge_X__.webp",
         "logo_url": "",
-        "description": "Hinge+ ðŸ–¤   ðŸ“± Contact: Viber / WhatsApp â€“ 9862157864 (or scan QR code)  Features included: ðŸ’¬ Send unlimited li"
+        "description": "Hinge+ ðŸ–¤   ðŸ“± Contact: Viber / WhatsApp â€“ 9862157864 (or scan QR code)  Features included: ðŸ’¬ Send unlimited li",
+        "slug": "hinge-x"
     },
     {
         "id": "91",
@@ -1690,7 +1782,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/iCloud_Storage.webp",
         "logo_url": "",
-        "description": "ðŸ“± ð‚ð¨ð§ð­ðšðœð­: Viber/WhatsApp: 9862157864 or scan QR code. â˜ï¸ ð”ð©ð ð«ðšððž ð˜ð"
+        "description": "ðŸ“± ð‚ð¨ð§ð­ðšðœð­: Viber/WhatsApp: 9862157864 or scan QR code. â˜ï¸ ð”ðð ð«ðšððž ð˜ð",
+        "slug": "icloud-storage"
     },
     {
         "id": "92",
@@ -1707,7 +1800,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/IMAX_for_Apple_Vision_Pro.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  IMAX Experiences for Apple Vision Pro  Watch curated i"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  IMAX Experiences for Apple Vision Pro  Watch curated i",
+        "slug": "imax-for-apple-vision-pro"
     },
     {
         "id": "93",
@@ -1724,7 +1818,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/iTunes_giftcard__Apple_Appstore_.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 ðŸš€ Quick delivery: Game codes in 10 mins! ðŸ“± Easy redemption: Hassle-fre"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 ðŸš€ Quick delivery: Game codes in 10 mins! ðŸ“± Easy redemption: Hassle-fre",
+        "slug": "itunes-giftcard-apple-appstore"
     },
     {
         "id": "94",
@@ -1741,7 +1836,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Logic_Pro.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Create professional music from your Mac.  ðŸŽ¹ Hu"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Create professional music from your Mac.  ðŸŽ¹ Hu",
+        "slug": "logic-pro"
     },
     {
         "id": "95",
@@ -1758,7 +1854,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/LumaFusion_for_iOS.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Professional video editing on iPhone & iPad. Fast, pow"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Professional video editing on iPhone & iPad. Fast, pow",
+        "slug": "lumafusion-for-ios"
     },
     {
         "id": "96",
@@ -1775,7 +1872,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Magnet_for_Macbook.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Magnet, Window Management for Mac  ðŸ“ Snap windows i"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Magnet, Window Management for Mac  ðŸ“ Snap windows i",
+        "slug": "magnet-for-macbook"
     },
     {
         "id": "97",
@@ -1792,7 +1890,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Nomad_Sculpt_for_iOS.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Bring your ideas to life with intuitive 3D modeling on"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  Bring your ideas to life with intuitive 3D modeling on",
+        "slug": "nomad-sculpt-for-ios"
     },
     {
         "id": "98",
@@ -1809,7 +1908,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Notion_AI.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ§  Boost your productivity with Notion AI. ðŸ’¬ Gene"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ§  Boost your productivity with Notion AI. ðŸ’¬ Gene",
+        "slug": "notion-ai"
     },
     {
         "id": "99",
@@ -1826,7 +1926,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Pixelmator_Pro.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Stream millions of songs, ad-free. ðŸ“¥ Download"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŽ§ Stream millions of songs, ad-free. ðŸ“¥ Download",
+        "slug": "pixelmator-pro"
     },
     {
         "id": "100",
@@ -1843,7 +1944,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Playstation_Giftcards_US___INDIA.webp",
         "logo_url": "",
-        "description": "ðŸ“± Order Now: Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸ®ðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° or scan the QR! ðŸ’³ Playstaion Gift Cards INR"
+        "description": "ðŸ“± Order Now: Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° or scan the QR! ðŸ’³ Playstaion Gift Cards INR",
+        "slug": "playstation-giftcards-us-india"
     },
     {
         "id": "101",
@@ -1860,7 +1962,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Playstation_plus_for_Playstations.webp",
         "logo_url": "",
-        "description": "ðŸŽ® PlayStation Plus (India Region) â€“ Cheapest Worldwide!  ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR"
+        "description": "ðŸŽ PlayStation Plus (India Region) â€“ Cheapest Worldwide!  ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR",
+        "slug": "playstation-plus-for-playstations"
     },
     {
         "id": "102",
@@ -1877,7 +1980,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Snapchat__.webp",
         "logo_url": "",
-        "description": "ðŸ‘» Unlock Exclusive Perks with Snapchat+! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŒŸ 1 Month"
+        "description": "ðŸ‘» Unlock Exclusive Perks with Snapchat+! ðŸ“± Contact: Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸŒŸ 1 Month",
+        "slug": "snapchat"
     },
     {
         "id": "103",
@@ -1894,7 +1998,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Steam_Giftcards_US___INDIA.webp",
         "logo_url": "",
-        "description": "ðŸ“± Order Now: Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸ®ðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° or scan the QR! ðŸ’³ Steam Gift Cards - Choose"
+        "description": "ðŸ“± Order Now: Viber/WhatsApp: ðŸµðŸ´ðŸ²ðŸðŸ­ðŸ±ðŸ³ðŸ´ðŸ²ðŸ° or scan the QR! ðŸ’³ Steam Gift Cards - Choose",
+        "slug": "steam-giftcards-us-india"
     },
     {
         "id": "104",
@@ -1911,7 +2016,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Supercut_for_Vision_Pro.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  The ultimate way to watch Netflix & Prime Video in a s"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  The ultimate way to watch Netflix & Prime Video in a s",
+        "slug": "supercut-for-vision-pro"
     },
     {
         "id": "105",
@@ -1928,7 +2034,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Tantan_Dating_VIP.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  â¤ï¸ TanTan VIP â€“ Unlock premium dating features."
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  â¤ï¸ TanTan VIP â€“ Unlock premium dating features.",
+        "slug": "tantan-dating-vip"
     },
     {
         "id": "106",
@@ -1945,7 +2052,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Twitch_Sub.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ’œ Get Twitch Subscriptions Instantly! â­ Support y"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ’œ Get Twitch Subscriptions Instantly! â­ Support y",
+        "slug": "twitch-sub"
     },
     {
         "id": "107",
@@ -1962,7 +2070,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Udemy_Courses_With_Certifications.webp",
         "logo_url": "",
-        "description": "ðŸ“± ð‚ð¨ð§ð­ðšðœð­: Viber/WhatsApp: 9862157864 or scan QR code! ðŸŽ“ ð‹ðžðšð«ð§ ð¨ð§ ð˜ð"
+        "description": "ðŸ“± ð‚ð¨ð§ð­ðšðœð­: Viber/WhatsApp: 9862157864 or scan QR code! ðŸŽ“ ð‹ðžðšð«ð§ ð¨ð§ ð˜ð",
+        "slug": "udemy-courses-with-certifications"
     },
     {
         "id": "108",
@@ -1979,7 +2088,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/X_Twitter__Premium.webp",
         "logo_url": "",
-        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ¦ Get Twitter/X Premium! âœ¨ Unlock exclusive featu"
+        "description": "ðŸ“± Contact via Viber/WhatsApp: 9862157864 or scan the QR code!  ðŸ¦ Get Twitter/X Premium! âœ¨ Unlock exclusive featu",
+        "slug": "x-twitter-premium"
     },
     {
         "id": "109",
@@ -1996,7 +2106,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/8 Ball Pool Pass.webp",
         "logo_url": "",
-        "description": "🎱 Level up your game with the 8 Ball Pool Pass! Unlock exclusive rewards, cues, and more."
+        "description": "Level up your game with the 8 Ball Pool Pass! Unlock exclusive rewards, cues, and more.",
+        "slug": "8-ball-pool-pass"
     },
     {
         "id": "110",
@@ -2013,7 +2124,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Adobe Firefly.webp",
         "logo_url": "",
-        "description": "🎨 Unleash your creativity with Adobe Firefly's generative AI tools for amazing designs."
+        "description": "Unleash your creativity with Adobe Firefly's generative AI tools for amazing designs.",
+        "slug": "adobe-firefly"
     },
     {
         "id": "111",
@@ -2030,7 +2142,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Canva Pro.webp",
         "logo_url": "",
-        "description": "✨ Design like a professional with Canva Pro. Access premium templates, images, and tools."
+        "description": "Design like a professional with Canva Pro. Access premium templates, images, and tools.",
+        "slug": "canva-pro"
     },
     {
         "id": "112",
@@ -2047,7 +2160,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Capcut Pro.webp",
         "logo_url": "",
-        "description": "🎬 Professional video editing made easy. Unlock all premium effects and features on Capcut Pro."
+        "description": "Professional video editing made easy. Unlock all premium effects and features on Capcut Pro.",
+        "slug": "capcut-pro"
     },
     {
         "id": "113",
@@ -2064,7 +2178,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Character AI.webp",
         "logo_url": "",
-        "description": "🧠 Chat without limits! Experience priority access and faster response times with Character AI+."
+        "description": "Chat without limits! Experience priority access and faster response times with Character AI+.",
+        "slug": "character-ai"
     },
     {
         "id": "114",
@@ -2081,7 +2196,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ChatGPT Plus.webp",
         "logo_url": "",
-        "description": "🚀 Get ahead with GPT-4. Faster response speeds and priority access to new features."
+        "description": "Get ahead with GPT-4. Faster response speeds and priority access to new features.",
+        "slug": "chatgpt-plus-monthly"
     },
     {
         "id": "115",
@@ -2098,7 +2214,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Clash of Clans.webp",
         "logo_url": "",
-        "description": "🏰 Fast-track your village progress with the Clash of Clans Gold Pass rewards and perks."
+        "description": "Fast-track your village progress with the Clash of Clans Gold Pass rewards and perks.",
+        "slug": "clash-of-clans-gold-pass"
     },
     {
         "id": "116",
@@ -2115,7 +2232,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Clash Royale Pass Royale.webp",
         "logo_url": "",
-        "description": "👑 Dominate the arena with Pass Royale! Get exclusive rewards, tower skins, and emotes."
+        "description": "Dominate the arena with Pass Royale! Get exclusive rewards, tower skins, and emotes.",
+        "slug": "clash-royale-pass-royale"
     },
     {
         "id": "117",
@@ -2132,7 +2250,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/DistroKID.webp",
         "logo_url": "",
-        "description": "🎵 The easiest way for musicians to get music into Apple Music, Spotify, and more."
+        "description": "The easiest way for musicians to get music into Apple Music, Spotify, and more.",
+        "slug": "distrokid"
     },
     {
         "id": "118",
@@ -2149,7 +2268,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Symphonic MS.webp",
         "logo_url": "",
-        "description": "🎶 Professional music distribution and marketing tools for independent artists."
+        "description": "Professional music distribution and marketing tools for independent artists.",
+        "slug": "symphonic-ms"
     },
     {
         "id": "119",
@@ -2174,7 +2294,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/eFootball.webp",
         "logo_url": "",
-        "description": "⚽ Build your dream team in eFootball with coins for players and special items."
+        "description": "Build your dream team in eFootball with coins for players and special items.",
+        "slug": "efootball-coins"
     },
     {
         "id": "120",
@@ -2195,7 +2316,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Flingster Premium.webp",
         "logo_url": "",
-        "description": "🔞 Experience premium random video chat. Unlimited filters and enhanced privacy."
+        "description": "Experience premium random video chat. Unlimited filters and enhanced privacy.",
+        "slug": "flingster-premium-18"
     },
     {
         "id": "121",
@@ -2212,7 +2334,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Goodnotes.webp",
         "logo_url": "",
-        "description": "📝 Take beautiful digital notes. The best note-taking app for students and professionals."
+        "description": "Take beautiful digital notes. The best note-taking app for students and professionals.",
+        "slug": "goodnotes"
     },
     {
         "id": "122",
@@ -2229,7 +2352,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Grindr Dating.webp",
         "logo_url": "",
-        "description": "🔞 Unlock premium features on the world's largest social network for LGBTQ people."
+        "description": "Unlock premium features on the world's largest social network for LGBTQ people.",
+        "slug": "grindr-dating-18"
     },
     {
         "id": "123",
@@ -2250,7 +2374,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/HER Dating.webp",
         "logo_url": "",
-        "description": "🔞 Premium dating for lesbian, bi, and queer people. See who likes you and more."
+        "description": "Premium dating for lesbian, bi, and queer people. See who likes you and more.",
+        "slug": "her-dating-18"
     },
     {
         "id": "124",
@@ -2267,7 +2392,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Mircosoft Copilot Premium.webp",
         "logo_url": "",
-        "description": "🤖 Boost your productivity with Microsoft's most powerful AI companion."
+        "description": "Boost your productivity with Microsoft's most powerful AI companion.",
+        "slug": "microsoft-copilot-premium"
     },
     {
         "id": "125",
@@ -2284,7 +2410,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/myfitnesspal.webp",
         "logo_url": "",
-        "description": "🥗 Reach your fitness goals with personalized meal plans and macro tracking."
+        "description": "Reach your fitness goals with personalized meal plans and macro tracking.",
+        "slug": "myfitnesspal-premium"
     },
     {
         "id": "126",
@@ -2301,7 +2428,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/OnlyFans.webp",
         "logo_url": "",
-        "description": "⭐️ Support your favorite creators and unlock exclusive content directly."
+        "description": "️ Support your favorite creators and unlock exclusive content directly.",
+        "slug": "onlyfans-creator-sub"
     },
     {
         "id": "127",
@@ -2322,7 +2450,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Roblox Giftcards.webp",
         "logo_url": "",
-        "description": "🎮 Buy Robux to upgrade your avatar and unlock special in-game perks."
+        "description": "Buy Robux to upgrade your avatar and unlock special in-game perks.",
+        "slug": "roblox-robux"
     },
     {
         "id": "128",
@@ -2343,7 +2472,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Simply Piano.webp",
         "logo_url": "",
-        "description": "🎹 Learn piano fast and easily with interactive lessons and real-time feedback."
+        "description": "Learn piano fast and easily with interactive lessons and real-time feedback.",
+        "slug": "simply-piano"
     },
     {
         "id": "129",
@@ -2360,7 +2490,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Sketchbook.webp",
         "logo_url": "",
-        "description": "🎨 Professional digital drawing and painting tools for artists of all levels."
+        "description": "Professional digital drawing and painting tools for artists of all levels.",
+        "slug": "sketchbook-pro"
     },
     {
         "id": "130",
@@ -2381,7 +2512,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Sololearn.webp",
         "logo_url": "",
-        "description": "💻 Master coding with bitesize lessons in Python, Java, C++, and more."
+        "description": "Master coding with bitesize lessons in Python, Java, C++, and more.",
+        "slug": "sololearn-premium"
     },
     {
         "id": "131",
@@ -2398,7 +2530,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Uno Ad Free.webp",
         "logo_url": "",
-        "description": "🃏 Play the classic card game without interruptions. Enjoy Uno Ad-Free!"
+        "description": "Play the classic card game without interruptions. Enjoy Uno Ad-Free!",
+        "slug": "uno-ad-free"
     },
     {
         "id": "132",
@@ -2419,7 +2552,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/Valorant Points.webp",
         "logo_url": "",
-        "description": "🔫 Unlock weapon skins and battle passes in Valorant with VP."
+        "description": "Unlock weapon skins and battle passes in Valorant with VP.",
+        "slug": "valorant-points-vp"
     },
     {
         "id": "133",
@@ -2436,7 +2570,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/VN Video Editor.webp",
         "logo_url": "",
-        "description": "🎥 Create stunning videos on your phone. Unlock all premium assets on VN Editor."
+        "description": "Create stunning videos on your phone. Unlock all premium assets on VN Editor.",
+        "slug": "vn-video-editor-pro"
     },
     {
         "id": "134",
@@ -2453,7 +2588,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/365_SCORES.webp",
         "logo_url": "",
-        "description": "⚽ Live scores, real-time stats & breaking sports news. VIP access for football, basketball & more!"
+        "description": "Live scores, real-time stats & breaking sports news. VIP access for football, basketball & more!",
+        "slug": "365scores-vip"
     },
     {
         "id": "135",
@@ -2470,7 +2606,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/DAZN.webp",
         "logo_url": "",
-        "description": "🥊 Live boxing, MMA, football & more! Stream unlimited sports with DAZN Ultimate."
+        "description": "Live boxing, MMA, football & more! Stream unlimited sports with DAZN Ultimate.",
+        "slug": "dazn-ultimate"
     },
     {
         "id": "136",
@@ -2487,7 +2624,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/FOTMOB.webp",
         "logo_url": "",
-        "description": "⚽ The #1 football scores app! Live results, stats, lineups & match highlights ad-free."
+        "description": "The #1 football scores app! Live results, stats, lineups & match highlights ad-free.",
+        "slug": "fotmob-standard"
     },
     {
         "id": "137",
@@ -2504,7 +2642,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ONEFOOTBALL.webp",
         "logo_url": "",
-        "description": "⚽ Ad-free football news, live scores & match highlights from every league worldwide."
+        "description": "Ad-free football news, live scores & match highlights from every league worldwide.",
+        "slug": "onefootball-ad-free"
     },
     {
         "id": "138",
@@ -2521,7 +2660,8 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/SOFASCORE.webp",
         "logo_url": "",
-        "description": "📊 Deep sports analytics! Live scores, player ratings & advanced stats for 20+ sports."
+        "description": "Deep sports analytics! Live scores, player ratings & advanced stats for 20+ sports.",
+        "slug": "sofascore-analyst-plan"
     },
     {
         "id": "139",
@@ -2538,6 +2678,7 @@
         "delivery_type": "Instant",
         "image_url": "/IMAGES/PRODUCTS/ZEE5.webp",
         "logo_url": "",
-        "description": "⚽ Watch FIFA & live football on Zee5! Full access to sports, movies & web series."
+        "description": "Watch FIFA & live football on Zee5! Full access to sports, movies & web series.",
+        "slug": "zee5-fifa-all-access"
     }
 ]

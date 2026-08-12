@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Product } from '@/lib/supabase';
 import { useCart } from '@/context/CartContext';
 import MagneticButton from '@/components/MagneticButton';
@@ -65,41 +66,43 @@ function ProductCardInner({ product }: ProductCardProps) {
             }}
         >
             {/* ── IMAGE AREA ──────────────────────────────────── */}
-            <div style={{
-                position: 'relative',
-                width: '100%',
-                paddingTop: '100%',
-                background: 'var(--bg-secondary)',
-                overflow: 'hidden',
-            }}>
-                {/* Product image */}
-                {product.image_url && !imageError ? (
-                    <Image
-                        src={product.image_url}
-                        alt={product.name}
-                        fill
-                        sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                        onError={() => setImageError(true)}
-                        style={{
-                            objectFit: 'cover',
-                            transition: 'transform 0.5s ease',
-                            transform: isHovered ? 'scale(1.02)' : 'scale(1)',
-                        }}
-                    />
-                ) : (
-                    <div style={{
-                        position: 'absolute',
-                        top: 0, left: 0, width: '100%', height: '100%',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '2.25rem', fontWeight: 800,
-                        color: '#CCCCCC',
-                        letterSpacing: '-0.05em',
-                        background: 'var(--bg-secondary)',
-                    }}>
-                        {product.brand.toUpperCase().slice(0, 2)}
-                    </div>
-                )}
-            </div>
+            <Link href={`/product/${product.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
+                <div style={{
+                    position: 'relative',
+                    width: '100%',
+                    paddingTop: '100%',
+                    background: 'var(--bg-secondary)',
+                    overflow: 'hidden',
+                }}>
+                    {/* Product image */}
+                    {product.image_url && !imageError ? (
+                        <Image
+                            src={product.image_url}
+                            alt={product.name}
+                            fill
+                            sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                            onError={() => setImageError(true)}
+                            style={{
+                                objectFit: 'cover',
+                                transition: 'transform 0.5s ease',
+                                transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+                            }}
+                        />
+                    ) : (
+                        <div style={{
+                            position: 'absolute',
+                            top: 0, left: 0, width: '100%', height: '100%',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontSize: '2.25rem', fontWeight: 800,
+                            color: '#CCCCCC',
+                            letterSpacing: '-0.05em',
+                            background: 'var(--bg-secondary)',
+                        }}>
+                            {product.brand.toUpperCase().slice(0, 2)}
+                        </div>
+                    )}
+                </div>
+            </Link>
 
             {/* ── CONTENT AREA ────────────────────────────────── */}
             <div style={{
@@ -135,7 +138,9 @@ function ProductCardInner({ product }: ProductCardProps) {
                     overflow: 'hidden',
                     minHeight: '2.3em',
                 }}>
-                    {product.name}
+                    <Link href={`/product/${product.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        {product.name}
+                    </Link>
                 </h3>
 
                 {/* Denomination pills — flat selection */}
