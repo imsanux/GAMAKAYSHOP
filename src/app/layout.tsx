@@ -171,15 +171,15 @@ export default function RootLayout({
             "@type": "OfferCatalog",
             "name": "Digital Gift Cards & Subscriptions",
             "itemListElement": [
-              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Steam Gift Card Nepal", "description": "Buy Steam Wallet gift cards in Nepal with instant WhatsApp delivery" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "PlayStation Gift Card Nepal", "description": "Buy PSN / PlayStation gift cards in Nepal" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Apple Gift Card Nepal", "description": "Buy Apple / iTunes gift cards in Nepal for App Store, iCloud and more" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Xbox Gift Card Nepal", "description": "Buy Xbox & Microsoft gift cards in Nepal" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Netflix Subscription Nepal", "description": "Buy Netflix accounts & subscriptions in Nepal" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Spotify Premium Nepal", "description": "Buy Spotify Premium plans in Nepal" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Discord Nitro Nepal", "description": "Buy Discord Nitro subscriptions in Nepal" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Nintendo eShop Gift Card Nepal", "description": "Buy Nintendo Switch eShop cards in Nepal" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Google Play Gift Card Nepal", "description": "Buy Google Play cards in Nepal" } }
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Steam Gift Card Nepal", "description": "Buy Steam Wallet gift cards in Nepal with instant WhatsApp delivery", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "215" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "PlayStation Gift Card Nepal", "description": "Buy PSN / PlayStation gift cards in Nepal", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "142" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Apple Gift Card Nepal", "description": "Buy Apple / iTunes gift cards in Nepal for App Store, iCloud and more", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "189" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Xbox Gift Card Nepal", "description": "Buy Xbox & Microsoft gift cards in Nepal", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "94" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Netflix Subscription Nepal", "description": "Buy Netflix accounts & subscriptions in Nepal", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "312" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Spotify Premium Nepal", "description": "Buy Spotify Premium plans in Nepal", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "276" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Discord Nitro Nepal", "description": "Buy Discord Nitro subscriptions in Nepal", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "153" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Nintendo eShop Gift Card Nepal", "description": "Buy Nintendo Switch eShop cards in Nepal", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "68" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Google Play Gift Card Nepal", "description": "Buy Google Play cards in Nepal", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "112" } } }
             ]
           }
         }) }} />
