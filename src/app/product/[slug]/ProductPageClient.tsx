@@ -265,7 +265,7 @@ export default function ProductPageClient({ product, related }: Props) {
                   >
                     {product.denominations.map(d => (
                       <option key={d.value} value={d.value} style={{ background: '#FFFFFF', color: '#111111' }}>
-                        {d.value} — Rs. {d.price.toLocaleString()}
+                        {d.value}
                       </option>
                     ))}
                   </select>
@@ -274,7 +274,7 @@ export default function ProductPageClient({ product, related }: Props) {
               </div>
 
               {/* In Stock badge */}
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
                 <span style={{
                   background: '#EAF6F0', color: '#2B8D56',
                   fontSize: '0.72rem', fontWeight: 800, padding: '6px 12px',
@@ -283,18 +283,34 @@ export default function ProductPageClient({ product, related }: Props) {
                 }}>In Stock</span>
               </div>
 
+              {/* Price */}
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '24px' }}>
+                <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-muted)' }}>Rs.</span>
+                <span style={{
+                  fontSize: 'clamp(2.2rem, 5vw, 3rem)',
+                  fontWeight: 900, color: 'var(--text-primary)',
+                  letterSpacing: '-0.04em', lineHeight: 1,
+                  fontVariantNumeric: 'tabular-nums',
+                }}>
+                  {selectedDenom.price.toLocaleString()}
+                </span>
+              </div>
+
               {/* CTA Buttons */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '32px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '32px' }}>
                 <button
                   onClick={handleAddToCart}
                   disabled={isAdding}
                   className="pdp-cta-btn"
                   style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
                     background: isAdding ? '#16A34A' : '#111111',
                     color: '#FFFFFF',
                     cursor: isAdding ? 'default' : 'pointer',
                     borderRadius: '6px',
-                    padding: '16px 24px',
+                    padding: 'clamp(10px, 2vw, 16px) clamp(8px, 1.5vw, 24px)',
+                    fontSize: 'clamp(0.6rem, 1.8vw, 0.85rem)',
+                    fontWeight: 700,
                   }}
                   onMouseEnter={(e) => { if (!isAdding) { e.currentTarget.style.background = '#333333'; }}}
                   onMouseLeave={(e) => { if (!isAdding) { e.currentTarget.style.background = '#111111'; }}}
@@ -306,11 +322,7 @@ export default function ProductPageClient({ product, related }: Props) {
                     </>
                   ) : (
                     <>
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                      </svg>
-                      ADD TO CART — RS. {selectedDenom.price.toLocaleString()}
+                      ADD TO CART
                     </>
                   )}
                 </button>
@@ -320,10 +332,14 @@ export default function ProductPageClient({ product, related }: Props) {
                   target="_blank" rel="noopener noreferrer"
                   className="pdp-cta-btn"
                   style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
                     border: '1px solid #B6D8B6',
                     background: '#F9FDF9', color: '#25D366',
                     borderRadius: '6px',
-                    padding: '16px 24px',
+                    padding: 'clamp(10px, 2vw, 16px) clamp(8px, 1.5vw, 24px)',
+                    fontSize: 'clamp(0.6rem, 1.8vw, 0.85rem)',
+                    fontWeight: 700,
+                    textDecoration: 'none',
                   }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = '#F0F9F0'; e.currentTarget.style.borderColor = '#25D366'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = '#F9FDF9'; e.currentTarget.style.borderColor = '#B6D8B6'; }}
