@@ -413,29 +413,49 @@ export default function ProductPageClient({ product, related }: Props) {
 
           {/* ── How It Works ── */}
           <div style={{
-            marginTop: '56px',
-            padding: 'clamp(28px, 4vw, 44px)',
-            background: 'var(--bg-card)',
-            borderRadius: 'var(--radius-lg)',
-            border: '1.5px solid var(--border-color)',
+            marginTop: '48px',
+            padding: '24px 0',
           }} id="how-it-works">
-            <h2 style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '28px', letterSpacing: '-0.02em' }}>
-              Get your code in 3 steps
+            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '32px', letterSpacing: '-0.02em', textAlign: 'center' }}>
+              How it works
             </h2>
             <div className="pdp-steps-grid">
               {HOW_IT_WORKS.map((step) => (
-                <div key={step.num} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                    <div style={{
-                      width: '30px', height: '30px', borderRadius: '50%',
-                      background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: '0.82rem', fontWeight: 700, flexShrink: 0,
-                    }}>{step.num}</div>
-                    <div style={{ color: 'var(--color-green)' }}>{step.icon}</div>
+                <div key={step.num} style={{ 
+                  position: 'relative',
+                  padding: '24px',
+                  background: 'var(--bg-secondary)',
+                  borderRadius: 'var(--radius-md)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}>
+                  {/* Dull background number */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '-5px',
+                    left: '0px',
+                    fontSize: '6rem',
+                    fontWeight: 900,
+                    color: 'rgba(0,0,0,0.03)',
+                    lineHeight: 1,
+                    zIndex: 0,
+                    pointerEvents: 'none',
+                    letterSpacing: '-0.05em'
+                  }}>
+                    {step.num}
                   </div>
-                  <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>{step.title}</h3>
-                  <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{step.desc}</p>
+                  
+                  <div style={{ position: 'relative', zIndex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--text-primary)' }}>
+                      {step.icon}
+                      <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>
+                        {step.title}
+                      </h3>
+                    </div>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>
+                      {step.desc}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
