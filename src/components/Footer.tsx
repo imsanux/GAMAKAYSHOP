@@ -1,15 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useTheme } from '@/context/ThemeContext';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
-    const { isDark } = useTheme();
-
     return (
         <footer style={{
-            background: isDark ? '#0A0A0A' : '#111111',
+            background: '#111111',
             color: '#f5f5f7',
             paddingTop: '0',
             transition: 'background 0.35s ease',

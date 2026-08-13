@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
-import { ThemeProvider } from "@/context/ThemeContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
@@ -206,19 +205,17 @@ export default function RootLayout({
         flexDirection: 'column',
         minHeight: '100dvh'
       }}>
-        <ThemeProvider>
-          <CartProvider>
-            <SmoothScrollProvider>
-              <Header />
-              <main style={{ flex: 1 }}>
-                {children}
-              </main>
-              <Footer />
-              <Analytics />
-              <SpeedInsights />
-            </SmoothScrollProvider>
-          </CartProvider>
-        </ThemeProvider>
+        <CartProvider>
+          <SmoothScrollProvider>
+            <Header />
+            <main style={{ flex: 1 }}>
+              {children}
+            </main>
+            <Footer />
+            <Analytics />
+            <SpeedInsights />
+          </SmoothScrollProvider>
+        </CartProvider>
       </body>
     </html>
   );

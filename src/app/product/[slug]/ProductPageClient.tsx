@@ -275,12 +275,21 @@ export default function ProductPageClient({ product, related }: Props) {
 
               {/* In Stock badge */}
               <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-                <span style={{
-                  background: '#EAF6F0', color: '#2B8D56',
-                  fontSize: '0.72rem', fontWeight: 800, padding: '6px 12px',
-                  borderRadius: '4px',
-                  textTransform: 'uppercase', letterSpacing: '0.04em',
-                }}>In Stock</span>
+                {(product.in_stock ?? true) ? (
+                  <span style={{
+                    background: '#EAF6F0', color: '#2B8D56',
+                    fontSize: '0.72rem', fontWeight: 800, padding: '6px 12px',
+                    borderRadius: '4px',
+                    textTransform: 'uppercase', letterSpacing: '0.04em',
+                  }}>In Stock</span>
+                ) : (
+                  <span style={{
+                    background: '#FEF2F2', color: '#B91C1C',
+                    fontSize: '0.72rem', fontWeight: 800, padding: '6px 12px',
+                    borderRadius: '4px',
+                    textTransform: 'uppercase', letterSpacing: '0.04em',
+                  }}>Out of Stock</span>
+                )}
               </div>
 
               {/* Price */}

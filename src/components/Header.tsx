@@ -4,12 +4,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
-import { useTheme } from '@/context/ThemeContext';
 import { searchProducts } from '@/lib/products';
 
 export default function Header() {
     const { items } = useCart();
-    const { toggleTheme } = useTheme(); // kept to avoid unused-import lint error — noop
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);

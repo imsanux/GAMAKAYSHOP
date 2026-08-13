@@ -88,24 +88,8 @@ export default function CheckoutPage() {
 
     if (items.length === 0) {
         return (
-            <div className="container fade-in" style={{
-                paddingTop: '110px',
-                paddingBottom: '80px',
-                paddingLeft: '16px',
-                paddingRight: '16px',
-                textAlign: 'center'
-            }}>
-                <div style={{
-                    width: '72px',
-                    height: '72px',
-                    margin: '0 auto 20px',
-                    borderRadius: '50%',
-                    background: 'var(--bg-secondary)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.8rem'
-                }}>
+            <div className="container fade-in" style={{ paddingTop: '110px', paddingBottom: '80px', paddingLeft: '16px', paddingRight: '16px', textAlign: 'center' }}>
+                <div style={{ width: '72px', height: '72px', margin: '0 auto 20px', borderRadius: '50%', background: 'var(--bg-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem' }}>
                     🛒
                 </div>
                 <h1 style={{ marginBottom: '12px', fontSize: '1.5rem', color: 'var(--text-primary)', letterSpacing: '-0.03em' }}>
@@ -114,18 +98,7 @@ export default function CheckoutPage() {
                 <p style={{ color: 'var(--text-secondary)', marginBottom: '28px', fontSize: '0.95rem' }}>
                     Add some items before checking out.
                 </p>
-                <Link href="/" style={{
-                    display: 'inline-flex',
-                    padding: '14px 28px',
-                    background: 'var(--btn-primary-bg)',
-                    color: 'white',
-                    borderRadius: 'var(--radius-full)',
-                    textDecoration: 'none',
-                    fontWeight: 600,
-                    fontSize: '0.95rem',
-                    boxShadow: '0 2px 8px rgba(0, 113, 227, 0.25)',
-                    transition: 'all 0.2s ease'
-                }}>
+                <Link href="/" style={{ display: 'inline-flex', padding: '14px 28px', background: '#111111', color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem', transition: 'all 0.2s ease' }}>
                     Continue Shopping
                 </Link>
             </div>
@@ -133,419 +106,231 @@ export default function CheckoutPage() {
     }
 
     return (
-        <div className="container fade-in" style={{
-            paddingTop: '100px',
-            paddingBottom: '80px',
-            paddingLeft: '16px',
-            paddingRight: '16px'
-        }}>
-            {/* Page Title */}
-            <div style={{ position: 'relative', textAlign: 'left', marginBottom: '32px' }}>
-                <h1 style={{
-                    fontSize: '1.75rem',
-                    fontWeight: 700,
-                    color: 'var(--text-primary)',
-                    letterSpacing: '-0.03em',
-                    marginBottom: '6px'
-                }}>
-                    {showPayment ? 'Complete Payment' : 'Checkout'}
-                </h1>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>
-                    {showPayment ? 'Send your order with WhatsApp or Viber' : 'Review your order and proceed'}
-                </p>
-                
-                <Link href="/" style={{
-                    position: 'absolute',
-                    right: 0,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '36px',
-                    height: '36px',
-                    color: 'var(--text-secondary)',
-                    textDecoration: 'none',
-                    transition: 'color 0.2s ease'
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--text-primary)';
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'var(--text-secondary)';
-                }}
-                >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </Link>
-            </div>
+        <div style={{ background: 'var(--bg-primary)', minHeight: '100vh', paddingTop: '96px', paddingBottom: '80px' }}>
+            <div className="container" style={{ paddingLeft: '16px', paddingRight: '16px', maxWidth: '1000px', margin: '0 auto' }}>
 
-            <div className={`checkout-grid ${showPayment ? 'is-payment-grid' : ''}`}>
-                <div className="order-summary" style={{
-                    background: 'var(--card-bg)',
-                    borderRadius: 'var(--radius-xl)',
-                    border: '1px solid var(--border-light)',
-                    padding: '24px',
-                    marginBottom: '20px',
-                    boxShadow: 'var(--shadow-md)',
-                    transition: 'var(--theme-transition)'
-                }}>
-                    {showPayment && (
-                        <div className="order-number-container" style={{
-                            marginBottom: '24px',
-                            paddingBottom: '20px',
-                            borderBottom: '1px dashed var(--border-color)',
-                            textAlign: 'center'
-                        }}>
-                            <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                                Order Number
-                            </div>
-                            <div className="order-number-val" style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.02em', wordBreak: 'break-all' }}>
-                                {orderNumber}
-                            </div>
-                        </div>
-                    )}
-                    <h2 style={{
-                        fontSize: '0.8rem',
-                        fontWeight: 600,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.06em',
-                        marginBottom: '16px',
-                        color: 'var(--text-muted)'
-                    }}>
-                        Order Summary
-                    </h2>
-
-                {items.map((item, index) => (
-                    <div
-                        key={index}
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start',
-                            padding: '14px 0',
-                            borderBottom: index < items.length - 1 ? '1px solid var(--border-light)' : 'none'
-                        }}
-                    >
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                            <div style={{
-                                fontSize: '0.9rem',
-                                fontWeight: 600,
-                                marginBottom: '3px',
-                                color: 'var(--text-primary)'
-                            }}>
-                                {item.product.name}
-                            </div>
-                            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                                {item.denomination.value} × {item.quantity}
-                            </div>
-                        </div>
-                        <div style={{ fontWeight: 700, fontSize: '0.9rem', marginLeft: '12px', color: 'var(--text-primary)' }}>
-                            Rs. {(item.denomination.price * item.quantity).toLocaleString()}
-                        </div>
+                {/* Page Header */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '36px' }}>
+                    <div>
+                        <p style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', marginBottom: '4px' }}>
+                            {showPayment ? 'Step 2 of 2' : 'Step 1 of 2'}
+                        </p>
+                        <h1 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-0.04em', margin: 0, textTransform: 'uppercase' }}>
+                            {showPayment ? 'Complete Payment' : 'Checkout'}
+                        </h1>
                     </div>
-                ))}
-
-                <div style={{
-                    borderTop: '2px solid var(--border-color)',
-                    paddingTop: '16px',
-                    marginTop: '12px'
-                }}>
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        fontSize: '1.25rem',
-                        fontWeight: 700,
-                        letterSpacing: '-0.02em'
-                    }}>
-                        <span style={{ color: 'var(--text-primary)' }}>Total</span>
-                        <span style={{ color: 'var(--text-primary)' }}>Rs. {getTotal().toLocaleString()}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="form-payment">
-                {!showPayment ? (
-                    /* Phone Number Entry */
-                <div style={{
-                    background: 'var(--card-bg)',
-                    borderRadius: 'var(--radius-xl)',
-                    border: '1px solid var(--border-light)',
-                    padding: '24px',
-                    boxShadow: 'var(--shadow-sm)',
-                    transition: 'var(--theme-transition)'
-                }}>
-                    <h2 style={{
-                        fontSize: '1.5rem',
-                        fontWeight: 700,
-                        marginBottom: '24px',
-                        color: 'var(--text-primary)',
-                        textAlign: 'left',
-                        letterSpacing: '-0.02em'
-                    }}>
-                        Checkout Confirmation
-                    </h2>
-                    <label style={{
-                        display: 'block',
-                        marginBottom: '10px',
-                        fontWeight: 600,
-                        fontSize: '0.9rem',
-                        color: 'var(--text-primary)'
-                    }}>
-                        Phone Number
-                    </label>
-                    <input
-                        type="tel"
-                        placeholder="e.g., 9841234567"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        style={{
-                            width: '100%',
-                            padding: '14px 18px',
-                            fontSize: '1rem',
-                            border: '1.5px solid var(--border-color)',
-                            borderRadius: 'var(--radius-xl)',
-                            marginBottom: '12px',
-                            outline: 'none',
-                            background: 'var(--input-bg)',
-                            color: 'var(--text-primary)',
-                            transition: 'all 0.2s ease'
-                        }}
-                        onFocus={(e) => {
-                            e.currentTarget.style.borderColor = 'var(--color-ink)';
-                            e.currentTarget.style.boxShadow = '0 0 0 4px rgba(244, 217, 122, 0.3)';
-                        }}
-                        onBlur={(e) => {
-                            e.currentTarget.style.borderColor = 'var(--border-color)';
-                            e.currentTarget.style.boxShadow = 'none';
-                        }}
-                    />
-                    {phoneError && (
-                        <div style={{ color: '#ff3b30', fontSize: '0.85rem', marginTop: '-8px', marginBottom: '12px', fontWeight: 500 }}>
-                            {phoneError}
-                        </div>
-                    )}
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '20px' }}>
-                        We&apos;ll generate your order number and send confirmation
-                    </p>
-                    <button
-                        onClick={handleProceedToPayment}
-                        style={{
-                            width: '100%',
-                            padding: '16px',
-                            fontSize: '1rem',
-                            fontWeight: 600,
-                            background: 'var(--btn-primary-bg)',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: 'var(--radius-xl)',
-                            cursor: 'pointer',
-                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-                            transition: 'all 0.25s ease'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.background = 'var(--btn-primary-hover)';
-                            e.currentTarget.style.transform = 'translateY(-1px)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.background = 'var(--btn-primary-bg)';
-                            e.currentTarget.style.transform = 'translateY(0)';
-                        }}
+                    <Link href="/"
+                        style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', textDecoration: 'none', padding: '8px 14px', border: '1px solid var(--border-color)', borderRadius: '6px' }}
+                        onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+                        onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
                     >
-                        Proceed to Payment
-                    </button>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        Close
+                    </Link>
                 </div>
-            ) : (
-                <>
-                    {/* QR Codes */}
-                    <div style={{
-                        background: 'var(--card-bg)',
-                        borderRadius: 'var(--radius-xl)',
-                        border: '1px solid var(--border-light)',
-                        padding: '24px',
-                        marginBottom: '20px',
-                        boxShadow: 'var(--shadow-md)',
-                        transition: 'var(--theme-transition)'
-                    }}>
-                        <h3 style={{
-                            fontSize: '0.8rem',
-                            fontWeight: 600,
-                            marginBottom: '20px',
-                            textAlign: 'center',
-                            color: 'var(--text-muted)',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.06em'
-                        }}>
-                            Scan QR to Contact Us
-                        </h3>
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1fr 1fr',
-                            gap: '20px'
-                        }}>
-                            <div style={{ textAlign: 'center' }}>
-                                <img
-                                    src="/viber-qr.png"
-                                    alt="Viber QR"
-                                    style={{
-                                        width: '100%',
-                                        maxWidth: '180px',
-                                        borderRadius: 'var(--radius-md)',
-                                        border: '1px solid var(--border-light)'
-                                    }}
-                                />
-                                <div style={{ fontSize: '0.8rem', fontWeight: 600, marginTop: '10px', color: '#7360f2' }}>
-                                    Viber
+
+                {/* Two-column grid */}
+                <div className="checkout-grid">
+
+                    {/* LEFT — Form */}
+                    <div className="form-payment">
+                        {!showPayment ? (
+                            <div className="form-card">
+
+                                {/* Step indicator */}
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px', paddingBottom: '24px', borderBottom: '1px solid var(--border-color)' }}>
+                                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#111111', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem', fontWeight: 800, flexShrink: 0 }}>1</div>
+                                    <div>
+                                        <p style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>Your Contact Info</p>
+                                        <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>We&apos;ll send your order code via WhatsApp</p>
+                                    </div>
+                                </div>
+
+                                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 700, fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                                    WhatsApp / Phone Number
+                                </label>
+                                <div style={{ position: 'relative', marginBottom: '12px' }}>
+                                    <span style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-muted)', pointerEvents: 'none' }}>🇳🇵 +977</span>
+                                    <input
+                                        type="tel"
+                                        placeholder="98XXXXXXXX"
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
+                                        style={{ width: '100%', padding: '14px 18px 14px 90px', fontSize: '1rem', fontWeight: 600, border: '1.5px solid var(--border-color)', borderRadius: '8px', outline: 'none', background: 'var(--bg-secondary)', color: 'var(--text-primary)', transition: 'all 0.2s ease', boxSizing: 'border-box' }}
+                                        onFocus={(e) => { e.currentTarget.style.borderColor = '#111111'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(250,204,21,0.25)'; }}
+                                        onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.boxShadow = 'none'; }}
+                                    />
+                                </div>
+                                {phoneError && (
+                                    <div style={{ color: '#B91C1C', fontSize: '0.82rem', marginBottom: '12px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+                                        {phoneError}
+                                    </div>
+                                )}
+                                <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '28px' }}>
+                                    We&apos;ll generate a unique order number and you&apos;ll complete payment via WhatsApp.
+                                </p>
+
+                                <button
+                                    onClick={handleProceedToPayment}
+                                    style={{ width: '100%', padding: '16px', fontSize: '0.95rem', fontWeight: 800, background: '#111111', color: '#FFFFFF', border: 'none', borderRadius: '8px', cursor: 'pointer', letterSpacing: '0.02em', transition: 'all 0.2s ease', textTransform: 'uppercase' }}
+                                    onMouseEnter={e => { e.currentTarget.style.background = '#333333'; }}
+                                    onMouseLeave={e => { e.currentTarget.style.background = '#111111'; }}
+                                >
+                                    Proceed to Payment
+                                </button>
+
+                                {/* Trust row */}
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px', marginTop: '20px', flexWrap: 'wrap' }}>
+                                    {[
+                                        { text: 'Secure' },
+                                        { text: 'Instant Delivery' },
+                                        { text: 'WhatsApp Support' },
+                                    ].map(({ text }) => (
+                                        <span key={text} style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                                            {text}
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
-                            <div style={{ textAlign: 'center' }}>
-                                <img
-                                    src="/whatsapp-qr.png"
-                                    alt="WhatsApp QR"
-                                    style={{
-                                        width: '100%',
-                                        maxWidth: '180px',
-                                        borderRadius: 'var(--radius-md)',
-                                        border: '1px solid var(--border-light)'
-                                    }}
-                                />
-                                <div style={{ fontSize: '0.8rem', fontWeight: 600, marginTop: '10px', color: '#30d158' }}>
-                                    WhatsApp
+                        ) : (
+                            <>
+                                {/* Payment step */}
+                                <div className="form-card" style={{ marginBottom: '16px' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px', paddingBottom: '24px', borderBottom: '1px solid var(--border-color)' }}>
+                                        <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#111111', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem', fontWeight: 800, flexShrink: 0 }}>2</div>
+                                        <div>
+                                            <p style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>Send Order on WhatsApp or Viber</p>
+                                            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>Tap a button below — your order details will be pre-filled</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Order number */}
+                                    <div style={{ background: 'var(--bg-secondary)', borderRadius: '8px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', border: '1px dashed var(--border-color)' }}>
+                                        <span style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Order #</span>
+                                        <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.04em', wordBreak: 'break-all', textAlign: 'right' }}>{orderNumber}</span>
+                                    </div>
+
+                                    {/* Buttons */}
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '20px' }}>
+                                        <button
+                                            onClick={handleViberPayment}
+                                            style={{ padding: '14px', fontSize: '0.88rem', fontWeight: 700, background: '#7360F2', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 4px 16px rgba(115,96,242,0.3)', transition: 'all 0.2s ease' }}
+                                            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(115,96,242,0.4)'; }}
+                                            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(115,96,242,0.3)'; }}
+                                        >
+                                            <img src="/viber-logo.png" alt="Viber" style={{ width: '18px', height: '18px', filter: 'brightness(0) invert(1)' }} />
+                                            Viber
+                                        </button>
+                                        <button
+                                            onClick={handleWhatsAppPayment}
+                                            style={{ padding: '14px', fontSize: '0.88rem', fontWeight: 700, background: '#25D366', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 4px 16px rgba(37,211,102,0.3)', transition: 'all 0.2s ease' }}
+                                            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(37,211,102,0.4)'; }}
+                                            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(37,211,102,0.3)'; }}
+                                        >
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
+                                            WhatsApp
+                                        </button>
+                                    </div>
+
+                                    <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center', margin: 0 }}>
+                                        Your order details will be pre-filled. Send the message and we&apos;ll reply with payment instructions!
+                                    </p>
+                                </div>
+
+                                {/* QR codes */}
+                                <div className="form-card">
+                                    <p style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', textAlign: 'center', marginBottom: '16px' }}>Or scan to contact us</p>
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                                        {[
+                                            { src: '/viber-qr.png', alt: 'Viber QR', label: 'Viber', color: '#7360F2' },
+                                            { src: '/whatsapp-qr.png', alt: 'WhatsApp QR', label: 'WhatsApp', color: '#25D366' },
+                                        ].map(({ src, alt, label, color }) => (
+                                            <div key={label} style={{ textAlign: 'center' }}>
+                                                <img src={src} alt={alt} style={{ width: '100%', maxWidth: '140px', borderRadius: '8px', border: '1px solid var(--border-color)' }} />
+                                                <p style={{ fontSize: '0.75rem', fontWeight: 700, marginTop: '8px', color }}>{label}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </div>
+
+                    {/* RIGHT — Order Summary */}
+                    <div className="order-summary">
+                        <div style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid var(--border-color)', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', position: 'sticky', top: '120px' }}>
+                            {/* Header */}
+                            <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border-color)', background: 'var(--bg-secondary)' }}>
+                                <p style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.09em', color: 'var(--text-muted)', margin: 0 }}>Order Summary</p>
+                            </div>
+
+                            {/* Items */}
+                            <div style={{ padding: '0 24px' }}>
+                                {items.map((item, index) => (
+                                    <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px 0', borderBottom: index < items.length - 1 ? '1px solid var(--border-color)' : 'none' }}>
+                                        <div style={{ width: '48px', height: '48px', borderRadius: '8px', overflow: 'hidden', background: 'var(--bg-secondary)', flexShrink: 0, border: '1px solid var(--border-color)' }}>
+                                            {item.product.image_url ? (
+                                                <img src={item.product.image_url} alt={item.product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                            ) : (
+                                                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)' }}>
+                                                    {item.product.brand.slice(0, 2).toUpperCase()}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div style={{ flex: 1, minWidth: 0 }}>
+                                            <p style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 2px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.product.name}</p>
+                                            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0 }}>{item.denomination.value} × {item.quantity}</p>
+                                        </div>
+                                        <div style={{ fontWeight: 800, fontSize: '0.88rem', color: 'var(--text-primary)', flexShrink: 0 }}>
+                                            Rs. {(item.denomination.price * item.quantity).toLocaleString()}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Total */}
+                            <div style={{ padding: '16px 24px', borderTop: '2px solid #111111', background: '#111111' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Total</span>
+                                    <span style={{ fontSize: '1.3rem', fontWeight: 900, color: '#FACC15', letterSpacing: '-0.03em' }}>Rs. {getTotal().toLocaleString()}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Payment Buttons */}
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        gap: '12px'
-                    }}>
-                        <button
-                            onClick={handleViberPayment}
-                            style={{
-                                width: '100%',
-                                padding: '12px 4px',
-                                fontSize: 'clamp(0.7rem, 3vw, 0.95rem)',
-                                fontWeight: 600,
-                                background: '#826BF0',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: 'var(--radius-xl)',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '6px',
-                                boxShadow: '0 4px 16px rgba(130, 107, 240, 0.3)',
-                                transition: 'all 0.25s ease',
-                                whiteSpace: 'nowrap'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-2px)';
-                                e.currentTarget.style.boxShadow = '0 6px 24px rgba(130, 107, 240, 0.4)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(130, 107, 240, 0.3)';
-                            }}
-                        >
-                            <img
-                                src="/viber-logo.png"
-                                alt="Viber"
-                                style={{
-                                    width: '18px',
-                                    height: '18px',
-                                    filter: 'brightness(0) invert(1)'
-                                }}
-                            />
-                            Continue with Viber
-                        </button>
-                        <button
-                            onClick={handleWhatsAppPayment}
-                            style={{
-                                width: '100%',
-                                padding: '12px 4px',
-                                fontSize: 'clamp(0.7rem, 3vw, 0.95rem)',
-                                fontWeight: 600,
-                                background: '#5AD17A',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: 'var(--radius-xl)',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '6px',
-                                boxShadow: '0 4px 16px rgba(90, 209, 122, 0.3)',
-                                transition: 'all 0.25s ease',
-                                whiteSpace: 'nowrap'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-2px)';
-                                e.currentTarget.style.boxShadow = '0 6px 24px rgba(90, 209, 122, 0.4)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(90, 209, 122, 0.3)';
-                            }}
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                            </svg>
-                            Continue with WhatsApp
-                        </button>
-                    </div>
-
-                    <p style={{
-                        fontSize: '0.8rem',
-                        color: 'var(--text-muted)',
-                        textAlign: 'center',
-                        marginTop: '20px'
-                    }}>
-                        Click a button above to send your order. We&apos;ll reply with payment details!
-                    </p>
-                </>
-            )}
                 </div>
             </div>
 
-            <style jsx>{`
+            <style>{`
+                .form-card {
+                    background: #FFFFFF;
+                    border-radius: 12px;
+                    border: 1px solid var(--border-color);
+                    padding: 20px 16px;
+                    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+                }
                 .checkout-grid {
                     display: flex;
                     flex-direction: column;
-                    gap: 28px;
+                    gap: 16px;
                 }
-                .order-summary {
-                    order: 2;
-                }
-                .form-payment {
-                    order: 1;
-                }
-                @media (max-width: 899px) {
-                    .is-payment-grid .order-summary {
-                        padding: 16px !important;
-                        font-size: 0.9em;
+                .order-summary { order: 2; }
+                .form-payment { order: 1; }
+                @media (min-width: 768px) {
+                    .form-card {
+                        padding: 32px !important;
                     }
-                    .is-payment-grid .order-summary .order-number-val {
-                        font-size: 1.35rem !important;
-                    }
-                    .is-payment-grid .order-summary .order-number-container {
-                        margin-bottom: 16px !important;
-                        padding-bottom: 16px !important;
-                    }
-                }
-                @media (min-width: 900px) {
                     .checkout-grid {
                         display: grid !important;
-                        grid-template-columns: 1fr 340px !important;
+                        grid-template-columns: 1fr 360px !important;
+                        gap: 32px !important;
+                        align-items: start !important;
                     }
+                    .order-summary { order: 2; }
+                    .form-payment { order: 1; }
                 }
             `}</style>
         </div>
     );
 }
-

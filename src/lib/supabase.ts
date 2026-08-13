@@ -18,6 +18,7 @@ export interface Product {
     image_url: string;
     logo_url: string;
     description?: string;
+    in_stock?: boolean; // defaults to true when omitted
 }
 
 export interface Order {

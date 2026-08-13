@@ -26,7 +26,7 @@ import { Product } from '@/lib/supabase';
 // Mobile images:  /public/IMAGES/webpmobile/
 const HERO_SLIDES = [
   {
-    desktop: '/IMAGES/webpmobile/AI_mobile.webp',
+    desktop: '/IMAGES/webpdesktop/AI_web.webp',
     mobile: '/IMAGES/webpmobile/AI_mobile.webp',
     alt: 'AI Tools',
     link: '/category/software',
@@ -50,7 +50,7 @@ const HERO_SLIDES = [
     link: '/search?q=grok',
   },
   {
-    desktop: '/IMAGES/webpmobile/Gamepass_mobile.webp',
+    desktop: '/IMAGES/webpdesktop/Gamepass_web.webp',
     mobile: '/IMAGES/webpmobile/Gamepass_mobile.webp',
     alt: 'Xbox Game Pass',
     link: '/search?q=xbox',
@@ -74,7 +74,7 @@ const HERO_SLIDES = [
     link: '/search?q=steam',
   },
   {
-    desktop: '/IMAGES/webpmobile/GTA_mobile.webp',
+    desktop: '/IMAGES/webpdesktop/GTA_web.webp',
     mobile: '/IMAGES/webpmobile/GTA_mobile.webp',
     alt: 'GTA',
     link: '/category/gaming',
@@ -176,6 +176,7 @@ const MARQUEE_ROW2 = [
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>(() => featuredProductsData.slice(0, 6));
+  const [heroSlides, setHeroSlides] = useState(HERO_SLIDES);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Refs for GSAP animations
@@ -194,9 +195,10 @@ export default function Home() {
   useGsapCardStagger(subsGridRef);
   useGsapCardStagger(aiGridRef);
 
-  // Randomize starting slide on each visit (client-side only to avoid SSR mismatch)
+  // Randomize the order of the slides on each visit (client-side only to avoid SSR mismatch)
   useEffect(() => {
-    setCurrentSlide(Math.floor(Math.random() * HERO_SLIDES.length));
+    setHeroSlides([...HERO_SLIDES].sort(() => 0.5 - Math.random()));
+    setCurrentSlide(0);
   }, []);
 
   // Swipe State
@@ -220,20 +222,20 @@ export default function Home() {
     const isRightSwipe = distance < -minSwipeDistance;
 
     if (isLeftSwipe) {
-      setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
+      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
     }
     if (isRightSwipe) {
-      setCurrentSlide(prev => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+      setCurrentSlide(prev => (prev - 1 + heroSlides.length) % heroSlides.length);
     }
   };
 
   // Auto-slide hero carousel
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
+      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [heroSlides]);
 
   // Smart FAB: show after scrolling past hero, hide near bottom CTA
   const [showFab, setShowFab] = useState(false);
@@ -277,17 +279,16 @@ export default function Home() {
       >
         <div className="container" style={{ paddingTop: '16px' }}>
           {/* Slide Track */}
-          <div style={{
+          <div className="hero-track" style={{
             position: 'relative',
             width: '100%',
-            height: 'clamp(220px, 40vw, 480px)',
             background: 'var(--color-ink)',
             overflow: 'hidden',
             borderRadius: 'var(--radius-2xl)',
             boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
           }}>
             {/* Slides */}
-            {HERO_SLIDES.map((slide, index) => {
+            {heroSlides.map((slide, index) => {
               const isActive = index === currentSlide;
               return (
                 <div
@@ -337,7 +338,7 @@ export default function Home() {
 
             {/* Premium Glass Arrows */}
             <button
-              onClick={() => setCurrentSlide(p => (p - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
+              onClick={() => setCurrentSlide(p => (p - 1 + heroSlides.length) % heroSlides.length)}
               aria-label="Previous slide"
               style={{
                 position: 'absolute',
@@ -371,7 +372,7 @@ export default function Home() {
             </button>
 
             <button
-              onClick={() => setCurrentSlide(p => (p + 1) % HERO_SLIDES.length)}
+              onClick={() => setCurrentSlide(p => (p + 1) % heroSlides.length)}
               aria-label="Next slide"
               style={{
                 position: 'absolute',
@@ -888,6 +889,22 @@ export default function Home() {
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
         </svg>
       </a>
+      <style>{`
+        .hero-track {
+          height: clamp(220px, 40vw, 480px);
+        }
+        @media (min-width: 1024px) {
+          .hero-track {
+            height: auto;
+            aspect-ratio: 21 / 9;
+          }
+        }
+        @media (min-width: 1440px) {
+          .hero-track {
+            aspect-ratio: 2.8 / 1;
+          }
+        }
+      `}</style>
     </div >
   );
 }

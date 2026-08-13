@@ -9,434 +9,235 @@ export default function CartPage() {
 
     if (items.length === 0) {
         return (
-            <div className="container fade-in" style={{
-                paddingTop: '110px',
-                paddingBottom: '80px',
-                paddingLeft: '16px',
-                paddingRight: '16px',
-                textAlign: 'center'
-            }}>
-                <div style={{
-                    margin: '0 auto 24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.8 }}>
-                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-                        <line x1="3" y1="6" x2="21" y2="6" />
-                        <path d="M16 10a4 4 0 01-8 0" />
-                    </svg>
+            <div style={{ background: 'var(--bg-primary)', minHeight: '100vh', paddingTop: '96px', paddingBottom: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ textAlign: 'center', maxWidth: '360px', padding: '0 16px' }}>
+                    <div style={{ width: '64px', height: '64px', borderRadius: '12px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
+                            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <path d="M16 10a4 4 0 01-8 0" />
+                        </svg>
+                    </div>
+                    <h1 style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-0.03em', marginBottom: '8px', textTransform: 'uppercase' }}>
+                        Cart is Empty
+                    </h1>
+                    <p style={{ color: 'var(--text-muted)', marginBottom: '28px', fontSize: '0.88rem' }}>
+                        Add some gift cards and they&apos;ll appear here.
+                    </p>
+                    <Link href="/" style={{ display: 'inline-flex', padding: '13px 28px', background: '#111111', color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: 800, fontSize: '0.88rem', textTransform: 'uppercase', letterSpacing: '0.02em' }}>
+                        Start Shopping
+                    </Link>
                 </div>
-                <h1 style={{ marginBottom: '10px', fontSize: '1.75rem', color: 'var(--text-primary)', letterSpacing: '-0.03em' }}>
-                    Your cart is empty
-                </h1>
-                <p style={{
-                    color: 'var(--text-secondary)',
-                    marginBottom: '28px',
-                    maxWidth: '320px',
-                    margin: '0 auto 28px',
-                    fontSize: '0.95rem'
-                }}>
-                    Add some gift cards and they&apos;ll appear here.
-                </p>
-                <Link href="/" className="btn btn-primary btn-lg" style={{ borderRadius: 'var(--radius-xl)' }}>
-                    Start Shopping
-                </Link>
             </div>
         );
     }
 
     return (
-        <div className="container fade-in" style={{ 
-            paddingTop: '100px', 
-            paddingBottom: '80px', 
-            paddingLeft: '16px', 
-            paddingRight: '16px' 
-        }}>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '28px'
-            }}>
-                <h1 style={{
-                    fontSize: '1.75rem',
-                    color: 'var(--text-primary)',
-                    letterSpacing: '-0.03em',
-                    margin: 0
-                }}>
-                    Shopping Cart
-                    <span style={{
-                        fontSize: '0.85rem',
-                        fontWeight: 400,
-                        color: 'var(--text-muted)',
-                        marginLeft: '10px'
-                    }}>
-                        ({items.reduce((c, i) => c + i.quantity, 0)} items)
-                    </span>
-                </h1>
-                
-                <Link href="/" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '36px',
-                    height: '36px',
-                    color: 'var(--text-secondary)',
-                    textDecoration: 'none',
-                    transition: 'color 0.2s ease'
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--text-primary)';
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'var(--text-secondary)';
-                }}
-                >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </Link>
-            </div>
+        <div style={{ background: 'var(--bg-primary)', minHeight: '100vh', paddingTop: '96px', paddingBottom: '80px' }}>
+            <div className="container" style={{ paddingLeft: '16px', paddingRight: '16px', maxWidth: '1000px', margin: '0 auto' }}>
 
-            <div className="cart-grid" style={{
-                display: 'flex',
-                flexDirection: 'column-reverse',
-                gap: '28px'
-            }}>
-                {/* Cart Items */}
-                <div>
-                    {items.length >= 2 && (
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
+                {/* Page Header */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+                    <div>
+                        <p style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', marginBottom: '2px' }}>
+                            {items.reduce((c, i) => c + i.quantity, 0)} item{items.reduce((c, i) => c + i.quantity, 0) !== 1 ? 's' : ''}
+                        </p>
+                        <h1 style={{ fontSize: 'clamp(1.4rem, 5vw, 2.2rem)', fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-0.04em', margin: 0, textTransform: 'uppercase' }}>
+                            Your Cart
+                        </h1>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        {items.length >= 2 && (
                             <button
                                 onClick={clearCart}
-                                style={{
-                                    padding: '8px 16px',
-                                    background: 'none',
-                                    border: '1px solid var(--border-light)',
-                                    borderRadius: 'var(--radius-full)',
-                                    color: 'var(--text-muted)',
-                                    fontSize: '0.8rem',
-                                    fontWeight: 600,
-                                    cursor: 'pointer',
-                                    transition: 'all 0.2s ease',
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    gap: '6px'
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.color = '#ff453a';
-                                    e.currentTarget.style.borderColor = 'rgba(255, 69, 58, 0.3)';
-                                    e.currentTarget.style.background = 'rgba(255, 69, 58, 0.05)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.color = 'var(--text-muted)';
-                                    e.currentTarget.style.borderColor = 'var(--border-light)';
-                                    e.currentTarget.style.background = 'none';
-                                }}
+                                style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '7px 12px', background: 'none', border: '1px solid var(--border-color)', borderRadius: '6px', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s ease', whiteSpace: 'nowrap' }}
+                                onMouseEnter={e => { e.currentTarget.style.color = '#B91C1C'; e.currentTarget.style.borderColor = 'rgba(185,28,28,0.3)'; e.currentTarget.style.background = 'rgba(185,28,28,0.04)'; }}
+                                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.background = 'none'; }}
                             >
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                                 </svg>
-                                Clear cart
+                                Clear
                             </button>
-                        </div>
-                    )}
-                    {items.map((item) => (
-                        <div
-                            key={`${item.product.id}-${item.denomination.value}`}
-                            style={{
-                                padding: '20px',
-                                marginBottom: '12px',
-                                background: 'var(--card-bg)',
-                                borderRadius: 'var(--radius-xl)',
-                                border: '1px solid var(--border-light)',
-                                display: 'flex',
-                                gap: '16px',
-                                alignItems: 'flex-start',
-                                transition: 'all 0.2s ease',
-                                boxShadow: 'var(--shadow-sm)'
-                            }}
+                        )}
+                        <Link href="/"
+                            style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textDecoration: 'none', padding: '7px 12px', border: '1px solid var(--border-color)', borderRadius: '6px', whiteSpace: 'nowrap' }}
+                            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+                            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
                         >
-                            {/* Product Image */}
-                            <div style={{
-                                width: '72px',
-                                height: '72px',
-                                borderRadius: 'var(--radius-md)',
-                                background: 'var(--bg-secondary)',
-                                overflow: 'hidden',
-                                flexShrink: 0
-                            }}>
-                                {item.product.image_url ? (
-                                    <img
-                                        src={item.product.image_url}
-                                        alt={item.product.name}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            objectFit: 'cover'
-                                        }}
-                                    />
-                                ) : (
-                                    <div style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '1.25rem',
-                                        fontWeight: 700,
-                                        color: 'var(--text-muted)'
-                                    }}>
-                                        {item.product.brand.charAt(0)}
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                            Close
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="cart-grid">
+
+                    {/* LEFT — Cart Items */}
+                    <div>
+                        {items.map((item) => (
+                            <div
+                                key={`${item.product.id}-${item.denomination.value}`}
+                                className="cart-item"
+                            >
+                                {/* Top row: image + info + remove */}
+                                <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                                    {/* Product Image */}
+                                    <div style={{ width: '60px', height: '60px', borderRadius: '8px', background: 'var(--bg-secondary)', overflow: 'hidden', flexShrink: 0, border: '1px solid var(--border-color)' }}>
+                                        {item.product.image_url ? (
+                                            <img src={item.product.image_url} alt={item.product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        ) : (
+                                            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', fontWeight: 800, color: 'var(--text-muted)' }}>
+                                                {item.product.brand.charAt(0)}
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
 
-                            {/* Product Info */}
-                            <div style={{ flex: 1, minWidth: 0 }}>
-                                <div style={{
-                                    fontSize: '0.65rem',
-                                    color: 'var(--text-muted)',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '0.06em',
-                                    marginBottom: '3px',
-                                    fontWeight: 600
-                                }}>
-                                    {item.product.brand}
-                                </div>
-                                <h3 style={{
-                                    fontSize: '0.95rem',
-                                    fontWeight: 600,
-                                    marginBottom: '4px',
-                                    lineHeight: 1.3,
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap',
-                                    color: 'var(--text-primary)'
-                                }}>
-                                    {item.product.name}
-                                </h3>
-                                <div style={{
-                                    fontSize: '0.8rem',
-                                    color: 'var(--text-secondary)',
-                                    marginBottom: '12px'
-                                }}>
-                                    {item.denomination.value}
+                                    {/* Product Info */}
+                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                        <p style={{ fontSize: '0.62rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.07em', fontWeight: 700, margin: '0 0 2px 0' }}>
+                                            {item.product.brand}
+                                        </p>
+                                        <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 3px 0', lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                            {item.product.name}
+                                        </h3>
+                                        <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0, fontWeight: 600 }}>
+                                            {item.denomination.value}
+                                        </p>
+                                    </div>
+
+                                    {/* Remove button */}
+                                    <button
+                                        onClick={() => removeItem(item.product.id, item.denomination.value)}
+                                        aria-label="Remove item"
+                                        style={{ padding: '5px', border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-muted)', borderRadius: '6px', flexShrink: 0, transition: 'all 0.15s ease' }}
+                                        onMouseEnter={e => { e.currentTarget.style.background = '#FEF2F2'; e.currentTarget.style.color = '#B91C1C'; }}
+                                        onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = 'var(--text-muted)'; }}
+                                    >
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                                    </button>
                                 </div>
 
-                                {/* Quantity & Actions Row */}
-                                <div style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                    gap: '12px'
-                                }}>
+                                {/* Bottom row: quantity + price */}
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '12px' }}>
                                     {/* Quantity Controls */}
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '0',
-                                        background: 'var(--bg-secondary)',
-                                        borderRadius: 'var(--radius-sm)',
-                                        overflow: 'hidden',
-                                        border: '1px solid var(--border-light)'
-                                    }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-secondary)', borderRadius: '6px', border: '1px solid var(--border-color)', overflow: 'hidden' }}>
                                         <button
                                             onClick={() => updateQuantity(item.product.id, item.denomination.value, item.quantity - 1)}
-                                            style={{
-                                                width: '36px',
-                                                height: '36px',
-                                                border: 'none',
-                                                background: 'transparent',
-                                                cursor: 'pointer',
-                                                fontSize: '1rem',
-                                                color: 'var(--text-primary)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                transition: 'background 0.15s ease'
-                                            }}
-                                        >
-                                            −
-                                        </button>
-                                        <span style={{
-                                            minWidth: '32px',
-                                            textAlign: 'center',
-                                            fontSize: '0.9rem',
-                                            fontWeight: 600,
-                                            color: 'var(--text-primary)'
-                                        }}>
+                                            style={{ width: '36px', height: '36px', border: 'none', background: 'transparent', cursor: 'pointer', fontSize: '1.1rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}
+                                        >−</button>
+                                        <span style={{ minWidth: '32px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-primary)', padding: '0 4px' }}>
                                             {item.quantity}
                                         </span>
                                         <button
                                             onClick={() => updateQuantity(item.product.id, item.denomination.value, item.quantity + 1)}
-                                            style={{
-                                                width: '36px',
-                                                height: '36px',
-                                                border: 'none',
-                                                background: 'transparent',
-                                                cursor: 'pointer',
-                                                fontSize: '1rem',
-                                                color: 'var(--text-primary)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                transition: 'background 0.15s ease'
-                                            }}
-                                        >
-                                            +
-                                        </button>
+                                            style={{ width: '36px', height: '36px', border: 'none', background: 'transparent', cursor: 'pointer', fontSize: '1.1rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}
+                                        >+</button>
                                     </div>
 
                                     {/* Price */}
-                                    <div style={{
-                                        fontWeight: 700,
-                                        fontSize: '1rem',
-                                        color: 'var(--text-primary)',
-                                        letterSpacing: '-0.02em',
-                                        whiteSpace: 'nowrap'
-                                    }}>
+                                    <div style={{ fontWeight: 900, fontSize: '1rem', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
                                         Rs. {(item.denomination.price * item.quantity).toLocaleString()}
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Remove Button */}
-                            <button
-                                onClick={() => removeItem(item.product.id, item.denomination.value)}
-                                style={{
-                                    padding: '8px',
-                                    border: 'none',
-                                    background: 'none',
-                                    cursor: 'pointer',
-                                    color: 'var(--text-muted)',
-                                    flexShrink: 0,
-                                    borderRadius: '50%',
-                                    transition: 'all 0.2s ease'
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.background = 'var(--bg-secondary)';
-                                    e.currentTarget.style.color = '#ff453a';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.background = 'none';
-                                    e.currentTarget.style.color = 'var(--text-muted)';
-                                }}
-                                aria-label="Remove item"
-                            >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M18 6L6 18M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Order Summary */}
-                <div style={{
-                    background: 'var(--card-bg)',
-                    borderRadius: 'var(--radius-xl)',
-                    border: '1px solid var(--border-light)',
-                    padding: '24px',
-                    position: 'sticky',
-                    top: '72px',
-                    height: 'fit-content',
-                    boxShadow: 'var(--shadow-sm)',
-                    transition: 'var(--theme-transition)'
-                }}>
-                    <h2 style={{
-                        fontSize: '0.8rem',
-                        fontWeight: 600,
-                        marginBottom: '20px',
-                        color: 'var(--text-muted)',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.06em'
-                    }}>
-                        Order Summary
-                    </h2>
-
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        marginBottom: '10px',
-                        fontSize: '0.9rem'
-                    }}>
-                        <span style={{ color: 'var(--text-secondary)' }}>Subtotal</span>
-                        <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Rs. {getTotal().toLocaleString()}</span>
+                        ))}
                     </div>
 
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        marginBottom: '20px',
-                        fontSize: '0.9rem'
-                    }}>
-                        <span style={{ color: 'var(--text-secondary)' }}>Delivery</span>
-                        <span style={{ color: '#30d158', fontWeight: 500 }}>Digital (Free)</span>
-                    </div>
+                    {/* RIGHT — Order Summary */}
+                    <div className="summary-sticky">
+                        <div style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid var(--border-color)', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                            {/* Header */}
+                            <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border-color)', background: 'var(--bg-secondary)' }}>
+                                <p style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.09em', color: 'var(--text-muted)', margin: 0 }}>Order Summary</p>
+                            </div>
 
-                    <div style={{
-                        borderTop: '1.5px solid var(--border-color)',
-                        paddingTop: '16px',
-                        marginBottom: '20px'
-                    }}>
-                        <div style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            fontSize: '1.2rem',
-                            fontWeight: 700,
-                            letterSpacing: '-0.02em'
-                        }}>
-                            <span style={{ color: 'var(--text-primary)' }}>Total</span>
-                            <span style={{ color: 'var(--text-primary)' }}>Rs. {getTotal().toLocaleString()}</span>
+                            <div style={{ padding: '16px 20px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '0.88rem' }}>
+                                    <span style={{ color: 'var(--text-muted)' }}>Subtotal</span>
+                                    <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>Rs. {getTotal().toLocaleString()}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
+                                    <span style={{ color: 'var(--text-muted)' }}>Delivery</span>
+                                    <span style={{ color: '#15803D', fontWeight: 700 }}>Digital — Free</span>
+                                </div>
+                            </div>
+
+                            {/* Total */}
+                            <div style={{ padding: '14px 20px', borderTop: '1px solid var(--border-color)', background: '#111111' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Total</span>
+                                    <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#FACC15', letterSpacing: '-0.03em' }}>Rs. {getTotal().toLocaleString()}</span>
+                                </div>
+                            </div>
+
+                            <div style={{ padding: '16px 20px' }}>
+                                <Link
+                                    href="/checkout"
+                                    style={{ display: 'block', width: '100%', padding: '15px', fontSize: '0.88rem', fontWeight: 800, background: '#111111', color: '#FFFFFF', borderRadius: '8px', textDecoration: 'none', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '0.04em', transition: 'background 0.2s ease', boxSizing: 'border-box' }}
+                                    onMouseEnter={e => (e.currentTarget.style.background = '#333333')}
+                                    onMouseLeave={e => (e.currentTarget.style.background = '#111111')}
+                                >
+                                    Proceed to Checkout
+                                </Link>
+
+                                <a
+                                    href={`https://wa.me/9779862157864?text=${encodeURIComponent(`I would like to know more about ${items.map(item => item.product.name).join(', ')}`)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '12px', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none', transition: 'color 0.2s ease' }}
+                                    onMouseOver={e => (e.currentTarget.style.color = '#25D366')}
+                                    onMouseOut={e => (e.currentTarget.style.color = 'var(--text-muted)')}
+                                >
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" />
+                                    </svg>
+                                    Need help? Ask on WhatsApp
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <Link
-                        href="/checkout"
-                        className="btn btn-primary btn-lg"
-                        style={{ width: '100%' }}
-                    >
-                        Proceed to Checkout
-                    </Link>
-
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px', marginTop: '16px' }}>
-                        <a 
-                            href={`https://wa.me/9779862157864?text=${encodeURIComponent(`I would like to know more about ${items.map(item => item.product.name).join(', ')}`)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                                color: 'var(--text-secondary)',
-                                fontSize: '0.9rem',
-                                textDecoration: 'none',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '6px',
-                                transition: 'color 0.2s ease'
-                            }}
-                            onMouseOver={(e) => e.currentTarget.style.color = '#25D366'}
-                            onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
-                        >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                            </svg>
-                            Need Help?
-                        </a>
-                    </div>
                 </div>
             </div>
 
-            <style jsx>{`
-                @media (min-width: 900px) {
+            <style>{`
+                /* Cart item card */
+                .cart-item {
+                    padding: 16px;
+                    margin-bottom: 8px;
+                    background: #FFFFFF;
+                    border-radius: 12px;
+                    border: 1px solid var(--border-color);
+                    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+                }
+
+                /* Summary panel sticky on desktop only */
+                .summary-sticky {
+                    position: static;
+                }
+
+                /* Main grid — mobile: stacked, items first */
+                .cart-grid {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                }
+
+                /* Desktop overrides */
+                @media (min-width: 768px) {
                     .cart-grid {
                         display: grid !important;
                         grid-template-columns: 1fr 340px !important;
+                        gap: 32px !important;
+                        align-items: start !important;
+                    }
+                    .summary-sticky {
+                        position: sticky !important;
+                        top: 120px !important;
+                    }
+                    .cart-item {
+                        padding: 18px 20px !important;
                     }
                 }
             `}</style>
