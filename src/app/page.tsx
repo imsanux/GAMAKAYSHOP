@@ -277,6 +277,10 @@ export default function Home() {
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEndWrapper}
       >
+        {/* Visually-hidden h1 for accessibility & heading hierarchy */}
+        <h1 style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', borderWidth: 0 }}>
+          GAMAKAY Shop — Gift Cards &amp; Subscriptions in Nepal
+        </h1>
         <div className="container" style={{ paddingTop: '16px' }}>
           {/* Slide Track */}
           <div className="hero-track" style={{
@@ -318,6 +322,8 @@ export default function Home() {
                       <img
                         src={slide.desktop}
                         alt={slide.alt}
+                        width="1920"
+                        height="600"
                         loading={index === 0 ? 'eager' : 'lazy'}
                         fetchPriority={index === 0 ? 'high' : undefined}
                         decoding="async"
@@ -502,14 +508,14 @@ export default function Home() {
           {/* Row 1 - Scrolling Left */}
           <DraggableMarquee
             items={[
-              { image: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.webp', link: '/search?q=playstation' },
-              { image: '/IMAGES/PRODUCTS/XBOX_GIFTCARDS.webp', link: '/search?q=xbox' },
-              { image: '/IMAGES/PRODUCTS/NETFLIX.webp', link: '/search?q=netflix' },
-              { image: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.webp', link: '/search?q=spotify' },
-              { image: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.webp', link: '/search?q=apple' },
-              { image: '/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.webp', link: '/search?q=nintendo' },
-              { image: '/IMAGES/PRODUCTS/DISCORD_NITRO.webp', link: '/search?q=discord' },
-              { image: '/IMAGES/PRODUCTS/CRUCHYROLL.webp', link: '/search?q=crunchyroll' },
+              { image: '/IMAGES/PRODUCTS/PLAYSTATION_GIFTCARDS_USD.webp', link: '/search?q=playstation', name: 'PlayStation Gift Cards' },
+              { image: '/IMAGES/PRODUCTS/XBOX_GIFTCARDS.webp', link: '/search?q=xbox', name: 'Xbox Gift Cards' },
+              { image: '/IMAGES/PRODUCTS/NETFLIX.webp', link: '/search?q=netflix', name: 'Netflix' },
+              { image: '/IMAGES/PRODUCTS/SPOTIFY_PREMIUM.webp', link: '/search?q=spotify', name: 'Spotify Premium' },
+              { image: '/IMAGES/PRODUCTS/APPLE_GIFTCARD_INR.webp', link: '/search?q=apple', name: 'Apple Gift Card' },
+              { image: '/IMAGES/PRODUCTS/Ninentdo_ESHOP_GIFTCARDS.webp', link: '/search?q=nintendo', name: 'Nintendo eShop Gift Cards' },
+              { image: '/IMAGES/PRODUCTS/DISCORD_NITRO.webp', link: '/search?q=discord', name: 'Discord Nitro' },
+              { image: '/IMAGES/PRODUCTS/CRUCHYROLL.webp', link: '/search?q=crunchyroll', name: 'Crunchyroll' },
             ]}
             direction="forward"
             speed={0.5}
@@ -520,14 +526,14 @@ export default function Home() {
           {/* Row 2 - Scrolling Right */}
           <DraggableMarquee
             items={[
-              { image: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.webp', link: '/search?q=youtube' },
-              { image: '/IMAGES/PRODUCTS/NORD_VPN.webp', link: '/search?q=nordvpn' },
-              { image: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.webp', link: '/search?q=gemini' },
-              { image: '/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.webp', link: '/search?q=claude' },
-              { image: '/IMAGES/PRODUCTS/CURSOR_AI.webp', link: '/search?q=cursor' },
-              { image: '/IMAGES/PRODUCTS/EXPRESS_VPN.webp', link: '/search?q=express' },
-              { image: '/IMAGES/PRODUCTS/DUOLINGO.webp', link: '/search?q=duolingo' },
-              { image: '/IMAGES/PRODUCTS/TINDER_GOLD.webp', link: '/search?q=tinder' },
+              { image: '/IMAGES/PRODUCTS/YOUTUBE_PREMIUM.webp', link: '/search?q=youtube', name: 'YouTube Premium' },
+              { image: '/IMAGES/PRODUCTS/NORD_VPN.webp', link: '/search?q=nordvpn', name: 'NordVPN' },
+              { image: '/IMAGES/PRODUCTS/GOOGLE_GEMINI_PRO.webp', link: '/search?q=gemini', name: 'Google Gemini Pro' },
+              { image: '/IMAGES/PRODUCTS/CLAUDE_BY_ANTHROPIC.webp', link: '/search?q=claude', name: 'Claude by Anthropic' },
+              { image: '/IMAGES/PRODUCTS/CURSOR_AI.webp', link: '/search?q=cursor', name: 'Cursor AI' },
+              { image: '/IMAGES/PRODUCTS/EXPRESS_VPN.webp', link: '/search?q=express', name: 'ExpressVPN' },
+              { image: '/IMAGES/PRODUCTS/DUOLINGO.webp', link: '/search?q=duolingo', name: 'Duolingo' },
+              { image: '/IMAGES/PRODUCTS/TINDER_GOLD.webp', link: '/search?q=tinder', name: 'Tinder Gold' },
             ]}
             direction="backward"
             speed={0.5}

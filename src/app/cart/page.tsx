@@ -124,6 +124,7 @@ export default function CartPage() {
                                     <div style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-secondary)', borderRadius: '6px', border: '1px solid var(--border-color)', overflow: 'hidden' }}>
                                         <button
                                             onClick={() => updateQuantity(item.product.id, item.denomination.value, item.quantity - 1)}
+                                            aria-label={`Decrease quantity of ${item.product.name}`}
                                             style={{ width: '36px', height: '36px', border: 'none', background: 'transparent', cursor: 'pointer', fontSize: '1.1rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}
                                         >−</button>
                                         <span style={{ minWidth: '32px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-primary)', padding: '0 4px' }}>
@@ -131,6 +132,7 @@ export default function CartPage() {
                                         </span>
                                         <button
                                             onClick={() => updateQuantity(item.product.id, item.denomination.value, item.quantity + 1)}
+                                            aria-label={`Increase quantity of ${item.product.name}`}
                                             style={{ width: '36px', height: '36px', border: 'none', background: 'transparent', cursor: 'pointer', fontSize: '1.1rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}
                                         >+</button>
                                     </div>

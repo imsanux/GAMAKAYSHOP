@@ -81,6 +81,13 @@ const nextConfig: NextConfig = {
           { key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' },
         ],
       },
+      {
+        // Immutable cache for Next.js static chunks (JS/CSS) — content-hashed, safe for 1 year
+        source: '/_next/static/(.*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
     ];
   },
 };

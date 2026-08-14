@@ -7,6 +7,7 @@ import Link from 'next/link';
 export interface MarqueeItem {
     image: string;
     link: string;
+    name: string;
 }
 
 interface DraggableMarqueeProps {
@@ -48,6 +49,7 @@ export default function DraggableMarquee({ items, direction = 'forward', speed =
                     >
                         <Link
                             href={item.link}
+                            aria-label={item.name}
                             style={{
                                 display: 'block',
                                 width: '160px',
@@ -70,7 +72,7 @@ export default function DraggableMarquee({ items, direction = 'forward', speed =
                         >
                             <Image
                                 src={item.image}
-                                alt="Gift Card Brand"
+                                alt={item.name}
                                 fill
                                 sizes="160px"
                                 style={{ objectFit: 'cover' }}

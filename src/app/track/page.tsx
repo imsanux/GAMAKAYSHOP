@@ -71,7 +71,7 @@ export default function TrackPage() {
                 transition: 'var(--theme-transition)'
             }}>
                 <div style={{ marginBottom: '24px' }}>
-                    <label style={{
+                    <label htmlFor="track-phone" style={{
                         display: 'block',
                         marginBottom: '10px',
                         fontWeight: 600,
@@ -81,6 +81,7 @@ export default function TrackPage() {
                         Phone Number
                     </label>
                     <input
+                        id="track-phone"
                         type="tel"
                         placeholder="e.g., 9841234567"
                         value={phone}

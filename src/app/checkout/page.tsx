@@ -146,12 +146,13 @@ export default function CheckoutPage() {
                                     </div>
                                 </div>
 
-                                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 700, fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                                <label htmlFor="checkout-phone" style={{ display: 'block', marginBottom: '8px', fontWeight: 700, fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                                     WhatsApp / Phone Number
                                 </label>
                                 <div style={{ position: 'relative', marginBottom: '12px' }}>
                                     <span style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-muted)', pointerEvents: 'none' }}>🇳🇵 +977</span>
                                     <input
+                                        id="checkout-phone"
                                         type="tel"
                                         placeholder="98XXXXXXXX"
                                         value={phone}
@@ -219,7 +220,7 @@ export default function CheckoutPage() {
                                             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(115,96,242,0.4)'; }}
                                             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(115,96,242,0.3)'; }}
                                         >
-                                            <img src="/viber-logo.png" alt="Viber" style={{ width: '18px', height: '18px', filter: 'brightness(0) invert(1)' }} />
+                                            <img src="/viber-logo.png" alt="" role="presentation" style={{ width: '18px', height: '18px', filter: 'brightness(0) invert(1)' }} />
                                             Viber
                                         </button>
                                         <button
@@ -243,8 +244,8 @@ export default function CheckoutPage() {
                                     <p style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', textAlign: 'center', marginBottom: '16px' }}>Or scan to contact us</p>
                                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                                         {[
-                                            { src: '/viber-qr.png', alt: 'Viber QR', label: 'Viber', color: '#7360F2' },
-                                            { src: '/whatsapp-qr.png', alt: 'WhatsApp QR', label: 'WhatsApp', color: '#25D366' },
+                                            { src: '/viber-qr.png', alt: 'Scan QR code to contact us on Viber', label: 'Viber', color: '#7360F2' },
+                                            { src: '/whatsapp-qr.png', alt: 'Scan QR code to contact us on WhatsApp', label: 'WhatsApp', color: '#25D366' },
                                         ].map(({ src, alt, label, color }) => (
                                             <div key={label} style={{ textAlign: 'center' }}>
                                                 <img src={src} alt={alt} style={{ width: '100%', maxWidth: '140px', borderRadius: '8px', border: '1px solid var(--border-color)' }} />

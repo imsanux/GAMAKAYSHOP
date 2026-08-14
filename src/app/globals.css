@@ -49,8 +49,8 @@
 
   /* ── Text ───────────────────────────────────────── */
   --text-primary:   #111111;
-  --text-secondary: #555555;
-  --text-muted:     #888888;
+  --text-secondary: #444444;
+  --text-muted:     #666666;
   --text-inverted:  #FFFFFF;
 
   /* ── Borders ────────────────────────────────────── */
@@ -754,6 +754,8 @@ html.lenis body        { height: auto; }
 ══════════════════════════════════════════════════════ */
 .gsap-card {
   will-change: transform, opacity;
+  opacity: 0;
+  transform: translateY(48px) scale(0.97);
 }
 
 /* ══════════════════════════════════════════════════════

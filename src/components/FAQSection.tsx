@@ -104,6 +104,7 @@ export default function FAQSection() {
                             >
                                 <button
                                     onClick={() => toggleFAQ(index)}
+                                    aria-expanded={isOpen}
                                     style={{
                                         width: '100%',
                                         padding: '20px 22px',

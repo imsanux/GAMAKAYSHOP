@@ -176,6 +176,7 @@ export default function Header() {
                             <input
                                 type="text"
                                 name="search"
+                                aria-label="Search products"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder=""
@@ -234,6 +235,7 @@ export default function Header() {
                             )}
                             <button
                                 type="submit"
+                                aria-label="Search"
                                 style={{
                                     position: 'absolute',
                                     right: '4px',
@@ -300,7 +302,7 @@ export default function Header() {
                                             flexShrink: 0, background: 'rgba(255,255,255,0.04)',
                                             border: '1px solid rgba(255,255,255,0.08)',
                                         }}>
-                                            <img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                            <img src={product.image_url} alt="" role="presentation" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                         </div>
                                         <div style={{ flex: 1, minWidth: 0 }}>
                                             <div style={{ fontWeight: 600, fontSize: '0.8rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -375,7 +377,7 @@ export default function Header() {
                         </Link>
 
                         {/* Cart */}
-                        <Link href="/cart" style={{
+                        <Link href="/cart" aria-label={`Cart${itemCount > 0 ? `, ${itemCount} item${itemCount !== 1 ? 's' : ''}` : ''}`} style={{
                             position: 'relative',
                             display: 'flex',
                             alignItems: 'center',
@@ -479,6 +481,7 @@ export default function Header() {
                         <input
                             type="text"
                             name="search"
+                            aria-label="Search products"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder=""
@@ -537,6 +540,7 @@ export default function Header() {
                         )}
                         <button
                             type="submit"
+                            aria-label="Search"
                             style={{
                                 position: 'absolute',
                                 right: '4px',
@@ -599,7 +603,7 @@ export default function Header() {
                                         flexShrink: 0, background: 'rgba(255,255,255,0.04)',
                                         border: '1px solid rgba(255,255,255,0.08)',
                                     }}>
-                                        <img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <img src={product.image_url} alt="" role="presentation" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div style={{ flex: 1, minWidth: 0 }}>
                                         <div style={{ fontWeight: 600, fontSize: '0.8rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>

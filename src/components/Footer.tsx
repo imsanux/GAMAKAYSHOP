@@ -49,7 +49,7 @@ export default function Footer() {
 
                     {/* Shop */}
                     <div>
-                        <h4 style={{
+                        <h3 style={{
                             fontSize: '0.68rem',
                             fontWeight: 800,
                             textTransform: 'uppercase',
@@ -58,7 +58,7 @@ export default function Footer() {
                         color: 'rgba(255,255,255,0.45)',
                         }}>
                             Shop
-                        </h4>
+                        </h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             {[
                                 { href: '/category/gaming',        label: 'Gaming' },
@@ -87,7 +87,7 @@ export default function Footer() {
 
                     {/* Support */}
                     <div>
-                        <h4 style={{
+                        <h3 style={{
                             fontSize: '0.68rem',
                             fontWeight: 800,
                             textTransform: 'uppercase',
@@ -96,7 +96,7 @@ export default function Footer() {
                         color: 'rgba(255,255,255,0.45)',
                         }}>
                             Support
-                        </h4>
+                        </h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             <Link
                                 href="/support"
@@ -137,7 +137,7 @@ export default function Footer() {
 
                     {/* Connect */}
                     <div>
-                        <h4 style={{
+                        <h3 style={{
                             fontSize: '0.68rem',
                             fontWeight: 800,
                             textTransform: 'uppercase',
@@ -146,7 +146,7 @@ export default function Footer() {
                         color: 'rgba(255,255,255,0.45)',
                         }}>
                             Connect
-                        </h4>
+                        </h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             {/* WhatsApp */}
                             <a
@@ -180,7 +180,8 @@ export default function Footer() {
                             >
                                 <img
                                     src="/viber-logo.png"
-                                    alt="Viber"
+                                    alt=""
+                                    role="presentation"
                                     width={14}
                                     height={14}
                                     style={{ filter: 'brightness(0) invert(0.6)', opacity: 0.7 }}
