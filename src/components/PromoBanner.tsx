@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Banner configuration with links to relevant categories
 const banners = [
@@ -161,11 +162,11 @@ export default function PromoBanner({ variant = 'single', category, className }:
                     if (img) img.style.transform = 'scale(1)';
                 }}
             >
-                <img
+                <Image
                     src={banner.src}
                     alt={banner.alt}
-                    loading="lazy"
-                    decoding="async"
+                    width={1200}
+                    height={400}
                     style={{
                         width: '100%',
                         height: 'auto',
@@ -213,11 +214,11 @@ export default function PromoBanner({ variant = 'single', category, className }:
                             if (img) img.style.transform = 'scale(1)';
                         }}
                     >
-                        <img
+                        <Image
                             src={banner.src}
                             alt={banner.alt}
-                            loading="lazy"
-                            decoding="async"
+                            width={600}
+                            height={300}
                             style={{
                                 width: '100%',
                                 height: 'auto',
@@ -267,11 +268,11 @@ export default function PromoBanner({ variant = 'single', category, className }:
                                 if (img) img.style.transform = 'scale(1)';
                             }}
                         >
-                            <img
+                            <Image
                                 src={banner.src}
                                 alt={banner.alt}
-                                loading="lazy"
-                                decoding="async"
+                                width={1200}
+                                height={400}
                                 style={{
                                     width: '100%',
                                     height: 'auto',

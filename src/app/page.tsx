@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import ProductCard from '@/components/ProductCard';
 import PromoBanner from '@/components/PromoBanner';
@@ -317,26 +318,27 @@ export default function Home() {
                       cursor: 'pointer',
                     }}
                   >
-                    <picture style={{ display: 'block', width: '100%', height: '100%' }}>
-                      <source media="(max-width: 767px)" srcSet={slide.mobile} type="image/webp" />
-                      <img
+                    <div style={{ display: 'block', width: '100%', height: '100%' }}>
+                      <Image
+                        src={slide.mobile}
+                        alt={slide.alt}
+                        className="hide-desktop hero-parallax-img"
+                        width={767}
+                        height={900}
+                        priority={index === 0}
+                        style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                      <Image
                         src={slide.desktop}
                         alt={slide.alt}
-                        width="1920"
-                        height="600"
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                        fetchPriority={index === 0 ? 'high' : undefined}
-                        decoding="async"
+                        className="hide-mobile hero-parallax-img"
+                        width={1920}
+                        height={600}
+                        priority={index === 0}
+                        style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
                         draggable={false}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          objectPosition: 'center',
-                          display: 'block',
-                        }}
                       />
-                    </picture>
+                    </div>
                   </Link>
                 </div>
               );
