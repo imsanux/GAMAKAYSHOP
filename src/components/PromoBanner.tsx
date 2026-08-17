@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 // Banner configuration with links to relevant categories
 const banners = [
