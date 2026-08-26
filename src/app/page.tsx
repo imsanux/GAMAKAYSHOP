@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import ProductCard from '@/components/ProductCard';
 import PromoBanner from '@/components/PromoBanner';
+import RandomAdBoxes from '@/components/RandomAdBoxes';
 import ScrollReveal from '@/components/ScrollReveal';
 import ClipReveal from '@/components/ClipReveal';
 import { useGsapCardStagger, useHeroParallax } from '@/hooks/useGsapAnimations';
@@ -27,58 +28,28 @@ import { Product } from '@/lib/supabase';
 // Mobile images:  /public/IMAGES/webpmobile/
 const HERO_SLIDES = [
   {
-    desktop: '/IMAGES/webpdesktop/AI_web.webp',
-    mobile: '/IMAGES/webpmobile/AI_mobile.webp',
-    alt: 'AI Tools',
+    desktop: '/IMAGES/BANNERS/BANNER_FOR_BUILDERS.jpeg',
+    mobile: '/IMAGES/webpmobile/BANNER_MOBILE_FORBUILDERS.webp',
+    alt: 'For Builders',
     link: '/category/software',
   },
   {
-    desktop: '/IMAGES/webpdesktop/AppleGiftcard_web.webp',
-    mobile: '/IMAGES/webpmobile/Applegiftcard_mobile.webp',
-    alt: 'Apple Gift Cards',
-    link: '/search?q=apple',
+    desktop: '/IMAGES/BANNERS/BANNER_FOR_CREATORS.jpeg',
+    mobile: '/IMAGES/webpmobile/BANNER_MOBILE_FORCREATORS.webp',
+    alt: 'For Creators',
+    link: '/category/subscriptions',
   },
   {
-    desktop: '/IMAGES/webpdesktop/Applemusic_web.webp',
-    mobile: '/IMAGES/webpmobile/Applemusic_mobile.webp',
-    alt: 'Apple Music',
-    link: '/search?q=apple+music',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/GROK_web.webp',
-    mobile: '/IMAGES/webpmobile/Grok_mobile_new.webp',
-    alt: 'Grok AI',
-    link: '/search?q=grok',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/Gamepass_web.webp',
-    mobile: '/IMAGES/webpmobile/Gamepass_mobile.webp',
-    alt: 'Xbox Game Pass',
-    link: '/search?q=xbox',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/NETFLIX_web.webp',
-    mobile: '/IMAGES/webpmobile/Netflix_mobile_new.webp',
-    alt: 'Netflix',
-    link: '/search?q=netflix',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/Playstation_web.webp',
-    mobile: '/IMAGES/webpmobile/Playstation_mobile.webp',
-    alt: 'PlayStation',
-    link: '/search?q=playstation',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/Steam_web.webp',
-    mobile: '/IMAGES/webpmobile/Steam_mobile_new.webp',
-    alt: 'Steam Gift Cards',
-    link: '/search?q=steam',
-  },
-  {
-    desktop: '/IMAGES/webpdesktop/GTA_web.webp',
-    mobile: '/IMAGES/webpmobile/GTA_mobile.webp',
-    alt: 'GTA',
+    desktop: '/IMAGES/BANNERS/BANNER_FOR_GAMERS.jpeg',
+    mobile: '/IMAGES/webpmobile/BANNER_MOBILE_FORGAMERS.webp',
+    alt: 'For Gamers',
     link: '/category/gaming',
+  },
+  {
+    desktop: '/IMAGES/BANNERS/BANNER_FOR_SHOWS.webp',
+    mobile: '/IMAGES/webpmobile/BANNER_MOBILE_FORSHOWS.webp',
+    alt: 'For Shows',
+    link: '/category/streaming',
   },
 ];
 
@@ -543,6 +514,18 @@ export default function Home() {
         </section>
       </ScrollReveal>
 
+      {/* Random Advertisement Boxes from old hero banners */}
+      <ScrollReveal>
+        <section className="promo-padding below-fold" style={{ background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)' }}>
+          <div className="container">
+            <div className="section-title-row">
+              <h2>FEATURED</h2>
+            </div>
+            <RandomAdBoxes count={2} />
+          </div>
+        </section>
+      </ScrollReveal>
+
 
 
       {/* Gaming Section */}
@@ -899,7 +882,8 @@ export default function Home() {
       </a>
       <style>{`
         .hero-track {
-          height: clamp(220px, 40vw, 480px);
+          height: auto;
+          aspect-ratio: 767 / 900;
         }
         @media (min-width: 1024px) {
           .hero-track {
