@@ -158,7 +158,7 @@ function ProductCardInner({ product }: ProductCardProps) {
                                     onClick={() => setSelectedDenom(denom)}
                                     style={{
                                         padding: '4px 9px',
-                                        borderRadius: '99px',
+                                        borderRadius: '4px',
                                         fontSize: '0.74rem',
                                         fontWeight: 600,
                                         cursor: 'pointer',
