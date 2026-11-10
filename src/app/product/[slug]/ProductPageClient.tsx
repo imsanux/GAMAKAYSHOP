@@ -274,7 +274,7 @@ export default function ProductPageClient({ product, related }: Props) {
               </div>
 
               {/* In Stock badge */}
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
                 {(product.in_stock ?? true) ? (
                   <span style={{
                     background: '#EAF6F0', color: '#2B8D56',
@@ -289,6 +289,19 @@ export default function ProductPageClient({ product, related }: Props) {
                     borderRadius: '4px',
                     textTransform: 'uppercase', letterSpacing: '0.04em',
                   }}>Out of Stock</span>
+                )}
+                {product.id === '2' && (
+                  <span style={{
+                    background: '#FEF3C7', color: '#92400E',
+                    border: '1px solid #FCD34D',
+                    fontSize: '0.72rem', fontWeight: 800, padding: '6px 12px',
+                    borderRadius: '4px',
+                    textTransform: 'uppercase', letterSpacing: '0.04em',
+                    display: 'inline-flex', alignItems: 'center', gap: '6px',
+                  }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    High Demand • Low Stock
+                  </span>
                 )}
               </div>
 
@@ -405,6 +418,59 @@ export default function ProductPageClient({ product, related }: Props) {
               <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '16px', letterSpacing: '-0.01em' }}>
                 Product Details
               </h2>
+
+              {product.id === '2' && (
+                <div style={{
+                  background: '#FFFBEB',
+                  border: '1.5px solid #FCD34D',
+                  borderRadius: '10px',
+                  padding: '16px 20px',
+                  marginBottom: '20px',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '14px',
+                }}>
+                  <div style={{
+                    background: '#F59E0B',
+                    color: '#FFFFFF',
+                    borderRadius: '50%',
+                    width: '26px',
+                    height: '26px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    marginTop: '2px',
+                    fontSize: '14px',
+                    fontWeight: 900
+                  }}>
+                    !
+                  </div>
+                  <div>
+                    <div style={{
+                      display: 'inline-block',
+                      background: '#D97706',
+                      color: '#FFFFFF',
+                      fontSize: '0.68rem',
+                      fontWeight: 800,
+                      padding: '2px 8px',
+                      borderRadius: '4px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      marginBottom: '6px'
+                    }}>
+                      Important Notice
+                    </div>
+                    <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#92400E', marginBottom: '2px' }}>
+                      Playstation Indian Giftcards are in high demand and low in stock.
+                    </div>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#B45309' }}>
+                      Avoid duplicate orders for faster delivery.
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.8, whiteSpace: 'pre-line' }}>
                 {product.description}
               </div>
