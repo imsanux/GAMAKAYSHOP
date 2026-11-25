@@ -33,6 +33,19 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  // ── Permanent Redirects for Consolidated Product URLs ───────────────────────
+  async redirects() {
+    return [
+      { source: '/product/grok-by-xai', destination: '/product/grok-x-premium', permanent: true },
+      { source: '/product/grok-4-by-xai', destination: '/product/grok-x-premium', permanent: true },
+      { source: '/product/x-twitter-premium', destination: '/product/grok-x-premium', permanent: true },
+      { source: '/product/x-premium-monthly', destination: '/product/grok-x-premium', permanent: true },
+      { source: '/product/chatgpt-shared', destination: '/product/chatgpt-plus', permanent: true },
+      { source: '/product/chatgpt-plus-monthly', destination: '/product/chatgpt-plus', permanent: true },
+      { source: '/product/udemy-courses-with-certifications', destination: '/product/udemy-course-access', permanent: true },
+    ];
+  },
+
   // ── HTTP headers ────────────────────────────────────────────────────────────
   async headers() {
     return [
@@ -68,26 +81,30 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Immutable cache for product/banner WebP images — 30 days
-        source: '/IMAGES/(.*)',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
-      {
-        // Long cache for other static assets — 7 days + stale-while-revalidate
+        // Long cache for root static assets — 7 days + stale-while-revalidate
         source: '/:path*.(png|jpg|jpeg|gif|svg|webp|ico|woff2|woff)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' },
         ],
       },
       {
-        // Immutable cache for Next.js static chunks (JS/CSS) — content-hashed, safe for 1 year
-        source: '/_next/static/(.*)',
+        // Immutable cache for versioned product/banner WebP images — 1 year
+        source: '/IMAGES/(.*)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
+      ...(process.env.NODE_ENV === 'production'
+        ? [
+            {
+              // Immutable cache for Next.js static chunks (JS/CSS) in production builds only
+              source: '/_next/static/(.*)',
+              headers: [
+                { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+              ],
+            },
+          ]
+        : []),
     ];
   },
 };

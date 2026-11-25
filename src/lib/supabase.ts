@@ -6,14 +6,24 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Types
+export interface CustomAmountConfig {
+    currency_symbol: string;
+    currency_label: string;
+    min: number;
+    max: number;
+    rate: number;
+    label?: string;
+}
+
 export interface Product {
     id: string;
     slug: string;
     name: string;
     brand: string;
-    category: 'gaming' | 'streaming' | 'software' | 'subscriptions';
+    category: 'gaming' | 'streaming' | 'software' | 'dating-social' | 'subscriptions';
     region: string;
     denominations: { value: string; price: number }[];
+    custom_amount?: CustomAmountConfig;
     delivery_type: 'Instant' | 'Manual';
     image_url: string;
     logo_url: string;

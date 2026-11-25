@@ -1,551 +1,1056 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Product } from '@/lib/supabase';
+import { getDisplayRegion, cleanProductDescription } from '@/lib/products';
 import { useCart } from '@/context/CartContext';
 import ProductCard from '@/components/ProductCard';
+import CustomAmountSelector from '@/components/CustomAmountSelector';
 
-const CATEGORY_META: Record<string, { label: string; color: string; bg: string }> = {
-  gaming:        { label: 'Gaming',        color: '#15803D', bg: '#ECFDF5' },
-  streaming:     { label: 'Streaming',     color: '#B91C1C', bg: '#FEF2F2' },
-  software:      { label: 'Software',      color: '#1D4ED8', bg: '#EFF6FF' },
-  subscriptions: { label: 'Subscriptions', color: '#92400E', bg: '#FEFCE8' },
+const CATEGORY_LABELS: Record<string, string> = {
+  gaming: 'Gaming',
+  streaming: 'Streaming',
+  software: 'Software & AI',
+  'dating-social': 'Dating & Social',
+  subscriptions: 'Subscriptions',
 };
-
-const HOW_IT_WORKS = [
-  {
-    num: '1',
-    title: 'Add to Cart',
-    desc: 'Choose an amount and add it to your cart.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-        <line x1="3" y1="6" x2="21" y2="6" />
-        <path d="M16 10a4 4 0 01-8 0" />
-      </svg>
-    ),
-  },
-  {
-    num: '2',
-    title: 'Make Payment',
-    desc: 'Pay securely via eSewa or Bank Transfer.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-        <path d="M7 11V7a5 5 0 0110 0v4" />
-      </svg>
-    ),
-  },
-  {
-    num: '3',
-    title: 'Get Your Code',
-    desc: 'Receive your code instantly via WhatsApp.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 2L11 13" />
-        <path d="M22 2l-7 20-4-9-9-4 20-7z" />
-      </svg>
-    ),
-  },
-];
 
 interface Props {
   product: Product;
   related: Product[];
 }
 
+function parseDescription(raw?: string) {
+  const cleaned = cleanProductDescription(raw);
+  if (!cleaned) return { intro: [] as string[], bullets: [] as string[], steps: [] as string[], note: '' };
+
+  const lines = cleaned.split('\n').map(l => l.trim()).filter(Boolean);
+  const intro: string[] = [];
+  const bullets: string[] = [];
+  const steps: string[] = [];
+  let note = '';
+
+  for (const line of lines) {
+    if (/^(what's included|how to redeem|features included):?$/i.test(line)) continue;
+    if (line.startsWith('•') || line.startsWith('- ')) {
+      bullets.push(line.replace(/^[•\-]\s*/, ''));
+    } else if (/^\d+\.\s+/.test(line)) {
+      steps.push(line.replace(/^\d+\.\s+/, ''));
+    } else if (bullets.length > 0 || steps.length > 0) {
+      note = note ? `${note} ${line}` : line;
+    } else {
+      intro.push(line);
+    }
+  }
+
+  return { intro, bullets, steps, note };
+}
+
 export default function ProductPageClient({ product, related }: Props) {
-  const { addItem } = useCart();
+  const router = useRouter();
+  const { addItem, isDrawerOpen, lastAdded } = useCart();
+
+  const customCfg = product.custom_amount;
   const [selectedDenom, setSelectedDenom] = useState(product.denominations[0]);
+  const [isCustomMode, setIsCustomMode] = useState(false);
+  const [customRaw, setCustomRaw] = useState('');
+  const [customError, setCustomError] = useState('');
+  const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
 
-  const catMeta = CATEGORY_META[product.category] ?? { label: product.category, color: 'var(--text-secondary)', bg: 'var(--bg-secondary)' };
-  const waMessage = encodeURIComponent(`Hi! I want to order: ${product.name} — ${selectedDenom.value} (Rs. ${selectedDenom.price})`);
+  const primaryActionsRef = useRef<HTMLDivElement>(null);
+  const customInputRef = useRef<HTMLInputElement>(null);
+
+  const categoryLabel = CATEGORY_LABELS[product.category] ?? product.category;
+  const displayRegion = getDisplayRegion(product);
+  const inStock = product.in_stock ?? true;
+  const hasMultipleOptions = product.denominations.length > 1 || Boolean(customCfg);
+
+  const parsedCustomAmount = customRaw.trim() === '' ? NaN : Number(customRaw.trim());
+  const isCustomValid = Boolean(
+    customCfg &&
+    Number.isInteger(parsedCustomAmount) &&
+    parsedCustomAmount >= customCfg.min &&
+    parsedCustomAmount <= customCfg.max
+  );
+  const customPrice = isCustomValid && customCfg ? Math.round(parsedCustomAmount * customCfg.rate) : 0;
+
+  const activeDenom =
+    isCustomMode && customCfg
+      ? {
+          value: isCustomValid
+            ? `${customCfg.currency_symbol}${parsedCustomAmount.toLocaleString()}`
+            : `Custom ${customCfg.currency_label}`,
+          price: customPrice,
+        }
+      : selectedDenom;
+
+  const isStandardOption = activeDenom.value.trim().toLowerCase() === 'standard';
+  const totalPrice = activeDenom.price * quantity;
+  const canPurchase = inStock && (!isCustomMode || isCustomValid);
+  const parsed = useMemo(() => parseDescription(product.description), [product.description]);
+
+  // If user arrived via #custom-amount link from a catalog card, activate custom mode cleanly
+  useEffect(() => {
+    if (!customCfg || typeof window === 'undefined') return;
+    if (window.location.hash === '#custom-amount') {
+      setIsCustomMode(true);
+      requestAnimationFrame(() => customInputRef.current?.focus());
+    }
+  }, [customCfg]);
+
+  // Show compact sticky purchase bar on mobile once main Buy button scrolls out of view
+  useEffect(() => {
+    const el = primaryActionsRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyBar(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const waMessage = encodeURIComponent(
+    `Hi! I want to order: ${product.name}${!isStandardOption ? ` (${activeDenom.value})` : ''}${quantity > 1 ? ` x${quantity}` : ''}${totalPrice > 0 ? ` - Rs. ${totalPrice.toLocaleString()}` : ''}`
+  );
+
+  const validateCustomBeforeAction = (): boolean => {
+    if (!isCustomMode || !customCfg) return true;
+    if (isCustomValid) {
+      setCustomError('');
+      return true;
+    }
+    setCustomError(
+      `Enter a whole amount between ${customCfg.currency_symbol}${customCfg.min.toLocaleString()} and ${customCfg.currency_symbol}${customCfg.max.toLocaleString()}.`
+    );
+    customInputRef.current?.focus();
+    return false;
+  };
 
   const handleAddToCart = () => {
+    if (isAdding || !inStock) return;
+    if (!validateCustomBeforeAction()) return;
     setIsAdding(true);
-    addItem(product, selectedDenom);
-    setTimeout(() => setIsAdding(false), 900);
+    addItem(product, activeDenom, quantity);
+    setTimeout(() => setIsAdding(false), 950);
+  };
+
+  const handleBuyNow = () => {
+    if (!inStock) return;
+    if (!validateCustomBeforeAction()) return;
+    addItem(product, activeDenom, quantity);
+    router.push('/checkout');
   };
 
   return (
-    <>
+    <div style={{ background: 'var(--bg-primary)', minHeight: '100vh', paddingTop: 'var(--header-height)' }}>
+      <div className="container pdp-container">
+        {/* Breadcrumb */}
+        <nav
+          aria-label="Breadcrumb"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '0.82rem',
+            color: '#635D57',
+            marginBottom: '26px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <Link href="/" className="pdp-crumb-link">Home</Link>
+          <span aria-hidden="true" style={{ opacity: 0.45 }}>/</span>
+          <Link href={`/category/${product.category}`} className="pdp-crumb-link">{categoryLabel}</Link>
+          <span aria-hidden="true" style={{ opacity: 0.45 }}>/</span>
+          <span style={{ color: '#181818', fontWeight: 500 }}>{product.name}</span>
+        </nav>
+
+        {/* Main 2-Column Purchase Layout */}
+        <div className="pdp-grid">
+          {/* LEFT: Sticky Framed Artwork + Reassurance Strip */}
+          <div className="pdp-media-col">
+            <div className="pdp-media-frame">
+              {product.image_url && !imageError ? (
+                <Image
+                  src={product.image_url}
+                  alt={product.name}
+                  fill
+                  priority
+                  sizes="(max-width: 840px) 92vw, 460px"
+                  style={{ objectFit: 'cover' }}
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                <div style={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '3.5rem',
+                  fontWeight: 600,
+                  color: '#635D57',
+                  background: '#EFEDE6',
+                }}>
+                  {product.brand.toUpperCase().slice(0, 2)}
+                </div>
+              )}
+            </div>
+
+            {/* Quiet Desktop Reassurance Strip Beneath Artwork */}
+            <div className="pdp-media-meta hide-mobile">
+              <div>
+                <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#181818' }}>Direct Delivery</div>
+                <div style={{ fontSize: '0.74rem', color: '#66635B', marginTop: '2px' }}>Sent on WhatsApp &amp; Viber</div>
+              </div>
+              <div>
+                <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#181818' }}>Fast Turnaround</div>
+                <div style={{ fontSize: '0.74rem', color: '#66635B', marginTop: '2px' }}>Usually 5–15 minutes</div>
+              </div>
+              <div>
+                <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#181818' }}>Verified Codes</div>
+                <div style={{ fontSize: '0.74rem', color: '#66635B', marginTop: '2px' }}>Redemption help included</div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: Clean Architectural Purchase Interface */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', minWidth: 0 }}>
+            {/* Header & Clean Typographic Metadata */}
+            <div>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                flexWrap: 'wrap',
+                marginBottom: '10px',
+                fontSize: '0.82rem',
+                color: '#635D57',
+                fontWeight: 500,
+              }}>
+                <span style={{ color: '#181818', fontWeight: 600 }}>{product.brand}</span>
+                <span aria-hidden="true" style={{ opacity: 0.35 }}>·</span>
+                <span>{displayRegion} region</span>
+                {!inStock && (
+                  <>
+                    <span aria-hidden="true" style={{ opacity: 0.35 }}>·</span>
+                    <span style={{ color: '#B91C1C', fontWeight: 600 }}>Out of stock</span>
+                  </>
+                )}
+              </div>
+
+              <h1
+                className="font-display"
+                style={{
+                  fontSize: 'clamp(1.85rem, 3.4vw, 2.75rem)',
+                  lineHeight: 1.08,
+                  letterSpacing: '-0.035em',
+                  marginBottom: '14px',
+                }}
+              >
+                {product.name}
+              </h1>
+
+              {/* Active Price Display */}
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', flexWrap: 'wrap' }}>
+                {isCustomMode && !isCustomValid ? (
+                  <span style={{ fontSize: 'clamp(1.35rem, 2.6vw, 1.7rem)', fontWeight: 600, color: '#635D57', letterSpacing: '-0.025em', lineHeight: 1.15 }}>
+                    Enter custom {customCfg?.currency_label} amount
+                  </span>
+                ) : (
+                  <>
+                    <span style={{ fontSize: '1.05rem', fontWeight: 500, color: '#635D57' }}>Rs.</span>
+                    <span
+                      key={`${activeDenom.value}-${totalPrice}`}
+                      className="tabular-nums price-tick"
+                      style={{
+                        fontSize: 'clamp(2rem, 3.8vw, 2.65rem)',
+                        fontWeight: 700,
+                        color: '#181818',
+                        letterSpacing: '-0.035em',
+                        lineHeight: 1,
+                      }}
+                    >
+                      {totalPrice.toLocaleString()}
+                    </span>
+                    {!isStandardOption && (
+                      <span style={{ fontSize: '0.88rem', color: '#635D57', fontWeight: 500, marginLeft: '4px' }}>
+                        / {activeDenom.value}
+                      </span>
+                    )}
+                    {quantity > 1 && (
+                      <span className="tabular-nums" style={{ fontSize: '0.8rem', color: '#635D57', marginLeft: '6px' }}>
+                        ({quantity} × Rs. {activeDenom.price.toLocaleString()})
+                      </span>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* PlayStation India Low-Stock Notice (authentic product-specific notice) */}
+            {product.id === '2' && (
+              <div style={{
+                background: '#FFFBEB',
+                border: '1px solid rgba(146, 64, 14, 0.22)',
+                borderRadius: '14px',
+                padding: '14px 16px',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '12px',
+              }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#92400E" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}>
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <div>
+                  <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#92400E', marginBottom: '2px' }}>
+                    High demand, limited stock
+                  </div>
+                  <p style={{ fontSize: '0.82rem', color: '#92400E', margin: 0, lineHeight: 1.5 }}>
+                    PlayStation India gift cards are currently in low stock. Please avoid placing duplicate orders so we can fulfill yours faster.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Option Selector (Multi-Option Grid) OR Clean Single-Plan Summary Row with Quantity */}
+            {hasMultipleOptions ? (
+              <div>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  gap: '12px',
+                  marginBottom: '12px',
+                }}>
+                  <span style={{ fontSize: '0.86rem', fontWeight: 600, color: '#181818' }}>
+                    Choose amount
+                  </span>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ fontSize: '0.78rem', color: '#635D57' }}>Qty</span>
+                    <div className="pdp-qty-stepper">
+                      <button
+                        type="button"
+                        onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                        disabled={quantity <= 1}
+                        aria-label="Decrease quantity"
+                        className="pdp-qty-btn"
+                      >
+                        −
+                      </button>
+                      <span className="tabular-nums pdp-qty-val">{quantity}</span>
+                      <button
+                        type="button"
+                        onClick={() => setQuantity(q => Math.min(10, q + 1))}
+                        disabled={quantity >= 10}
+                        aria-label="Increase quantity"
+                        className="pdp-qty-btn"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  role="radiogroup"
+                  aria-label="Choose amount"
+                  className="pdp-denom-grid"
+                  data-wide={product.denominations.some((d) => d.value.length > 10)}
+                >
+                  {product.denominations.map((denom) => {
+                    const active = !isCustomMode && denom.value === selectedDenom.value;
+                    return (
+                      <button
+                        key={denom.value}
+                        type="button"
+                        role="radio"
+                        aria-checked={active}
+                        onClick={() => {
+                          setSelectedDenom(denom);
+                          setIsCustomMode(false);
+                          setCustomError('');
+                        }}
+                        className="pdp-denom-tile"
+                        data-active={active}
+                      >
+                        <div style={{
+                          width: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: '8px',
+                        }}>
+                          <span style={{ fontSize: '0.96rem', fontWeight: 600, letterSpacing: '-0.015em' }}>
+                            {denom.value}
+                          </span>
+                          <span className="pdp-denom-check" aria-hidden="true">
+                            {active && (
+                              <svg className="check-draw" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                              </svg>
+                            )}
+                          </span>
+                        </div>
+                        <span
+                          className="tabular-nums"
+                          style={{
+                            fontSize: '0.82rem',
+                            fontWeight: 500,
+                            color: active ? 'rgba(250, 246, 240, 0.8)' : '#635D57',
+                          }}
+                        >
+                          Rs. {denom.price.toLocaleString()}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Custom INR Amount Composer (Apple India / Steam India) */}
+                {customCfg && (
+                  <CustomAmountSelector
+                    config={customCfg}
+                    isActive={isCustomMode}
+                    rawValue={customRaw}
+                    isValid={isCustomValid}
+                    calculatedPrice={customPrice}
+                    error={customError}
+                    inputRef={customInputRef}
+                    onActivate={() => setIsCustomMode(true)}
+                    onChangeValue={(digitsOnly) => {
+                      setCustomRaw(digitsOnly);
+                      setIsCustomMode(true);
+                      if (customError) setCustomError('');
+                    }}
+                  />
+                )}
+              </div>
+            ) : (
+              /* Clean Single-Option Bar with Integrated Quantity Stepper (No lonely black tile!) */
+              <div className="pdp-single-plan-bar">
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontSize: '0.74rem', color: '#635D57', fontWeight: 500, marginBottom: '2px' }}>
+                    Included option
+                  </div>
+                  <div style={{ fontSize: '0.94rem', fontWeight: 600, color: '#181818' }}>
+                    {isStandardOption ? 'Digital gift card code' : selectedDenom.value}
+                  </div>
+                </div>
+
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+                  <span style={{ fontSize: '0.8rem', color: '#635D57', fontWeight: 500 }}>Quantity</span>
+                  <div className="pdp-qty-stepper" style={{ background: '#FFFFFF' }}>
+                    <button
+                      type="button"
+                      onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                      disabled={quantity <= 1}
+                      aria-label="Decrease quantity"
+                      className="pdp-qty-btn"
+                    >
+                      −
+                    </button>
+                    <span className="tabular-nums pdp-qty-val">{quantity}</span>
+                    <button
+                      type="button"
+                      onClick={() => setQuantity(q => Math.min(10, q + 1))}
+                      disabled={quantity >= 10}
+                      aria-label="Increase quantity"
+                      className="pdp-qty-btn"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Primary Purchase CTAs — Clean Two-Button Row + Subtle Direct WhatsApp Link */}
+            <div ref={primaryActionsRef} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <div className="pdp-actions-row">
+                <button
+                  type="button"
+                  onClick={handleBuyNow}
+                  disabled={!inStock}
+                  className="btn btn-accent btn-lg"
+                  style={{ width: '100%' }}
+                >
+                  {canPurchase ? `Buy Now · Rs. ${totalPrice.toLocaleString()}` : 'Buy Now'}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  disabled={isAdding || !inStock}
+                  className="btn btn-secondary btn-lg"
+                  style={{
+                    width: '100%',
+                    background: isAdding ? '#11663A' : undefined,
+                    color: isAdding ? '#FFFFFF' : undefined,
+                    borderColor: isAdding ? '#11663A' : undefined,
+                  }}
+                >
+                  {isAdding ? (
+                    <>
+                      <svg className="check-draw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      Added to Cart
+                    </>
+                  ) : (
+                    'Add to Cart'
+                  )}
+                </button>
+              </div>
+
+              <a
+                href={`https://wa.me/9779862157864?text=${waMessage}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  if (!validateCustomBeforeAction()) e.preventDefault();
+                }}
+                className="pdp-whatsapp-btn"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                Order directly on WhatsApp
+              </a>
+            </div>
+
+            {/* Key Product Specs Card */}
+            <div className="pdp-specs-card">
+              <div>
+                <div style={{ color: '#66635B', fontSize: '0.75rem', marginBottom: '3px' }}>Account Region</div>
+                <div style={{ color: '#181818', fontWeight: 600, fontSize: '0.88rem' }}>{displayRegion}</div>
+              </div>
+              <div>
+                <div style={{ color: '#66635B', fontSize: '0.75rem', marginBottom: '3px' }}>Delivery</div>
+                <div style={{ color: '#181818', fontWeight: 600, fontSize: '0.88rem' }}>WhatsApp &amp; Viber</div>
+              </div>
+              <div>
+                <div style={{ color: '#66635B', fontSize: '0.75rem', marginBottom: '3px' }}>Turnaround</div>
+                <div style={{ color: '#181818', fontWeight: 600, fontSize: '0.88rem' }}>5–15 minutes</div>
+              </div>
+              <div>
+                <div style={{ color: '#66635B', fontSize: '0.75rem', marginBottom: '3px' }}>Redemption Help</div>
+                <Link href="/guides" style={{ color: '#181818', fontWeight: 600, fontSize: '0.88rem', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+                  View step-by-step guide
+                </Link>
+              </div>
+            </div>
+
+            {/* Region Check Reminder */}
+            <p style={{ fontSize: '0.8rem', color: '#635D57', lineHeight: 1.55, margin: 0 }}>
+              Make sure your account matches the <strong style={{ color: '#181818', fontWeight: 600 }}>{displayRegion}</strong> region before ordering. Digital codes can&apos;t be refunded once sent.
+            </p>
+          </div>
+        </div>
+
+        {/* Structured Details & Redemption Section */}
+        <section
+          id="product-details"
+          style={{
+            marginTop: '64px',
+            paddingTop: '48px',
+            borderTop: '1px solid rgba(24, 22, 21, 0.1)',
+          }}
+        >
+          <div className="pdp-details-grid">
+            <div>
+              <span className="section-kicker">Overview</span>
+              <h2 className="font-display" style={{ fontSize: 'clamp(1.6rem, 2.8vw, 2.15rem)', marginBottom: '16px' }}>
+                Details &amp; how to redeem
+              </h2>
+              {parsed.intro.length > 0 ? (
+                parsed.intro.map((para, i) => (
+                  <p key={i} style={{ fontSize: '0.96rem', color: '#57524E', lineHeight: 1.7, marginBottom: '14px' }}>
+                    {para}
+                  </p>
+                ))
+              ) : (
+                <p style={{ fontSize: '0.96rem', color: '#595751', lineHeight: 1.7, marginBottom: '14px' }}>
+                  Order {product.name} and receive your digital code or activation details directly on WhatsApp or Viber, usually within 5 to 15 minutes after confirmation.
+                </p>
+              )}
+              {parsed.note && (
+                <p style={{ fontSize: '0.88rem', color: '#635D57', lineHeight: 1.65 }}>
+                  {parsed.note}
+                </p>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+              {parsed.bullets.length > 0 && (
+                <div className="surface-card" style={{ padding: '22px 24px' }}>
+                  <h3 style={{ fontSize: '0.96rem', fontWeight: 600, marginBottom: '14px', color: '#181818' }}>
+                    What is included
+                  </h3>
+                  <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    {parsed.bullets.map((b, i) => (
+                      <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.9rem', color: '#57524E', lineHeight: 1.55 }}>
+                        <span style={{
+                          width: '18px',
+                          height: '18px',
+                          borderRadius: '9999px',
+                          background: '#EFEDE6',
+                          color: '#181818',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          marginTop: '2px',
+                        }}>
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        </span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="surface-card" style={{ padding: '22px 24px' }}>
+                <h3 style={{ fontSize: '0.96rem', fontWeight: 600, marginBottom: '14px', color: '#181818' }}>
+                  {parsed.steps.length > 0 ? 'How to redeem' : 'How ordering works'}
+                </h3>
+                <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {(parsed.steps.length > 0
+                    ? parsed.steps
+                    : [
+                        `Select ${product.name} and continue to checkout with your WhatsApp or Viber number.`,
+                        'Send your pre-filled order message in chat to confirm.',
+                        'Receive your digital code or activation details on WhatsApp or Viber within 5–15 minutes.',
+                      ]
+                  ).map((s, i) => (
+                    <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: '0.9rem', color: '#57524E', lineHeight: 1.55 }}>
+                      <span
+                        className="tabular-nums"
+                        style={{
+                          width: '22px',
+                          height: '22px',
+                          borderRadius: '9999px',
+                          background: '#181818',
+                          color: '#FAF6F0',
+                          fontSize: '0.72rem',
+                          fontWeight: 600,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          marginTop: '1px',
+                        }}
+                      >
+                        {i + 1}
+                      </span>
+                      <span>{s}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Related Products */}
+        {related.length > 0 && (
+          <section style={{ marginTop: '72px', paddingTop: '48px', borderTop: '1px solid rgba(24, 22, 21, 0.1)' }}>
+            <div className="section-header-bar">
+              <div>
+                <span className="section-kicker">More in {categoryLabel}</span>
+                <h2 className="font-display" style={{ fontSize: 'clamp(1.6rem, 2.8vw, 2.15rem)' }}>
+                  You may also like
+                </h2>
+              </div>
+              <Link href={`/category/${product.category}`} className="section-link">
+                View all {categoryLabel.toLowerCase()}
+              </Link>
+            </div>
+            <div className="product-grid">
+              {related.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      {/* Mobile Sticky Bottom Purchase Bar (appears cleanly once user scrolls past CTA) */}
+      {inStock && showStickyBar && !isDrawerOpen && !lastAdded && (
+        <div className="pdp-mobile-sticky-bar sticky-bar-enter safe-bottom" role="region" aria-label="Quick purchase">
+          <div style={{ minWidth: 0 }}>
+            <div style={{
+              fontSize: '0.76rem',
+              color: '#635D57',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}>
+              {product.name}{!isStandardOption ? ` · ${activeDenom.value}` : ''}
+            </div>
+            <div className="tabular-nums" style={{ fontSize: '1.08rem', fontWeight: 700, color: '#181818', letterSpacing: '-0.02em' }}>
+              {canPurchase ? `Rs. ${totalPrice.toLocaleString()}` : 'Enter amount'}
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={handleBuyNow}
+            className="btn btn-accent"
+            style={{ flexShrink: 0, padding: '10px 22px', minHeight: '42px' }}
+          >
+            Buy Now
+          </button>
+        </div>
+      )}
+
       <style>{`
+        .pdp-container {
+          padding-top: 28px;
+          padding-bottom: 92px;
+        }
+        .pdp-crumb-link {
+          color: #635D57;
+          text-decoration: none;
+          transition: color 0.15s ease;
+        }
+        .pdp-crumb-link:hover {
+          color: #181818;
+        }
         .pdp-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        @media (min-width: 840px) {
+          .pdp-grid {
+            grid-template-columns: 420px 1fr;
+            gap: 54px;
+            align-items: start;
+          }
+        }
+        @media (min-width: 1120px) {
+          .pdp-grid {
+            grid-template-columns: 468px 1fr;
+            gap: 64px;
+          }
+        }
+        .pdp-media-col {
+          width: 100%;
+          max-width: 468px;
+          margin: 0 auto;
+        }
+        @media (min-width: 840px) {
+          .pdp-media-col {
+            position: sticky;
+            top: calc(var(--header-height) + 28px);
+          }
+        }
+        .pdp-media-frame {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          border-radius: 22px;
+          overflow: hidden;
+          background: #FFFFFF;
+          border: 1px solid rgba(24, 22, 21, 0.08);
+          box-shadow: var(--shadow-lg);
+        }
+        .pdp-media-meta {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 10px;
+          margin-top: 14px;
+          padding: 14px 16px;
+          border-radius: 16px;
+          background: #EFEDE6;
+          border: 1px solid #E8E5DC;
+          text-align: left;
+        }
+
+        /* Quantity Stepper */
+        .pdp-qty-stepper {
+          display: inline-flex;
+          align-items: center;
+          background: #EFEDE6;
+          border: 1px solid rgba(24, 22, 21, 0.08);
+          border-radius: 9999px;
+          padding: 2px;
+        }
+        .pdp-qty-btn {
+          width: 30px;
+          height: 30px;
+          border-radius: 9999px;
+          border: none;
+          background: transparent;
+          color: #181818;
+          font-size: 1rem;
+          font-weight: 500;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.14s ease, opacity 0.14s ease;
+        }
+        .pdp-qty-btn:hover:not(:disabled) {
+          background: rgba(24, 22, 21, 0.08);
+        }
+        .pdp-qty-btn:disabled {
+          opacity: 0.35;
+          cursor: not-allowed;
+        }
+        .pdp-qty-val {
+          min-width: 26px;
+          text-align: center;
+          font-size: 0.86rem;
+          font-weight: 600;
+          color: #181818;
+        }
+
+        /* Single-Option Summary Row */
+        .pdp-single-plan-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+          padding: 14px 18px;
+          border-radius: 16px;
+          background: #EFEDE6;
+          border: 1px solid #E8E5DC;
+        }
+
+        /* Multi-Option Denomination Grid */
+        .pdp-denom-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+        }
+        @media (min-width: 520px) {
+          .pdp-denom-grid {
+            grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+          }
+          .pdp-denom-grid[data-wide="true"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+        .pdp-denom-tile {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+          gap: 5px;
+          min-height: 66px;
+          padding: 12px 14px;
+          border-radius: 14px;
+          border: 1px solid rgba(24, 22, 21, 0.12);
+          background: #FFFFFF;
+          color: #181818;
+          font-family: inherit;
+          cursor: pointer;
+          transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease, transform 0.12s ease;
+          text-align: left;
+        }
+        .pdp-denom-tile:hover {
+          border-color: rgba(24, 22, 21, 0.32);
+          background: #F7F5F0;
+        }
+        .pdp-denom-tile:active {
+          transform: scale(0.98);
+        }
+        .pdp-denom-tile[data-active="true"] {
+          background: #181818;
+          border-color: #181818;
+          color: #FAF6F0;
+          box-shadow: 0 6px 18px rgba(24, 22, 21, 0.16);
+        }
+        .pdp-denom-check {
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          border: 1.5px solid rgba(24, 22, 21, 0.18);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          color: #181818;
+          transition: background-color 0.16s ease, border-color 0.16s ease;
+        }
+        .pdp-denom-tile[data-active="true"] .pdp-denom-check {
+          background: #F4CE16;
+          border-color: #F4CE16;
+          color: #181818;
+          animation: badgePop 0.24s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+        }
+
+        /* Custom INR Amount Selector Card */
+        .pdp-custom-card {
+          margin-top: 12px;
+          padding: 14px 16px;
+          border-radius: 16px;
+          background: #EFEDE6;
+          border: 1.5px solid #E2DED3;
+          transition: background-color 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+          cursor: pointer;
+        }
+        .pdp-custom-card:hover {
+          border-color: #C7C2B4;
+        }
+        .pdp-custom-card[data-active="true"] {
+          background: #FFFFFF;
+          border-color: #181818;
+          box-shadow: 0 6px 18px rgba(24, 22, 21, 0.08);
+          cursor: default;
+        }
+        .pdp-custom-input-wrap {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: #FFFFFF;
+          border: 1px solid rgba(24, 22, 21, 0.16);
+          border-radius: 12px;
+          padding: 4px 6px 4px 13px;
+          transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .pdp-custom-input-wrap:focus-within {
+          border-color: #181818;
+          box-shadow: 0 0 0 3px rgba(244, 206, 22, 0.28);
+        }
+        .pdp-custom-input-wrap[data-invalid="true"] {
+          border-color: #B91C1C;
+          box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+        }
+        .pdp-custom-prefix {
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: #181818;
+          flex-shrink: 0;
+        }
+        .pdp-custom-input {
+          flex: 1;
+          min-width: 0;
+          border: none;
+          background: transparent;
+          font-family: inherit;
+          font-size: 1rem;
+          font-weight: 600;
+          color: #181818;
+          padding: 9px 4px;
+          outline: none;
+        }
+        .pdp-custom-input::placeholder {
+          color: #8A867D;
+          font-weight: 400;
+        }
+        .pdp-custom-preview {
+          padding: 6px 12px;
+          border-radius: 9px;
+          background: #EFEDE6;
+          color: #181818;
+          font-size: 0.84rem;
+          font-weight: 600;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .pdp-custom-card[data-active="true"] .pdp-custom-preview {
+          background: #181818;
+          color: #F8F7F2;
+        }
+
+        /* Purchase CTAs */
+        .pdp-actions-row {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        @media (min-width: 520px) {
+          .pdp-actions-row {
+            grid-template-columns: 1.25fr 1fr;
+          }
+        }
+        .pdp-whatsapp-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          width: 100%;
+          min-height: 44px;
+          padding: 10px 18px;
+          border-radius: 9999px;
+          border: 1px solid rgba(24, 22, 21, 0.12);
+          background: #FFFFFF;
+          color: #11663A;
+          font-size: 0.88rem;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          text-decoration: none;
+          transition: background-color 0.16s ease, border-color 0.16s ease;
+        }
+        .pdp-whatsapp-btn:hover {
+          background: #F4F9F6;
+          border-color: rgba(17, 102, 58, 0.32);
+        }
+
+        /* Specs Card */
+        .pdp-specs-card {
+          background: #EFEDE6;
+          border: 1px solid #E8E5DC;
+          border-radius: 16px;
+          padding: 18px 20px;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px 20px;
+        }
+
+        .pdp-details-grid {
           display: grid;
           grid-template-columns: 1fr;
           gap: 32px;
         }
-        @media (min-width: 768px) {
-          .pdp-grid {
-            grid-template-columns: 380px 1fr;
-            gap: 48px;
-          }
-        }
-        @media (min-width: 1024px) {
-          .pdp-grid {
-            grid-template-columns: 420px 1fr;
+        @media (min-width: 840px) {
+          .pdp-details-grid {
+            grid-template-columns: 1fr 1.1fr;
             gap: 56px;
+            align-items: start;
           }
         }
-        .pdp-image-wrap {
-          position: relative;
-          width: 100%;
-          max-width: 420px;
-          margin: 0 auto;
-          aspect-ratio: 1 / 1;
-          border-radius: 10px;
-          overflow: hidden;
-          background: var(--bg-secondary);
-          box-shadow: var(--shadow-xl);
-        }
-        @media (min-width: 768px) {
-          .pdp-image-wrap {
-            max-width: none;
-            position: sticky;
-            top: 130px;
-          }
-        }
-        .pdp-dropdown-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 12px;
-        }
-        @media (min-width: 480px) {
-          .pdp-dropdown-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-          }
-        }
-        .pdp-meta-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 12px;
-        }
-        @media (min-width: 480px) {
-          .pdp-meta-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 14px 40px;
-          }
-        }
-        .pdp-check-grid {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px 24px;
-        }
-        .pdp-cta-btn {
-          width: 100%;
-          padding: 15px 24px;
+
+        /* Mobile Sticky Bottom Purchase Bar */
+        .pdp-mobile-sticky-bar {
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 120;
+          background: rgba(248, 247, 242, 0.96);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-top: 1px solid #E8E5DC;
+          box-shadow: 0 -8px 24px rgba(24, 24, 24, 0.08);
+          padding: 12px 16px;
           display: flex;
           align-items: center;
-          justify-content: center;
-          gap: 10px;
-          border-radius: var(--radius-md);
-          font-size: 0.9rem;
-          font-weight: 700;
-          letter-spacing: 0.03em;
-          transition: all var(--transition-fast);
-          text-decoration: none;
-          cursor: pointer;
-          border: 1.5px solid transparent;
+          justify-content: space-between;
+          gap: 14px;
         }
-        .pdp-steps-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 24px;
-        }
-        @media (min-width: 640px) {
-          .pdp-steps-grid {
-            grid-template-columns: repeat(3, 1fr);
+        @media (min-width: 840px) {
+          .pdp-mobile-sticky-bar {
+            display: none;
           }
         }
       `}</style>
-
-      <div style={{ background: 'var(--bg-primary)', minHeight: '100vh', paddingTop: 'var(--header-height, 110px)', color: 'var(--text-primary)' }}>
-        <div className="container" style={{ paddingTop: '24px', paddingBottom: '80px' }}>
-
-          {/* Breadcrumb */}
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '28px', flexWrap: 'wrap' }}>
-            <Link href="/" style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>Home</Link>
-            <span style={{ color: 'var(--text-muted)' }}>/</span>
-            <Link href={`/category/${product.category}`} style={{ color: 'var(--text-muted)', textDecoration: 'none', textTransform: 'capitalize', transition: 'color 0.15s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>{catMeta.label}</Link>
-            <span style={{ color: 'var(--text-muted)' }}>/</span>
-            <span style={{ color: 'var(--text-secondary)' }}>{product.name}</span>
-          </nav>
-
-          {/* ── Main Grid ── */}
-          <div className="pdp-grid">
-
-            {/* LEFT: Image */}
-            <div>
-              <div className="pdp-image-wrap">
-                {product.image_url && !imageError ? (
-                  <Image
-                    src={product.image_url}
-                    alt={product.name}
-                    fill
-                    priority
-                    sizes="(max-width: 768px) 90vw, 420px"
-                    style={{ objectFit: 'cover' }}
-                    onError={() => setImageError(true)}
-                  />
-                ) : (
-                  <div style={{
-                    width: '100%', height: '100%', display: 'flex',
-                    alignItems: 'center', justifyContent: 'center',
-                    fontSize: '4rem', fontWeight: 800, color: 'var(--text-muted)',
-                    background: 'var(--bg-secondary)',
-                  }}>
-                    {product.brand.toUpperCase().slice(0, 2)}
-                  </div>
-                )}
-
-
-              </div>
-            </div>
-
-            {/* RIGHT: Product Details */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-
-              {/* Title row */}
-              <div style={{ marginBottom: '20px' }}>
-                <p style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>
-                  {product.brand}
-                </p>
-                <h1 style={{
-                  fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
-                  fontWeight: 900, color: 'var(--text-primary)',
-                  letterSpacing: '-0.04em', lineHeight: 1.1, margin: 0,
-                  textTransform: 'uppercase',
-                }}>
-                  {product.name}
-                </h1>
-              </div>
-
-              {/* Denomination & Region dropdowns */}
-              <div className="pdp-dropdown-grid" style={{ marginBottom: '16px' }}>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  background: 'var(--bg-secondary)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '6px',
-                  padding: '12px 16px',
-                  color: 'var(--text-secondary)',
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
-                    <circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                  </svg>
-                  {product.region || 'Global'} Region
-                </div>
-
-                <div style={{
-                  position: 'relative',
-                  background: '#FFFFFF',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '6px',
-                  padding: '12px 36px 12px 14px',
-                  transition: 'border-color var(--transition-fast)'
-                }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = '#111111'}
-                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-color)'}
-                >
-                  <select
-                    style={{ width: '100%', background: 'transparent', border: 'none', color: '#111111', fontSize: '0.9rem', fontWeight: 700, appearance: 'none', outline: 'none', cursor: 'pointer' }}
-                    value={selectedDenom.value}
-                    onChange={(e) => {
-                      const denom = product.denominations.find(d => d.value === e.target.value);
-                      if (denom) setSelectedDenom(denom);
-                    }}
-                  >
-                    {product.denominations.map(d => (
-                      <option key={d.value} value={d.value} style={{ background: '#FFFFFF', color: '#111111' }}>
-                        {d.value}
-                      </option>
-                    ))}
-                  </select>
-                  <svg style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666666" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
-                </div>
-              </div>
-
-              {/* In Stock badge */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
-                {(product.in_stock ?? true) ? (
-                  <span style={{
-                    background: '#EAF6F0', color: '#2B8D56',
-                    fontSize: '0.72rem', fontWeight: 800, padding: '6px 12px',
-                    borderRadius: '4px',
-                    textTransform: 'uppercase', letterSpacing: '0.04em',
-                  }}>In Stock</span>
-                ) : (
-                  <span style={{
-                    background: '#FEF2F2', color: '#B91C1C',
-                    fontSize: '0.72rem', fontWeight: 800, padding: '6px 12px',
-                    borderRadius: '4px',
-                    textTransform: 'uppercase', letterSpacing: '0.04em',
-                  }}>Out of Stock</span>
-                )}
-                {product.id === '2' && (
-                  <span style={{
-                    background: '#FEF3C7', color: '#92400E',
-                    border: '1px solid #FCD34D',
-                    fontSize: '0.72rem', fontWeight: 800, padding: '6px 12px',
-                    borderRadius: '4px',
-                    textTransform: 'uppercase', letterSpacing: '0.04em',
-                    display: 'inline-flex', alignItems: 'center', gap: '6px',
-                  }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    High Demand • Low Stock
-                  </span>
-                )}
-              </div>
-
-              {/* Price */}
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '24px' }}>
-                <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-muted)' }}>Rs.</span>
-                <span style={{
-                  fontSize: 'clamp(2.2rem, 5vw, 3rem)',
-                  fontWeight: 900, color: 'var(--text-primary)',
-                  letterSpacing: '-0.04em', lineHeight: 1,
-                  fontVariantNumeric: 'tabular-nums',
-                }}>
-                  {selectedDenom.price.toLocaleString()}
-                </span>
-              </div>
-
-              {/* CTA Buttons */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '32px' }}>
-                <button
-                  onClick={handleAddToCart}
-                  disabled={isAdding}
-                  className="pdp-cta-btn"
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
-                    background: isAdding ? '#16A34A' : '#111111',
-                    color: '#FFFFFF',
-                    cursor: isAdding ? 'default' : 'pointer',
-                    borderRadius: '6px',
-                    padding: 'clamp(10px, 2vw, 16px) clamp(8px, 1.5vw, 24px)',
-                    fontSize: 'clamp(0.6rem, 1.8vw, 0.85rem)',
-                    fontWeight: 700,
-                  }}
-                  onMouseEnter={(e) => { if (!isAdding) { e.currentTarget.style.background = '#333333'; }}}
-                  onMouseLeave={(e) => { if (!isAdding) { e.currentTarget.style.background = '#111111'; }}}
-                >
-                  {isAdding ? (
-                    <>
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                      ADDED TO CART
-                    </>
-                  ) : (
-                    <>
-                      ADD TO CART
-                    </>
-                  )}
-                </button>
-
-                <a
-                  href={`https://wa.me/9779862157864?text=${waMessage}`}
-                  target="_blank" rel="noopener noreferrer"
-                  className="pdp-cta-btn"
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
-                    border: '1px solid #B6D8B6',
-                    background: '#F9FDF9', color: '#25D366',
-                    borderRadius: '6px',
-                    padding: 'clamp(10px, 2vw, 16px) clamp(8px, 1.5vw, 24px)',
-                    fontSize: 'clamp(0.6rem, 1.8vw, 0.85rem)',
-                    fontWeight: 700,
-                    textDecoration: 'none',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = '#F0F9F0'; e.currentTarget.style.borderColor = '#25D366'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = '#F9FDF9'; e.currentTarget.style.borderColor = '#B6D8B6'; }}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                  </svg>
-                  ORDER ON WHATSAPP
-                </a>
-              </div>
-
-              {/* Checklist */}
-              <div className="pdp-check-grid" style={{ marginBottom: '24px' }}>
-                {[
-                  { label: 'In Stock', ok: true },
-                  { label: 'Can activate in Nepal', ok: true },
-                  { label: 'Digital Key Code', ok: true },
-                ].map(item => (
-                  <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    {item.label}
-                  </div>
-                ))}
-              </div>
-
-              {/* Activation link */}
-              <a href="#product-details" style={{ color: 'var(--text-muted)', fontSize: '0.82rem', textDecoration: 'none', marginBottom: '24px', display: 'inline-block', borderBottom: '1px dashed var(--border-color)', paddingBottom: '2px', transition: 'color 0.15s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
-                Click here for activation instructions and more info
-              </a>
-
-              {/* Divider */}
-              <hr style={{ border: 'none', borderTop: '1px solid var(--border-light)', margin: '24px 0' }} />
-
-              {/* Metadata Table */}
-              <div className="pdp-meta-grid" style={{ fontSize: '0.8rem' }}>
-                {[
-                  { label: 'Publisher', value: product.brand },
-                  { label: 'Platform', value: catMeta.label },
-                  { label: 'Region', value: product.region || 'Global' },
-                  { label: 'Delivery', value: `${product.delivery_type} Delivery` },
-                ].map(row => (
-                  <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', gap: '16px', padding: '8px 0', borderBottom: '1px solid var(--border-light)' }}>
-                    <span style={{ color: 'var(--text-muted)' }}>{row.label}</span>
-                    <span style={{ color: 'var(--text-primary)', fontWeight: 600, textAlign: 'right' }}>{row.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* ── Product Description ── */}
-          {product.description && (
-            <div style={{ marginTop: '64px', maxWidth: '800px' }} id="product-details">
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '16px', letterSpacing: '-0.01em' }}>
-                Product Details
-              </h2>
-
-              {product.id === '2' && (
-                <div style={{
-                  background: '#FFFBEB',
-                  border: '1.5px solid #FCD34D',
-                  borderRadius: '10px',
-                  padding: '16px 20px',
-                  marginBottom: '20px',
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: '14px',
-                }}>
-                  <div style={{
-                    background: '#F59E0B',
-                    color: '#FFFFFF',
-                    borderRadius: '50%',
-                    width: '26px',
-                    height: '26px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    marginTop: '2px',
-                    fontSize: '14px',
-                    fontWeight: 900
-                  }}>
-                    !
-                  </div>
-                  <div>
-                    <div style={{
-                      display: 'inline-block',
-                      background: '#D97706',
-                      color: '#FFFFFF',
-                      fontSize: '0.68rem',
-                      fontWeight: 800,
-                      padding: '2px 8px',
-                      borderRadius: '4px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      marginBottom: '6px'
-                    }}>
-                      Important Notice
-                    </div>
-                    <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#92400E', marginBottom: '2px' }}>
-                      Playstation Indian Giftcards are in high demand and low in stock.
-                    </div>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#B45309' }}>
-                      Avoid duplicate orders for faster delivery.
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.8, whiteSpace: 'pre-line' }}>
-                {product.description}
-              </div>
-            </div>
-          )}
-
-          {/* ── How It Works ── */}
-          <div style={{
-            marginTop: '48px',
-            padding: '24px 0',
-          }} id="how-it-works">
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '32px', letterSpacing: '-0.02em', textAlign: 'center' }}>
-              How it works
-            </h2>
-            <div className="pdp-steps-grid">
-              {HOW_IT_WORKS.map((step) => (
-                <div key={step.num} style={{ 
-                  position: 'relative',
-                  padding: '24px',
-                  background: 'var(--bg-secondary)',
-                  borderRadius: 'var(--radius-md)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}>
-                  {/* Dull background number */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '-5px',
-                    left: '0px',
-                    fontSize: '6rem',
-                    fontWeight: 900,
-                    color: 'rgba(0,0,0,0.03)',
-                    lineHeight: 1,
-                    zIndex: 0,
-                    pointerEvents: 'none',
-                    letterSpacing: '-0.05em'
-                  }}>
-                    {step.num}
-                  </div>
-                  
-                  <div style={{ position: 'relative', zIndex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--text-primary)' }}>
-                      {step.icon}
-                      <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>
-                        {step.title}
-                      </h3>
-                    </div>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>
-                      {step.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Related Products ── */}
-          {related.length > 0 && (
-            <div style={{ marginTop: '72px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px', borderBottom: '2px solid var(--border-color)', paddingBottom: '14px' }}>
-                <h2 style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', fontWeight: 800, margin: 0, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>You May Also Like</h2>
-                <Link href={`/category/${product.category}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.05em', transition: 'color 0.15s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
-                  View All
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </Link>
-              </div>
-              <div className="product-grid">
-                {related.map((p) => (
-                  <ProductCard key={p.id} product={p} />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </>
+    </div>
   );
 }

@@ -4,264 +4,242 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/lib/supabase';
+import { getDisplayRegion } from '@/lib/products';
 import { useCart } from '@/context/CartContext';
-import MagneticButton from '@/components/MagneticButton';
 
 interface ProductCardProps {
     product: Product;
 }
 
-// Category accent — small badge only, restrained
-const CATEGORY_ACCENT: Record<string, { bg: string; text: string }> = {
-    gaming:        { bg: '#ECFDF5', text: '#15803D' },
-    streaming:     { bg: '#FEF2F2', text: '#B91C1C' },
-    software:      { bg: '#EFF6FF', text: '#1D4ED8' },
-    subscriptions: { bg: '#FEFCE8', text: '#92400E' },
-};
-
-// Dark mode accent overrides
-const CATEGORY_ACCENT_DARK: Record<string, { bg: string; text: string }> = {
-    gaming:        { bg: 'rgba(21,128,61,0.15)', text: '#4ADE80' },
-    streaming:     { bg: 'rgba(185,28,28,0.15)', text: '#F87171' },
-    software:      { bg: 'rgba(29,78,216,0.15)', text: '#60A5FA' },
-    subscriptions: { bg: 'rgba(146,64,14,0.15)', text: '#FCD34D' },
-};
-
 function ProductCardInner({ product }: ProductCardProps) {
     const { addItem } = useCart();
-    const firstDenom = product.denominations[0] ?? { value: 'N/A', price: 0 };
+    const firstDenom = product.denominations[0] ?? { value: 'Standard', price: 0 };
     const [selectedDenom, setSelectedDenom] = useState(firstDenom);
     const [isAdding, setIsAdding] = useState(false);
     const [imageError, setImageError] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
 
     const handleAddToCart = () => {
+        if (isAdding) return;
         setIsAdding(true);
         addItem(product, selectedDenom);
         setTimeout(() => setIsAdding(false), 900);
     };
 
-    const accent = CATEGORY_ACCENT[product.category] ?? {
-        bg: '#F5F5F5', text: '#555555'
-    };
+    const displayRegion = getDisplayRegion(product);
+    const showRegionPill = displayRegion !== 'Global';
 
     return (
-        <div
-            className="gsap-card"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            style={{
-                borderRadius: 'var(--radius-md)',
-                background: 'var(--bg-secondary)',
-                border: 'none',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                position: 'relative',
-                boxShadow: isHovered
-                    ? '0 10px 40px -10px rgba(0,0,0,0.1)'
-                    : '0 2px 4px rgba(0,0,0,0.02)',
-                transition: 'box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.23,1,0.32,1)',
-                transform: isHovered ? 'translateY(-3px)' : 'translateY(0)',
-            }}
-        >
-            {/* ── IMAGE AREA ──────────────────────────────────── */}
-            <Link href={`/product/${product.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
-                <div style={{
+        <article className="product-card gsap-card">
+            {/* Artwork Stage */}
+            <Link
+                href={`/product/${product.slug}`}
+                aria-label={product.name}
+                style={{
+                    display: 'block',
+                    textDecoration: 'none',
                     position: 'relative',
-                    width: '100%',
-                    paddingTop: '100%',
-                    background: 'var(--bg-secondary)',
-                    overflow: 'hidden',
-                }}>
-                    {/* Product image */}
+                    borderBottom: '1px solid #EFEDE6',
+                }}
+            >
+                <div className="product-card-media">
                     {product.image_url && !imageError ? (
                         <Image
                             src={product.image_url}
                             alt={product.name}
                             fill
-                            sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                             onError={() => setImageError(true)}
-                            style={{
-                                objectFit: 'cover',
-                                transition: 'transform 0.5s ease',
-                                transform: isHovered ? 'scale(1.02)' : 'scale(1)',
-                            }}
+                            style={{ objectFit: 'cover' }}
                         />
                     ) : (
                         <div style={{
                             position: 'absolute',
-                            top: 0, left: 0, width: '100%', height: '100%',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            fontSize: '2.25rem', fontWeight: 800,
-                            color: '#CCCCCC',
-                            letterSpacing: '-0.05em',
-                            background: 'var(--bg-secondary)',
+                            inset: 0,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '2rem',
+                            fontWeight: 600,
+                            color: '#66635B',
+                            background: '#EFEDE6',
                         }}>
                             {product.brand.toUpperCase().slice(0, 2)}
                         </div>
                     )}
+
+                    {/* Functional region marker only when restricted (US / India) */}
+                    {showRegionPill && (
+                        <span style={{
+                            position: 'absolute',
+                            top: '10px',
+                            right: '10px',
+                            padding: '4px 9px',
+                            borderRadius: '9999px',
+                            background: 'rgba(20, 20, 19, 0.86)',
+                            color: '#F8F7F2',
+                            fontSize: '0.7rem',
+                            fontWeight: 600,
+                            letterSpacing: '0.01em',
+                            lineHeight: 1.1,
+                        }}>
+                            {displayRegion}
+                        </span>
+                    )}
                 </div>
             </Link>
 
-            {/* ── CONTENT AREA ────────────────────────────────── */}
+            {/* Card Body */}
             <div style={{
-                padding: '11px 12px 12px',
+                padding: '14px 14px 15px',
                 display: 'flex',
                 flexDirection: 'column',
                 flex: 1,
-                gap: '7px',
+                gap: '8px',
             }}>
-                {/* Brand label — muted, small caps */}
+                {/* Brand Row */}
                 <div style={{
-                    fontSize: '0.6rem',
-                    fontWeight: 700,
-                    color: 'var(--text-muted)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.09em',
-                    lineHeight: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontSize: '0.74rem',
+                    color: '#66635B',
+                    fontWeight: 500,
                 }}>
-                    {product.brand}
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {product.brand}
+                    </span>
                 </div>
 
-                {/* Product name — clear hierarchy */}
+                {/* Product Name */}
                 <h3 style={{
-                    fontSize: '0.88rem',
-                    fontWeight: 700,
-                    color: 'var(--text-primary)',
+                    fontSize: '0.95rem',
+                    fontWeight: 600,
+                    color: '#181818',
                     lineHeight: 1.3,
-                    letterSpacing: '-0.01em',
+                    letterSpacing: '-0.02em',
                     margin: 0,
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
                     overflow: 'hidden',
-                    minHeight: '2.3em',
+                    minHeight: '2.5em',
                 }}>
-                    <Link href={`/product/${product.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Link
+                        href={`/product/${product.slug}`}
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
                         {product.name}
                     </Link>
                 </h3>
 
-                {/* Denomination pills — flat selection */}
-                {product.denominations.length > 1 && (
-                    <div style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        gap: '4px',
-                    }}>
-                        {product.denominations.map(denom => {
+                {/* Denomination Selector */}
+                {product.denominations.length > 1 ? (
+                    <div
+                        role="group"
+                        aria-label={`Select amount for ${product.name}`}
+                        style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '6px',
+                        }}
+                    >
+                        {product.denominations.map((denom) => {
                             const active = denom.value === selectedDenom.value;
                             return (
                                 <button
                                     key={denom.value}
+                                    type="button"
+                                    className="denom-chip"
+                                    data-active={active}
+                                    aria-pressed={active}
                                     onClick={() => setSelectedDenom(denom)}
-                                    style={{
-                                        padding: '4px 9px',
-                                        borderRadius: '4px',
-                                        fontSize: '0.74rem',
-                                        fontWeight: 600,
-                                        cursor: 'pointer',
-                                        border: active
-                                            ? '1.5px solid #111111'
-                                            : '1px solid var(--border-color)',
-                                        background: active
-                                            ? '#111111'
-                                            : 'transparent',
-                                        color: active ? '#FFFFFF' : 'var(--text-secondary)',
-                                        transition: 'all 0.12s ease',
-                                        whiteSpace: 'nowrap',
-                                        lineHeight: 1,
-                                    }}
                                 >
                                     {denom.value}
                                 </button>
                             );
                         })}
+                        {product.custom_amount && (
+                            <Link
+                                href={`/product/${product.slug}#custom-amount`}
+                                className="denom-chip"
+                                style={{
+                                    textDecoration: 'none',
+                                    background: 'transparent',
+                                    borderStyle: 'dashed',
+                                    borderColor: '#C5C0B3',
+                                    color: '#181818',
+                                }}
+                            >
+                                Custom {product.custom_amount.currency_symbol}
+                            </Link>
+                        )}
+                    </div>
+                ) : (
+                    <div style={{ fontSize: '0.78rem', color: '#595751', fontWeight: 500 }}>
+                        {selectedDenom.value}
                     </div>
                 )}
 
-                {/* Price + CTA — pushed to bottom */}
-                <div style={{ marginTop: 'auto' }}>
-                    {/* Price row */}
+                {/* Price + Quick Add CTA */}
+                <div style={{ marginTop: 'auto', paddingTop: '6px' }}>
                     <div style={{
                         display: 'flex',
                         alignItems: 'baseline',
-                        gap: '2px',
-                        marginBottom: '8px',
+                        justifyContent: 'space-between',
+                        gap: '6px',
+                        marginBottom: '10px',
                     }}>
-                        <span style={{
-                            fontSize: '0.68rem',
-                            fontWeight: 600,
-                            color: 'var(--text-muted)',
-                        }}>Rs.</span>
-                        <span style={{
-                            fontSize: '1.3rem',
-                            fontWeight: 800,
-                            color: 'var(--text-primary)',
-                            letterSpacing: '-0.03em',
-                            lineHeight: 1,
-                            fontVariantNumeric: 'tabular-nums',
-                        }}>
-                            {(selectedDenom?.price ?? 0).toLocaleString()}
-                        </span>
-                    </div>
-
-                    {/* Add to Cart — magnetic + black primary, yellow on hover */}
-                    <MagneticButton strength={0.25}>
-                        <button
-                            onClick={handleAddToCart}
-                            disabled={isAdding}
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px' }}>
+                            <span style={{ fontSize: '0.76rem', fontWeight: 500, color: '#66635B' }}>
+                                Rs.
+                            </span>
+                            <span
+                                key={selectedDenom.value}
+                                className="tabular-nums price-tick"
+                                style={{
+                                    fontSize: '1.28rem',
+                                    fontWeight: 700,
+                                    color: '#181818',
+                                    letterSpacing: '-0.03em',
+                                    lineHeight: 1,
+                                }}
+                            >
+                                {(selectedDenom?.price ?? 0).toLocaleString()}
+                            </span>
+                        </div>
+                        <Link
+                            href={`/product/${product.slug}`}
                             style={{
-                                width: '100%',
-                                padding: '10px 14px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '6px',
-                                borderRadius: '5px',
-                                border: isAdding ? '1.5px solid #16A34A' : '1.5px solid #111111',
-                                fontSize: '0.79rem',
-                                fontWeight: 700,
-                                letterSpacing: '0.005em',
-                                cursor: isAdding ? 'default' : 'pointer',
-                                background: isAdding ? '#16A34A' : 'transparent',
-                                color: isAdding ? '#FFFFFF' : '#111111',
-                                transition: 'all 0.16s ease',
-                            }}
-                            onMouseEnter={(e) => {
-                                if (!isAdding) {
-                                    e.currentTarget.style.background = '#111111';
-                                    e.currentTarget.style.color = '#FFFFFF';
-                                }
-                            }}
-                            onMouseLeave={(e) => {
-                                if (isAdding) {
-                                    e.currentTarget.style.background = '#16A34A';
-                                    e.currentTarget.style.color = '#FFFFFF';
-                                    e.currentTarget.style.border = '1.5px solid #16A34A';
-                                } else {
-                                    e.currentTarget.style.background = 'transparent';
-                                    e.currentTarget.style.color = '#111111';
-                                    e.currentTarget.style.border = '1.5px solid #111111';
-                                }
+                                fontSize: '0.76rem',
+                                fontWeight: 500,
+                                color: '#66635B',
+                                textDecoration: 'none',
                             }}
                         >
-                            {isAdding ? (
-                                <>
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                                        <polyline points="20 6 9 17 4 12" />
-                                    </svg>
-                                    Added
-                                </>
-                            ) : (
-                                <>Add to Cart</>
-                            )}
-                        </button>
-                    </MagneticButton>
+                            Details
+                        </Link>
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={handleAddToCart}
+                        disabled={isAdding}
+                        className="card-add-btn"
+                        data-added={isAdding}
+                    >
+                        {isAdding ? (
+                            <>
+                                <svg className="check-draw" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Added to cart
+                            </>
+                        ) : (
+                            'Add to cart'
+                        )}
+                    </button>
                 </div>
             </div>
-        </div>
+        </article>
     );
 }
 

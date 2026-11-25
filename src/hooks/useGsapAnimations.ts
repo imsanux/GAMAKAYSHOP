@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 
 /**
  * useGsapCardStagger
- * Applies GSAP ScrollTrigger batch stagger to product cards inside a container.
- * Each card fades + slides up with a cascade delay — GTA VI card-reveal style.
+ * Smoothly reveals cards inside a container using GSAP ScrollTrigger.
+ * Gracefully skips motion when prefers-reduced-motion is enabled.
  */
 export function useGsapCardStagger(containerRef: React.RefObject<HTMLElement | null>) {
     useEffect(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         let ctx: { revert?: () => void } = {};
 
         const init = async () => {
@@ -21,24 +22,24 @@ export function useGsapCardStagger(containerRef: React.RefObject<HTMLElement | n
             const cards = container.querySelectorAll<HTMLElement>('.gsap-card');
             if (!cards.length) return;
 
-            // Set initial hidden state
-            gsap.set(cards, { opacity: 0, y: 48, scale: 0.97 });
-
             ctx = gsap.context(() => {
-                ScrollTrigger.batch(cards, {
-                    onEnter: (batch) => {
-                        gsap.to(batch, {
-                            opacity: 1,
-                            y: 0,
-                            scale: 1,
-                            duration: 0.65,
-                            ease: 'power3.out',
-                            stagger: 0.08,
-                        });
-                    },
-                    start: 'top 90%',
-                    once: true,
-                });
+                gsap.fromTo(
+                    cards,
+                    { opacity: 0, y: 20 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        ease: 'power3.out',
+                        stagger: 0.045,
+                        clearProps: 'transform,opacity',
+                        scrollTrigger: {
+                            trigger: container,
+                            start: 'top 92%',
+                            once: true,
+                        },
+                    }
+                );
             }, container);
         };
 
@@ -49,11 +50,11 @@ export function useGsapCardStagger(containerRef: React.RefObject<HTMLElement | n
 
 /**
  * useHeroParallax
- * Applies a subtle scroll-driven parallax to the hero banner image.
- * As the user scrolls, the image moves upward at half the scroll speed.
+ * Subtle scroll-linked parallax for hero visual layers.
  */
 export function useHeroParallax(heroRef: React.RefObject<HTMLElement | null>) {
     useEffect(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         let ctx: { revert?: () => void } = {};
 
         const init = async () => {
@@ -64,18 +65,18 @@ export function useHeroParallax(heroRef: React.RefObject<HTMLElement | null>) {
             const hero = heroRef.current;
             if (!hero) return;
 
-            const img = hero.querySelector<HTMLElement>('.hero-parallax-img');
-            if (!img) return;
+            const target = hero.querySelector<HTMLElement>('.hero-parallax-img');
+            if (!target) return;
 
             ctx = gsap.context(() => {
-                gsap.to(img, {
-                    y: -60,
+                gsap.to(target, {
+                    y: -28,
                     ease: 'none',
                     scrollTrigger: {
                         trigger: hero,
                         start: 'top top',
                         end: 'bottom top',
-                        scrub: 1.5,
+                        scrub: 1.2,
                     },
                 });
             }, hero);

@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Checkout | Gamakay Giftcards Nepal',
-    description: 'Complete your gift card purchase. Fast digital delivery via WhatsApp within minutes.',
-    robots: 'noindex, nofollow',
+    title: 'Checkout',
+    description: 'Complete your Gamakay gift card order and receive your digital code on WhatsApp or Viber.',
+    robots: {
+        index: false,
+        follow: false,
+    },
 };
 
 export default function CheckoutLayout({ children }: { children: React.ReactNode }) {

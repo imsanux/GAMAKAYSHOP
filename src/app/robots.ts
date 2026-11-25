@@ -1,4 +1,5 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/seo';
 
 export default function robots(): MetadataRoute.Robots {
     return {
@@ -6,10 +7,10 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/cart', '/checkout', '/confirmation', '/api/'],
+                disallow: ['/admin', '/cart', '/checkout', '/confirmation', '/student', '/api/'],
             },
         ],
-        sitemap: 'https://gamakay.com/sitemap.xml',
-        host: 'https://gamakay.com',
-    }
+        sitemap: `${SITE_URL}/sitemap.xml`,
+        host: SITE_URL,
+    };
 }

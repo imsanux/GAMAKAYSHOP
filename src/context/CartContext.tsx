@@ -1,16 +1,28 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { Product, CartItem } from '@/lib/supabase';
+
+interface LastAddedInfo {
+    productName: string;
+    denomination: string;
+    price: number;
+    timestamp: number;
+}
 
 interface CartContextType {
     items: CartItem[];
-    addItem: (product: Product, denomination: { value: string; price: number }) => void;
+    addItem: (product: Product, denomination: { value: string; price: number }, quantity?: number) => void;
     removeItem: (productId: string, denominationValue: string) => void;
     updateQuantity: (productId: string, denominationValue: string, quantity: number) => void;
     clearCart: () => void;
     getTotal: () => number;
     getItemCount: () => number;
+    isDrawerOpen: boolean;
+    openDrawer: () => void;
+    closeDrawer: () => void;
+    lastAdded: LastAddedInfo | null;
+    clearLastAdded: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -18,13 +30,14 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [lastAdded, setLastAdded] = useState<LastAddedInfo | null>(null);
 
     // Load cart from localStorage on mount
     useEffect(() => {
         const savedCart = localStorage.getItem('giftcard-cart');
         if (savedCart) {
             try {
-                // eslint-disable-next-line react-hooks/set-state-in-effect
                 setItems(JSON.parse(savedCart));
             } catch (e) {
                 console.error('Failed to parse cart:', e);
@@ -40,33 +53,52 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
     }, [items, isLoaded]);
 
-    const addItem = (product: Product, denomination: { value: string; price: number }) => {
+    // Auto-clear toast banner after 3.5 seconds
+    useEffect(() => {
+        if (!lastAdded) return;
+        const timer = setTimeout(() => setLastAdded(null), 3500);
+        return () => clearTimeout(timer);
+    }, [lastAdded]);
+
+    const addItem = useCallback((product: Product, denomination: { value: string; price: number }, quantity = 1) => {
+        const qty = Math.max(1, Math.floor(quantity));
         setItems(prev => {
             const existingIndex = prev.findIndex(
                 item => item.product.id === product.id && item.denomination.value === denomination.value
             );
 
             if (existingIndex >= 0) {
-                const updated = [...prev];
-                updated[existingIndex].quantity += 1;
-                return updated;
+                return prev.map((item, idx) =>
+                    idx === existingIndex ? { ...item, quantity: item.quantity + qty } : item
+                );
             }
 
-            return [...prev, { product, denomination, quantity: 1 }];
+            return [...prev, { product, denomination, quantity: qty }];
         });
-    };
 
-    const removeItem = (productId: string, denominationValue: string) => {
+        setLastAdded({
+            productName: product.name,
+            denomination: qty > 1 ? `${denomination.value} × ${qty}` : denomination.value,
+            price: denomination.price * qty,
+            timestamp: Date.now(),
+        });
+    }, []);
+
+    const removeItem = useCallback((productId: string, denominationValue: string) => {
         setItems(prev =>
             prev.filter(item =>
                 !(item.product.id === productId && item.denomination.value === denominationValue)
             )
         );
-    };
+    }, []);
 
-    const updateQuantity = (productId: string, denominationValue: string, quantity: number) => {
+    const updateQuantity = useCallback((productId: string, denominationValue: string, quantity: number) => {
         if (quantity <= 0) {
-            removeItem(productId, denominationValue);
+            setItems(prev =>
+                prev.filter(item =>
+                    !(item.product.id === productId && item.denomination.value === denominationValue)
+                )
+            );
             return;
         }
 
@@ -77,19 +109,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
                     : item
             )
         );
-    };
+    }, []);
 
-    const clearCart = () => {
+    const clearCart = useCallback(() => {
         setItems([]);
-    };
+    }, []);
 
-    const getTotal = () => {
+    const getTotal = useCallback(() => {
         return items.reduce((total, item) => total + (item.denomination.price * item.quantity), 0);
-    };
+    }, [items]);
 
-    const getItemCount = () => {
+    const getItemCount = useCallback(() => {
         return items.reduce((count, item) => count + item.quantity, 0);
-    };
+    }, [items]);
+
+    const openDrawer = useCallback(() => setIsDrawerOpen(true), []);
+    const closeDrawer = useCallback(() => setIsDrawerOpen(false), []);
+    const clearLastAdded = useCallback(() => setLastAdded(null), []);
 
     return (
         <CartContext.Provider value={{
@@ -99,7 +135,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
             updateQuantity,
             clearCart,
             getTotal,
-            getItemCount
+            getItemCount,
+            isDrawerOpen,
+            openDrawer,
+            closeDrawer,
+            lastAdded,
+            clearLastAdded,
         }}>
             {children}
         </CartContext.Provider>

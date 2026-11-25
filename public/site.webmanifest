@@ -1,6 +1,8 @@
 {
-  "name": "Gamakay Giftcards",
+  "name": "Gamakay Giftcards Nepal",
   "short_name": "Gamakay",
+  "description": "Buy digital gift cards and subscriptions in Nepal with fast WhatsApp delivery.",
+  "start_url": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +17,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#F8F7F2",
+  "background_color": "#F8F7F2",
   "display": "standalone"
 }

@@ -18,20 +18,25 @@ interface ScrollRevealProps {
 export default function ScrollReveal({
     children,
     delay = 0,
-    duration = 0.7,
-    distance = '40px',
+    duration = 0.5,
+    distance = '14px',
     direction = 'up',
     scale,
     style,
     className,
     once = true,
-    threshold = 0.15
+    threshold = 0.06
 }: ScrollRevealProps) {
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const el = ref.current;
         if (!el) return;
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            el.classList.add('sr-visible');
+            return;
+        }
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -44,7 +49,7 @@ export default function ScrollReveal({
                     }
                 });
             },
-            { threshold, rootMargin: '0px 0px -40px 0px' }
+            { threshold, rootMargin: '0px 0px -24px 0px' }
         );
 
         observer.observe(el);
@@ -68,9 +73,8 @@ export default function ScrollReveal({
             ref={ref}
             className={`sr-element ${className || ''}`}
             style={{
-                opacity: 0,
                 transform: initialTransform,
-                transition: `opacity ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
+                transition: `opacity ${duration}s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s, transform ${duration}s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`,
                 ...style
             }}
         >

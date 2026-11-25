@@ -1,153 +1,185 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
-import ProductCard from '@/components/ProductCard';
-import { searchProducts } from '@/lib/products';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { Suspense, useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import ProductCard from '@/components/ProductCard';
+import { searchProducts, getFeaturedProducts } from '@/lib/products';
+
+const QUICK_TERMS = ['PlayStation', 'Steam', 'Apple', 'Netflix', 'Spotify', 'Claude', 'Xbox', 'Discord'];
 
 function SearchContent() {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const query = searchParams.get('q') || '';
-    const results = searchProducts(query);
+    const [inputVal, setInputVal] = useState(query);
+    const [categoryFilter, setCategoryFilter] = useState('all');
+
+    useEffect(() => {
+        setInputVal(query);
+        setCategoryFilter('all');
+    }, [query]);
+
+    const rawResults = useMemo(() => searchProducts(query), [query]);
+    const popularFallback = useMemo(() => getFeaturedProducts(4), []);
+
+    const categoryCounts = useMemo(() => {
+        const counts: Record<string, number> = {};
+        rawResults.forEach(p => {
+            counts[p.category] = (counts[p.category] || 0) + 1;
+        });
+        return counts;
+    }, [rawResults]);
+
+    const visibleResults = useMemo(() => {
+        if (categoryFilter === 'all') return rawResults;
+        return rawResults.filter(p => p.category === categoryFilter);
+    }, [rawResults, categoryFilter]);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        const trimmed = inputVal.trim();
+        router.push(trimmed ? `/search?q=${encodeURIComponent(trimmed)}` : '/search');
+    };
 
     return (
-        <div style={{ background: 'var(--bg-primary)', minHeight: '70vh', transition: 'var(--theme-transition)', paddingTop: 'var(--header-height)' }}>
+        <div style={{ background: 'var(--bg-primary)', minHeight: '80vh', paddingTop: 'var(--header-height)' }}>
             {/* Search Header */}
             <div style={{
-                background: 'var(--card-bg)',
-                borderBottom: '1px solid var(--border-color)',
-                padding: '32px 16px',
-                transition: 'var(--theme-transition)'
+                background: '#EFEDE6',
+                borderBottom: '1px solid #E8E5DC',
+                padding: '32px 0 28px',
             }}>
                 <div className="container">
-                    {/* Breadcrumb with Back Button */}
-                    <nav style={{
-                        fontSize: '0.8rem',
-                        color: 'var(--text-muted)',
-                        marginBottom: '16px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '16px'
-                    }}>
-                        <button
-                            onClick={() => window.history.back()}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '6px',
-                                padding: '8px 14px',
-                                fontSize: '0.85rem',
-                                fontWeight: 500,
-                                color: 'var(--text-secondary)',
-                                background: 'var(--btn-secondary-bg)',
-                                border: 'none',
-                                borderRadius: '8px',
-                                cursor: 'pointer',
-                                transition: 'all 0.15s ease'
-                            }}
-                            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--btn-secondary-hover)'; }}
-                            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--btn-secondary-bg)'; }}
-                        >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Back
-                        </button>
-                        <div>
-                            <Link href="/" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>
-                                Home
-                            </Link>
-                            <span style={{ margin: '0 8px', color: 'var(--text-muted)' }}>/</span>
-                            <span style={{ color: 'var(--text-primary)' }}>Search</span>
-                        </div>
+                    <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: '#635D57', marginBottom: '18px' }}>
+                        <Link href="/" style={{ color: '#635D57', textDecoration: 'none' }}>Home</Link>
+                        <span aria-hidden="true">/</span>
+                        <span style={{ color: '#181818', fontWeight: 500 }}>Search</span>
                     </nav>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <span style={{ fontSize: '2rem' }}>
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="11" cy="11" r="8" />
-                                <path d="M21 21l-4.35-4.35" />
-                            </svg>
-                        </span>
-                        <div>
-                            <h1 style={{ fontSize: '1.5rem', marginBottom: '4px', color: 'var(--text-primary)' }}>
-                                Search Results
-                            </h1>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>
-                                {query ? `Results for "${query}"` : 'Enter a search term'}
-                            </p>
-                        </div>
-                    </div>
+                    <h1 className="font-display" style={{ fontSize: 'clamp(1.9rem, 3.8vw, 2.85rem)', marginBottom: '16px' }}>
+                        {query ? `Results for “${query}”` : 'Search gift cards'}
+                    </h1>
+
+                    {/* Inline Search Refinement Form */}
+                    <form
+                        onSubmit={handleSubmit}
+                        style={{
+                            display: 'flex',
+                            gap: '8px',
+                            maxWidth: '560px',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <input
+                            type="search"
+                            value={inputVal}
+                            onChange={(e) => setInputVal(e.target.value)}
+                            placeholder="Search by brand, game, or subscription..."
+                            aria-label="Search gift cards"
+                            className="input"
+                            style={{ borderRadius: '9999px' }}
+                        />
+                        <button type="submit" className="btn btn-primary" style={{ flexShrink: 0 }}>
+                            Search
+                        </button>
+                    </form>
                 </div>
             </div>
 
-            {/* Results Grid */}
-            <div className="container fade-in" style={{ padding: '32px 16px 64px' }}>
+            {/* Results Section */}
+            <div className="container" style={{ paddingTop: '28px', paddingBottom: '80px' }}>
                 {!query ? (
-                    <div style={{
-                        textAlign: 'center',
-                        padding: '48px 16px'
-                    }}>
-                        <div style={{
-                            width: '64px',
-                            height: '64px',
-                            margin: '0 auto 16px',
-                            borderRadius: '50%',
-                            background: 'var(--bg-secondary)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '1.5rem'
-                        }}>
-                            🔍
-                        </div>
-                        <h2 style={{ fontSize: '1.25rem', marginBottom: '8px', color: 'var(--text-primary)' }}>
-                            Search for products
-                        </h2>
-                        <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
-                            Use the search bar to find gift cards and subscriptions.
+                    <div>
+                        <p style={{ fontSize: '0.9rem', color: '#57524E', marginBottom: '16px' }}>
+                            Popular searches
                         </p>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '40px' }}>
+                            {QUICK_TERMS.map(term => (
+                                <Link
+                                    key={term}
+                                    href={`/search?q=${encodeURIComponent(term)}`}
+                                    className="filter-pill"
+                                >
+                                    {term}
+                                </Link>
+                            ))}
+                        </div>
+                        <h2 className="font-display" style={{ fontSize: '1.65rem', marginBottom: '20px' }}>
+                            Popular right now
+                        </h2>
+                        <div className="product-grid">
+                            {popularFallback.map(product => (
+                                <ProductCard key={product.id} product={product} />
+                            ))}
+                        </div>
                     </div>
-                ) : results.length === 0 ? (
-                    <div style={{
-                        textAlign: 'center',
-                        padding: '48px 16px'
-                    }}>
-                        <div style={{
-                            width: '64px',
-                            height: '64px',
-                            margin: '0 auto 16px',
-                            borderRadius: '50%',
-                            background: 'var(--bg-secondary)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '1.5rem'
-                        }}>
-                            📦
+                ) : rawResults.length === 0 ? (
+                    <div>
+                        <div className="surface-card" style={{ textAlign: 'center', padding: '48px 24px', marginBottom: '48px' }}>
+                            <h2 className="font-display" style={{ fontSize: '1.65rem', marginBottom: '8px' }}>
+                                No cards matched &ldquo;{query}&rdquo;
+                            </h2>
+                            <p style={{ color: '#57524E', fontSize: '0.94rem', marginBottom: '22px', maxWidth: '420px', margin: '0 auto 22px' }}>
+                                Try searching for a broader brand name, or message us on WhatsApp if you need a specific regional card.
+                            </p>
+                            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                                <Link href="/category/all" className="btn btn-primary">
+                                    Browse All Gift Cards
+                                </Link>
+                                <a
+                                    href={`https://wa.me/9779862157864?text=${encodeURIComponent(`Hi! Do you have "${query}" available?`)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-outline"
+                                >
+                                    Request on WhatsApp
+                                </a>
+                            </div>
                         </div>
-                        <h2 style={{ fontSize: '1.25rem', marginBottom: '8px', color: 'var(--text-primary)' }}>
-                            No results found
+
+                        <h2 className="font-display" style={{ fontSize: '1.6rem', marginBottom: '20px' }}>
+                            Popular gift cards
                         </h2>
-                        <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
-                            We couldn&apos;t find any products matching &quot;{query}&quot;.
-                        </p>
-                        <Link href="/" className="btn btn-primary">
-                            Browse All Products
-                        </Link>
+                        <div className="product-grid">
+                            {popularFallback.map(product => (
+                                <ProductCard key={product.id} product={product} />
+                            ))}
+                        </div>
                     </div>
                 ) : (
                     <>
-                        <div style={{
-                            marginBottom: '20px',
-                            fontSize: '0.85rem',
-                            color: 'var(--text-muted)'
-                        }}>
-                            {results.length} product{results.length !== 1 ? 's' : ''} found
+                        {/* Category Filter Bar for Matches */}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: '24px' }}>
+                            <div className="filter-strip">
+                                <button
+                                    type="button"
+                                    className="filter-pill"
+                                    data-active={categoryFilter === 'all'}
+                                    onClick={() => setCategoryFilter('all')}
+                                >
+                                    All ({rawResults.length})
+                                </button>
+                                {Object.entries(categoryCounts).map(([cat, count]) => (
+                                    <button
+                                        key={cat}
+                                        type="button"
+                                        className="filter-pill"
+                                        data-active={categoryFilter === cat}
+                                        onClick={() => setCategoryFilter(cat)}
+                                        style={{ textTransform: cat === 'dating-social' ? 'none' : 'capitalize' }}
+                                    >
+                                        {cat === 'dating-social' ? 'Dating & Social' : cat} ({count})
+                                    </button>
+                                ))}
+                            </div>
+                            <span className="tabular-nums" style={{ fontSize: '0.84rem', color: '#635D57' }}>
+                                Showing {visibleResults.length} product{visibleResults.length !== 1 ? 's' : ''}
+                            </span>
                         </div>
-                        <div className="product-grid stagger-children">
-                            {results.map(product => (
+
+                        <div className="product-grid">
+                            {visibleResults.map(product => (
                                 <ProductCard key={product.id} product={product} />
                             ))}
                         </div>
@@ -163,15 +195,17 @@ export default function SearchPage() {
         <Suspense fallback={
             <div style={{
                 minHeight: '70vh',
+                paddingTop: 'var(--header-height)',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: 'var(--bg-primary)'
+                background: 'var(--bg-primary)',
             }}>
-                <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '2rem', marginBottom: '8px' }}>🔍</div>
-                    <p style={{ color: 'var(--text-muted)' }}>Loading search...</p>
-                </div>
+                <h1 className="font-display" style={{ fontSize: 'clamp(1.9rem, 3.6vw, 2.5rem)', marginBottom: '8px' }}>
+                    Search gift cards
+                </h1>
+                <p style={{ color: '#635D57', fontSize: '0.95rem' }}>Loading catalog search...</p>
             </div>
         }>
             <SearchContent />
