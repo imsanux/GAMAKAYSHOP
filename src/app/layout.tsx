@@ -24,7 +24,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://gamakay.com"),
+  metadataBase: new URL("https://gamakay.shop"),
   title: {
     default: "Buy Gift Cards in Nepal | Steam, PSN, Apple & AI | Gamakay",
     template: "%s | Gamakay Nepal",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     "Gamakay",
     "Gamakay Nepal",
   ],
-  authors: [{ name: "Gamakay", url: "https://gamakay.com" }],
+  authors: [{ name: "Gamakay", url: "https://gamakay.shop" }],
   creator: "Gamakay",
   publisher: "Gamakay",
   robots: {
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_NP",
-    url: "https://gamakay.com",
+    url: "https://gamakay.shop",
     siteName: "Gamakay",
     title: "Buy Gift Cards in Nepal | Steam, PSN, Apple & AI | Gamakay",
     description:
@@ -164,12 +164,12 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Gamakay",
               alternateName: "Gamakay Giftcards Nepal",
-              url: "https://gamakay.com",
+              url: "https://gamakay.shop",
               logo: {
                 "@type": "ImageObject",
-                url: "https://gamakay.com/gamakay-logo.webp",
+                url: "https://gamakay.shop/gamakay-logo.webp",
               },
-              image: "https://gamakay.com/og-image.png",
+              image: "https://gamakay.shop/og-image.png",
               description:
                 "Digital gift cards and subscriptions in Nepal including Steam, PlayStation, Apple, Xbox, Netflix, Spotify, ChatGPT Plus and Claude AI with fast WhatsApp delivery.",
               foundingDate: "2023",
@@ -205,7 +205,7 @@ export default function RootLayout({
               "@type": "WebSite",
               name: "Gamakay",
               alternateName: "Gamakay Nepal",
-              url: "https://gamakay.com",
+              url: "https://gamakay.shop",
               description:
                 "Buy digital gift cards and subscriptions in Nepal: Steam, PlayStation, Apple, Xbox, Netflix, Spotify, ChatGPT and Claude AI with fast WhatsApp delivery.",
               inLanguage: "en-NP",
@@ -213,7 +213,7 @@ export default function RootLayout({
                 "@type": "SearchAction",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://gamakay.com/search?q={search_term_string}",
+                  urlTemplate: "https://gamakay.shop/search?q={search_term_string}",
                 },
                 "query-input": "required name=search_term_string",
               },
@@ -229,8 +229,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Store",
               name: "Gamakay Digital Gift Cards Nepal",
-              image: ["https://gamakay.com/og-image.png"],
-              url: "https://gamakay.com",
+              image: ["https://gamakay.shop/og-image.png"],
+              url: "https://gamakay.shop",
               telephone: "+977-9862157864",
               priceRange: "NPR 385 - NPR 50,000",
               currenciesAccepted: "NPR",
@@ -270,7 +270,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "Steam Gift Card Nepal",
-                      url: "https://gamakay.com/product/steam-giftcards-us-india",
+                      url: "https://gamakay.shop/product/steam-giftcards-us-india",
                       description: "Buy Steam Wallet gift cards (US & India) in Nepal with fast WhatsApp delivery.",
                     },
                   },
@@ -279,7 +279,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "PlayStation Gift Card Nepal",
-                      url: "https://gamakay.com/product/playstation-giftcards-usd",
+                      url: "https://gamakay.shop/product/playstation-giftcards-usd",
                       description: "Buy PSN PlayStation Store gift cards (USD & INR) in Nepal for PS4 and PS5.",
                     },
                   },
@@ -288,7 +288,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "Apple Gift Card Nepal",
-                      url: "https://gamakay.com/product/apple-gift-card-usd",
+                      url: "https://gamakay.shop/product/apple-gift-card-usd",
                       description: "Buy Apple and iTunes gift cards in Nepal for App Store, iCloud+ and Apple Music.",
                     },
                   },
@@ -297,7 +297,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "Xbox Game Pass Ultimate Nepal",
-                      url: "https://gamakay.com/product/xbox-gamepass-ultimate",
+                      url: "https://gamakay.shop/product/xbox-gamepass-ultimate",
                       description: "Buy Xbox Game Pass Ultimate and Xbox gift cards in Nepal.",
                     },
                   },
@@ -306,7 +306,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "Netflix Subscription Nepal",
-                      url: "https://gamakay.com/product/netflix-monthly",
+                      url: "https://gamakay.shop/product/netflix-monthly",
                       description: "Buy Netflix 4K Ultra HD monthly subscriptions in Nepal with fast WhatsApp delivery.",
                     },
                   },
@@ -315,7 +315,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "Spotify Premium Nepal",
-                      url: "https://gamakay.com/product/spotify-premium",
+                      url: "https://gamakay.shop/product/spotify-premium",
                       description: "Buy Spotify Premium plans in Nepal with instant WhatsApp delivery.",
                     },
                   },
@@ -324,7 +324,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "Claude AI Pro Nepal",
-                      url: "https://gamakay.com/product/claude-ai-anthropic",
+                      url: "https://gamakay.shop/product/claude-ai-anthropic",
                       description: "Buy Claude AI Pro by Anthropic subscription in Nepal via eSewa, Khalti or bank transfer.",
                     },
                   },
@@ -333,7 +333,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "ChatGPT Plus Nepal",
-                      url: "https://gamakay.com/product/chatgpt-plus",
+                      url: "https://gamakay.shop/product/chatgpt-plus",
                       description: "Buy ChatGPT Plus subscription in Nepal with fast WhatsApp activation.",
                     },
                   },
@@ -342,7 +342,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "Discord Nitro Nepal",
-                      url: "https://gamakay.com/product/discord-nitro",
+                      url: "https://gamakay.shop/product/discord-nitro",
                       description: "Buy Discord Nitro subscriptions in Nepal with fast delivery.",
                     },
                   },
@@ -351,7 +351,7 @@ export default function RootLayout({
                     itemOffered: {
                       "@type": "Product",
                       name: "Nintendo eShop Gift Card Nepal",
-                      url: "https://gamakay.com/product/nintendo-eshop-giftcards",
+                      url: "https://gamakay.shop/product/nintendo-eshop-giftcards",
                       description: "Buy Nintendo Switch eShop gift cards in Nepal.",
                     },
                   },

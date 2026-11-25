@@ -1274,7 +1274,7 @@ export default function AdminCatalogClient({ isDevServer }: Props) {
                                             Google Nepal SERP Preview
                                         </div>
                                         <div style={{ fontSize: '0.78rem', color: '#595751', marginBottom: '2px' }}>
-                                            https://gamakay.com/product/{draft.slug || 'product-slug'}
+                                            https://gamakay.shop/product/{draft.slug || 'product-slug'}
                                         </div>
                                         <div style={{ fontSize: '1.02rem', fontWeight: 600, color: '#1A0DAB', lineHeight: 1.3, marginBottom: '4px' }}>
                                             {previewSeoTitle(draft.name, minDraftPrice)}

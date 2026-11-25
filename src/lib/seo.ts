@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Product } from './supabase';
 import { cleanProductDescription, getDisplayRegion, getProductsByCategory, getAllProducts } from './products';
 
-export const SITE_URL = 'https://gamakay.com';
+export const SITE_URL = 'https://gamakay.shop';
 export const SITE_NAME = 'Gamakay';
 export const DEFAULT_OG_IMAGE = '/og-image.png';
 
