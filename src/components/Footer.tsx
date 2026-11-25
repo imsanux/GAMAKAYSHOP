@@ -148,22 +148,27 @@ export default function Footer() {
             <style>{`
                 .footer-grid {
                     display: grid;
-                    grid-template-columns: 1fr;
+                    grid-template-columns: minmax(0, 1fr);
                     gap: 44px;
+                }
+                .footer-grid > *,
+                .footer-links-grid > * {
+                    min-width: 0;
                 }
                 .footer-links-grid {
                     display: grid;
                     grid-template-columns: repeat(2, minmax(0, 1fr));
-                    gap: 32px;
+                    gap: 24px;
                 }
                 @media (min-width: 640px) {
                     .footer-links-grid {
                         grid-template-columns: repeat(3, minmax(0, 1fr));
+                        gap: 32px;
                     }
                 }
                 @media (min-width: 960px) {
                     .footer-grid {
-                        grid-template-columns: 360px 1fr;
+                        grid-template-columns: 360px minmax(0, 1fr);
                         gap: 80px;
                     }
                 }
@@ -173,6 +178,7 @@ export default function Footer() {
                     text-decoration: none;
                     transition: color 0.16s ease;
                     line-height: 1.4;
+                    overflow-wrap: anywhere;
                 }
                 .footer-link:hover {
                     color: #FAF6F0;

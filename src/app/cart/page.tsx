@@ -227,7 +227,7 @@ export default function CartPage() {
                             </div>
 
                             <div style={{ padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                                <Link href="/checkout" className="btn btn-accent btn-lg" style={{ width: '100%' }}>
+                                <Link href="/checkout" className="btn btn-accent btn-lg" style={{ width: '100%', whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.25 }}>
                                     Proceed to Checkout
                                 </Link>
                                 <a
@@ -254,12 +254,17 @@ export default function CartPage() {
             <style>{`
                 .cart-grid {
                     display: grid;
-                    grid-template-columns: 1fr;
+                    grid-template-columns: minmax(0, 1fr);
                     gap: 24px;
+                    width: 100%;
+                }
+                .cart-grid > * {
+                    min-width: 0;
+                    max-width: 100%;
                 }
                 @media (min-width: 820px) {
                     .cart-grid {
-                        grid-template-columns: 1fr 340px;
+                        grid-template-columns: minmax(0, 1fr) 340px;
                         gap: 32px;
                         align-items: start;
                     }

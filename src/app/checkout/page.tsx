@@ -164,9 +164,9 @@ export default function CheckoutPage() {
                     {/* LEFT: Form / Payment Step */}
                     <div className="checkout-main">
                         {!showPayment ? (
-                            <form onSubmit={handleProceedToPayment} className="surface-card" style={{ padding: 'clamp(22px, 3.5vw, 32px)' }}>
+                            <form onSubmit={handleProceedToPayment} className="surface-card checkout-card">
                                 <div style={{ marginBottom: '22px', paddingBottom: '18px', borderBottom: '1px solid rgba(24, 22, 21, 0.08)' }}>
-                                    <h2 className="font-display" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>
+                                    <h2 className="font-display" style={{ fontSize: 'clamp(1.3rem, 4.5vw, 1.5rem)', marginBottom: '4px' }}>
                                         Where should we send your code?
                                     </h2>
                                     <p style={{ fontSize: '0.88rem', color: '#595751' }}>
@@ -224,20 +224,24 @@ export default function CheckoutPage() {
                                     </p>
                                 )}
 
-                                <button type="submit" className="btn btn-accent btn-lg" style={{ width: '100%' }}>
+                                <button
+                                    type="submit"
+                                    className="btn btn-accent btn-lg checkout-submit-btn"
+                                >
                                     Continue to Payment · Rs. {getTotal().toLocaleString()}
                                 </button>
 
                                 <div style={{
                                     display: 'grid',
                                     gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-                                    gap: '10px',
+                                    gap: '8px',
                                     marginTop: '22px',
                                     paddingTop: '18px',
                                     borderTop: '1px solid rgba(24, 22, 21, 0.08)',
                                     textAlign: 'center',
-                                    fontSize: '0.78rem',
+                                    fontSize: '0.75rem',
                                     color: '#57524E',
+                                    lineHeight: 1.35,
                                 }}>
                                     <div>WhatsApp &amp; Viber</div>
                                     <div>Verified codes</div>
@@ -245,11 +249,11 @@ export default function CheckoutPage() {
                                 </div>
                             </form>
                         ) : (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                <div className="surface-card" style={{ padding: 'clamp(22px, 3.5vw, 32px)' }}>
-                                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px', marginBottom: '20px', paddingBottom: '18px', borderBottom: '1px solid rgba(24, 22, 21, 0.08)' }}>
-                                        <div>
-                                            <h2 className="font-display" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: 0 }}>
+                                <div className="surface-card checkout-card">
+                                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: '20px', paddingBottom: '18px', borderBottom: '1px solid rgba(24, 22, 21, 0.08)' }}>
+                                        <div style={{ flex: '1 1 200px', minWidth: 0 }}>
+                                            <h2 className="font-display" style={{ fontSize: 'clamp(1.3rem, 4.5vw, 1.5rem)', marginBottom: '4px' }}>
                                                 Send your order in chat
                                             </h2>
                                             <p style={{ fontSize: '0.88rem', color: '#595751' }}>
@@ -260,6 +264,7 @@ export default function CheckoutPage() {
                                             type="button"
                                             onClick={() => setShowPayment(false)}
                                             className="btn btn-outline btn-sm"
+                                            style={{ flexShrink: 0 }}
                                         >
                                             Edit phone
                                         </button>
@@ -277,9 +282,9 @@ export default function CheckoutPage() {
                                         gap: '12px',
                                         flexWrap: 'wrap',
                                     }}>
-                                        <div>
+                                        <div style={{ flex: '1 1 180px', minWidth: 0 }}>
                                             <div style={{ fontSize: '0.74rem', fontWeight: 500, color: '#635D57' }}>Order number</div>
-                                            <div className="tabular-nums" style={{ fontSize: '0.96rem', fontWeight: 700, color: '#181818', wordBreak: 'break-all' }}>
+                                            <div className="tabular-nums" style={{ fontSize: '0.94rem', fontWeight: 700, color: '#181818', wordBreak: 'break-all' }}>
                                                 {orderNumber}
                                             </div>
                                         </div>
@@ -287,19 +292,19 @@ export default function CheckoutPage() {
                                             type="button"
                                             onClick={handleCopyOrder}
                                             className="btn btn-outline btn-sm"
-                                            style={{ background: '#FFFFFF' }}
+                                            style={{ background: '#FFFFFF', flexShrink: 0 }}
                                         >
                                             {copied ? 'Copied' : 'Copy'}
                                         </button>
                                     </div>
 
                                     {/* Messaging Channel Buttons */}
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginBottom: '16px' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: '12px', marginBottom: '16px' }}>
                                         <button
                                             type="button"
                                             onClick={handleWhatsAppPayment}
                                             className="btn btn-whatsapp btn-lg"
-                                            style={{ width: '100%', padding: '13px 14px', fontSize: '0.9rem' }}
+                                            style={{ width: '100%', padding: '13px 14px', fontSize: '0.9rem', whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.25 }}
                                         >
                                             <WhatsAppIcon size={18} />
                                             Confirm on WhatsApp
@@ -309,7 +314,7 @@ export default function CheckoutPage() {
                                             type="button"
                                             onClick={handleViberPayment}
                                             className="btn btn-lg"
-                                            style={{ width: '100%', padding: '13px 14px', fontSize: '0.9rem', background: '#6652E0', color: '#FFFFFF' }}
+                                            style={{ width: '100%', padding: '13px 14px', fontSize: '0.9rem', background: '#6652E0', color: '#FFFFFF', whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.25 }}
                                         >
                                             <img src="/viber-logo.webp" alt="" role="presentation" width={18} height={18} decoding="async" style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0, filter: 'brightness(0) invert(1)' }} />
                                             Confirm on Viber
@@ -322,16 +327,16 @@ export default function CheckoutPage() {
                                 </div>
 
                                 {/* Desktop QR Scan Option */}
-                                <div className="surface-card" style={{ padding: '22px 24px' }}>
+                                <div className="surface-card checkout-card">
                                     <p style={{ fontSize: '0.84rem', fontWeight: 600, color: '#181818', textAlign: 'center', marginBottom: '16px' }}>
                                         On a computer? Scan to message from your phone
                                     </p>
-                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '340px', margin: '0 auto' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '16px', maxWidth: '340px', margin: '0 auto' }}>
                                         {[
                                             { src: '/whatsapp-qr.webp', alt: 'WhatsApp QR code', label: 'WhatsApp' },
                                             { src: '/viber-qr.webp', alt: 'Viber QR code', label: 'Viber' },
                                         ].map(({ src, alt, label }) => (
-                                            <div key={label} style={{ textAlign: 'center' }}>
+                                            <div key={label} style={{ textAlign: 'center', minWidth: 0 }}>
                                                 <img
                                                     src={src}
                                                     alt={alt}
@@ -354,14 +359,14 @@ export default function CheckoutPage() {
 
                     {/* RIGHT: Order Summary */}
                     <div className="checkout-summary">
-                        <div className="surface-card" style={{ overflow: 'hidden' }}>
-                            <div style={{ padding: '18px 22px', borderBottom: '1px solid rgba(24, 22, 21, 0.08)', background: '#EFEDE6' }}>
+                        <div className="surface-card" style={{ overflow: 'hidden', maxWidth: '100%' }}>
+                            <div className="checkout-summary-pad" style={{ paddingTop: '16px', paddingBottom: '16px', borderBottom: '1px solid rgba(24, 22, 21, 0.08)', background: '#EFEDE6' }}>
                                 <h2 style={{ fontFamily: 'var(--font-sans)', fontSize: '0.84rem', fontWeight: 600, color: '#57524E', margin: 0 }}>
                                     Order Summary
                                 </h2>
                             </div>
 
-                            <div style={{ padding: '0 22px' }}>
+                            <div className="checkout-summary-pad">
                                 {items.map((item, index) => (
                                     <div
                                         key={`${item.product.id}-${item.denomination.value}`}
@@ -370,10 +375,11 @@ export default function CheckoutPage() {
                                             alignItems: 'center',
                                             gap: '12px',
                                             padding: '14px 0',
+                                            minWidth: 0,
                                             borderBottom: index < items.length - 1 ? '1px solid rgba(24, 22, 21, 0.08)' : 'none',
                                         }}
                                     >
-                                        <div style={{ width: '46px', height: '46px', borderRadius: '10px', overflow: 'hidden', background: '#EFEDE6', flexShrink: 0, border: '1px solid rgba(24,22,21,0.08)' }}>
+                                        <div style={{ width: '44px', height: '44px', borderRadius: '10px', overflow: 'hidden', background: '#EFEDE6', flexShrink: 0, border: '1px solid rgba(24,22,21,0.08)' }}>
                                             {item.product.image_url ? (
                                                 <img src={item.product.image_url} alt={item.product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                             ) : (
@@ -383,23 +389,23 @@ export default function CheckoutPage() {
                                             )}
                                         </div>
                                         <div style={{ flex: 1, minWidth: 0 }}>
-                                            <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#181818', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                            <div style={{ fontSize: '0.86rem', fontWeight: 600, color: '#181818', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                                 {item.product.name}
                                             </div>
-                                            <div style={{ fontSize: '0.78rem', color: '#635D57' }}>
+                                            <div style={{ fontSize: '0.78rem', color: '#635D57', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                                 {item.denomination.value} × {item.quantity}
                                             </div>
                                         </div>
-                                        <div className="tabular-nums" style={{ fontSize: '0.9rem', fontWeight: 600, color: '#181818', whiteSpace: 'nowrap' }}>
+                                        <div className="tabular-nums" style={{ fontSize: '0.88rem', fontWeight: 600, color: '#181818', whiteSpace: 'nowrap', flexShrink: 0 }}>
                                             Rs. {(item.denomination.price * item.quantity).toLocaleString()}
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
-                            <div style={{ padding: '16px 22px', background: '#141413', color: '#F8F7F2', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                            <div className="checkout-summary-pad" style={{ paddingTop: '16px', paddingBottom: '16px', background: '#141413', color: '#F8F7F2', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '12px' }}>
                                 <span style={{ fontSize: '0.88rem', color: '#B8B5AE', fontWeight: 500 }}>Total</span>
-                                <span className="tabular-nums" style={{ fontSize: '1.35rem', fontWeight: 700, letterSpacing: '-0.03em' }}>
+                                <span className="tabular-nums" style={{ fontSize: '1.35rem', fontWeight: 700, letterSpacing: '-0.03em', whiteSpace: 'nowrap' }}>
                                     Rs. {getTotal().toLocaleString()}
                                 </span>
                             </div>
@@ -411,12 +417,43 @@ export default function CheckoutPage() {
             <style>{`
                 .checkout-grid {
                     display: grid;
-                    grid-template-columns: 1fr;
-                    gap: 24px;
+                    grid-template-columns: minmax(0, 1fr);
+                    gap: 20px;
+                    width: 100%;
+                }
+                .checkout-main,
+                .checkout-summary {
+                    min-width: 0;
+                    max-width: 100%;
+                }
+                .checkout-card {
+                    padding: 20px 18px;
+                    min-width: 0;
+                    max-width: 100%;
+                }
+                .checkout-summary-pad {
+                    padding-left: 18px;
+                    padding-right: 18px;
+                }
+                .checkout-submit-btn {
+                    width: 100%;
+                    padding: 13px 16px;
+                    white-space: normal;
+                    text-align: center;
+                    line-height: 1.25;
+                }
+                @media (min-width: 640px) {
+                    .checkout-card {
+                        padding: 26px 28px;
+                    }
+                    .checkout-summary-pad {
+                        padding-left: 22px;
+                        padding-right: 22px;
+                    }
                 }
                 @media (min-width: 820px) {
                     .checkout-grid {
-                        grid-template-columns: 1fr 350px;
+                        grid-template-columns: minmax(0, 1fr) 350px;
                         gap: 32px;
                         align-items: start;
                     }
